@@ -14,14 +14,14 @@
         body {
             font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             line-height: 1.6;
-            color: #4a433f; /* Soft dark brown for main text */
-            background-color: #faf8f5; /* Very soft pastel cream */
+            color: #4f2d2c; /* Palette Color 6 */
+            background-color: #e9e2d8; /* Palette Color 1 */
         }
         
         /* --- Header / Hero Section --- */
         header {
-            background-color: #b5c4b9; /* Pastel Sage Green */
-            color: #2c3630; /* Darker green text for readability */
+            background-color: #4e513e; /* Palette Color 5 */
+            color: #e9e2d8; /* Palette Color 1 */
             padding: 80px 20px;
             text-align: center;
         }
@@ -32,7 +32,8 @@
         }
         header p {
             font-size: 1.2rem;
-            color: #4b5950; /* Muted deep sage for subtitle */
+            color: #e9e2d8; 
+            opacity: 0.85; /* Softened slightly for visual hierarchy */
             max-width: 600px;
             margin: 0 auto;
         }
@@ -47,7 +48,7 @@
         .services-section h2 {
             font-size: 2rem;
             margin-bottom: 40px;
-            color: #4a433f; 
+            color: #4f2d2c; /* Palette Color 6 */
         }
 
         /* Flexbox for the 3 columns */
@@ -60,9 +61,9 @@
 
         /* --- Individual Service Cards --- */
         .card {
-            background: white;
+            background: #ffffff;
             border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.03);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
             overflow: hidden;
             flex: 1 1 calc(33.333% - 30px);
             min-width: 300px; 
@@ -72,7 +73,7 @@
         }
         .card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 8px 15px rgba(0,0,0,0.08);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
         }
         .card img {
             width: 100%;
@@ -88,10 +89,10 @@
         .card h3 {
             font-size: 1.4rem;
             margin-bottom: 15px;
-            color: #6a7b6f; /* Muted mid-tone sage for headers */
+            color: #4e513e; /* Palette Color 5 */
         }
         .card p {
-            color: #6e6560; /* Soft taupe/brown for paragraphs */
+            color: #4f2d2c; /* Palette Color 6 */
             margin-bottom: 25px;
             flex-grow: 1; 
         }
@@ -99,8 +100,8 @@
         /* --- Buttons --- */
         .btn {
             display: inline-block;
-            background-color: #d1bba8; /* Pastel warm clay/taupe */
-            color: #3b302a; /* Dark espresso text for contrast */
+            background-color: #99724b; /* Palette Color 3 */
+            color: #e9e2d8; /* Palette Color 1 */
             text-decoration: none;
             padding: 12px 20px;
             border-radius: 4px;
@@ -108,15 +109,15 @@
             transition: background-color 0.3s ease;
         }
         .btn:hover {
-            background-color: #bca48f; /* Slightly deeper clay on hover */
+            background-color: #9a5d40; /* Palette Color 4 */
         }
 
         /* --- Footer --- */
         footer {
             text-align: center;
             padding: 40px 20px;
-            background-color: #b5c4b9; /* Pastel Sage Green */
-            color: #2c3630;
+            background-color: #4e513e; /* Palette Color 5 */
+            color: #e9e2d8; /* Palette Color 1 */
             margin-top: 40px;
         }
         .footer-contact {
@@ -125,10 +126,10 @@
         .footer-contact p {
             margin-bottom: 8px;
             font-size: 1.1rem;
-            color: #2c3630;
+            color: #e9e2d8;
         }
         .footer-contact a {
-            color: #8b7562; /* Deeper clay color for links */
+            color: #c09050; /* Palette Color 2 */
             text-decoration: none;
             font-weight: bold;
         }
@@ -139,16 +140,18 @@
             max-width: 900px;
             margin: 0 auto 20px auto;
             font-size: 0.8rem;
-            color: #4b5950; 
+            color: #e9e2d8; 
+            opacity: 0.75;
             line-height: 1.5;
             text-align: justify;
             text-align-last: center; 
         }
         .copyright {
             font-size: 0.9rem;
-            color: #58665c;
+            color: #e9e2d8;
+            opacity: 0.6;
             margin-top: 20px;
-            border-top: 1px solid #9eaa9d;
+            border-top: 1px solid #99724b; /* Palette Color 3 */
             padding-top: 20px;
             max-width: 400px;
             margin-left: auto;
@@ -169,7 +172,7 @@
         <div class="services-container">
             
             <div class="card">
-                <img src="https://placehold.co/600x400/e2e8e4/6a7b6f?text=Buying+A+Home" alt="Buying a Home">
+                <img src="https://placehold.co/600x400/e9e2d8/4e513e?text=Buying+A+Home" alt="Buying a Home">
                 <div class="card-content">
                     <h3>Buying a Home</h3>
                     <p>Whether you are a first-time buyer or looking for your forever home, I'll help you navigate the market to find the perfect property at the right price.</p>
@@ -178,7 +181,7 @@
             </div>
 
             <div class="card">
-                <img src="https://placehold.co/600x400/e2e8e4/6a7b6f?text=Selling+A+Home" alt="Selling a Home">
+                <img src="https://placehold.co/600x400/e9e2d8/4e513e?text=Selling+A+Home" alt="Selling a Home">
                 <div class="card-content">
                     <h3>Selling a Home</h3>
                     <p>Maximize your property's value. From staging advice to aggressive marketing, I ensure your home sells quickly and for top dollar.</p>
@@ -187,7 +190,7 @@
             </div>
 
             <div class="card">
-                <img src="https://placehold.co/600x400/e2e8e4/6a7b6f?text=House+Flipping" alt="House Flipping">
+                <img src="https://placehold.co/600x400/e9e2d8/4e513e?text=House+Flipping" alt="House Flipping">
                 <div class="card-content">
                     <h3>House Flipping</h3>
                     <p>Unlock high-yield investment opportunities. I provide strategic insights to help investors find, renovate, and flip properties for maximum ROI.</p>
