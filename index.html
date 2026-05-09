@@ -19,14 +19,22 @@
             overflow-x: hidden; /* Prevents horizontal scrolling when mobile menu opens */
         }
         
-        /* --- Navigation Bar --- */
+        /* --- Navigation Bar (Sticky & Glassmorphism) --- */
         .navbar {
-            background-color: #e9e2d8;
+            /* Glassmorphism Effect */
+            background: rgba(233, 226, 216, 0.85); /* Transparent version of #e9e2d8 */
+            backdrop-filter: blur(12px); /* Creates the frosted glass blur */
+            -webkit-backdrop-filter: blur(12px); /* Safari support */
+            
+            /* Sticky Positioning */
+            position: sticky;
+            top: 0;
+            z-index: 1000; /* Ensures it stays above all other content */
+            
             padding: 15px 30px;
-            position: relative;
             display: flex;
             align-items: center;
-            border-bottom: 2px solid #99724b; /* Subtle line to separate from hero */
+            border-bottom: 1px solid rgba(153, 114, 75, 0.3); /* Softened border for the glass look */
             min-height: 80px;
         }
         .mobile-center-logo {
@@ -84,7 +92,7 @@
                 transform: translate(-50%, -50%); /* Perfectly centers the logo */
             }
             .mobile-center-logo img {
-                height: 40px; /* Slightly smaller for the mobile top bar */
+                height: 40px; 
                 width: auto;
                 border-radius: 4px;
                 display: block;
@@ -98,7 +106,12 @@
                 right: -100%; /* Hidden off-screen by default */
                 width: 280px;
                 height: 100vh;
-                background-color: #e9e2d8; /* Palette Color 1 */
+                
+                /* Glassmorphism for mobile drawer */
+                background: rgba(233, 226, 216, 0.95); 
+                backdrop-filter: blur(15px);
+                -webkit-backdrop-filter: blur(15px);
+                
                 flex-direction: column;
                 justify-content: flex-start;
                 align-items: flex-start;
@@ -113,7 +126,7 @@
             .nav-logo {
                 margin-bottom: 40px;
                 width: 100%;
-                text-align: center; /* Centers logo in mobile menu */
+                text-align: center; 
             }
             .nav-logo img {
                 margin: 0 auto;
@@ -129,7 +142,7 @@
                 display: block;
                 width: 100%;
                 padding-bottom: 10px;
-                border-bottom: 1px solid #c09050; /* Palette Color 2 */
+                border-bottom: 1px solid rgba(192, 144, 80, 0.4); /* Softened palette color 2 */
                 font-size: 1.3rem;
             }
             .close-menu {
