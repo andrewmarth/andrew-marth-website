@@ -25,8 +25,12 @@
             padding: 15px 30px;
             position: relative;
             display: flex;
-            justify-content: flex-end; /* Aligns hamburger to the right on mobile */
+            align-items: center;
             border-bottom: 2px solid #99724b; /* Subtle line to separate from hero */
+            min-height: 80px;
+        }
+        .mobile-center-logo {
+            display: none; /* Hidden on desktop */
         }
         .hamburger {
             display: none;
@@ -43,7 +47,7 @@
             width: 100%;
         }
         .nav-logo img {
-            height: 50px; /* Adjust based on your actual logo */
+            height: 50px; 
             width: auto;
             display: block;
             border-radius: 4px;
@@ -69,6 +73,22 @@
 
         /* Mobile Navigation Styles */
         @media (max-width: 768px) {
+            .navbar {
+                justify-content: flex-end; /* Pushes hamburger to the right */
+            }
+            .mobile-center-logo {
+                display: block;
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%); /* Perfectly centers the logo */
+            }
+            .mobile-center-logo img {
+                height: 40px; /* Slightly smaller for the mobile top bar */
+                width: auto;
+                border-radius: 4px;
+                display: block;
+            }
             .hamburger {
                 display: block;
             }
@@ -306,13 +326,19 @@
 <body>
 
     <nav class="navbar">
+        <a href="index.html" class="mobile-center-logo">
+            <img src="https://placehold.co/150x50/4e513e/e9e2d8?text=Your+Logo" alt="Andrew Marth Logo Placeholder">
+        </a>
+
         <button class="hamburger" id="hamburger-btn">&#9776;</button>
         
         <div class="nav-menu" id="nav-menu">
             <button class="close-menu" id="close-btn">&times;</button>
             
             <div class="nav-logo">
-                <img src="https://placehold.co/150x50/4e513e/e9e2d8?text=Your+Logo" alt="Andrew Marth Logo Placeholder">
+                <a href="index.html">
+                    <img src="https://placehold.co/150x50/4e513e/e9e2d8?text=Your+Logo" alt="Andrew Marth Logo Placeholder">
+                </a>
             </div>
             
             <div class="nav-links">
