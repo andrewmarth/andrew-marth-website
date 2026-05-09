@@ -204,17 +204,21 @@
 
         /* --- Zapier Form Container (FRAMED & SCALED) --- */
         .form-container {
-            max-width: 900px; /* Restored the frame width */
-            margin: 40px auto 80px auto; /* Restored centering */
+            max-width: 900px; 
+            margin: 40px auto 80px auto; 
             padding: 0; 
             display: flex;
             justify-content: center;
             width: 100%; 
             
+            /* Text-colored Top and Bottom Borders */
+            border-top: 4px solid #4f2d2c;
+            border-bottom: 4px solid #4f2d2c;
+            
             /* Tiling Background Image */
             background-image: url('https://i.ibb.co/5hQjGRNC/tiling-background-final.png');
-            background-size: 100% auto; /* Forces image width to match the frame width exactly */
-            background-repeat: repeat-y; /* Repeats downwards seamlessly */
+            background-size: 100% auto; 
+            background-repeat: repeat-y; 
             background-position: top center;
         }
 
