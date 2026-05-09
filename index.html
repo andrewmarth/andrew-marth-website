@@ -33,9 +33,45 @@
         header p {
             font-size: 1.2rem;
             color: #e9e2d8; 
-            opacity: 0.85; /* Softened slightly for visual hierarchy */
+            opacity: 0.85; 
             max-width: 600px;
             margin: 0 auto;
+        }
+
+        /* --- About Me Section --- */
+        .about-section {
+            max-width: 1000px;
+            margin: 60px auto 20px auto;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            flex-wrap: wrap; /* Allows stacking on smaller screens */
+        }
+        .about-image {
+            flex: 1 1 300px;
+            text-align: center;
+        }
+        .about-image img {
+            width: 100%;
+            max-width: 350px;
+            border-radius: 50%; /* Creates a professional circular headshot */
+            border: 8px solid #4e513e; /* Palette Color 5 */
+            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+            object-fit: cover;
+        }
+        .about-text {
+            flex: 2 1 400px;
+        }
+        .about-text h2 {
+            font-size: 2rem;
+            color: #4f2d2c; /* Palette Color 6 */
+            margin-bottom: 20px;
+        }
+        .about-text p {
+            color: #4f2d2c; /* Palette Color 6 */
+            font-size: 1.1rem;
+            margin-bottom: 15px;
         }
 
         /* --- Main Services Section --- */
@@ -165,6 +201,17 @@
         <h1>Andrew Marth</h1>
         <p>Elevating your real estate experience with expert guidance, strategic insights, and proven results.</p>
     </header>
+
+    <section class="about-section">
+        <div class="about-image">
+            <img src="https://placehold.co/400x400/4e513e/e9e2d8?text=Andrew+Marth" alt="Andrew Marth - Real Estate Agent">
+        </div>
+        <div class="about-text">
+            <h2>Meet Andrew Marth</h2>
+            <p>Welcome! I am a dedicated real estate professional serving the vibrant Arizona market. With a deep understanding of local trends and a relentless drive to achieve my clients' goals, I provide a tailored approach to every transaction.</p>
+            <p>Whether you are purchasing your first home, selling a luxury property, or looking for your next investment flip, I bring strategic insight, fierce negotiation skills, and unyielding integrity to the table. Let's turn your real estate vision into reality.</p>
+        </div>
+    </section>
 
     <section class="services-section">
         <h2>How Can I Help You Achieve Your Goals?</h2>
