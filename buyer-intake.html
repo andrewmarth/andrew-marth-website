@@ -205,17 +205,11 @@
         /* --- Zapier Form Container --- */
         .form-container {
             max-width: 900px;
-            margin: 40px auto 80px auto; /* Slightly reduced top margin to pull form closer to text */
+            margin: 40px auto 80px auto; 
             padding: 0 20px;
             display: flex;
             justify-content: center;
-            width: 100%; /* Ensures container spans full width up to 900px */
-        }
-        
-        /* Ensures the Zapier web component stretches properly */
-        zapier-interfaces-page-embed {
-            width: 100%;
-            display: block; /* Helps prevent margin collapse issues */
+            width: 100%; 
         }
 
         /* --- Footer --- */
@@ -295,7 +289,12 @@
 
         <section class="form-container">
             <script type='module' src='https://interfaces.zapier.com/assets/web-components/zapier-interfaces/zapier-interfaces.esm.js'></script>
-            <zapier-interfaces-page-embed page-id='cmi67p46r000lyouapegaxk2j' test-id='cmi67p46r000lyouapegaxk2j-zapier-interfaces-page-embed-iframe' no-background='true' style='max-width: 900px; width: 100%; min-height: 800px;'></zapier-interfaces-page-embed>
+            <zapier-interfaces-page-embed 
+                page-id='cmi67p46r000lyouapegaxk2j' 
+                test-id='cmi67p46r000lyouapegaxk2j-zapier-interfaces-page-embed-iframe' 
+                no-background='true' 
+                style='max-width: 900px; width: 100%; height: calc(100vh - 120px); border: none;'>
+            </zapier-interfaces-page-embed>
         </section>
     </main>
 
