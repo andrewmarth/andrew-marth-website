@@ -55,13 +55,13 @@
             width: 100%;
         }
         .nav-logo img {
-            height: 50px; /* Adjusted for actual logo */
+            height: 50px; 
             width: auto;
             display: block;
             border-radius: 4px;
         }
         .nav-logo a {
-            text-decoration: none; /* Remove underline from logo link */
+            text-decoration: none; 
             display: block;
         }
         .nav-links {
@@ -119,7 +119,7 @@
                 padding: 60px 30px 30px 30px;
                 box-shadow: -5px 0 15px rgba(0,0,0,0.1);
                 transition: right 0.3s ease;
-                z-index: 1001;
+                z-index: 1001; 
             }
             .nav-menu.active {
                 right: 0; 
@@ -162,10 +162,11 @@
 
         /* --- Header / Hero Section --- */
         header {
-            background: linear-gradient(rgba(78, 81, 62, 0.75), rgba(78, 81, 62, 0.75)), url('https://i.imgur.com/RYFkDI4.jpeg');
+            /* Linear gradient overlay with the ImgBB hero image */
+            background: linear-gradient(rgba(78, 81, 62, 0.75), rgba(78, 81, 62, 0.75)), url('https://i.ibb.co/nNxwtB3g/background.jpg');
             background-size: cover;
             background-position: center;
-            color: #e9e2d8; /* Palette Color 1 */
+            color: #e9e2d8; 
             padding: 160px 20px 100px 20px; 
             text-align: center;
         }
@@ -202,7 +203,7 @@
             width: 100%;
             max-width: 350px;
             border-radius: 50%; 
-            border: 8px solid #4e513e; /* Palette Color 5 */
+            border: 8px solid #4e513e; 
             box-shadow: 0 8px 15px rgba(0,0,0,0.1);
             object-fit: cover;
         }
@@ -211,11 +212,11 @@
         }
         .about-text h2 {
             font-size: 2rem;
-            color: #4f2d2c; /* Palette Color 6 */
+            color: #4f2d2c; 
             margin-bottom: 20px;
         }
         .about-text p {
-            color: #4f2d2c; /* Palette Color 6 */
+            color: #4f2d2c; 
             font-size: 1.1rem;
             margin-bottom: 15px;
         }
@@ -230,259 +231,7 @@
         .services-section h2 {
             font-size: 2rem;
             margin-bottom: 40px;
-            color: #4f2d2c; /* Palette Color 6 */
-        }
-
-        /* Flexbox for the 3 columns */
-        .services-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            gap: 30px;
-        }
-
-        /* --- Individual Service Cards ---I have updated the code to include your specific portrait and logo images. I have also ensured that every instance of the logo (on desktop, the mobile center bar, and inside the mobile menu drawer) is wrapped in a link that points back to `index.html`.
-
-### Your Updated Homepage Code
-
-Copy this code, delete everything in your `index.html` file, and paste this in:
-
-```html
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Andrew Marth | Real Estate Agent</title>
-    <style>
-        /* --- General Reset & Styling --- */
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-        body {
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            line-height: 1.6;
-            color: #4f2d2c; /* Palette Color 6 */
-            background-color: #e9e2d8; /* Palette Color 1 */
-            overflow-x: hidden; 
-        }
-        
-        /* --- Navigation Bar (Fixed & Glassmorphism) --- */
-        .navbar {
-            background: rgba(233, 226, 216, 0.85); 
-            backdrop-filter: blur(12px); 
-            -webkit-backdrop-filter: blur(12px); 
-            
-            /* Fixed to guarantee it NEVER hides on scroll */
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000; 
-            
-            padding: 15px 30px;
-            display: flex;
-            align-items: center;
-            border-bottom: 1px solid rgba(153, 114, 75, 0.3); 
-            min-height: 80px;
-        }
-        .mobile-center-logo {
-            display: none; /* Hidden on desktop */
-        }
-        .hamburger {
-            display: none;
-            font-size: 2rem;
-            background: none;
-            border: none;
-            color: #4e513e; /* Palette Color 5 */
-            cursor: pointer;
-        }
-        .nav-menu {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 100%;
-        }
-        .nav-logo img {
-            height: 50px; 
-            width: auto;
-            display: block;
-            border-radius: 4px;
-        }
-        .nav-logo a {
-            text-decoration: none; /* Remove underline from logo link */
-            display: block;
-        }
-        .nav-links {
-            display: flex;
-            gap: 30px;
-            align-items: center;
-        }
-        .nav-links a {
-            text-decoration: none;
-            color: #4f2d2c; /* Palette Color 6 */
-            font-weight: bold;
-            font-size: 1.1rem;
-            transition: color 0.3s;
-        }
-        .nav-links a:hover {
-            color: #9a5d40; /* Palette Color 4 */
-        }
-        .close-menu {
-            display: none; 
-        }
-
-        /* Mobile Navigation Styles */
-        @media (max-width: 768px) {
-            .navbar {
-                justify-content: flex-end; 
-            }
-            .mobile-center-logo {
-                display: block;
-                position: absolute;
-                left: 50%;
-                top: 50%;
-                transform: translate(-50%, -50%); 
-            }
-            .mobile-center-logo img {
-                height: 40px; 
-                width: auto;
-                border-radius: 4px;
-                display: block;
-            }
-            .hamburger {
-                display: block;
-            }
-            .nav-menu {
-                position: fixed;
-                top: 0;
-                right: -100%; 
-                width: 280px;
-                height: 100vh;
-                background: rgba(233, 226, 216, 0.95); 
-                backdrop-filter: blur(15px);
-                -webkit-backdrop-filter: blur(15px);
-                flex-direction: column;
-                justify-content: flex-start;
-                align-items: flex-start;
-                padding: 60px 30px 30px 30px;
-                box-shadow: -5px 0 15px rgba(0,0,0,0.1);
-                transition: right 0.3s ease;
-                z-index: 1001; /* Keeps drawer slightly above the navbar */
-            }
-            .nav-menu.active {
-                right: 0; 
-            }
-            .nav-logo {
-                margin-bottom: 40px;
-                width: 100%;
-                text-align: center; 
-            }
-            .nav-logo img {
-                margin: 0 auto;
-                height: 60px;
-            }
-            .nav-links {
-                flex-direction: column;
-                width: 100%;
-                align-items: flex-start;
-                gap: 20px;
-            }
-            .nav-links a {
-                display: block;
-                width: 100%;
-                padding-bottom: 10px;
-                border-bottom: 1px solid rgba(192, 144, 80, 0.4); 
-                font-size: 1.3rem;
-            }
-            .close-menu {
-                display: block;
-                position: absolute;
-                top: 15px;
-                right: 25px;
-                font-size: 2.5rem;
-                background: none;
-                border: none;
-                color: #4f2d2c;
-                cursor: pointer;
-                line-height: 1;
-            }
-        }
-
-        /* --- Header / Hero Section --- */
-        header {
-            /* Linear gradient acts as the color overlay. We use rgba to make Palette Color 5 transparent */
-            background: linear-gradient(rgba(78, 81, 62, 0.75), rgba(78, 81, 62, 0.75)), url('[https://i.imgur.com/RYFkDI4.jpeg](https://i.imgur.com/RYFkDI4.jpeg)');
-            background-size: cover;
-            background-position: center;
-            color: #e9e2d8; /* Palette Color 1 */
-            padding: 160px 20px 100px 20px; /* Increased top padding so the fixed navbar doesn't cover your title */
-            text-align: center;
-        }
-        header h1 {
-            font-size: 3rem; 
-            margin-bottom: 15px;
-            letter-spacing: 2px;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.3); 
-        }
-        header p {
-            font-size: 1.3rem;
-            color: #e9e2d8; 
-            opacity: 0.95; 
-            max-width: 700px;
-            margin: 0 auto;
-            text-shadow: 0 1px 3px rgba(0,0,0,0.3);
-        }
-
-        /* --- About Me Section --- */
-        .about-section {
-            max-width: 1000px;
-            margin: 60px auto 20px auto;
-            padding: 0 20px;
-            display: flex;
-            align-items: center;
-            gap: 50px;
-            flex-wrap: wrap; 
-        }
-        .about-image {
-            flex: 1 1 300px;
-            text-align: center;
-        }
-        .about-image img {
-            width: 100%;
-            max-width: 350px;
-            border-radius: 50%; 
-            border: 8px solid #4e513e; /* Palette Color 5 */
-            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
-            object-fit: cover;
-        }
-        .about-text {
-            flex: 2 1 400px;
-        }
-        .about-text h2 {
-            font-size: 2rem;
-            color: #4f2d2c; /* Palette Color 6 */
-            margin-bottom: 20px;
-        }
-        .about-text p {
-            color: #4f2d2c; /* Palette Color 6 */
-            font-size: 1.1rem;
-            margin-bottom: 15px;
-        }
-
-        /* --- Main Services Section --- */
-        .services-section {
-            max-width: 1200px;
-            margin: 60px auto;
-            padding: 0 20px;
-            text-align: center;
-        }
-        .services-section h2 {
-            font-size: 2rem;
-            margin-bottom: 40px;
-            color: #4f2d2c; /* Palette Color 6 */
+            color: #4f2d2c; 
         }
 
         /* Flexbox for the 3 columns */
@@ -523,10 +272,10 @@ Copy this code, delete everything in your `index.html` file, and paste this in:
         .card h3 {
             font-size: 1.4rem;
             margin-bottom: 15px;
-            color: #4e513e; /* Palette Color 5 */
+            color: #4e513e; 
         }
         .card p {
-            color: #4f2d2c; /* Palette Color 6 */
+            color: #4f2d2c; 
             margin-bottom: 25px;
             flex-grow: 1; 
         }
@@ -534,8 +283,8 @@ Copy this code, delete everything in your `index.html` file, and paste this in:
         /* --- Buttons --- */
         .btn {
             display: inline-block;
-            background-color: #99724b; /* Palette Color 3 */
-            color: #e9e2d8; /* Palette Color 1 */
+            background-color: #99724b; 
+            color: #e9e2d8; 
             text-decoration: none;
             padding: 12px 20px;
             border-radius: 4px;
@@ -543,15 +292,15 @@ Copy this code, delete everything in your `index.html` file, and paste this in:
             transition: background-color 0.3s ease;
         }
         .btn:hover {
-            background-color: #9a5d40; /* Palette Color 4 */
+            background-color: #9a5d40; 
         }
 
         /* --- Footer --- */
         footer {
             text-align: center;
             padding: 40px 20px;
-            background-color: #4e513e; /* Palette Color 5 */
-            color: #e9e2d8; /* Palette Color 1 */
+            background-color: #4e513e; 
+            color: #e9e2d8; 
             margin-top: 40px;
         }
         .footer-contact {
@@ -563,7 +312,7 @@ Copy this code, delete everything in your `index.html` file, and paste this in:
             color: #e9e2d8;
         }
         .footer-contact a {
-            color: #c09050; /* Palette Color 2 */
+            color: #c09050; 
             text-decoration: none;
             font-weight: bold;
         }
@@ -585,7 +334,7 @@ Copy this code, delete everything in your `index.html` file, and paste this in:
             color: #e9e2d8;
             opacity: 0.6;
             margin-top: 20px;
-            border-top: 1px solid #99724b; /* Palette Color 3 */
+            border-top: 1px solid #99724b; 
             padding-top: 20px;
             max-width: 400px;
             margin-left: auto;
@@ -597,7 +346,7 @@ Copy this code, delete everything in your `index.html` file, and paste this in:
 
     <nav class="navbar">
         <a href="index.html" class="mobile-center-logo">
-            <img src="[https://i.imgur.com/H3GQC1s.png](https://i.imgur.com/H3GQC1s.png)" alt="Andrew Marth Logo">
+            <img src="https://i.ibb.co/hRHFvcrJ/andrew-marth-logo.png" alt="Andrew Marth Logo">
         </a>
 
         <button class="hamburger" id="hamburger-btn">&#9776;</button>
@@ -607,7 +356,7 @@ Copy this code, delete everything in your `index.html` file, and paste this in:
             
             <div class="nav-logo">
                 <a href="index.html">
-                    <img src="[https://i.imgur.com/H3GQC1s.png](https://i.imgur.com/H3GQC1s.png)" alt="Andrew Marth Logo">
+                    <img src="https://i.ibb.co/hRHFvcrJ/andrew-marth-logo.png" alt="Andrew Marth Logo">
                 </a>
             </div>
             
@@ -627,7 +376,7 @@ Copy this code, delete everything in your `index.html` file, and paste this in:
 
     <section class="about-section">
         <div class="about-image">
-            <img src="[https://i.imgur.com/Ouc9Yo2.png](https://i.imgur.com/Ouc9Yo2.png)" alt="Andrew Marth - Real Estate Agent">
+            <img src="https://i.ibb.co/kVcmYj3f/az-pfp-graded.png" alt="Andrew Marth - Real Estate Agent">
         </div>
         <div class="about-text">
             <h2>Meet Andrew Marth</h2>
@@ -642,7 +391,7 @@ Copy this code, delete everything in your `index.html` file, and paste this in:
         <div class="services-container">
             
             <div class="card">
-                <img src="[https://i.imgur.com/UppARem.png](https://i.imgur.com/UppARem.png)" alt="Buying a Home">
+                <img src="https://i.ibb.co/4ZvpKzdG/firsttimebuyerfinal.png" alt="Buying a Home">
                 <div class="card-content">
                     <h3>Buying a Home</h3>
                     <p>Whether you are a first-time buyer or looking for your forever home, I'll help you navigate the market to find the perfect property at the right price.</p>
@@ -651,7 +400,7 @@ Copy this code, delete everything in your `index.html` file, and paste this in:
             </div>
 
             <div class="card">
-                <img src="[https://i.imgur.com/TBkamiV.jpeg](https://i.imgur.com/TBkamiV.jpeg)" alt="Selling a Home">
+                <img src="https://i.ibb.co/xSS35DSK/sellingfinal.png" alt="Selling a Home">
                 <div class="card-content">
                     <h3>Selling a Home</h3>
                     <p>Maximize your property's value. From staging advice to aggressive marketing, I ensure your home sells quickly and for top dollar.</p>
@@ -660,7 +409,7 @@ Copy this code, delete everything in your `index.html` file, and paste this in:
             </div>
 
             <div class="card">
-                <img src="[https://i.imgur.com/oBZutWK.jpeg](https://i.imgur.com/oBZutWK.jpeg)" alt="House Flipping">
+                <img src="https://i.ibb.co/hF9GCqj5/flippingfinal.png" alt="House Flipping">
                 <div class="card-content">
                     <h3>House Flipping</h3>
                     <p>Unlock high-yield investment opportunities. I provide strategic insights to help investors find, renovate, and flip properties for maximum ROI.</p>
