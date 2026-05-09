@@ -1,0 +1,128 @@
+/* Reset basic margins for the header elements */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+/* Main Header Container */
+.site-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 30px;
+  background-color: #ffffff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 1000;
+}
+
+/* Hide mobile-specific elements by default */
+.hamburger-btn, 
+.mobile-logo,
+.menu-overlay {
+  display: none;
+}
+
+/* Nav Links Styling (Desktop) */
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 30px;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #333333;
+  font-weight: bold;
+  font-size: 16px;
+  transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+  color: #007BFF; /* Change to your brand color */
+}
+
+/* =========================================
+   Mobile View (Screens 768px and smaller)
+   ========================================= */
+@media (max-width: 768px) {
+  /* Swap logos and show hamburger */
+  .desktop-logo {
+    display: none;
+  }
+  
+  .hamburger-btn {
+    display: block;
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-left: auto; /* Pushes the hamburger to the right */
+    color: #333;
+  }
+
+  /* Slide-out Menu Container */
+  .nav-menu {
+    position: fixed;
+    top: 0;
+    right: -250px; /* Hidden off-screen to the right */
+    width: 250px;
+    height: 100vh;
+    background-color: #ffffff;
+    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+    flex-direction: column;
+    transition: right 0.3s ease;
+    z-index: 1002;
+  }
+
+  /* When JS adds the 'active' class, slide the menu in */
+  .nav-menu.active {
+    right: 0;
+  }
+
+  /* Mobile Logo Formatting */
+  .mobile-logo {
+    display: block;
+    padding: 20px;
+    text-align: center;
+    border-bottom: 1px solid #eeeeee;
+    margin-bottom: 20px;
+  }
+
+  /* Stack Nav Links vertically */
+  .nav-links {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .nav-links li {
+    width: 100%;
+  }
+
+  .nav-links a {
+    display: block;
+    padding: 15px 25px;
+    border-bottom: 1px solid #f8f8f8;
+  }
+
+  /* Dark overlay for the rest of the screen */
+  .menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1001;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease;
+  }
+
+  .menu-overlay.active {
+    display: block;
+    opacity: 1;
+    visibility: visible;
+  }
+}
