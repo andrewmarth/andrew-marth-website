@@ -14,14 +14,14 @@
         body {
             font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             line-height: 1.6;
-            color: #3b2f2f; 
-            background-color: #f5f2eb; 
+            color: #4a433f; /* Soft dark brown for main text */
+            background-color: #faf8f5; /* Very soft pastel cream */
         }
         
         /* --- Header / Hero Section --- */
         header {
-            background-color: #2b4231; 
-            color: #fdfbf7;
+            background-color: #b5c4b9; /* Pastel Sage Green */
+            color: #2c3630; /* Darker green text for readability */
             padding: 80px 20px;
             text-align: center;
         }
@@ -32,7 +32,7 @@
         }
         header p {
             font-size: 1.2rem;
-            color: #cdd5d0; 
+            color: #4b5950; /* Muted deep sage for subtitle */
             max-width: 600px;
             margin: 0 auto;
         }
@@ -47,7 +47,7 @@
         .services-section h2 {
             font-size: 2rem;
             margin-bottom: 40px;
-            color: #3b2f2f; 
+            color: #4a433f; 
         }
 
         /* Flexbox for the 3 columns */
@@ -62,7 +62,7 @@
         .card {
             background: white;
             border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.03);
             overflow: hidden;
             flex: 1 1 calc(33.333% - 30px);
             min-width: 300px; 
@@ -72,7 +72,7 @@
         }
         .card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.08);
         }
         .card img {
             width: 100%;
@@ -88,10 +88,10 @@
         .card h3 {
             font-size: 1.4rem;
             margin-bottom: 15px;
-            color: #2b4231; 
+            color: #6a7b6f; /* Muted mid-tone sage for headers */
         }
         .card p {
-            color: #5a504b; 
+            color: #6e6560; /* Soft taupe/brown for paragraphs */
             margin-bottom: 25px;
             flex-grow: 1; 
         }
@@ -99,8 +99,8 @@
         /* --- Buttons --- */
         .btn {
             display: inline-block;
-            background-color: #8b5e34; 
-            color: white;
+            background-color: #d1bba8; /* Pastel warm clay/taupe */
+            color: #3b302a; /* Dark espresso text for contrast */
             text-decoration: none;
             padding: 12px 20px;
             border-radius: 4px;
@@ -108,15 +108,15 @@
             transition: background-color 0.3s ease;
         }
         .btn:hover {
-            background-color: #6a4625; 
+            background-color: #bca48f; /* Slightly deeper clay on hover */
         }
 
         /* --- Footer --- */
         footer {
             text-align: center;
             padding: 40px 20px;
-            background-color: #2b4231; 
-            color: #cdd5d0;
+            background-color: #b5c4b9; /* Pastel Sage Green */
+            color: #2c3630;
             margin-top: 40px;
         }
         .footer-contact {
@@ -125,11 +125,12 @@
         .footer-contact p {
             margin-bottom: 8px;
             font-size: 1.1rem;
-            color: #fdfbf7;
+            color: #2c3630;
         }
         .footer-contact a {
-            color: #e3d5ca; 
+            color: #8b7562; /* Deeper clay color for links */
             text-decoration: none;
+            font-weight: bold;
         }
         .footer-contact a:hover {
             text-decoration: underline;
@@ -138,16 +139,16 @@
             max-width: 900px;
             margin: 0 auto 20px auto;
             font-size: 0.8rem;
-            color: #9aa89e; 
+            color: #4b5950; 
             line-height: 1.5;
             text-align: justify;
             text-align-last: center; 
         }
         .copyright {
             font-size: 0.9rem;
-            color: #7b8a80;
+            color: #58665c;
             margin-top: 20px;
-            border-top: 1px solid #3c5443;
+            border-top: 1px solid #9eaa9d;
             padding-top: 20px;
             max-width: 400px;
             margin-left: auto;
@@ -168,7 +169,7 @@
         <div class="services-container">
             
             <div class="card">
-                <img src="https://placehold.co/600x400/e8eee9/2b4231?text=Buying+A+Home" alt="Buying a Home">
+                <img src="https://placehold.co/600x400/e2e8e4/6a7b6f?text=Buying+A+Home" alt="Buying a Home">
                 <div class="card-content">
                     <h3>Buying a Home</h3>
                     <p>Whether you are a first-time buyer or looking for your forever home, I'll help you navigate the market to find the perfect property at the right price.</p>
@@ -177,7 +178,7 @@
             </div>
 
             <div class="card">
-                <img src="https://placehold.co/600x400/e8eee9/2b4231?text=Selling+A+Home" alt="Selling a Home">
+                <img src="https://placehold.co/600x400/e2e8e4/6a7b6f?text=Selling+A+Home" alt="Selling a Home">
                 <div class="card-content">
                     <h3>Selling a Home</h3>
                     <p>Maximize your property's value. From staging advice to aggressive marketing, I ensure your home sells quickly and for top dollar.</p>
@@ -186,7 +187,7 @@
             </div>
 
             <div class="card">
-                <img src="https://placehold.co/600x400/e8eee9/2b4231?text=House+Flipping" alt="House Flipping">
+                <img src="https://placehold.co/600x400/e2e8e4/6a7b6f?text=House+Flipping" alt="House Flipping">
                 <div class="card-content">
                     <h3>House Flipping</h3>
                     <p>Unlock high-yield investment opportunities. I provide strategic insights to help investors find, renovate, and flip properties for maximum ROI.</p>
@@ -204,4 +205,11 @@
         </div>
         
         <div class="footer-disclosure">
-            <p>Andrew Marth is an agent affiliated with Compass, a licensed real estate broker and abides by Equal Housing Opportunity laws. All material presented herein
+            <p>Andrew Marth is an agent affiliated with Compass, a licensed real estate broker and abides by Equal Housing Opportunity laws. All material presented herein is intended for informational purposes only. Information is compiled from sources deemed reliable but is subject to errors, omissions, changes in price, condition, sale, or withdrawal without notice. This is not intended to solicit property already listed. Photos may be virtually staged or digitally enhanced and may not reflect actual property conditions.</p>
+        </div>
+        
+        <p class="copyright">&copy; 2026 Andrew Marth Real Estate. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
