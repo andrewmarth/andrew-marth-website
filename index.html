@@ -64,14 +64,14 @@
             border-radius: 8px;
             box-shadow: 0 4px 6px rgba(0,0,0,0.05);
             overflow: hidden;
-            flex: 1 1 calc(33.333% - 30px); /* 3 columns by default */
-            min-width: 300px; /* Forces stacking on smaller screens */
+            flex: 1 1 calc(33.333% - 30px);
+            min-width: 300px; 
             display: flex;
             flex-direction: column;
             transition: transform 0.3s ease;
         }
         .card:hover {
-            transform: translateY(-5px); /* Slight lift effect on hover */
+            transform: translateY(-5px);
             box-shadow: 0 8px 15px rgba(0,0,0,0.1);
         }
         .card img {
@@ -93,7 +93,7 @@
         .card p {
             color: #666;
             margin-bottom: 25px;
-            flex-grow: 1; /* Pushes the button to the bottom */
+            flex-grow: 1; 
         }
 
         /* --- Buttons --- */
@@ -114,10 +114,44 @@
         /* --- Footer --- */
         footer {
             text-align: center;
-            padding: 30px 20px;
+            padding: 40px 20px;
             background-color: #1a252c;
-            color: #888;
+            color: #d1d5db;
             margin-top: 40px;
+        }
+        .footer-contact {
+            margin-bottom: 20px;
+        }
+        .footer-contact p {
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+            color: #ffffff;
+        }
+        .footer-contact a {
+            color: #4da6ff; /* Lighter blue to show up on the dark background */
+            text-decoration: none;
+        }
+        .footer-contact a:hover {
+            text-decoration: underline;
+        }
+        .footer-disclosure {
+            max-width: 900px;
+            margin: 0 auto 20px auto;
+            font-size: 0.8rem;
+            color: #9ca3af;
+            line-height: 1.5;
+            text-align: justify;
+            text-align-last: center; /* Keeps the last line centered */
+        }
+        .copyright {
+            font-size: 0.9rem;
+            color: #6b7280;
+            margin-top: 20px;
+            border-top: 1px solid #374151;
+            padding-top: 20px;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
         }
     </style>
 </head>
@@ -164,7 +198,16 @@
     </section>
 
     <footer>
-        <p>&copy; 2026 Andrew Marth Real Estate. All rights reserved.</p>
+        <div class="footer-contact">
+            <p><strong>Cell:</strong> 480.652.1330 | <strong>Email:</strong> <a href="mailto:andrew@andrewmarth.com">andrew@andrewmarth.com</a></p>
+            <p><strong>AZ License:</strong> SA711359000</p>
+        </div>
+        
+        <div class="footer-disclosure">
+            <p>Andrew Marth is an agent affiliated with Compass, a licensed real estate broker and abides by Equal Housing Opportunity laws. All material presented herein is intended for informational purposes only. Information is compiled from sources deemed reliable but is subject to errors, omissions, changes in price, condition, sale, or withdrawal without notice. This is not intended to solicit property already listed. Photos may be virtually staged or digitally enhanced and may not reflect actual property conditions.</p>
+        </div>
+        
+        <p class="copyright">&copy; 2026 Andrew Marth Real Estate. All rights reserved.</p>
     </footer>
 
 </body>
