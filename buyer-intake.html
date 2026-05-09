@@ -202,14 +202,19 @@
             margin-bottom: 15px;
         }
 
-        /* --- Zapier Form Container --- */
+        /* --- Zapier Form Container (UPDATED WITH TILING IMAGE) --- */
         .form-container {
             max-width: 900px;
             margin: 40px auto 80px auto; 
-            padding: 0 20px;
+            padding: 0; /* Removed side padding so the pattern goes edge to edge in the container */
             display: flex;
             justify-content: center;
             width: 100%; 
+            
+            /* Tiling Background Image */
+            background-image: url('https://i.ibb.co/Q39K8cz2/tiling-background.png');
+            background-repeat: repeat; /* Forces the pattern to tile seamlessly */
+            background-position: top center;
         }
 
         /* --- Footer --- */
