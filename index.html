@@ -127,10 +127,10 @@
             .nav-logo {
                 margin-bottom: 40px;
                 width: 100%;
-                text-align: center; 
+                display: flex;
+                justify-content: center; /* Forces the logo to be perfectly centered */
             }
             .nav-logo img {
-                margin: 0 auto;
                 height: 60px;
             }
             .nav-links {
@@ -162,7 +162,6 @@
 
         /* --- Header / Hero Section --- */
         header {
-            /* Linear gradient overlay with the ImgBB hero image */
             background: linear-gradient(rgba(78, 81, 62, 0.75), rgba(78, 81, 62, 0.75)), url('https://i.ibb.co/nNxwtB3g/background.jpg');
             background-size: cover;
             background-position: center;
@@ -321,7 +320,7 @@
         }
         .footer-disclosure {
             max-width: 900px;
-            margin: 0 auto 0 auto; /* Removed bottom margin since copyright is gone */
+            margin: 0 auto 0 auto; 
             font-size: 0.8rem;
             color: #e9e2d8; 
             opacity: 0.75;
