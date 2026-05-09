@@ -205,14 +205,17 @@
         /* --- Zapier Form Container --- */
         .form-container {
             max-width: 900px;
-            margin: 60px auto 80px auto;
+            margin: 40px auto 80px auto; /* Slightly reduced top margin to pull form closer to text */
             padding: 0 20px;
             display: flex;
             justify-content: center;
+            width: 100%; /* Ensures container spans full width up to 900px */
         }
         
+        /* Ensures the Zapier web component stretches properly */
         zapier-interfaces-page-embed {
             width: 100%;
+            display: block; /* Helps prevent margin collapse issues */
         }
 
         /* --- Footer --- */
@@ -270,7 +273,7 @@
             </div>
             
             <div class="nav-links">
-                <a href="buyer-intake.html">Buying</a>
+                <a href="buying.html">Buying</a>
                 <a href="selling.html">Selling</a>
                 <a href="flipping.html">Flipping</a>
                 <a href="contact.html">Contact</a>
@@ -292,7 +295,7 @@
 
         <section class="form-container">
             <script type='module' src='https://interfaces.zapier.com/assets/web-components/zapier-interfaces/zapier-interfaces.esm.js'></script>
-            <zapier-interfaces-page-embed page-id='cmi67p46r000lyouapegaxk2j' test-id='cmi67p46r000lyouapegaxk2j-zapier-interfaces-page-embed-iframe' no-background='true' style='max-width: 900px; height: 500px;'></zapier-interfaces-page-embed>
+            <zapier-interfaces-page-embed page-id='cmi67p46r000lyouapegaxk2j' test-id='cmi67p46r000lyouapegaxk2j-zapier-interfaces-page-embed-iframe' no-background='true' style='max-width: 900px; width: 100%; min-height: 800px;'></zapier-interfaces-page-embed>
         </section>
     </main>
 
