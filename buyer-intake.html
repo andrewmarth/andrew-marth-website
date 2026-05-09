@@ -173,7 +173,7 @@
         /* --- Top Intro Section --- */
         .about-section {
             max-width: 1000px;
-            margin: 40px auto;
+            margin: 40px auto 20px auto; /* Reduced bottom margin to pull disclaimer closer */
             padding: 0 20px;
             display: flex;
             align-items: center;
@@ -206,10 +206,32 @@
             margin-bottom: 15px;
         }
 
+        /* --- Disclaimer Section --- */
+        .intake-disclaimer {
+            max-width: 900px;
+            margin: 0 auto 30px auto; 
+            padding: 0 20px;
+            text-align: center;
+        }
+        .intake-disclaimer p {
+            font-size: 0.95rem; /* Slightly smaller font */
+            font-style: italic;
+            color: #4f2d2c;
+            opacity: 0.85; /* Softens the visual weight slightly */
+        }
+        .intake-disclaimer a {
+            color: #c09050;
+            text-decoration: underline;
+            font-weight: bold;
+        }
+        .intake-disclaimer a:hover {
+            color: #9a5d40;
+        }
+
         /* --- Zapier Form Container (FRAMED & SCALED) --- */
         .form-container {
             max-width: 900px; 
-            margin: 40px auto 80px auto; 
+            margin: 0 auto 80px auto; /* Removed top margin to sit flush with disclaimer */
             padding: 0; 
             display: flex;
             justify-content: center;
@@ -300,6 +322,10 @@
                 <p>Fill out the brief questionnaire below to tell me exactly what you are looking for. Once I have your details, I will immediately begin curating a personalized list of properties that match your lifestyle, timeline, and budget.</p>
             </div>
         </section>
+
+        <div class="intake-disclaimer">
+            <p><strong>*Disclaimer:</strong> If you are also selling a home, please use the <a href="seller-intake.html">seller intake form</a> instead.*</p>
+        </div>
 
         <section class="form-container">
             <script type='module' src='https://interfaces.zapier.com/assets/web-components/zapier-interfaces/zapier-interfaces.esm.js'></script>
