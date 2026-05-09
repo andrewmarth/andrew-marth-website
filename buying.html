@@ -126,7 +126,7 @@
 
         /* --- Timeline Section --- */
         .timeline-section {
-            padding: 40px 20px 80px 20px;
+            padding: 40px 20px 60px 20px;
             background-color: #e9e2d8;
         }
         .timeline {
@@ -140,7 +140,7 @@
             content: '';
             position: absolute;
             width: 4px;
-            background-color: #99724b; /* Gold/Brown accent */
+            background-color: #99724b; 
             top: 0;
             bottom: 0;
             left: 50%;
@@ -164,7 +164,7 @@
             height: 24px;
             right: -12px;
             background-color: #e9e2d8;
-            border: 4px solid #4e513e; /* Olive Green border */
+            border: 4px solid #4e513e; 
             top: 25px;
             border-radius: 50%;
             z-index: 1;
@@ -230,6 +230,42 @@
             background-color: #9a5d40;
         }
 
+        /* --- Call to Action Section --- */
+        .cta-section {
+            max-width: 800px;
+            margin: 0 auto 80px auto; /* Replaces some of the timeline's bottom padding */
+            padding: 40px 20px;
+            text-align: center;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border-top: 4px solid #99724b; /* Gold/Brown accent */
+        }
+        .cta-section h2 {
+            font-size: 2rem;
+            color: #4f2d2c;
+            margin-bottom: 15px;
+        }
+        .cta-section p {
+            font-size: 1.1rem;
+            color: #4f2d2c;
+            margin-bottom: 30px;
+        }
+        .cta-btn {
+            display: inline-block;
+            padding: 15px 35px;
+            background-color: #4e513e; /* Olive Green to stand out */
+            color: #e9e2d8;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: background-color 0.3s;
+        }
+        .cta-btn:hover {
+            background-color: #3d4030;
+        }
+
         /* --- Footer --- */
         footer {
             text-align: center;
@@ -266,7 +302,6 @@
 
         /* --- Mobile Responsiveness --- */
         @media (max-width: 768px) {
-            /* Navigation Mobile Fixes */
             .navbar {
                 justify-content: flex-end; 
             }
@@ -343,7 +378,7 @@
 
             /* Timeline Mobile Fixes (Snaps to left) */
             .timeline::after {
-                left: 31px; /* Move central line to the left edge */
+                left: 31px; 
             }
             .timeline-item {
                 width: 100%;
@@ -351,10 +386,15 @@
                 padding-right: 15px;
             }
             .timeline-item::after {
-                left: 19px; /* Align circles to the new left-aligned line */
+                left: 19px; 
             }
             .right {
-                left: 0; /* Stop right-aligned items from being pushed over */
+                left: 0; 
+            }
+            
+            /* Give CTA section some breathing room on mobile */
+            .cta-section {
+                margin: 20px 20px 80px 20px; 
             }
         }
     </style>
@@ -458,6 +498,12 @@
             </div>
 
         </div>
+    </section>
+
+    <section class="cta-section">
+        <h2>Ready to Take the First Step?</h2>
+        <p>Before we can dive into the collection and start touring, we have to start with Step 1. Filling out the initial intake form is completely zero-pressure. In fact, it is a great idea to do this even if you are months or years away from buying—it gives you a crystal-clear picture of your options and what you are able to do right now.</p>
+        <a href="buyer-intake.html" class="cta-btn">Start Your Buyer Intake</a>
     </section>
 
     <footer>
