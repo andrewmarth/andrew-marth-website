@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Andrew Marth | Real Estate Agent</title>
+    <title>Andrew Marth Real Estate | Arizona</title>
     <style>
         /* --- General Reset & Styling --- */
         * {
@@ -14,8 +14,8 @@
         body {
             font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             line-height: 1.6;
-            color: #4f2d2c; /* Palette Color 6 */
-            background-color: #e9e2d8; /* Palette Color 1 */
+            color: #4f2d2c; 
+            background-color: #e9e2d8; 
             overflow-x: hidden; 
         }
         
@@ -38,14 +38,14 @@
             min-height: 80px;
         }
         .mobile-center-logo {
-            display: none; /* Hidden on desktop */
+            display: none; 
         }
         .hamburger {
             display: none;
             font-size: 2rem;
             background: none;
             border: none;
-            color: #4e513e; /* Palette Color 5 */
+            color: #4e513e; 
             cursor: pointer;
         }
         .nav-menu {
@@ -71,19 +71,160 @@
         }
         .nav-links a {
             text-decoration: none;
-            color: #4f2d2c; /* Palette Color 6 */
+            color: #4f2d2c; 
             font-weight: bold;
             font-size: 1.1rem;
             transition: color 0.3s;
         }
         .nav-links a:hover {
-            color: #9a5d40; /* Palette Color 4 */
+            color: #9a5d40; 
         }
         .close-menu {
             display: none; 
         }
 
-        /* Mobile Navigation Styles */
+        /* --- Header / Hero Section --- */
+        header {
+            background: linear-gradient(rgba(78, 81, 62, 0.75), rgba(78, 81, 62, 0.75)), url('https://i.ibb.co/nNxwtB3g/background.jpg');
+            background-size: cover;
+            background-position: center;
+            color: #e9e2d8; 
+            padding: 180px 20px 120px 20px; 
+            text-align: center;
+        }
+        header h1 {
+            font-size: 3.5rem; 
+            margin-bottom: 15px;
+            letter-spacing: 2px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3); 
+        }
+        header p {
+            font-size: 1.4rem;
+            color: #e9e2d8; 
+            opacity: 0.95; 
+            max-width: 800px;
+            margin: 0 auto;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+        }
+
+        /* --- Intro Section --- */
+        .intro-section {
+            max-width: 1000px;
+            margin: 60px auto 40px auto;
+            padding: 0 20px;
+            text-align: center;
+        }
+        .intro-section h2 {
+            font-size: 2.5rem;
+            color: #4f2d2c;
+            margin-bottom: 20px;
+        }
+        .intro-section p {
+            font-size: 1.15rem;
+            margin-bottom: 15px;
+        }
+
+        /* --- Cards Section --- */
+        .cards-section {
+            max-width: 1200px;
+            margin: 0 auto 80px auto;
+            padding: 0 20px;
+        }
+        .cards-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+        }
+        .card {
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            overflow: hidden;
+            flex: 1 1 calc(33.333% - 30px);
+            min-width: 320px; 
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+        .card img {
+            width: 100%;
+            height: 240px;
+            object-fit: cover;
+        }
+        .card-content {
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            text-align: center;
+        }
+        .card h3 {
+            font-size: 1.6rem;
+            margin-bottom: 15px;
+            color: #4e513e; 
+        }
+        .card p {
+            color: #4f2d2c; 
+            margin-bottom: 25px;
+            flex-grow: 1; 
+            font-size: 1.05rem;
+        }
+
+        /* --- Buttons --- */
+        .btn {
+            display: inline-block;
+            background-color: #99724b; 
+            color: #e9e2d8; 
+            text-decoration: none;
+            padding: 12px 25px;
+            border-radius: 4px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+        .btn:hover {
+            background-color: #9a5d40; 
+        }
+
+        /* --- Footer --- */
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            background-color: #4e513e; 
+            color: #e9e2d8; 
+        }
+        .footer-contact {
+            margin-bottom: 20px;
+        }
+        .footer-contact p {
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+            color: #e9e2d8;
+        }
+        .footer-contact a {
+            color: #c09050; 
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .footer-contact a:hover {
+            text-decoration: underline;
+        }
+        .footer-disclosure {
+            max-width: 900px;
+            margin: 0 auto 0 auto; 
+            font-size: 0.8rem;
+            color: #e9e2d8; 
+            opacity: 0.75;
+            line-height: 1.5;
+            text-align: justify;
+            text-align-last: center; 
+        }
+
+        /* --- Mobile Responsiveness --- */
         @media (max-width: 768px) {
             .navbar {
                 justify-content: flex-end; 
@@ -158,186 +299,16 @@
                 cursor: pointer;
                 line-height: 1;
             }
-            /* Centers the intro text specifically on mobile screens */
-            .about-text {
+            .intro-section {
                 text-align: center;
             }
-        }
-
-        /* --- Header / Hero Section --- */
-        header {
-            background: linear-gradient(rgba(78, 81, 62, 0.75), rgba(78, 81, 62, 0.75)), url('https://i.ibb.co/nNxwtB3g/background.jpg');
-            background-size: cover;
-            background-position: center;
-            color: #e9e2d8; 
-            padding: 160px 20px 100px 20px; 
-            text-align: center;
-        }
-        header h1 {
-            font-size: 3rem; 
-            margin-bottom: 15px;
-            letter-spacing: 2px;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.3); 
-        }
-        header p {
-            font-size: 1.3rem;
-            color: #e9e2d8; 
-            opacity: 0.95; 
-            max-width: 700px;
-            margin: 0 auto;
-            text-shadow: 0 1px 3px rgba(0,0,0,0.3);
-        }
-
-        /* --- About Me Section --- */
-        .about-section {
-            max-width: 1000px;
-            margin: 60px auto 20px auto;
-            padding: 0 20px;
-            display: flex;
-            align-items: center;
-            gap: 50px;
-            flex-wrap: wrap; 
-        }
-        .about-image {
-            flex: 1 1 300px;
-            text-align: center;
-        }
-        .about-image img {
-            width: 100%;
-            max-width: 350px;
-            border-radius: 50%; 
-            border: 8px solid #4e513e; 
-            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
-            object-fit: cover;
-        }
-        .about-text {
-            flex: 2 1 400px;
-        }
-        .about-text h2 {
-            font-size: 2rem;
-            color: #4f2d2c; 
-            margin-bottom: 20px;
-        }
-        .about-text p {
-            color: #4f2d2c; 
-            font-size: 1.1rem;
-            margin-bottom: 15px;
-        }
-
-        /* --- Main Services Section --- */
-        .services-section {
-            max-width: 1200px;
-            margin: 60px auto;
-            padding: 0 20px;
-            text-align: center;
-        }
-        .services-section h2 {
-            font-size: 2rem;
-            margin-bottom: 40px;
-            color: #4f2d2c; 
-        }
-
-        /* Flexbox for the 3 columns */
-        .services-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            gap: 30px;
-        }
-
-        /* --- Individual Service Cards --- */
-        .card {
-            background: #ffffff;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            overflow: hidden;
-            flex: 1 1 calc(33.333% - 30px);
-            min-width: 300px; 
-            display: flex;
-            flex-direction: column;
-            transition: transform 0.3s ease;
-        }
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
-        }
-        .card img {
-            width: 100%;
-            height: 220px;
-            object-fit: cover;
-        }
-        .card-content {
-            padding: 25px;
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1;
-        }
-        .card h3 {
-            font-size: 1.4rem;
-            margin-bottom: 15px;
-            color: #4e513e; 
-        }
-        .card p {
-            color: #4f2d2c; 
-            margin-bottom: 25px;
-            flex-grow: 1; 
-        }
-
-        /* --- Buttons --- */
-        .btn {
-            display: inline-block;
-            background-color: #99724b; 
-            color: #e9e2d8; 
-            text-decoration: none;
-            padding: 12px 20px;
-            border-radius: 4px;
-            font-weight: bold;
-            transition: background-color 0.3s ease;
-        }
-        .btn:hover {
-            background-color: #9a5d40; 
-        }
-
-        /* --- Footer --- */
-        footer {
-            text-align: center;
-            padding: 40px 20px;
-            background-color: #4e513e; 
-            color: #e9e2d8; 
-            margin-top: 40px;
-        }
-        .footer-contact {
-            margin-bottom: 20px;
-        }
-        .footer-contact p {
-            margin-bottom: 8px;
-            font-size: 1.1rem;
-            color: #e9e2d8;
-        }
-        .footer-contact a {
-            color: #c09050; 
-            text-decoration: none;
-            font-weight: bold;
-        }
-        .footer-contact a:hover {
-            text-decoration: underline;
-        }
-        .footer-disclosure {
-            max-width: 900px;
-            margin: 0 auto 0 auto; 
-            font-size: 0.8rem;
-            color: #e9e2d8; 
-            opacity: 0.75;
-            line-height: 1.5;
-            text-align: justify;
-            text-align-last: center; 
         }
     </style>
 </head>
 <body>
 
     <nav class="navbar">
-        <a href="index.html" class="mobile-center-logo">
+        <a href="/" class="mobile-center-logo">
             <img src="https://i.ibb.co/hRHFvcrJ/andrew-marth-logo.png" alt="Andrew Marth Logo">
         </a>
 
@@ -347,65 +318,58 @@
             <button class="close-menu" id="close-btn">&times;</button>
             
             <div class="nav-logo">
-                <a href="index.html">
+                <a href="/">
                     <img src="https://i.ibb.co/hRHFvcrJ/andrew-marth-logo.png" alt="Andrew Marth Logo">
                 </a>
             </div>
             
             <div class="nav-links">
-                <a href="buying.html">Buying</a>
-                <a href="selling.html">Selling</a>
-                <a href="flipping.html">Flipping</a>
-                <a href="contact.html">Contact</a>
+                <a href="buying">Buying</a>
+                <a href="selling">Selling</a>
+                <a href="flipping">Flipping</a>
+                <a href="contact">Contact</a>
             </div>
         </div>
     </nav>
 
     <header>
-        <h1>Andrew Marth</h1>
-        <p>Elevating your real estate experience with expert guidance, strategic insights, and proven results.</p>
+        <h1>Andrew Marth Real Estate</h1>
+        <p>Elevating your real estate experience with strategic expertise and relentless advocacy in the Arizona market.</p>
     </header>
 
-    <section class="about-section">
-        <div class="about-image">
-            <img src="https://i.ibb.co/kVcmYj3f/az-pfp-graded.png" alt="Andrew Marth - Real Estate Agent">
-        </div>
-        <div class="about-text">
-            <h2>Meet Andrew Marth</h2>
-            <p>Welcome! I am a dedicated real estate professional serving the vibrant Arizona market. With a deep understanding of local trends and a relentless drive to achieve my clients' goals, I provide a tailored approach to every transaction.</p>
-            <p>Whether you are purchasing your first home, selling a luxury property, or looking for your next investment flip, I bring strategic insight, fierce negotiation skills, and unyielding integrity to the table. Let's turn your real estate vision into reality.</p>
-        </div>
+    <section class="intro-section">
+        <h2>How Can I Help You?</h2>
+        <p>Whether you are a first-time homebuyer, looking to sell your property for top dollar, or searching for your next lucrative investment, I am here to guide you every step of the way.</p>
+        <p>Select an option below to learn more about my processes and how we can achieve your real estate goals together.</p>
     </section>
 
-    <section class="services-section">
-        <h2>How Can I Help You Achieve Your Goals?</h2>
-        
-        <div class="services-container">
+    <section class="cards-section">
+        <div class="cards-container">
             
             <div class="card">
-                <img src="https://i.ibb.co/4ZvpKzdG/firsttimebuyerfinal.png" alt="Buying a Home">
+                <img src="https://i.ibb.co/Ps94Df0v/keys-final.png" alt="Buying a Home">
                 <div class="card-content">
-                    <h3>Buying a Home</h3>
-                    <p>Whether you are a first-time buyer or looking for your forever home, I'll help you navigate the market to find the perfect property at the right price.</p>
-                    <a href="buying.html" class="btn">Explore Buying</a>
+                    <h3>Buying</h3>
+                    <p>Discover a seamless, organized approach to finding your dream home. I provide relentless advocacy and negotiation to get you the keys.</p>
+                    <a href="buying" class="btn">The Buying Process</a>
                 </div>
             </div>
 
             <div class="card">
-                <img src="https://i.ibb.co/xSS35DSK/sellingfinal.png" alt="Selling a Home">
+                <img src="https://i.ibb.co/5hcLYhms/sold-final.png" alt="Selling a Home">
                 <div class="card-content">
-                    <h3>Selling a Home</h3>
-                    <p>Maximize your property's value. From staging advice to aggressive marketing, I ensure your home sells quickly and for top dollar.</p>
-                    <a href="selling.html" class="btn">Explore Selling</a>
+                    <h3>Selling</h3>
+                    <p>Maximize your property's value with expert market analysis, high-end marketing, and a strategic launch designed for top dollar.</p>
+                    <a href="selling" class="btn">The Selling Process</a>
                 </div>
             </div>
 
             <div class="card">
-                <img src="https://i.ibb.co/hF9GCqj5/flippingfinal.png" alt="House Flipping">
+                <img src="https://i.ibb.co/hF9GCqj5/flippingfinal.png" alt="Fix and Flip Investments">
                 <div class="card-content">
-                    <h3>House Flipping</h3>
-                    <p>Unlock high-yield investment opportunities. I provide strategic insights to help investors find, renovate, and flip properties for maximum ROI.</p>
-                    <a href="flipping.html" class="btn">Explore Flipping</a>
+                    <h3>Flipping</h3>
+                    <p>Partner with me for high-yield real estate returns. Whether you are an investor, contractor, or capital partner, I source the perfect deal.</p>
+                    <a href="flipping" class="btn">Explore Investments</a>
                 </div>
             </div>
 
@@ -428,12 +392,10 @@
         const closeBtn = document.getElementById('close-btn');
         const navMenu = document.getElementById('nav-menu');
 
-        // Open menu
         hamburgerBtn.addEventListener('click', () => {
             navMenu.classList.add('active');
         });
 
-        // Close menu
         closeBtn.addEventListener('click', () => {
             navMenu.classList.remove('active');
         });
