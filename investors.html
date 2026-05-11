@@ -154,7 +154,7 @@
         /* --- Call to Action Section --- */
         .cta-section {
             max-width: 800px;
-            margin: 80px auto 80px auto; 
+            margin: 80px auto; 
             padding: 40px 20px;
             text-align: center;
             background-color: #ffffff;
@@ -162,6 +162,13 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.05);
             border-top: 4px solid #99724b; 
         }
+        
+        /* Adding a smaller margin class for stacked CTAs */
+        .cta-stacked {
+            margin-top: -40px;
+            margin-bottom: 80px;
+        }
+        
         .cta-section h2 {
             font-size: 2rem;
             color: #4f2d2c;
@@ -299,6 +306,9 @@
             .intro-section {
                 text-align: center;
             }
+            .cta-stacked {
+                margin-top: -20px; 
+            }
         }
     </style>
 </head>
@@ -353,6 +363,12 @@
         <h2>Ready to Explore Active Deals?</h2>
         <p>Our next profitable partnership starts here. Fill out the investor intake form to help me understand your capital requirements, return targets, and specific criteria.</p>
         <a href="investor-intake.html" class="cta-btn">Start Investor Intake</a>
+    </section>
+
+    <section class="cta-section cta-stacked">
+        <h2>Looking For A Partnership Instead?</h2>
+        <p>If you want to capitalize on high-yield real estate returns without taking on the full responsibility of a project manager, managing cash flow, and being on-site every day, you can join as a capital partner instead.</p>
+        <a href="partnership.html" class="cta-btn">Explore Partnerships</a>
     </section>
 
     <footer>
