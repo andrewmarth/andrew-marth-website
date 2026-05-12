@@ -107,10 +107,10 @@
             text-shadow: 0 1px 3px rgba(0,0,0,0.3);
         }
 
-        /* --- Content Section (Reuses Contact/Homepage Layout) --- */
+        /* --- Content Section --- */
         .about-section {
             max-width: 1000px;
-            margin: 80px auto 100px auto; 
+            margin: 80px auto 60px auto; 
             padding: 0 20px;
             display: flex;
             align-items: center;
@@ -197,6 +197,39 @@
             width: 38px;
             height: 38px;
             object-fit: contain;
+        }
+
+        /* --- Calendar Section --- */
+        .calendar-section {
+            max-width: 1000px;
+            margin: 0 auto 100px auto;
+            padding: 0 20px;
+            text-align: center;
+        }
+        .calendar-section h2 {
+            font-size: 2.2rem;
+            color: #4f2d2c;
+            margin-bottom: 15px;
+        }
+        .calendar-section p {
+            font-size: 1.1rem;
+            color: #4f2d2c;
+            margin-bottom: 30px;
+        }
+        .calendar-container {
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            overflow: hidden;
+            border-top: 4px solid #99724b;
+            padding-top: 10px; 
+        }
+        
+        /* Iframe Desktop Styling */
+        .calendar-iframe {
+            width: 100%;
+            height: 1200px; /* Increased to eliminate scrollbar */
+            border: none;
         }
 
         /* --- Footer --- */
@@ -314,6 +347,11 @@
             .social-icons {
                 justify-content: center; 
             }
+            
+            /* Iframe Mobile Styling */
+            .calendar-iframe {
+                height: 1800px; /* Gives the calendar plenty of room to stack vertically */
+            }
         }
     </style>
 </head>
@@ -385,6 +423,14 @@
             </div>
 
         </div>
+    </section>
+
+    <section class="calendar-section">
+        <h2>Want To Reserve A Time?</h2>
+        <p>Select a time below to hop on a call.</p>
+        <div class="calendar-container">
+            <iframe src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ1dN08AzRdZjJxKE2nneRHb5Mt3udERnvQ-QWIcPpDbw4pcLU4eL-6QRfgita2pOwbtGW1nsxpp?gv=true" class="calendar-iframe" frameborder="0"></iframe>
+            </div>
     </section>
 
     <footer>
