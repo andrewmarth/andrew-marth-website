@@ -110,7 +110,7 @@
         /* --- Contact Content Section (Reuses Homepage Layout) --- */
         .about-section {
             max-width: 1000px;
-            margin: 80px auto 100px auto; /* Extended bottom margin */
+            margin: 80px auto 100px auto; 
             padding: 0 20px;
             display: flex;
             align-items: center;
@@ -169,6 +169,34 @@
         .contact-details a:hover {
             color: #9a5d40;
             text-decoration: underline;
+        }
+
+        /* --- Social Media Links --- */
+        .social-section {
+            margin-top: 35px;
+        }
+        .social-section h3 {
+            font-size: 1.3rem;
+            color: #4e513e;
+            margin-bottom: 15px;
+        }
+        .social-icons {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+        .social-icons a {
+            display: inline-block;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+        .social-icons a:hover {
+            transform: translateY(-4px); /* Floating effect on hover */
+            opacity: 0.8;
+        }
+        .social-icons img {
+            width: 38px;
+            height: 38px;
+            object-fit: contain;
         }
 
         /* --- Footer --- */
@@ -284,6 +312,9 @@
             .about-text {
                 text-align: center;
             }
+            .social-icons {
+                justify-content: center; /* Centers icons nicely on mobile */
+            }
         }
     </style>
 </head>
@@ -332,6 +363,28 @@
                 <p><strong>Cell:</strong> <a href="tel:4806521330">480.652.1330</a></p>
                 <p><strong>Email:</strong> <a href="mailto:andrew@andrewmarth.com">andrew@andrewmarth.com</a></p>
             </div>
+
+            <div class="social-section">
+                <h3>Follow Me</h3>
+                <div class="social-icons">
+                    <a href="https://www.instagram.com/secret_agent_andrew/" target="_blank" rel="noopener noreferrer">
+                        <img src="https://i.ibb.co/8k4kp96/instagram.png" alt="Instagram">
+                    </a>
+                    <a href="https://www.facebook.com/secret.agent.andrew" target="_blank" rel="noopener noreferrer">
+                        <img src="https://i.ibb.co/Q3YDKFWc/facebook.png" alt="Facebook">
+                    </a>
+                    <a href="https://www.threads.com/@secret_agent_andrew" target="_blank" rel="noopener noreferrer">
+                        <img src="https://i.ibb.co/RTwB9G26/threads.png" alt="Threads">
+                    </a>
+                    <a href="https://www.linkedin.com/in/secret-agent-andrew/" target="_blank" rel="noopener noreferrer">
+                        <img src="https://i.ibb.co/m56LWTHg/linkedin.png" alt="LinkedIn">
+                    </a>
+                    <a href="https://x.com/SecrtAgntAndrew" target="_blank" rel="noopener noreferrer">
+                        <img src="https://i.ibb.co/k6MT07bV/twitter.png" alt="X / Twitter">
+                    </a>
+                </div>
+            </div>
+
         </div>
     </section>
 
