@@ -225,10 +225,11 @@
             padding-top: 10px; 
         }
         
-        /* Iframe Desktop Styling */
+        /* Iframe Responsive Styling */
         .calendar-iframe {
             width: 100%;
-            height: 900px;
+            height: 80vh; /* Takes up 80% of the user's screen height dynamically */
+            min-height: 700px; /* Ensures it never gets too squished on very small screens */
             border: none;
         }
 
@@ -346,11 +347,6 @@
             }
             .social-icons {
                 justify-content: center; 
-            }
-            
-            /* Iframe Mobile Styling */
-            .calendar-iframe {
-                height: 1800px;
             }
         }
     </style>
