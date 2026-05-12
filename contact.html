@@ -107,10 +107,10 @@
             text-shadow: 0 1px 3px rgba(0,0,0,0.3);
         }
 
-        /* --- Contact Content Section (Reuses Homepage Layout) --- */
+        /* --- Contact Content Section --- */
         .about-section {
             max-width: 1000px;
-            margin: 80px auto 100px auto; 
+            margin: 80px auto 60px auto; 
             padding: 0 20px;
             display: flex;
             align-items: center;
@@ -158,7 +158,7 @@
             color: #4e513e;
         }
         .contact-details p:last-child {
-            margin-bottom: 0; /* Removes bottom space on the last item */
+            margin-bottom: 0; 
         }
         .contact-details a {
             color: #99724b;
@@ -190,13 +190,39 @@
             transition: transform 0.3s ease, opacity 0.3s ease;
         }
         .social-icons a:hover {
-            transform: translateY(-4px); /* Floating effect on hover */
+            transform: translateY(-4px); 
             opacity: 0.8;
         }
         .social-icons img {
             width: 38px;
             height: 38px;
             object-fit: contain;
+        }
+
+        /* --- Calendar Section --- */
+        .calendar-section {
+            max-width: 1000px;
+            margin: 0 auto 100px auto;
+            padding: 0 20px;
+            text-align: center;
+        }
+        .calendar-section h2 {
+            font-size: 2.2rem;
+            color: #4f2d2c;
+            margin-bottom: 15px;
+        }
+        .calendar-section p {
+            font-size: 1.1rem;
+            color: #4f2d2c;
+            margin-bottom: 30px;
+        }
+        .calendar-container {
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            overflow: hidden;
+            border-top: 4px solid #99724b;
+            padding-top: 10px; /* Slight padding so iframe doesn't hit the border directly */
         }
 
         /* --- Footer --- */
@@ -308,12 +334,11 @@
                 cursor: pointer;
                 line-height: 1;
             }
-            /* Centers the intro text specifically on mobile screens */
             .about-text {
                 text-align: center;
             }
             .social-icons {
-                justify-content: center; /* Centers icons nicely on mobile */
+                justify-content: center; 
             }
         }
     </style>
@@ -357,7 +382,7 @@
         <div class="about-text">
             <h2>Let's Connect</h2>
             <p>Whether you have a quick question about the current Arizona market, want to discuss an upcoming project, or you are ready to start your next real estate journey, I am just a call or email away.</p>
-            <p>Reach out to me directly using the contact information below, and I will get back to you as soon as possible.</p>
+            <p>Reach out to me directly using the contact information below, or grab a time on my calendar that works best for you.</p>
             
             <div class="contact-details">
                 <p><strong>Cell:</strong> <a href="tel:4806521330">480.652.1330</a></p>
@@ -386,6 +411,14 @@
             </div>
 
         </div>
+    </section>
+
+    <section class="calendar-section">
+        <h2>Schedule a Meeting</h2>
+        <p>Select a time below to hop on a call or schedule a coffee meeting.</p>
+        <div class="calendar-container">
+            <iframe src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ1dN08AzRdZjJxKE2nneRHb5Mt3udERnvQ-QWIcPpDbw4pcLU4eL-6QRfgita2pOwbtGW1nsxpp?gv=true" style="border: 0" width="100%" height="600" frameborder="0"></iframe>
+            </div>
     </section>
 
     <footer>
