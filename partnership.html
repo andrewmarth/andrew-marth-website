@@ -127,7 +127,7 @@
         /* --- Proforma Images Section (Floating Effect) --- */
         .proforma-section {
             max-width: 1000px;
-            margin: 0 auto;
+            margin: 0 auto 60px auto;
             padding: 0 20px;
             display: flex;
             flex-direction: column;
@@ -149,6 +149,102 @@
         .proforma-container img:hover {
             transform: translateY(-5px);
             box-shadow: 0 30px 60px rgba(0,0,0,0.25);
+        }
+
+        /* --- Timeline Section --- */
+        .timeline-section {
+            padding: 40px 20px 60px 20px;
+            background-color: #e9e2d8;
+        }
+        .timeline {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        /* The central vertical line */
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 4px;
+            background-color: #99724b; 
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -2px;
+            border-radius: 2px;
+        }
+
+        /* Container for each timeline item */
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            background-color: inherit;
+            width: 50%;
+        }
+
+        /* The circles on the timeline */
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            right: -12px;
+            background-color: #e9e2d8;
+            border: 4px solid #4e513e; 
+            top: 25px;
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        /* Place items to the left */
+        .left {
+            left: 0;
+        }
+
+        /* Place items to the right */
+        .right {
+            left: 50%;
+        }
+
+        /* Fix the circle position for right-aligned items */
+        .right::after {
+            left: -12px;
+        }
+
+        /* Actual content card inside the timeline item */
+        .content {
+            padding: 25px 30px;
+            background-color: white;
+            position: relative;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border-top: 4px solid #4e513e;
+        }
+        .content h3 {
+            color: #4e513e;
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+        }
+        .content p {
+            font-size: 1.05rem;
+            color: #4f2d2c;
+        }
+        .step-number {
+            font-size: 0.9rem;
+            color: #99724b;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        /* Dixon Logo specific styling */
+        .dixon-logo {
+            max-width: 140px;
+            margin-top: 15px;
+            display: block;
         }
 
         /* --- Call to Action Section --- */
@@ -311,6 +407,22 @@
             .intro-section {
                 text-align: center;
             }
+
+            /* Timeline Mobile Fixes (Snaps to left) */
+            .timeline::after {
+                left: 31px; 
+            }
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 15px;
+            }
+            .timeline-item::after {
+                left: 19px; 
+            }
+            .right {
+                left: 0; 
+            }
         }
     </style>
 </head>
@@ -358,6 +470,53 @@
         </div>
         <div class="proforma-container">
             <img src="https://i.ibb.co/G3xDhGf1/example-proforma-2.png" alt="Andrew Marth Real Estate Proforma Page 2">
+        </div>
+    </section>
+
+    <section class="timeline-section">
+        <div class="timeline">
+            
+            <div class="timeline-item left">
+                <div class="content">
+                    <span class="step-number">Step 01</span>
+                    <h3>Connect</h3>
+                    <p>We will connect to discuss the capital you are looking to invest, what the end-to-end process looks like, and establish a realistic timeline.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item right">
+                <div class="content">
+                    <span class="step-number">Step 02</span>
+                    <h3>The Search</h3>
+                    <p>I will get to work searching for the ideal deal that fits your capital contribution and timeline. Once I find a high-yield opportunity, I will send you the deal to get your feedback and final approval.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item left">
+                <div class="content">
+                    <span class="step-number">Step 03</span>
+                    <h3>Purchase</h3>
+                    <p>This is when you will need to wire your investment funds. Time is of the essence, so any delay in payment could cause the deal to fall through. Your contribution must be the full amount, as the deal needs to be fully funded at the time of purchase. We will also sign the full partnership agreement at this stage so there is absolutely no ambiguity regarding the scope of the investment.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item right">
+                <div class="content">
+                    <span class="step-number">Step 04</span>
+                    <h3>Construction</h3>
+                    <p>This is when the magic happens! Through our construction partner, Dixon Construction Co, the renovation will be completed in the most cost-effective and expedient manner possible.</p>
+                    <img src="https://i.ibb.co/vnj0f4K/dixon-final.png" alt="Dixon Construction Co Logo" class="dixon-logo">
+                </div>
+            </div>
+
+            <div class="timeline-item left">
+                <div class="content">
+                    <span class="step-number">Step 05</span>
+                    <h3>Sale</h3>
+                    <p>This is the best part. Seeing the finished product hit the market and making a new buyer happy with their new forever home. Once the home is sold, final numbers will be realized, profit will be distributed, and we start the hunt for the next deal.</p>
+                </div>
+            </div>
+
         </div>
     </section>
 
