@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Investor Opportunities | Andrew Marth Real Estate</title>
+    <style>
+        /* --- General Reset & Styling --- */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: #4f2d2c; 
+            background-color: #e9e2d8; 
+            overflow-x: hidden; 
+        }
+        
+        /* --- Navigation Bar (Fixed & Glassmorphism) --- */
+        .navbar {
+            background: rgba(233, 226, 216, 0.85); 
+            backdrop-filter: blur(12px); 
+            -webkit-backdrop-filter: blur(12px); 
+            
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000; 
+            
+            padding: 15px 30px;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid rgba(153, 114, 75, 0.3); 
+            min-height: 80px;
+        }
+        .mobile-center-logo {
+            display: none; 
+        }
+        .hamburger {
+            display: none;
+            font-size: 2rem;
+            background: none;
+            border: none;
+            color: #4e513e; 
+            cursor: pointer;
+        }
+        .nav-menu {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+        .nav-logo img {
+            height: 50px; 
+            width: auto;
+            display: block;
+            border-radius: 4px;
+        }
+        .nav-logo a {
+            text-decoration: none; 
+            display: block;
+        }
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: #4f2d2c; 
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: color 0.3s;
+        }
+        .nav-links a:hover {
+            color: #9a5d40; 
+        }
+        .close-menu {
+            display: none; 
+        }
+
+        /* Mobile Navigation Styles */
+        @media (max-width: 768px) {
+            .navbar {
+                justify-content: flex-end; 
+            }
+            .mobile-center-logo {
+                display: block;
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%); 
+            }
+            .mobile-center-logo img {
+                height: 40px; 
+                width: auto;
+                border-radius: 4px;
+                display: block;
+            }
+            .hamburger {
+                display: block;
+            }
+            .nav-menu {
+                position: fixed;
+                top: 0;
+                right: -100%; 
+                width: 280px;
+                height: 100vh;
+                background: rgba(233, 226, 216, 0.95); 
+                backdrop-filter: blur(15px);
+                -webkit-backdrop-filter: blur(15px);
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: flex-start;
+                padding: 60px 30px 30px 30px;
+                box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+                transition: right 0.3s ease;
+                z-index: 1001; 
+            }
+            .nav-menu.active {
+                right: 0; 
+            }
+            .nav-logo {
+                margin-bottom: 40px;
+                width: 100%;
+                display: flex;
+                justify-content: center;
+            }
+            .nav-logo img {
+                height: 60px;
+            }
+            .nav-links {
+                flex-direction: column;
+                width: 100%;
+                align-items: flex-start;
+                gap: 20px;
+            }
+            .nav-links a {
+                display: block;
+                width: 100%;
+                padding-bottom: 10px;
+                border-bottom: 1px solid rgba(192, 144, 80, 0.4); 
+                font-size: 1.3rem;
+            }
+            .close-menu {
+                display: block;
+                position: absolute;
+                top: 15px;
+                right: 25px;
+                font-size: 2.5rem;
+                background: none;
+                border: none;
+                color: #4f2d2c;
+                cursor: pointer;
+                line-height: 1;
+            }
+            .intro-section {
+                text-align: center;
+            }
+            .cta-stacked {
+                margin-top: -20px; 
+            }
+        }
+
+        /* --- Header / Hero Section --- */
+        header {
+            background: linear-gradient(rgba(78, 81, 62, 0.75), rgba(78, 81, 62, 0.75)), url('https://andrewmarth.com/images/background.jpeg');
+            background-size: cover;
+            background-position: center;
+            color: #e9e2d8; 
+            padding: 160px 20px 100px 20px; 
+            text-align: center;
+        }
+        header h1 {
+            font-size: 3rem; 
+            margin-bottom: 15px;
+            letter-spacing: 2px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3); 
+        }
+        header p {
+            font-size: 1.3rem;
+            color: #e9e2d8; 
+            opacity: 0.95; 
+            max-width: 700px;
+            margin: 0 auto;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+        }
+
+        /* --- Intro Section --- */
+        .intro-section {
+            max-width: 900px;
+            margin: 60px auto 40px auto;
+            padding: 0 20px;
+            text-align: center;
+        }
+        .intro-section h2 {
+            font-size: 2.2rem;
+            color: #4f2d2c;
+            margin-bottom: 20px;
+        }
+        .intro-section p {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+        }
+
+        /* --- Proforma Images Section (Floating Effect) --- */
+        .proforma-section {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 60px; /* Space between the two images */
+        }
+        .proforma-container {
+            width: 100%;
+            text-align: center;
+        }
+        .proforma-container img {
+            width: 100%;
+            max-width: 600px; /* Reduced to 2/3 size for desktop */
+            height: auto;
+            border-radius: 8px;
+            /* Deep drop shadow for the "floating" effect */
+            box-shadow: 0 20px 50px rgba(0,0,0,0.2); 
+            transition: transform 0.3s ease;
+        }
+        .proforma-container img:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.25);
+        }
+
+        /* --- Call to Action Section --- */
+        .cta-section {
+            max-width: 800px;
+            margin: 80px auto; 
+            padding: 40px 20px;
+            text-align: center;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border-top: 4px solid #99724b; 
+        }
+        
+        /* Adding a smaller margin class for stacked CTAs */
+        .cta-stacked {
+            margin-top: -40px;
+            margin-bottom: 80px;
+        }
+        
+        .cta-section h2 {
+            font-size: 2rem;
+            color: #4f2d2c;
+            margin-bottom: 15px;
+        }
+        .cta-section p {
+            font-size: 1.1rem;
+            color: #4f2d2c;
+            margin-bottom: 30px;
+        }
+        .cta-btn {
+            display: inline-block;
+            padding: 15px 35px;
+            background-color: #99724b; 
+            color: #e9e2d8;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: background-color 0.3s;
+        }
+        .cta-btn:hover {
+            background-color: #9a5d40; 
+        }
+
+        /* --- Footer --- */
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            background-color: #4e513e; 
+            color: #e9e2d8; 
+        }
+        .footer-contact {
+            margin-bottom: 20px;
+        }
+        .footer-contact p {
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+            color: #e9e2d8;
+        }
+        .footer-contact a {
+            color: #c09050; 
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .footer-contact a:hover {
+            text-decoration: underline;
+        }
+        .footer-disclosure {
+            max-width: 900px;
+            margin: 0 auto 0 auto; 
+            font-size: 0.8rem;
+            color: #e9e2d8; 
+            opacity: 0.75;
+            line-height: 1.5;
+            text-align: justify;
+            text-align-last: center; 
+        }
+
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="/" class="mobile-center-logo">
+            <img src="https://andrewmarth.com/images/andrew_marth_logo.png" alt="Andrew Marth Logo">
+        </a>
+
+        <button class="hamburger" id="hamburger-btn">&#9776;</button>
+        
+        <div class="nav-menu" id="nav-menu">
+            <button class="close-menu" id="close-btn">&times;</button>
+            
+            <div class="nav-logo">
+                <a href="/">
+                    <img src="https://andrewmarth.com/images/andrew_marth_logo.png" alt="Andrew Marth Logo">
+                </a>
+            </div>
+            
+            <div class="nav-links">
+                <a href="buying">Buying</a>
+                <a href="selling">Selling</a>
+                <a href="flipping">Flipping</a>
+                <a href="contact">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <header>
+        <h1>Investor Opportunities</h1>
+        <p>Expertly sourced deals backed by rigorous data and transparent analysis.</p>
+    </header>
+
+    <section class="intro-section">
+        <h2>Strategic Data for High-Yield Returns</h2>
+        <p>I only present the highest quality deals to my investors—the kind of opportunities I would buy myself. My philosophy is simple: your success is my success. By vetting every lead with extreme discipline, I ensure that our interests are perfectly aligned from day one.</p>
+        <p>Take a look at the example proforma below to see the level of analytical detail and transparency I provide for every investment opportunity.</p>
+    </section>
+
+    <section class="proforma-section">
+        <div class="proforma-container">
+            <img src="https://andrewmarth.com/images/example_proforma-1.png" alt="Andrew Marth Real Estate Proforma Page 1">
+        </div>
+        <div class="proforma-container">
+            <img src="https://andrewmarth.com/images/example_proforma-2.png" alt="Andrew Marth Real Estate Proforma Page 2">
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <h2>Ready to Explore Active Deals?</h2>
+        <p>Your next profitable deal starts here. Fill out the investor intake form to help me understand your capital requirements, return targets, and specific criteria.</p>
+        <a href="investor-intake" class="cta-btn">Start Investor Intake</a>
+    </section>
+
+    <section class="cta-section cta-stacked">
+        <h2>Looking For A Partnership Instead?</h2>
+        <p>If you want to capitalize on high-yield real estate returns without taking on the full responsibility of a project manager, managing cash flow, and being on-site every day, you can join as a capital partner instead.</p>
+        <a href="partnership" class="cta-btn">Explore Partnerships</a>
+    </section>
+
+    <footer>
+        <div class="footer-contact">
+            <p><strong>Cell:</strong> 480.652.1330 | <strong>Email:</strong> <a href="mailto:andrew@andrewmarth.com">andrew@andrewmarth.com</a></p>
+            <p><strong>AZ License:</strong> SA711359000</p>
+        </div>
+        
+        <div class="footer-disclosure">
+            <p>Andrew Marth is an agent affiliated with Compass, a licensed real estate broker and abides by Equal Housing Opportunity laws. All material presented herein is intended for informational purposes only. Information is compiled from sources deemed reliable but is subject to errors, omissions, changes in price, condition, sale, or withdrawal without notice. This is not intended to solicit property already listed. Photos may be virtually staged or digitally enhanced and may not reflect actual property conditions.</p>
+        </div>
+    </footer>
+
+    <script>
+        const hamburgerBtn = document.getElementById('hamburger-btn');
+        const closeBtn = document.getElementById('close-btn');
+        const navMenu = document.getElementById('nav-menu');
+
+        hamburgerBtn.addEventListener('click', () => {
+            navMenu.classList.add('active');
+        });
+
+        closeBtn.addEventListener('click', () => {
+            navMenu.classList.remove('active');
+        });
+    </script>
+</body>
+</html>
