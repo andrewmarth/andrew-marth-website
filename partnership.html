@@ -83,9 +83,105 @@
             display: none; 
         }
 
+        /* Mobile Navigation Styles */
+        @media (max-width: 768px) {
+            .navbar {
+                justify-content: flex-end; 
+            }
+            .mobile-center-logo {
+                display: block;
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%); 
+            }
+            .mobile-center-logo img {
+                height: 40px; 
+                width: auto;
+                border-radius: 4px;
+                display: block;
+            }
+            .hamburger {
+                display: block;
+            }
+            .nav-menu {
+                position: fixed;
+                top: 0;
+                right: -100%; 
+                width: 280px;
+                height: 100vh;
+                background: rgba(233, 226, 216, 0.95); 
+                backdrop-filter: blur(15px);
+                -webkit-backdrop-filter: blur(15px);
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: flex-start;
+                padding: 60px 30px 30px 30px;
+                box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+                transition: right 0.3s ease;
+                z-index: 1001; 
+            }
+            .nav-menu.active {
+                right: 0; 
+            }
+            .nav-logo {
+                margin-bottom: 40px;
+                width: 100%;
+                display: flex;
+                justify-content: center;
+            }
+            .nav-logo img {
+                height: 60px;
+            }
+            .nav-links {
+                flex-direction: column;
+                width: 100%;
+                align-items: flex-start;
+                gap: 20px;
+            }
+            .nav-links a {
+                display: block;
+                width: 100%;
+                padding-bottom: 10px;
+                border-bottom: 1px solid rgba(192, 144, 80, 0.4); 
+                font-size: 1.3rem;
+            }
+            .close-menu {
+                display: block;
+                position: absolute;
+                top: 15px;
+                right: 25px;
+                font-size: 2.5rem;
+                background: none;
+                border: none;
+                color: #4f2d2c;
+                cursor: pointer;
+                line-height: 1;
+            }
+            .intro-section {
+                text-align: center;
+            }
+
+            /* Timeline Mobile Fixes (Snaps to left) */
+            .timeline::after {
+                left: 31px; 
+            }
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 15px;
+            }
+            .timeline-item::after {
+                left: 19px; 
+            }
+            .right {
+                left: 0; 
+            }
+        }
+
         /* --- Header / Hero Section --- */
         header {
-            background: linear-gradient(rgba(78, 81, 62, 0.75), rgba(78, 81, 62, 0.75)), url('https://i.ibb.co/nNxwtB3g/background.jpg');
+            background: linear-gradient(rgba(78, 81, 62, 0.75), rgba(78, 81, 62, 0.75)), url('https://andrewmarth.com/images/background.jpeg');
             background-size: cover;
             background-position: center;
             color: #e9e2d8; 
@@ -355,109 +451,13 @@
             text-align: justify;
             text-align-last: center; 
         }
-
-        /* --- Mobile Responsiveness --- */
-        @media (max-width: 768px) {
-            .navbar {
-                justify-content: flex-end; 
-            }
-            .mobile-center-logo {
-                display: block;
-                position: absolute;
-                left: 50%;
-                top: 50%;
-                transform: translate(-50%, -50%); 
-            }
-            .mobile-center-logo img {
-                height: 40px; 
-                width: auto;
-                border-radius: 4px;
-                display: block;
-            }
-            .hamburger {
-                display: block;
-            }
-            .nav-menu {
-                position: fixed;
-                top: 0;
-                right: -100%; 
-                width: 280px;
-                height: 100vh;
-                background: rgba(233, 226, 216, 0.95); 
-                backdrop-filter: blur(15px);
-                -webkit-backdrop-filter: blur(15px);
-                flex-direction: column;
-                justify-content: flex-start;
-                align-items: flex-start;
-                padding: 60px 30px 30px 30px;
-                box-shadow: -5px 0 15px rgba(0,0,0,0.1);
-                transition: right 0.3s ease;
-                z-index: 1001; 
-            }
-            .nav-menu.active {
-                right: 0; 
-            }
-            .nav-logo {
-                margin-bottom: 40px;
-                width: 100%;
-                display: flex;
-                justify-content: center;
-            }
-            .nav-logo img {
-                height: 60px;
-            }
-            .nav-links {
-                flex-direction: column;
-                width: 100%;
-                align-items: flex-start;
-                gap: 20px;
-            }
-            .nav-links a {
-                display: block;
-                width: 100%;
-                padding-bottom: 10px;
-                border-bottom: 1px solid rgba(192, 144, 80, 0.4); 
-                font-size: 1.3rem;
-            }
-            .close-menu {
-                display: block;
-                position: absolute;
-                top: 15px;
-                right: 25px;
-                font-size: 2.5rem;
-                background: none;
-                border: none;
-                color: #4f2d2c;
-                cursor: pointer;
-                line-height: 1;
-            }
-            .intro-section {
-                text-align: center;
-            }
-
-            /* Timeline Mobile Fixes (Snaps to left) */
-            .timeline::after {
-                left: 31px; 
-            }
-            .timeline-item {
-                width: 100%;
-                padding-left: 70px;
-                padding-right: 15px;
-            }
-            .timeline-item::after {
-                left: 19px; 
-            }
-            .right {
-                left: 0; 
-            }
-        }
     </style>
 </head>
 <body>
 
     <nav class="navbar">
         <a href="/" class="mobile-center-logo">
-            <img src="https://i.ibb.co/hRHFvcrJ/andrew-marth-logo.png" alt="Andrew Marth Logo">
+            <img src="https://andrewmarth.com/images/andrew_marth_logo.png" alt="Andrew Marth Logo">
         </a>
 
         <button class="hamburger" id="hamburger-btn">&#9776;</button>
@@ -467,7 +467,7 @@
             
             <div class="nav-logo">
                 <a href="/">
-                    <img src="https://i.ibb.co/hRHFvcrJ/andrew-marth-logo.png" alt="Andrew Marth Logo">
+                    <img src="https://andrewmarth.com/images/andrew_marth_logo.png" alt="Andrew Marth Logo">
                 </a>
             </div>
             
@@ -493,10 +493,10 @@
 
     <section class="proforma-section">
         <div class="proforma-container">
-            <img src="https://i.ibb.co/6Vg2ksm/example-proforma-1.png" alt="Andrew Marth Real Estate Proforma Page 1">
+            <img src="https://andrewmarth.com/images/example_proforma-1.png" alt="Andrew Marth Real Estate Proforma Page 1">
         </div>
         <div class="proforma-container">
-            <img src="https://i.ibb.co/G3xDhGf1/example-proforma-2.png" alt="Andrew Marth Real Estate Proforma Page 2">
+            <img src="https://andrewmarth.com/images/example_proforma-2.png" alt="Andrew Marth Real Estate Proforma Page 2">
         </div>
     </section>
 
@@ -526,7 +526,7 @@
                     <span class="step-number">Step 03</span>
                     <h3>Purchase</h3>
                     <p>This is when you will need to wire your investment funds. Time is of the essence, so any delay in payment could cause the deal to fall through. Your contribution must be the full amount, as the deal needs to be fully funded at the time of purchase. We will also sign the full partnership agreement at this stage so there is absolutely no ambiguity regarding the scope of the investment. The purchase and partnership agreement will be handled directly through my company, Wynwest.</p>
-                    <img src="https://i.ibb.co/NgGQPshD/Wynwest-Logo-New.png" alt="Wynwest Logo" class="wynwest-logo">
+                    <img src="https://andrewmarth.com/images/Wynwest_Logo_New.png" alt="Wynwest Logo" class="wynwest-logo">
                 </div>
             </div>
 
@@ -535,7 +535,7 @@
                     <span class="step-number">Step 04</span>
                     <h3>Construction</h3>
                     <p>This is when the magic happens! Through our construction partner, Dixon Construction Co, the renovation will be completed in the most cost-effective and expedient manner possible.</p>
-                    <img src="https://i.ibb.co/tMFDPC5w/dixon-final.png" alt="Dixon Construction Co Logo" class="dixon-logo">
+                    <img src="https://andrewmarth.com/images/dixon_final.png" alt="Dixon Construction Co Logo" class="dixon-logo">
                 </div>
             </div>
 
