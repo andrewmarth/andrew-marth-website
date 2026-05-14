@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fix & Flip Investments | Andrew Marth Real Estate</title>
+    <title>Contact | Andrew Marth Real Estate</title>
     <style>
         /* --- General Reset & Styling --- */
         * {
@@ -83,9 +83,9 @@
             display: none; 
         }
 
-        /* --- Header / Hero Section (Theme Consistent) --- */
+        /* --- Header / Hero Section --- */
         header {
-            background: linear-gradient(rgba(78, 81, 62, 0.75), rgba(78, 81, 62, 0.75)), url('https://i.ibb.co/nNxwtB3g/background.jpg');
+            background: linear-gradient(rgba(78, 81, 62, 0.75), rgba(78, 81, 62, 0.75)), url('https://andrewmarth.com/images/background.jpeg');
             background-size: cover;
             background-position: center;
             color: #e9e2d8; 
@@ -107,87 +107,129 @@
             text-shadow: 0 1px 3px rgba(0,0,0,0.3);
         }
 
-        /* --- Intro Section --- */
-        .intro-section {
-            max-width: 900px;
-            margin: 60px auto 40px auto;
+        /* --- Contact Content Section --- */
+        .about-section {
+            max-width: 1000px;
+            margin: 80px auto 60px auto; 
             padding: 0 20px;
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            flex-wrap: wrap; 
+        }
+        .about-image {
+            flex: 1 1 300px;
             text-align: center;
         }
-        .intro-section h2 {
+        .about-image img {
+            width: 100%;
+            max-width: 350px;
+            border-radius: 50%; 
+            border: 8px solid #4e513e; 
+            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+            object-fit: cover;
+        }
+        .about-text {
+            flex: 2 1 400px;
+        }
+        .about-text h2 {
             font-size: 2.2rem;
-            color: #4f2d2c;
+            color: #4f2d2c; 
             margin-bottom: 20px;
         }
-        .intro-section p {
+        .about-text p {
+            color: #4f2d2c; 
             font-size: 1.1rem;
             margin-bottom: 15px;
         }
 
-        /* --- Cards Section --- */
-        .cards-section {
-            max-width: 1200px;
-            margin: 0 auto 80px auto;
-            padding: 0 20px;
+        /* --- Contact Details Box --- */
+        .contact-details {
+            margin-top: 30px;
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border-left: 4px solid #99724b; /* Gold/Brown accent */
         }
-        .cards-container {
+        .contact-details p {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: #4e513e;
+        }
+        .contact-details p:last-child {
+            margin-bottom: 0; 
+        }
+        .contact-details a {
+            color: #99724b;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+        .contact-details a:hover {
+            color: #9a5d40;
+            text-decoration: underline;
+        }
+
+        /* --- Social Media Links --- */
+        .social-section {
+            margin-top: 35px;
+        }
+        .social-section h3 {
+            font-size: 1.3rem;
+            color: #4e513e;
+            margin-bottom: 15px;
+        }
+        .social-icons {
             display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 30px;
+            gap: 20px;
+            align-items: center;
         }
-        .card {
+        .social-icons a {
+            display: inline-block;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+        .social-icons a:hover {
+            transform: translateY(-4px); 
+            opacity: 0.8;
+        }
+        .social-icons img {
+            width: 38px;
+            height: 38px;
+            object-fit: contain;
+        }
+
+        /* --- Calendar Section --- */
+        .calendar-section {
+            max-width: 1000px;
+            margin: 0 auto 100px auto;
+            padding: 0 20px;
+            text-align: center;
+        }
+        .calendar-section h2 {
+            font-size: 2.2rem;
+            color: #4f2d2c;
+            margin-bottom: 15px;
+        }
+        .calendar-section p {
+            font-size: 1.1rem;
+            color: #4f2d2c;
+            margin-bottom: 30px;
+        }
+        .calendar-container {
             background: #ffffff;
             border-radius: 8px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.05);
             overflow: hidden;
-            flex: 1 1 calc(33.333% - 30px);
-            min-width: 320px; 
-            display: flex;
-            flex-direction: column;
-            transition: transform 0.3s ease;
+            border-top: 4px solid #99724b;
+            padding-top: 10px; 
         }
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-        }
-        .card img {
+        
+        /* Iframe Desktop Styling */
+        .calendar-iframe {
             width: 100%;
-            height: 240px;
-            object-fit: cover;
-        }
-        .card-content {
-            padding: 30px;
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1;
-            text-align: center;
-        }
-        .card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-            color: #4e513e; 
-        }
-        .card p {
-            color: #4f2d2c; 
-            margin-bottom: 25px;
-            flex-grow: 1; 
-            font-size: 1.05rem;
-        }
-
-        /* --- Buttons --- */
-        .btn {
-            display: inline-block;
-            background-color: #99724b; 
-            color: #e9e2d8; 
-            text-decoration: none;
-            padding: 12px 25px;
-            border-radius: 4px;
-            font-weight: bold;
-            transition: background-color 0.3s ease;
-        }
-        .btn:hover {
-            background-color: #9a5d40; 
+            height: 1200px; /* Increased to eliminate scrollbar */
+            border: none;
         }
 
         /* --- Footer --- */
@@ -299,8 +341,16 @@
                 cursor: pointer;
                 line-height: 1;
             }
-            .intro-section {
+            .about-text {
                 text-align: center;
+            }
+            .social-icons {
+                justify-content: center; 
+            }
+            
+            /* Iframe Mobile Styling */
+            .calendar-iframe {
+                height: 1800px; /* Gives the calendar plenty of room to stack vertically */
             }
         }
     </style>
@@ -309,7 +359,7 @@
 
     <nav class="navbar">
         <a href="/" class="mobile-center-logo">
-            <img src="https://i.ibb.co/hRHFvcrJ/andrew-marth-logo.png" alt="Andrew Marth Logo">
+            <img src="https://andrewmarth.com/images/andrew_marth_logo.png" alt="Andrew Marth Logo">
         </a>
 
         <button class="hamburger" id="hamburger-btn">&#9776;</button>
@@ -319,7 +369,7 @@
             
             <div class="nav-logo">
                 <a href="/">
-                    <img src="https://i.ibb.co/hRHFvcrJ/andrew-marth-logo.png" alt="Andrew Marth Logo">
+                    <img src="https://andrewmarth.com/images/andrew_marth_logo.png" alt="Andrew Marth Logo">
                 </a>
             </div>
             
@@ -333,47 +383,54 @@
     </nav>
 
     <header>
-        <h1>Fix & Flip Investments</h1>
-        <p>Strategic real estate opportunities tailored to your role in the investment lifecycle.</p>
+        <h1>Contact Me</h1>
+        <p>I am here to answer your questions and help you achieve your real estate goals.</p>
     </header>
 
-    <section class="intro-section">
-        <h2>Maximize Your Returns</h2>
-        <p>Fixing and flipping homes in the Arizona market requires local expertise, sharp data analysis, and a reliable network. Whether you are looking for your next project or want to put your capital to work, I provide the strategic insight to ensure high-yield results.</p>
-        <p>I help my partners invest in fix and flips in three distinct ways, depending on your background, available time, and financial goals.</p>
-    </section>
-
-    <section class="cards-section">
-        <div class="cards-container">
+    <section class="about-section">
+        <div class="about-image">
+            <img src="https://andrewmarth.com/images/az_pfp_graded.png" alt="Andrew Marth - Real Estate Agent">
+        </div>
+        <div class="about-text">
+            <h2>Let's Connect</h2>
+            <p>Whether you have a quick question about the current Arizona market, want to discuss an upcoming project, or you are ready to start your next real estate journey, I am just a call or email away.</p>
+            <p>Reach out to me directly using the contact information below, or grab a time on my calendar that works best for you.</p>
             
-            <div class="card">
-                <img src="https://i.ibb.co/ym2WMzHH/investor-final.png" alt="Real Estate Investor">
-                <div class="card-content">
-                    <h3>Real Estate Investor</h3>
-                    <p>Whether you are an experienced professional or an aspiring investor, I can help you find profitable off-market and MLS deals. I only present opportunities with high ROI potential that I would buy myself.</p>
-                    <a href="investors" class="btn">Find Your Project</a>
-                </div>
+            <div class="contact-details">
+                <p><strong>Cell:</strong> <a href="tel:4806521330">480.652.1330</a></p>
+                <p><strong>Email:</strong> <a href="mailto:andrew@andrewmarth.com">andrew@andrewmarth.com</a></p>
             </div>
 
-            <div class="card">
-                <img src="https://i.ibb.co/1YGRk9RG/contractor-final.png" alt="Contractor Deals">
-                <div class="card-content">
-                    <h3>Contractor</h3>
-                    <p>If you are a contractor looking to take on a project of your own, I can find the perfect "diamond in the rough." I'll source the project so you can apply your skills and capture the full equity growth.</p>
-                    <a href="contractors" class="btn">See How It Works</a>
-                </div>
-            </div>
-
-            <div class="card">
-                <img src="https://i.ibb.co/mrsQfkdb/partnership-final.png" alt="Investment Partnership">
-                <div class="card-content">
-                    <h3>Partnership</h3>
-                    <p>Interested in the high returns of flipping but don't want the day-to-day responsibility? We can partner up. You bring the capital, I handle the acquisition, renovation, and sale, and we split the profits.</p>
-                    <a href="partnership" class="btn">Partner With Me</a>
+            <div class="social-section">
+                <h3>Follow Me</h3>
+                <div class="social-icons">
+                    <a href="https://www.instagram.com/secret_agent_andrew/" target="_blank" rel="noopener noreferrer">
+                        <img src="https://andrewmarth.com/images/instagram.png" alt="Instagram">
+                    </a>
+                    <a href="https://www.facebook.com/secret.agent.andrew" target="_blank" rel="noopener noreferrer">
+                        <img src="https://andrewmarth.com/images/facebook.png" alt="Facebook">
+                    </a>
+                    <a href="https://www.threads.com/@secret_agent_andrew" target="_blank" rel="noopener noreferrer">
+                        <img src="https://andrewmarth.com/images/threads.png" alt="Threads">
+                    </a>
+                    <a href="https://www.linkedin.com/in/secret-agent-andrew/" target="_blank" rel="noopener noreferrer">
+                        <img src="https://andrewmarth.com/images/linkedin.png" alt="LinkedIn">
+                    </a>
+                    <a href="https://x.com/SecrtAgntAndrew" target="_blank" rel="noopener noreferrer">
+                        <img src="https://andrewmarth.com/images/twitter.png" alt="X / Twitter">
+                    </a>
                 </div>
             </div>
 
         </div>
+    </section>
+
+    <section class="calendar-section">
+        <h2>Want To Reserve A Time?</h2>
+        <p>Select a time below to hop on a call.</p>
+        <div class="calendar-container">
+            <iframe src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ1dN08AzRdZjJxKE2nneRHb5Mt3udERnvQ-QWIcPpDbw4pcLU4eL-6QRfgita2pOwbtGW1nsxpp?gv=true" class="calendar-iframe" frameborder="0"></iframe>
+            </div>
     </section>
 
     <footer>
