@@ -124,12 +124,12 @@
             margin-bottom: 15px;
         }
 
-        /* --- Features Grid Section --- */
+        /* --- Features Stacked Section --- */
         .features-grid {
             display: flex;
-            flex-wrap: wrap;
+            flex-direction: column; /* Stacks items vertically */
+            align-items: center; /* Centers the cards horizontally */
             gap: 30px;
-            justify-content: center;
             max-width: 1000px;
             margin: 0 auto 80px auto;
             padding: 0 20px;
@@ -139,10 +139,11 @@
             border-radius: 8px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.05);
             padding: 35px;
-            flex: 1 1 calc(50% - 30px);
-            min-width: 320px;
+            width: 100%;
+            max-width: 700px; /* Prevents cards from getting too wide */
             border-top: 4px solid #4e513e;
             transition: transform 0.3s ease;
+            text-align: center; /* Centers text inside the card */
         }
         .feature-card:hover {
             transform: translateY(-5px);
