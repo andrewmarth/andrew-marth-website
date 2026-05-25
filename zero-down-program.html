@@ -124,39 +124,40 @@
             margin-bottom: 15px;
         }
 
-        /* --- Features Stacked Section --- */
-        .features-grid {
+        /* --- Single Comprehensive Program Card Section --- */
+        .program-details-section {
             display: flex;
-            flex-direction: column; /* Stacks items vertically */
-            align-items: center; /* Centers the cards horizontally */
-            gap: 30px;
+            justify-content: center;
             max-width: 1000px;
             margin: 0 auto 80px auto;
             padding: 0 20px;
         }
-        .feature-card {
+        .program-card {
             background: #ffffff;
             border-radius: 8px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            padding: 35px;
+            padding: 50px;
             width: 100%;
-            max-width: 700px; /* Prevents cards from getting too wide */
+            max-width: 800px; /* Keeps the text lines at a readable length */
             border-top: 4px solid #4e513e;
-            transition: transform 0.3s ease;
-            text-align: center; /* Centers text inside the card */
         }
-        .feature-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        .detail-item {
+            margin-bottom: 35px;
         }
-        .feature-card h3 {
+        .detail-item:last-child {
+            margin-bottom: 0;
+        }
+        .detail-item h3 {
             color: #4e513e;
-            margin-bottom: 15px;
-            font-size: 1.4rem;
+            margin-bottom: 8px;
+            font-size: 1.5rem;
+            border-bottom: 1px solid rgba(153, 114, 75, 0.2);
+            padding-bottom: 5px;
         }
-        .feature-card p {
+        .detail-item p {
             color: #4f2d2c;
-            font-size: 1.05rem;
+            font-size: 1.1rem;
+            line-height: 1.7;
         }
 
         /* --- Call to Action Section --- */
@@ -271,141 +272,4 @@
                 right: 0; 
             }
             .nav-logo {
-                margin-bottom: 40px;
-                width: 100%;
-                display: flex;
-                justify-content: center;
-            }
-            .nav-logo img {
-                height: 60px;
-            }
-            .nav-links {
-                flex-direction: column;
-                width: 100%;
-                align-items: flex-start;
-                gap: 20px;
-            }
-            .nav-links a {
-                display: block;
-                width: 100%;
-                padding-bottom: 10px;
-                border-bottom: 1px solid rgba(192, 144, 80, 0.4); 
-                font-size: 1.3rem;
-            }
-            .close-menu {
-                display: block;
-                position: absolute;
-                top: 15px;
-                right: 25px;
-                font-size: 2.5rem;
-                background: none;
-                border: none;
-                color: #4f2d2c;
-                cursor: pointer;
-                line-height: 1;
-            }
-            .cta-section {
-                margin: 20px 20px 80px 20px; 
-            }
-        }
-    </style>
-</head>
-<body>
-
-    <nav class="navbar">
-        <a href="/" class="mobile-center-logo">
-            <img src="https://andrewmarth.com/images/andrew_marth_logo.png" alt="Andrew Marth Logo">
-        </a>
-
-        <button class="hamburger" id="hamburger-btn">&#9776;</button>
-        
-        <div class="nav-menu" id="nav-menu">
-            <button class="close-menu" id="close-btn">&times;</button>
-            
-            <div class="nav-logo">
-                <a href="/">
-                    <img src="https://andrewmarth.com/images/andrew_marth_logo.png" alt="Andrew Marth Logo">
-                </a>
-            </div>
-            
-            <div class="nav-links">
-                <a href="buying">Buying</a>
-                <a href="selling">Selling</a>
-                <a href="flipping">Flipping</a>
-                <a href="contact">Contact</a>
-            </div>
-        </div>
-    </nav>
-
-    <header>
-        <h1>Zero Down Program</h1>
-        <p>Unlock the door to your new home without the burden of a down payment.</p>
-    </header>
-
-    <section class="intro-section">
-        <h2>Homeownership Just Got More Accessible</h2>
-        <p>Saving for a down payment is often the biggest hurdle to buying a home. That is why I am thrilled to offer an exclusive financing program designed to help you achieve your real estate goals faster and with less out-of-pocket cash.</p>
-        <p>Read through the requirements and benefits of the program below to see how we can put this incredible tool to work for you.</p>
-    </section>
-
-    <section class="features-grid">
-        
-        <div class="feature-card">
-            <h3>$0 Down Payment</h3>
-            <p>This program allows you to purchase a home with absolutely zero dollars required for a down payment, keeping your savings in your pocket where they belong.</p>
-        </div>
-
-        <div class="feature-card">
-            <h3>$88,000 Income Limit</h3>
-            <p>The program features a strict income limit of $88,000 per year. However, this limit <strong>only applies to the individual(s) officially listed on the loan</strong>. If two people plan to co-own the home, you can strategically structure it so only the qualifying earner is on the loan.</p>
-        </div>
-
-        <div class="feature-card">
-            <h3>True Market Interest Rates</h3>
-            <p>Unlike many specialty financing options, this program provides a standard, competitive market interest rate. There are absolutely no hidden markups on the rate or your closing costs.</p>
-        </div>
-
-        <div class="feature-card">
-            <h3>Powered by Sunflower Bank</h3>
-            <p>This program is a highly specialized lending product made possible through my direct professional partnership with the experts at Sunflower Bank.</p>
-        </div>
-
-        <div class="feature-card">
-            <h3>No Initial Credit Check</h3>
-            <p>Want to see if this is an option for you? No problem. There is absolutely no hard credit check required to see if your financial scenario qualifies for the program.</p>
-        </div>
-
-    </section>
-
-    <section class="cta-section">
-        <h2>Curious What This Looks Like For You?</h2>
-        <p>Fill out the information below to see what a purchase using this zero-down program looks like. It is completely zero-pressure and an incredible way to explore your buying power.</p>
-        <a href="intake" class="cta-btn">Get Started</a>
-    </section>
-
-    <footer>
-        <div class="footer-contact">
-            <p><strong>Cell:</strong> 480.652.1330 | <strong>Email:</strong> <a href="mailto:andrew@andrewmarth.com">andrew@andrewmarth.com</a></p>
-            <p><strong>AZ License:</strong> SA711359000</p>
-        </div>
-        
-        <div class="footer-disclosure">
-            <p>Andrew Marth is an agent affiliated with Compass, a licensed real estate broker and abides by Equal Housing Opportunity laws. All material presented herein is intended for informational purposes only. Information is compiled from sources deemed reliable but is subject to errors, omissions, changes in price, condition, sale, or withdrawal without notice. This is not intended to solicit property already listed. Photos may be virtually staged or digitally enhanced and may not reflect actual property conditions.</p>
-        </div>
-    </footer>
-
-    <script>
-        const hamburgerBtn = document.getElementById('hamburger-btn');
-        const closeBtn = document.getElementById('close-btn');
-        const navMenu = document.getElementById('nav-menu');
-
-        hamburgerBtn.addEventListener('click', () => {
-            navMenu.classList.add('active');
-        });
-
-        closeBtn.addEventListener('click', () => {
-            navMenu.classList.remove('active');
-        });
-    </script>
-</body>
-</html>
+                margin-bottom:
