@@ -206,10 +206,40 @@
             margin-bottom: 15px;
         }
 
+        /* --- Trust Badge / Secure Notice --- */
+        .secure-notice {
+            text-align: center;
+            max-width: 450px; /* Constrains text to half the width of the form */
+            margin: 0 auto 20px auto; /* Provides breathing room above the form and centers it */
+            padding: 0 20px;
+        }
+        .secure-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            color: #4e513e; /* Theme Green */
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+        .secure-header img {
+            height: 1.2rem; /* Matches the font size perfectly */
+            width: auto;
+            object-fit: contain;
+        }
+        .secure-disclaimer {
+            font-size: 0.8rem;
+            color: #4f2d2c;
+            opacity: 0.8;
+            line-height: 1.4;
+            font-style: italic; /* Italicized as requested */
+        }
+
         /* --- Zapier Form Container (FRAMED & SCALED) --- */
         .form-container {
             max-width: 900px; 
-            margin: 40px auto 80px auto; 
+            margin: 0 auto 80px auto; 
             padding: 0; 
             display: flex;
             justify-content: center;
@@ -299,6 +329,15 @@
                 <p>Whether you are looking to buy your dream home, sell your current property for top dollar, or explore investment opportunities, taking this first step is crucial. I provide expert guidance and relentless advocacy every step of the way.</p>
                 <p>Please fill out the brief questionnaire below so I can better understand your unique real estate goals. <em>Please note: This form is strictly for informational purposes to help me serve you better. This is not a loan application, and there is absolutely no pressure or obligation.</em></p>
             </div>
+        </section>
+
+        <!-- New Trust Badge & Disclaimer Section -->
+        <section class="secure-notice">
+            <div class="secure-header">
+                <img src="https://andrewmarth.com/images/lock.png" alt="Secure Lock">
+                <span>Secure Submission</span>
+            </div>
+            <p class="secure-disclaimer">All information is securely submitted and never shared with anyone. This is not a loan application and is only used for informational purposes.</p>
         </section>
 
         <section class="form-container">
