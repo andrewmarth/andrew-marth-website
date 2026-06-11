@@ -282,12 +282,15 @@
             width: auto;
             object-fit: contain;
         }
-        .secure-disclaimer {
+        
+        /* Specificity target to override .form-card-text p */
+        .form-card-text p.secure-disclaimer {
             font-size: 0.8rem;
             color: #4f2d2c;
             opacity: 0.8;
             line-height: 1.4;
             font-style: italic; 
+            margin-bottom: 0;
         }
 
         /* --- Zapier Form Container inside Card --- */
