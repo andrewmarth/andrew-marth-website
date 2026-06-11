@@ -315,30 +315,8 @@
 </head>
 <body>
 
-    <nav class="navbar">
-        <a href="/" class="mobile-center-logo">
-            <img src="https://andrewmarth.com/images/andrew_marth_logo.png" alt="Andrew Marth Logo">
-        </a>
-
-        <button class="hamburger" id="hamburger-btn">&#9776;</button>
-        
-        <div class="nav-menu" id="nav-menu">
-            <button class="close-menu" id="close-btn">&times;</button>
-            
-            <div class="nav-logo">
-                <a href="/">
-                    <img src="https://andrewmarth.com/images/andrew_marth_logo.png" alt="Andrew Marth Logo">
-                </a>
-            </div>
-            
-            <div class="nav-links">
-                <a href="buying">Buying</a>
-                <a href="selling">Selling</a>
-                <a href="flipping">Flipping</a>
-                <a href="contact">Contact</a>
-            </div>
-        </div>
-    </nav>
+    <!-- Header Placeholder -->
+    <div id="header-placeholder"></div>
 
     <header>
         <h1>Investor Opportunities</h1>
@@ -372,28 +350,48 @@
         <a href="partnership" class="cta-btn">Explore Partnerships</a>
     </section>
 
-    <footer>
-        <div class="footer-contact">
-            <p><strong>Cell:</strong> 480.652.1330 | <strong>Email:</strong> <a href="mailto:andrew@andrewmarth.com">andrew@andrewmarth.com</a></p>
-            <p><strong>AZ License:</strong> SA711359000</p>
-        </div>
-        
-        <div class="footer-disclosure">
-            <p>Andrew Marth is an agent affiliated with Compass, a licensed real estate broker and abides by Equal Housing Opportunity laws. All material presented herein is intended for informational purposes only. Information is compiled from sources deemed reliable but is subject to errors, omissions, changes in price, condition, sale, or withdrawal without notice. This is not intended to solicit property already listed. Photos may be virtually staged or digitally enhanced and may not reflect actual property conditions.</p>
-        </div>
-    </footer>
+    <!-- Footer Placeholder -->
+    <div id="footer-placeholder"></div>
 
     <script>
-        const hamburgerBtn = document.getElementById('hamburger-btn');
-        const closeBtn = document.getElementById('close-btn');
-        const navMenu = document.getElementById('nav-menu');
+        // Function to load external HTML components
+        async function loadComponent(id, file) {
+            try {
+                const response = await fetch(file);
+                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                const html = await response.text();
+                document.getElementById(id).innerHTML = html;
+                
+                // If we just loaded the header, initialize the hamburger menu logic
+                if (id === 'header-placeholder') {
+                    initNavigation();
+                }
+            } catch (error) {
+                console.error(`Error loading component ${file}:`, error);
+            }
+        }
 
-        hamburgerBtn.addEventListener('click', () => {
-            navMenu.classList.add('active');
-        });
+        // Initialize mobile navigation logic
+        function initNavigation() {
+            const hamburgerBtn = document.getElementById('hamburger-btn');
+            const closeBtn = document.getElementById('close-btn');
+            const navMenu = document.getElementById('nav-menu');
 
-        closeBtn.addEventListener('click', () => {
-            navMenu.classList.remove('active');
+            if(hamburgerBtn && closeBtn && navMenu) {
+                hamburgerBtn.addEventListener('click', () => {
+                    navMenu.classList.add('active');
+                });
+
+                closeBtn.addEventListener('click', () => {
+                    navMenu.classList.remove('active');
+                });
+            }
+        }
+
+        // Load the header and footer when the DOM is ready
+        document.addEventListener('DOMContentLoaded', () => {
+            loadComponent('header-placeholder', 'header.html');
+            loadComponent('footer-placeholder', 'footer.html');
         });
     </script>
 </body>
