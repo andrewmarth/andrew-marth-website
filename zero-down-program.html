@@ -88,29 +88,40 @@
             background: linear-gradient(rgba(78, 81, 62, 0.75), rgba(78, 81, 62, 0.75)), url('https://andrewmarth.com/images/background.jpeg');
             background-size: cover;
             background-position: center;
-            color: #e9e2d8; 
-            padding: 160px 20px 100px 20px; 
-            text-align: center;
+            /* Adjust padding so the box sits nicely on the edge */
+            padding: 160px 20px 0 20px; 
+            display: flex;
+            justify-content: center;
         }
-        header h1 {
-            font-size: 3rem; 
-            margin-bottom: 15px;
-            letter-spacing: 2px;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.3); 
+        
+        /* New Overlapping Hero Box */
+        .hero-overlay-box {
+            background: rgba(233, 226, 216, 0.85); 
+            backdrop-filter: blur(12px); 
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(153, 114, 75, 0.3);
+            border-radius: 8px;
+            padding: 40px;
+            max-width: 550px;
+            width: 100%;
+            /* This moves the box down so 75% is on the banner and 25% overhangs */
+            transform: translateY(25%); 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            position: relative;
+            z-index: 10;
         }
-        header p {
-            font-size: 1.3rem;
-            color: #e9e2d8; 
-            opacity: 0.95; 
-            max-width: 700px;
+        .hero-overlay-box img {
+            width: 100%;
+            height: auto;
+            display: block;
             margin: 0 auto;
-            text-shadow: 0 1px 3px rgba(0,0,0,0.3);
         }
 
         /* --- Intro Section --- */
         .intro-section {
             max-width: 900px;
-            margin: 60px auto 40px auto;
+            /* Increased top margin to give the overlapping box space to breathe */
+            margin: 100px auto 40px auto;
             padding: 0 20px;
             text-align: center;
         }
@@ -138,7 +149,7 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.05);
             padding: 50px;
             width: 100%;
-            max-width: 800px; /* Keeps the text lines at a readable length */
+            max-width: 800px; 
             border-top: 4px solid #4e513e;
         }
         .detail-item {
@@ -305,8 +316,14 @@
                 cursor: pointer;
                 line-height: 1;
             }
+            .hero-overlay-box {
+                padding: 20px;
+            }
+            .intro-section {
+                margin-top: 80px;
+            }
             .program-card {
-                padding: 30px 20px; /* Reduce padding for smaller screens */
+                padding: 30px 20px; 
             }
             .cta-section {
                 margin: 20px 20px 80px 20px; 
@@ -342,8 +359,9 @@
     </nav>
 
     <header>
-        <h1>Zero Down Program</h1>
-        <p>Unlock the door to your new home without the burden of a down payment.</p>
+        <div class="hero-overlay-box">
+            <img src="https://andrewmarth.com/images/final_zero_down.png" alt="Zero Down Program">
+        </div>
     </header>
 
     <section class="intro-section">
