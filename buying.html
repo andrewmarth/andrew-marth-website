@@ -591,5 +591,19 @@
             loadComponent('footer-placeholder', 'footer.html');
         });
     </script>
+    <script>
+    // Listen for ANY message coming over the wall from an iframe
+    window.addEventListener('message', function(event) {
+        // We only care about messages coming from Zapier
+        if (event.origin.includes('zapier.com')) {
+            console.log("Zapier sent a message!", event.data);
+            
+            // IF Zapier sends a height property, we could apply it here:
+            // if (event.data.height) {
+            //     document.querySelector('zapier-interfaces-page-embed').style.height = event.data.height + 'px';
+            // }
+        }
+    });
+</script>
 </body>
 </html>
