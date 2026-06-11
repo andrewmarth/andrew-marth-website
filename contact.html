@@ -406,4 +406,52 @@
         <h2>Want To Reserve A Time?</h2>
         <p>Select a time below to hop on a call.</p>
         <div class="calendar-container">
-            <iframe src="
+            <iframe src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ1dN08AzRdZjJxKE2nneRHb5Mt3udERnvQ-QWIcPpDbw4pcLU4eL-6QRfgita2pOwbtGW1nsxpp?gv=true" class="calendar-iframe" frameborder="0"></iframe>
+            </div>
+    </section>
+
+    <div id="footer-placeholder"></div>
+
+    <script>
+        // Function to load external HTML components
+        async function loadComponent(id, file) {
+            try {
+                const response = await fetch(file);
+                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                const html = await response.text();
+                document.getElementById(id).innerHTML = html;
+                
+                // If we just loaded the header, initialize the hamburger menu logic
+                if (id === 'header-placeholder') {
+                    initNavigation();
+                }
+            } catch (error) {
+                console.error(`Error loading component ${file}:`, error);
+            }
+        }
+
+        // Initialize mobile navigation logic
+        function initNavigation() {
+            const hamburgerBtn = document.getElementById('hamburger-btn');
+            const closeBtn = document.getElementById('close-btn');
+            const navMenu = document.getElementById('nav-menu');
+
+            if(hamburgerBtn && closeBtn && navMenu) {
+                hamburgerBtn.addEventListener('click', () => {
+                    navMenu.classList.add('active');
+                });
+
+                closeBtn.addEventListener('click', () => {
+                    navMenu.classList.remove('active');
+                });
+            }
+        }
+
+        // Load the header and footer when the DOM is ready
+        document.addEventListener('DOMContentLoaded', () => {
+            loadComponent('header-placeholder', 'header.html');
+            loadComponent('footer-placeholder', 'footer.html');
+        });
+    </script>
+</body>
+</html>
