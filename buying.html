@@ -230,40 +230,70 @@
             background-color: #9a5d40;
         }
 
-        /* --- Call to Action Section --- */
-        .cta-section {
+        /* --- Form Header Section --- */
+        .form-header-section {
             max-width: 800px;
-            margin: 0 auto 80px auto; 
-            padding: 40px 20px;
+            margin: 40px auto 20px auto; 
+            padding: 0 20px;
             text-align: center;
-            background-color: #ffffff;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            border-top: 4px solid #99724b; 
         }
-        .cta-section h2 {
+        .form-header-section h2 {
             font-size: 2rem;
             color: #4f2d2c;
             margin-bottom: 15px;
         }
-        .cta-section p {
+        .form-header-section p {
             font-size: 1.1rem;
             color: #4f2d2c;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
         }
-        .cta-btn {
-            display: inline-block;
-            padding: 15px 35px;
-            background-color: #99724b; /* Matched to the timeline brown/gold */
-            color: #e9e2d8;
-            text-decoration: none;
-            border-radius: 4px;
+
+        /* --- Trust Badge / Secure Notice --- */
+        .secure-notice {
+            text-align: center;
+            max-width: 450px; 
+            margin: 0 auto 20px auto; 
+            padding: 0 20px;
+        }
+        .secure-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            color: #4e513e; 
             font-weight: bold;
-            font-size: 1.1rem;
-            transition: background-color 0.3s;
+            font-size: 1.2rem;
+            margin-bottom: 5px;
         }
-        .cta-btn:hover {
-            background-color: #9a5d40; /* Matched hover color */
+        .secure-header img {
+            height: 1.2rem; 
+            width: auto;
+            object-fit: contain;
+        }
+        .secure-disclaimer {
+            font-size: 0.8rem;
+            color: #4f2d2c;
+            opacity: 0.8;
+            line-height: 1.4;
+            font-style: italic; 
+        }
+
+        /* --- Zapier Form Container (FRAMED & SCALED) --- */
+        .form-container {
+            max-width: 900px; 
+            margin: 0 auto 80px auto; 
+            padding: 0; 
+            display: flex;
+            justify-content: center;
+            width: 100%; 
+            
+            border-top: 4px solid #4f2d2c;
+            border-bottom: 4px solid #4f2d2c;
+            
+            background-image: url('https://andrewmarth.com/images/tiling_background_alt.png');
+            background-size: 100% auto; 
+            background-repeat: repeat-y; 
+            background-position: top center;
         }
 
         /* --- Footer --- */
@@ -392,9 +422,9 @@
                 left: 0; 
             }
             
-            /* Give CTA section some breathing room on mobile */
-            .cta-section {
-                margin: 20px 20px 80px 20px; 
+            /* Give form header section some breathing room on mobile */
+            .form-header-section {
+                margin: 40px 20px 20px 20px; 
             }
         }
     </style>
@@ -423,7 +453,6 @@
                     <span class="step-number">Step 01</span>
                     <h3>Initial Information</h3>
                     <p>To get started, simply fill out my brief buyer intake form. This provides me with the essential initial information regarding your budget, timeline, and the specific criteria you are looking for in a home.</p>
-                    <a href="intake" class="timeline-btn">Fill Out the Form</a>
                 </div>
             </div>
 
@@ -478,10 +507,29 @@
         </div>
     </section>
 
-    <section class="cta-section">
+    <!-- New Form Header Section -->
+    <section class="form-header-section">
         <h2>Ready to Take the First Step?</h2>
         <p>Before we can dive into the collection and start touring, we have to start with Step 1. Filling out the initial intake form is completely zero-pressure. In fact, it is a great idea to do this even if you are months or years away from buying—it gives you a crystal-clear picture of your options and what you are able to do right now.</p>
-        <a href="intake" class="cta-btn">Get Started</a>
+    </section>
+
+    <!-- Secure Notice & Form -->
+    <section class="secure-notice">
+        <div class="secure-header">
+            <img src="https://andrewmarth.com/images/lock.png" alt="Secure Lock">
+            <span>Secure Submission</span>
+        </div>
+        <p class="secure-disclaimer">All information is securely submitted and never shared with anyone. This is not a loan application and is only used for informational purposes.</p>
+    </section>
+
+    <section class="form-container">
+        <script type='module' src='https://interfaces.zapier.com/assets/web-components/zapier-interfaces/zapier-interfaces.esm.js'></script>
+        <zapier-interfaces-page-embed 
+            page-id='cmozybet9005g10pptw5gv06k' 
+            test-id='cmozybet9005g10pptw5gv06k-zapier-interfaces-page-embed-iframe' 
+            no-background='true' 
+            style='max-width: 900px; width: 100%; height: 12000px; overflow: hidden; border: none;'>
+        </zapier-interfaces-page-embed>
     </section>
 
     <!-- Footer Placeholder -->
