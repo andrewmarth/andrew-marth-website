@@ -83,6 +83,83 @@
             display: none; 
         }
 
+        /* Mobile Navigation Styles */
+        @media (max-width: 768px) {
+            .navbar {
+                justify-content: flex-end; 
+            }
+            .mobile-center-logo {
+                display: block;
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%); 
+            }
+            .mobile-center-logo img {
+                height: 40px; 
+                width: auto;
+                border-radius: 4px;
+                display: block;
+            }
+            .hamburger {
+                display: block;
+            }
+            .nav-menu {
+                position: fixed;
+                top: 0;
+                right: -100%; 
+                width: 280px;
+                height: 100vh;
+                background: rgba(233, 226, 216, 0.95); 
+                backdrop-filter: blur(15px);
+                -webkit-backdrop-filter: blur(15px);
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: flex-start;
+                padding: 60px 30px 30px 30px;
+                box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+                transition: right 0.3s ease;
+                z-index: 1001; 
+            }
+            .nav-menu.active {
+                right: 0; 
+            }
+            .nav-logo {
+                margin-bottom: 40px;
+                width: 100%;
+                display: flex;
+                justify-content: center;
+            }
+            .nav-logo img {
+                height: 60px;
+            }
+            .nav-links {
+                flex-direction: column;
+                width: 100%;
+                align-items: flex-start;
+                gap: 20px;
+            }
+            .nav-links a {
+                display: block;
+                width: 100%;
+                padding-bottom: 10px;
+                border-bottom: 1px solid rgba(192, 144, 80, 0.4); 
+                font-size: 1.3rem;
+            }
+            .close-menu {
+                display: block;
+                position: absolute;
+                top: 15px;
+                right: 25px;
+                font-size: 2.5rem;
+                background: none;
+                border: none;
+                color: #4f2d2c;
+                cursor: pointer;
+                line-height: 1;
+            }
+        }
+
         /* --- Header / Hero Section (Matches Homepage) --- */
         header {
             background: linear-gradient(rgba(78, 81, 62, 0.75), rgba(78, 81, 62, 0.75)), url('https://andrewmarth.com/images/background.jpeg');
@@ -401,30 +478,8 @@
 </head>
 <body>
 
-    <nav class="navbar">
-        <a href="/" class="mobile-center-logo">
-            <img src="https://andrewmarth.com/images/andrew_marth_logo.png" alt="Andrew Marth Logo">
-        </a>
-
-        <button class="hamburger" id="hamburger-btn">&#9776;</button>
-        
-        <div class="nav-menu" id="nav-menu">
-            <button class="close-menu" id="close-btn">&times;</button>
-            
-            <div class="nav-logo">
-                <a href="/">
-                    <img src="https://andrewmarth.com/images/andrew_marth_logo.png" alt="Andrew Marth Logo">
-                </a>
-            </div>
-            
-            <div class="nav-links">
-                <a href="buying">Buying</a>
-                <a href="selling">Selling</a>
-                <a href="flipping">Flipping</a>
-                <a href="contact">Contact</a>
-            </div>
-        </div>
-    </nav>
+    <!-- Header Placeholder -->
+    <div id="header-placeholder"></div>
 
     <header>
         <h1>The Selling Process</h1>
@@ -506,28 +561,48 @@
         <a href="intake" class="cta-btn">Get Started</a>
     </section>
 
-    <footer>
-        <div class="footer-contact">
-            <p><strong>Cell:</strong> 480.652.1330 | <strong>Email:</strong> <a href="mailto:andrew@andrewmarth.com">andrew@andrewmarth.com</a></p>
-            <p><strong>AZ License:</strong> SA711359000</p>
-        </div>
-        
-        <div class="footer-disclosure">
-            <p>Andrew Marth is an agent affiliated with Compass, a licensed real estate broker and abides by Equal Housing Opportunity laws. All material presented herein is intended for informational purposes only. Information is compiled from sources deemed reliable but is subject to errors, omissions, changes in price, condition, sale, or withdrawal without notice. This is not intended to solicit property already listed. Photos may be virtually staged or digitally enhanced and may not reflect actual property conditions.</p>
-        </div>
-    </footer>
+    <!-- Footer Placeholder -->
+    <div id="footer-placeholder"></div>
 
     <script>
-        const hamburgerBtn = document.getElementById('hamburger-btn');
-        const closeBtn = document.getElementById('close-btn');
-        const navMenu = document.getElementById('nav-menu');
+        // Function to load external HTML components
+        async function loadComponent(id, file) {
+            try {
+                const response = await fetch(file);
+                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                const html = await response.text();
+                document.getElementById(id).innerHTML = html;
+                
+                // If we just loaded the header, initialize the hamburger menu logic
+                if (id === 'header-placeholder') {
+                    initNavigation();
+                }
+            } catch (error) {
+                console.error(`Error loading component ${file}:`, error);
+            }
+        }
 
-        hamburgerBtn.addEventListener('click', () => {
-            navMenu.classList.add('active');
-        });
+        // Initialize mobile navigation logic
+        function initNavigation() {
+            const hamburgerBtn = document.getElementById('hamburger-btn');
+            const closeBtn = document.getElementById('close-btn');
+            const navMenu = document.getElementById('nav-menu');
 
-        closeBtn.addEventListener('click', () => {
-            navMenu.classList.remove('active');
+            if(hamburgerBtn && closeBtn && navMenu) {
+                hamburgerBtn.addEventListener('click', () => {
+                    navMenu.classList.add('active');
+                });
+
+                closeBtn.addEventListener('click', () => {
+                    navMenu.classList.remove('active');
+                });
+            }
+        }
+
+        // Load the header and footer when the DOM is ready
+        document.addEventListener('DOMContentLoaded', () => {
+            loadComponent('header-placeholder', 'header.html');
+            loadComponent('footer-placeholder', 'footer.html');
         });
     </script>
 </body>
