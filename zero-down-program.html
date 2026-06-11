@@ -141,7 +141,7 @@
             display: flex;
             justify-content: center;
             max-width: 1000px;
-            margin: 0 auto 80px auto;
+            margin: 0 auto 60px auto;
             padding: 0 20px;
         }
         .program-card {
@@ -180,40 +180,72 @@
             line-height: 1.7;
         }
 
-        /* --- Call to Action Section --- */
-        .cta-section {
+        /* --- Form Header Section (Replaces Boxed CTA) --- */
+        .form-header-section {
             max-width: 800px;
-            margin: 0 auto 80px auto; 
-            padding: 40px 20px;
+            margin: 0 auto 20px auto; 
+            padding: 0 20px;
             text-align: center;
-            background-color: #ffffff;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            border-top: 4px solid #99724b; 
         }
-        .cta-section h2 {
+        .form-header-section h2 {
             font-size: 2rem;
             color: #4f2d2c;
             margin-bottom: 15px;
         }
-        .cta-section p {
+        .form-header-section p {
             font-size: 1.1rem;
             color: #4f2d2c;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
         }
-        .cta-btn {
-            display: inline-block;
-            padding: 15px 35px;
-            background-color: #99724b; 
-            color: #e9e2d8;
-            text-decoration: none;
-            border-radius: 4px;
+
+        /* --- Trust Badge / Secure Notice --- */
+        .secure-notice {
+            text-align: center;
+            max-width: 450px; /* Constrains text to half the width of the form */
+            margin: 0 auto 20px auto; /* Provides breathing room above the form and centers it */
+            padding: 0 20px;
+        }
+        .secure-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            color: #4e513e; /* Theme Green */
             font-weight: bold;
-            font-size: 1.1rem;
-            transition: background-color 0.3s;
+            font-size: 1.2rem;
+            margin-bottom: 5px;
         }
-        .cta-btn:hover {
-            background-color: #9a5d40; 
+        .secure-header img {
+            height: 1.2rem; /* Matches the font size perfectly */
+            width: auto;
+            object-fit: contain;
+        }
+        .secure-disclaimer {
+            font-size: 0.8rem;
+            color: #4f2d2c;
+            opacity: 0.8;
+            line-height: 1.4;
+            font-style: italic;
+        }
+
+        /* --- Zapier Form Container (FRAMED & SCALED) --- */
+        .form-container {
+            max-width: 900px; 
+            margin: 0 auto 80px auto; 
+            padding: 0; 
+            display: flex;
+            justify-content: center;
+            width: 100%; 
+            
+            /* Text-colored Top and Bottom Borders */
+            border-top: 4px solid #4f2d2c;
+            border-bottom: 4px solid #4f2d2c;
+            
+            /* Tiling Background Image using your self-hosted link */
+            background-image: url('https://andrewmarth.com/images/tiling_background_alt.png');
+            background-size: 100% auto; 
+            background-repeat: repeat-y; 
+            background-position: top center;
         }
 
         /* --- Footer --- */
@@ -222,7 +254,6 @@
             padding: 40px 20px;
             background-color: #4e513e; 
             color: #e9e2d8; 
-            margin-top: 40px;
         }
         .footer-contact {
             margin-bottom: 20px;
@@ -335,9 +366,6 @@
             .program-card-content {
                 padding: 30px 20px; 
             }
-            .cta-section {
-                margin: 20px 20px 80px 20px; 
-            }
         }
     </style>
 </head>
@@ -415,10 +443,29 @@
         </div>
     </section>
 
-    <section class="cta-section">
-        <h2>Curious What This Looks Like For You?</h2>
+    <!-- New Form Header Section -->
+    <section class="form-header-section">
+        <h2>What Does This Look Like For You?</h2>
         <p>Fill out the information below to see what a purchase using this zero-down program looks like. It is completely zero-pressure and an incredible way to explore your buying power.</p>
-        <a href="intake" class="cta-btn">Get Started</a>
+    </section>
+
+    <!-- Secure Notice & Form Included from intake.html -->
+    <section class="secure-notice">
+        <div class="secure-header">
+            <img src="https://andrewmarth.com/images/lock.png" alt="Secure Lock">
+            <span>Secure Submission</span>
+        </div>
+        <p class="secure-disclaimer">All information is securely submitted and never shared with anyone. This is not a loan application and is only used for informational purposes.</p>
+    </section>
+
+    <section class="form-container">
+        <script type='module' src='https://interfaces.zapier.com/assets/web-components/zapier-interfaces/zapier-interfaces.esm.js'></script>
+        <zapier-interfaces-page-embed 
+            page-id='cmozybet9005g10pptw5gv06k' 
+            test-id='cmozybet9005g10pptw5gv06k-zapier-interfaces-page-embed-iframe' 
+            no-background='true' 
+            style='max-width: 900px; width: 100%; height: 12000px; overflow: hidden; border: none;'>
+        </zapier-interfaces-page-embed>
     </section>
 
     <footer>
