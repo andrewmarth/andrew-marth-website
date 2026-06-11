@@ -148,52 +148,36 @@
             background: #ffffff;
             border-radius: 8px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            padding: 50px;
             width: 100%;
             max-width: 800px; /* Keeps the text lines at a readable length */
             border-top: 4px solid #4e513e;
+            overflow: hidden; /* Clips the image to match the card's rounded corners */
         }
         .program-card-header-img {
             width: 100%;
-            max-width: 450px;
             height: auto;
             display: block;
-            margin: 0 auto 40px auto;
         }
-        
-        /* Custom Bulleted List Styling */
-        .program-benefits-list {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-            text-align: left;
+        .program-card-content {
+            padding: 40px 50px 50px 50px;
         }
-        .program-benefits-list li {
-            position: relative;
-            padding-left: 35px;
-            margin-bottom: 25px;
+        .detail-item {
+            margin-bottom: 35px;
+        }
+        .detail-item:last-child {
+            margin-bottom: 0;
+        }
+        .detail-item h3 {
+            color: #4e513e;
+            margin-bottom: 8px;
+            font-size: 1.5rem;
+            border-bottom: 1px solid rgba(153, 114, 75, 0.2);
+            padding-bottom: 5px;
+        }
+        .detail-item p {
             color: #4f2d2c;
             font-size: 1.1rem;
             line-height: 1.7;
-        }
-        .program-benefits-list li:last-child {
-            margin-bottom: 0;
-        }
-        /* Custom Bullet point */
-        .program-benefits-list li::before {
-            content: "•";
-            color: #99724b; /* Gold/Brown accent */
-            font-size: 2.2rem;
-            line-height: 1;
-            position: absolute;
-            left: 0;
-            top: -6px; /* Aligns bullet perfectly with the title text */
-        }
-        .program-benefits-list li strong {
-            color: #4e513e; /* Theme Green */
-            font-size: 1.3rem;
-            display: block; /* Stacks the title on top of the description */
-            margin-bottom: 5px;
         }
 
         /* --- Call to Action Section --- */
@@ -238,6 +222,7 @@
             padding: 40px 20px;
             background-color: #4e513e; 
             color: #e9e2d8; 
+            margin-top: 40px;
         }
         .footer-contact {
             margin-bottom: 20px;
@@ -347,7 +332,7 @@
             .intro-section {
                 margin-top: 80px;
             }
-            .program-card {
+            .program-card-content {
                 padding: 30px 20px; 
             }
             .cta-section {
@@ -398,31 +383,34 @@
     <section class="program-details-section">
         <div class="program-card">
             
-            <!-- New Header Image Inside Card -->
             <img src="https://andrewmarth.com/images/final_free_real_estate.jpg" alt="Free Real Estate" class="program-card-header-img">
             
-            <ul class="program-benefits-list">
-                <li>
-                    <strong>$0 Down Payment</strong>
-                    This program allows you to purchase a home with absolutely zero dollars required for a down payment, keeping your savings in your pocket where they belong.
-                </li>
-                <li>
-                    <strong>$88,000 Income Limit</strong>
-                    The program features a strict income limit of $88,000 per year. However, this limit only applies to the individual(s) officially listed on the loan. If two people plan to co-own the home, you can strategically structure it so only the qualifying earner is on the loan.
-                </li>
-                <li>
-                    <strong>True Market Interest Rates</strong>
-                    Unlike many specialty financing options, this program provides a standard, competitive market interest rate. There are absolutely no hidden markups on the rate or your closing costs.
-                </li>
-                <li>
-                    <strong>Powered by Sunflower Bank</strong>
-                    This program is a highly specialized lending product made possible through my direct professional partnership with the experts at Sunflower Bank.
-                </li>
-                <li>
-                    <strong>No Initial Credit Check</strong>
-                    Want to see if this is an option for you? No problem. There is absolutely no hard credit check required to see if your financial scenario qualifies for the program.
-                </li>
-            </ul>
+            <div class="program-card-content">
+                <div class="detail-item">
+                    <h3>$0 Down Payment</h3>
+                    <p>This program allows you to purchase a home with absolutely zero dollars required for a down payment, keeping your savings in your pocket where they belong.</p>
+                </div>
+
+                <div class="detail-item">
+                    <h3>$88,000 Income Limit</h3>
+                    <p>The program features a strict income limit of $88,000 per year. However, this limit <strong>only applies to the individual(s) officially listed on the loan</strong>. If two people plan to co-own the home, you can strategically structure it so only the qualifying earner is on the loan.</p>
+                </div>
+
+                <div class="detail-item">
+                    <h3>True Market Interest Rates</h3>
+                    <p>Unlike many specialty financing options, this program provides a standard, competitive market interest rate. There are absolutely no hidden markups on the rate or your closing costs.</p>
+                </div>
+
+                <div class="detail-item">
+                    <h3>Powered by Sunflower Bank</h3>
+                    <p>This program is a highly specialized lending product made possible through my direct professional partnership with the experts at Sunflower Bank.</p>
+                </div>
+
+                <div class="detail-item">
+                    <h3>No Initial Credit Check</h3>
+                    <p>Want to see if this is an option for you? No problem. There is absolutely no hard credit check required to see if your financial scenario qualifies for the program.</p>
+                </div>
+            </div>
 
         </div>
     </section>
