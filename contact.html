@@ -357,30 +357,7 @@
 </head>
 <body>
 
-    <nav class="navbar">
-        <a href="/" class="mobile-center-logo">
-            <img src="https://andrewmarth.com/images/andrew_marth_logo.png" alt="Andrew Marth Logo">
-        </a>
-
-        <button class="hamburger" id="hamburger-btn">&#9776;</button>
-        
-        <div class="nav-menu" id="nav-menu">
-            <button class="close-menu" id="close-btn">&times;</button>
-            
-            <div class="nav-logo">
-                <a href="/">
-                    <img src="https://andrewmarth.com/images/andrew_marth_logo.png" alt="Andrew Marth Logo">
-                </a>
-            </div>
-            
-            <div class="nav-links">
-                <a href="buying">Buying</a>
-                <a href="selling">Selling</a>
-                <a href="flipping">Flipping</a>
-                <a href="contact">Contact</a>
-            </div>
-        </div>
-    </nav>
+    <div id="header-placeholder"></div>
 
     <header>
         <h1>Contact Me</h1>
@@ -429,33 +406,4 @@
         <h2>Want To Reserve A Time?</h2>
         <p>Select a time below to hop on a call.</p>
         <div class="calendar-container">
-            <iframe src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ1dN08AzRdZjJxKE2nneRHb5Mt3udERnvQ-QWIcPpDbw4pcLU4eL-6QRfgita2pOwbtGW1nsxpp?gv=true" class="calendar-iframe" frameborder="0"></iframe>
-            </div>
-    </section>
-
-    <footer>
-        <div class="footer-contact">
-            <p><strong>Cell:</strong> 480.652.1330 | <strong>Email:</strong> <a href="mailto:andrew@andrewmarth.com">andrew@andrewmarth.com</a></p>
-            <p><strong>AZ License:</strong> SA711359000</p>
-        </div>
-        
-        <div class="footer-disclosure">
-            <p>Andrew Marth is an agent affiliated with Compass, a licensed real estate broker and abides by Equal Housing Opportunity laws. All material presented herein is intended for informational purposes only. Information is compiled from sources deemed reliable but is subject to errors, omissions, changes in price, condition, sale, or withdrawal without notice. This is not intended to solicit property already listed. Photos may be virtually staged or digitally enhanced and may not reflect actual property conditions.</p>
-        </div>
-    </footer>
-
-    <script>
-        const hamburgerBtn = document.getElementById('hamburger-btn');
-        const closeBtn = document.getElementById('close-btn');
-        const navMenu = document.getElementById('nav-menu');
-
-        hamburgerBtn.addEventListener('click', () => {
-            navMenu.classList.add('active');
-        });
-
-        closeBtn.addEventListener('click', () => {
-            navMenu.classList.remove('active');
-        });
-    </script>
-</body>
-</html>
+            <iframe src="
