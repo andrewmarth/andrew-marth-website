@@ -230,39 +230,42 @@
             background-color: #9a5d40;
         }
 
-        /* --- Section Divider --- */
-        .section-divider {
-            max-width: 900px;
-            width: 100%;
-            margin: 60px auto 0 auto;
-            border: none;
-            border-top: 4px solid #4f2d2c;
-        }
-
-        /* --- Form Header Section --- */
-        .form-header-section {
-            max-width: 800px;
-            margin: 40px auto 20px auto; 
+        /* --- Form Card Section --- */
+        .form-card-section {
+            max-width: 940px; /* Provides a max width of 900px for the card after padding */
+            margin: 60px auto 80px auto; 
             padding: 0 20px;
+        }
+        .form-card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border-top: 4px solid #4e513e; /* Matches timeline cards exactly */
+            overflow: hidden; /* Keeps the Zapier embed from breaking the rounded corners */
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        .form-card-text {
+            padding: 50px 40px 20px 40px;
             text-align: center;
         }
-        .form-header-section h2 {
+        .form-card-text h2 {
             font-size: 2rem;
             color: #4f2d2c;
             margin-bottom: 15px;
         }
-        .form-header-section p {
+        .form-card-text p {
             font-size: 1.1rem;
             color: #4f2d2c;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
         }
 
         /* --- Trust Badge / Secure Notice --- */
         .secure-notice {
             text-align: center;
             max-width: 450px; 
-            margin: 0 auto 20px auto; 
-            padding: 0 20px;
+            margin: 0 auto; 
         }
         .secure-header {
             display: flex;
@@ -287,22 +290,11 @@
             font-style: italic; 
         }
 
-        /* --- Zapier Form Container (FRAMED & SCALED) --- */
-        .form-container {
-            max-width: 900px; 
-            margin: 0 auto 80px auto; 
-            padding: 0; 
+        /* --- Zapier Form Container inside Card --- */
+        .form-container-card {
+            width: 100%;
             display: flex;
             justify-content: center;
-            width: 100%; 
-            
-            border-top: 4px solid #4f2d2c;
-            border-bottom: 4px solid #4f2d2c;
-            
-            background-image: url('https://andrewmarth.com/images/tiling_background_alt.png');
-            background-size: 100% auto; 
-            background-repeat: repeat-y; 
-            background-position: top center;
         }
 
         /* --- Footer --- */
@@ -431,9 +423,9 @@
                 left: 0; 
             }
             
-            /* Give form header section some breathing room on mobile */
-            .form-header-section {
-                margin: 40px 20px 20px 20px; 
+            /* Form card mobile padding */
+            .form-card-text {
+                padding: 40px 20px 20px 20px; 
             }
         }
     </style>
@@ -516,32 +508,34 @@
         </div>
     </section>
 
-    <!-- Section Divider -->
-    <hr class="section-divider">
+    <!-- Unified Form Card Section -->
+    <section class="form-card-section">
+        <div class="form-card">
+            
+            <div class="form-card-text">
+                <h2>Ready to Take the First Step?</h2>
+                <p>Before we can dive into the collection and start touring, we have to start with Step 1. Filling out the initial intake form is completely zero-pressure. In fact, it is a great idea to do this even if you are months or years away from buying—it gives you a crystal-clear picture of your options and what you are able to do right now.</p>
+                
+                <div class="secure-notice">
+                    <div class="secure-header">
+                        <img src="https://andrewmarth.com/images/lock.png" alt="Secure Lock">
+                        <span>Secure Submission</span>
+                    </div>
+                    <p class="secure-disclaimer">All information is securely submitted and never shared with anyone. This is not a loan application and is only used for informational purposes.</p>
+                </div>
+            </div>
 
-    <!-- New Form Header Section -->
-    <section class="form-header-section">
-        <h2>Ready to Take the First Step?</h2>
-        <p>Before we can dive into the collection and start touring, we have to start with Step 1. Filling out the initial intake form is completely zero-pressure. In fact, it is a great idea to do this even if you are months or years away from buying—it gives you a crystal-clear picture of your options and what you are able to do right now.</p>
-    </section>
+            <div class="form-container-card">
+                <script type='module' src='https://interfaces.zapier.com/assets/web-components/zapier-interfaces/zapier-interfaces.esm.js'></script>
+                <zapier-interfaces-page-embed 
+                    page-id='cmozybet9005g10pptw5gv06k' 
+                    test-id='cmozybet9005g10pptw5gv06k-zapier-interfaces-page-embed-iframe' 
+                    no-background='true' 
+                    style='width: 100%; height: 12000px; overflow: hidden; border: none;'>
+                </zapier-interfaces-page-embed>
+            </div>
 
-    <!-- Secure Notice & Form -->
-    <section class="secure-notice">
-        <div class="secure-header">
-            <img src="https://andrewmarth.com/images/lock.png" alt="Secure Lock">
-            <span>Secure Submission</span>
         </div>
-        <p class="secure-disclaimer">All information is securely submitted and never shared with anyone. This is not a loan application and is only used for informational purposes.</p>
-    </section>
-
-    <section class="form-container">
-        <script type='module' src='https://interfaces.zapier.com/assets/web-components/zapier-interfaces/zapier-interfaces.esm.js'></script>
-        <zapier-interfaces-page-embed 
-            page-id='cmozybet9005g10pptw5gv06k' 
-            test-id='cmozybet9005g10pptw5gv06k-zapier-interfaces-page-embed-iframe' 
-            no-background='true' 
-            style='max-width: 900px; width: 100%; height: 12000px; overflow: hidden; border: none;'>
-        </zapier-interfaces-page-embed>
     </section>
 
     <!-- Footer Placeholder -->
