@@ -230,9 +230,88 @@
             background-color: #9a5d40;
         }
 
+        /* --- Buyer Programs Section --- */
+        .programs-section {
+            max-width: 940px;
+            margin: 60px auto 40px auto;
+            padding: 0 20px;
+        }
+        .programs-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .programs-header h2 {
+            font-size: 2.2rem;
+            color: #4f2d2c;
+            margin-bottom: 15px;
+        }
+        .programs-header p {
+            font-size: 1.1rem;
+            color: #4f2d2c;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .program-link-card {
+            display: flex;
+            align-items: center;
+            background-color: #ffffff;
+            border-left: 4px solid #99724b;
+            padding: 25px 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            gap: 30px;
+            margin-bottom: 25px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .program-link-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+        .program-link-image {
+            flex: 0 0 280px;
+        }
+        .program-link-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 6px;
+            display: block;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            transition: opacity 0.3s ease;
+        }
+        .program-link-image a:hover img {
+            opacity: 0.85;
+        }
+        .program-link-content {
+            flex: 1;
+        }
+        .program-link-content h3 {
+            font-size: 1.6rem;
+            color: #4e513e;
+            margin-bottom: 10px;
+        }
+        .program-link-content p {
+            font-size: 1.05rem;
+            color: #4f2d2c;
+            margin-bottom: 20px;
+        }
+        .program-btn {
+            display: inline-block;
+            padding: 10px 25px;
+            background-color: #99724b;
+            color: #e9e2d8;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+        }
+        .program-btn:hover {
+            background-color: #9a5d40;
+        }
+
         /* --- Form Card Section --- */
         .form-card-section {
-            max-width: 940px; /* Provides a max width of 900px for the card after padding */
+            max-width: 940px; 
             margin: 60px auto 80px auto; 
             padding: 0 20px;
         }
@@ -240,8 +319,8 @@
             background-color: white;
             border-radius: 8px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            border-top: 4px solid #4e513e; /* Matches timeline cards exactly */
-            overflow: hidden; /* Keeps the Zapier embed from breaking the rounded corners */
+            border-top: 4px solid #4e513e; 
+            overflow: hidden; 
             width: 100%;
             display: flex;
             flex-direction: column;
@@ -283,7 +362,6 @@
             object-fit: contain;
         }
         
-        /* Specificity target to override .form-card-text p */
         .form-card-text p.secure-disclaimer {
             font-size: 0.8rem;
             color: #4f2d2c;
@@ -298,12 +376,12 @@
             width: 100%;
             display: flex;
             justify-content: center;
-            background-color: #e9e2d8; /* Matches the site background */
+            background-color: #e9e2d8; 
             background-image: url('https://andrewmarth.com/images/tiling_background_alt.png');
             background-size: 100% auto; 
             background-repeat: repeat-y; 
             background-position: top center;
-            border-top: 4px solid #4f2d2c; /* Clean divider between white header and form */
+            border-top: 4px solid #4f2d2c; 
         }
 
         /* --- Footer --- */
@@ -416,7 +494,7 @@
                 line-height: 1;
             }
 
-            /* Timeline Mobile Fixes (Snaps to left) */
+            /* Timeline Mobile Fixes */
             .timeline::after {
                 left: 31px; 
             }
@@ -432,6 +510,18 @@
                 left: 0; 
             }
             
+            /* Program Cards Mobile Fixes */
+            .program-link-card {
+                flex-direction: column;
+                text-align: center;
+                padding: 25px 20px;
+            }
+            .program-link-image {
+                flex: none;
+                width: 100%;
+                max-width: 320px;
+            }
+
             /* Form card mobile padding */
             .form-card-text {
                 padding: 40px 20px 20px 20px; 
@@ -517,6 +607,30 @@
         </div>
     </section>
 
+    <!-- Buyer Programs Section -->
+    <section class="programs-section">
+        <div class="programs-header">
+            <h2>Buyer Programs</h2>
+            <p>Explore exclusive financing options and specialized programs designed to give you a strategic advantage in the Arizona real estate market.</p>
+        </div>
+
+        <div class="program-link-card">
+            <div class="program-link-image">
+                <a href="zero-down-program">
+                    <img src="https://andrewmarth.com/images/final_free_real_estate.jpg" alt="Zero Down Program Header Image">
+                </a>
+            </div>
+            <div class="program-link-content">
+                <h3>Zero Down Program</h3>
+                <p>A highly specialized lending product that allows you to purchase a home with absolutely zero dollars required for a down payment, allowing you to keep your savings in your pocket without sacrificing true market interest rates.</p>
+                <a href="zero-down-program" class="program-btn">View Program</a>
+            </div>
+        </div>
+        
+        <!-- Future programs can be added below this line using the same program-link-card structure -->
+
+    </section>
+
     <!-- Unified Form Card Section -->
     <section class="form-card-section">
         <div class="form-card">
@@ -591,19 +705,5 @@
             loadComponent('footer-placeholder', 'footer.html');
         });
     </script>
-    <script>
-    // Listen for ANY message coming over the wall from an iframe
-    window.addEventListener('message', function(event) {
-        // We only care about messages coming from Zapier
-        if (event.origin.includes('zapier.com')) {
-            console.log("Zapier sent a message!", event.data);
-            
-            // IF Zapier sends a height property, we could apply it here:
-            // if (event.data.height) {
-            //     document.querySelector('zapier-interfaces-page-embed').style.height = event.data.height + 'px';
-            // }
-        }
-    });
-</script>
 </body>
 </html>
