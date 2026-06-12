@@ -253,29 +253,29 @@
         }
         .program-link-card {
             display: flex;
-            align-items: center;
+            align-items: stretch; /* Stretches the action button to full height */
             background-color: #ffffff;
             border-left: 4px solid #99724b;
-            padding: 25px 30px;
             border-radius: 8px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            gap: 30px;
             margin-bottom: 25px;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            overflow: hidden; /* Contains the arrow button radius seamlessly */
         }
         .program-link-card:hover {
             transform: translateY(-3px);
             box-shadow: 0 8px 25px rgba(0,0,0,0.1);
         }
         .program-link-image {
-            flex: 0 0 280px;
+            flex: 0 0 240px; /* Constrains logo size */
+            padding: 30px 0 30px 30px;
+            display: flex;
+            align-items: center;
         }
         .program-link-image img {
             width: 100%;
             height: auto;
-            border-radius: 6px;
             display: block;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
             transition: opacity 0.3s ease;
         }
         .program-link-image a:hover img {
@@ -283,29 +283,28 @@
         }
         .program-link-content {
             flex: 1;
-        }
-        .program-link-content h3 {
-            font-size: 1.6rem;
-            color: #4e513e;
-            margin-bottom: 10px;
+            padding: 30px;
+            display: flex;
+            align-items: center; /* Vertically centers the text with the logo */
         }
         .program-link-content p {
-            font-size: 1.05rem;
+            font-size: 1.1rem;
             color: #4f2d2c;
-            margin-bottom: 20px;
+            margin-bottom: 0;
+            line-height: 1.6;
         }
-        .program-btn {
-            display: inline-block;
-            padding: 10px 25px;
+        .program-link-action {
+            flex: 0 0 80px;
             background-color: #99724b;
             color: #e9e2d8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
             text-decoration: none;
-            border-radius: 4px;
-            font-weight: bold;
-            font-size: 1rem;
             transition: background-color 0.3s;
         }
-        .program-btn:hover {
+        .program-link-action:hover {
             background-color: #9a5d40;
         }
 
@@ -513,13 +512,22 @@
             /* Program Cards Mobile Fixes */
             .program-link-card {
                 flex-direction: column;
-                text-align: center;
-                padding: 25px 20px;
             }
             .program-link-image {
                 flex: none;
                 width: 100%;
-                max-width: 320px;
+                max-width: 250px;
+                padding: 30px 20px 10px 20px;
+                margin: 0 auto;
+            }
+            .program-link-content {
+                padding: 10px 20px 30px 20px;
+                text-align: center;
+            }
+            .program-link-action {
+                width: 100%;
+                flex: none;
+                padding: 15px;
             }
 
             /* Form card mobile padding */
@@ -617,14 +625,15 @@
         <div class="program-link-card">
             <div class="program-link-image">
                 <a href="zero-down-program">
-                    <img src="https://andrewmarth.com/images/final_free_real_estate.jpg" alt="Zero Down Program Header Image">
+                    <img src="https://andrewmarth.com/images/final_zero_down.png" alt="Zero Down Program Logo">
                 </a>
             </div>
             <div class="program-link-content">
-                <h3>Zero Down Program</h3>
-                <p>A highly specialized lending product that allows you to purchase a home with absolutely zero dollars required for a down payment, allowing you to keep your savings in your pocket without sacrificing true market interest rates.</p>
-                <a href="zero-down-program" class="program-btn">View Program</a>
+                <p>A highly specialized buying program that allows you to purchase a home with absolutely zero dollars out of pocket, without sacrificing true market interest rates.</p>
             </div>
+            <a href="zero-down-program" class="program-link-action">
+                &#8594;
+            </a>
         </div>
         
         <!-- Future programs can be added below this line using the same program-link-card structure -->
