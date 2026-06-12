@@ -207,51 +207,25 @@
             box-shadow: 0 30px 60px rgba(0,0,0,0.25);
         }
 
-        /* --- Form Card Section --- */
-        .form-card-section {
-            max-width: 940px; /* Provides a max width of 900px for the card after padding */
-            margin: 60px auto 80px auto; 
+        /* --- Standalone Contact Box Section --- */
+        .contact-card-section {
+            max-width: 940px; 
+            margin: 60px auto 40px auto; 
             padding: 0 20px;
         }
-        .form-card {
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            border-top: 4px solid #4e513e; /* Matches program cards exactly */
-            overflow: hidden; /* Keeps the Zapier embed from breaking the rounded corners */
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-        }
-        .form-card-text {
-            padding: 50px 40px 20px 40px;
-            text-align: center;
-        }
-        .form-card-text h2 {
-            font-size: 2rem;
-            color: #4f2d2c;
-            margin-bottom: 15px;
-        }
-        .form-card-text p {
-            font-size: 1.1rem;
-            color: #4f2d2c;
-            margin-bottom: 30px;
-        }
-
-        /* --- Inner Contact Box (Inside Form Card) --- */
         .inner-contact-box {
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 25px;
-            background-color: #fdfbf9; /* Very subtle off-white contrast inside the card */
-            border-left: 4px solid #99724b; /* Matches contact.html styling */
+            background-color: #ffffff; /* Pure white since it sits on the beige background */
+            border-left: 4px solid #99724b; 
             padding: 25px 30px;
             border-radius: 8px;
-            margin: 0 auto 40px auto;
+            margin: 0 auto;
             max-width: 600px;
             text-align: left;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.04);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05); /* Match main cards */
         }
         .inner-contact-image img {
             width: 100px;
@@ -266,14 +240,13 @@
             color: #4e513e;
             margin-bottom: 5px;
         }
-        /* Specificity targets to override general paragraph margins */
-        .form-card-text .inner-contact-details p.inner-subtitle {
+        .inner-contact-details p.inner-subtitle {
             font-size: 1rem;
             color: #4f2d2c;
             margin-bottom: 12px;
             font-style: italic;
         }
-        .form-card-text .inner-contact-details p.inner-link {
+        .inner-contact-details p.inner-link {
             font-size: 1.05rem;
             margin-bottom: 5px;
             color: #4e513e;
@@ -301,6 +274,37 @@
             opacity: 0.8;
         }
 
+        /* --- Form Card Section --- */
+        .form-card-section {
+            max-width: 940px; 
+            margin: 0 auto 80px auto; /* Reduced top margin since contact card is directly above */
+            padding: 0 20px;
+        }
+        .form-card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border-top: 4px solid #4e513e; 
+            overflow: hidden; 
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        .form-card-text {
+            padding: 50px 40px 20px 40px;
+            text-align: center;
+        }
+        .form-card-text h2 {
+            font-size: 2rem;
+            color: #4f2d2c;
+            margin-bottom: 15px;
+        }
+        .form-card-text p {
+            font-size: 1.1rem;
+            color: #4f2d2c;
+            margin-bottom: 30px;
+        }
+
         /* --- Trust Badge / Secure Notice --- */
         .secure-notice {
             text-align: center;
@@ -323,7 +327,6 @@
             object-fit: contain;
         }
         
-        /* Specificity target to override .form-card-text p */
         .form-card-text p.secure-disclaimer {
             font-size: 0.8rem;
             color: #4f2d2c;
@@ -338,12 +341,12 @@
             width: 100%;
             display: flex;
             justify-content: center;
-            background-color: #e9e2d8; /* Matches the site background */
+            background-color: #e9e2d8; 
             background-image: url('https://andrewmarth.com/images/tiling_background_alt.png');
             background-size: 100% auto; 
             background-repeat: repeat-y; 
             background-position: top center;
-            border-top: 4px solid #4f2d2c; /* Clean divider between white header and form */
+            border-top: 4px solid #4f2d2c; 
         }
 
         /* --- Footer --- */
@@ -469,7 +472,7 @@
                 padding: 40px 20px 20px 20px; 
             }
             
-            /* Mobile adjustments for the new contact block */
+            /* Mobile adjustments for the contact block */
             .inner-contact-box {
                 flex-direction: column;
                 text-align: center;
@@ -545,6 +548,39 @@
         </div>
     </section>
 
+    <!-- Standalone Contact Box Section -->
+    <section class="contact-card-section">
+        <div class="inner-contact-box">
+            <div class="inner-contact-image">
+                <img src="https://andrewmarth.com/images/az_pfp_graded.png" alt="Andrew Marth - Real Estate Agent">
+            </div>
+            <div class="inner-contact-details">
+                <h3>Questions First?</h3>
+                <p class="inner-subtitle">Call or text me to talk through it.</p>
+                <p class="inner-link"><strong>Cell:</strong> <a href="tel:4806521330">480.652.1330</a></p>
+                <p class="inner-link"><strong>Email:</strong> <a href="mailto:andrew@andrewmarth.com">andrew@andrewmarth.com</a></p>
+                
+                <div class="inner-socials">
+                    <a href="https://www.instagram.com/secret_agent_andrew/" target="_blank" rel="noopener noreferrer">
+                        <img src="https://andrewmarth.com/images/instagram.png" alt="Instagram">
+                    </a>
+                    <a href="https://www.facebook.com/secret.agent.andrew" target="_blank" rel="noopener noreferrer">
+                        <img src="https://andrewmarth.com/images/facebook.png" alt="Facebook">
+                    </a>
+                    <a href="https://www.threads.com/@secret_agent_andrew" target="_blank" rel="noopener noreferrer">
+                        <img src="https://andrewmarth.com/images/threads.png" alt="Threads">
+                    </a>
+                    <a href="https://www.linkedin.com/in/secret-agent-andrew/" target="_blank" rel="noopener noreferrer">
+                        <img src="https://andrewmarth.com/images/linkedin.png" alt="LinkedIn">
+                    </a>
+                    <a href="https://x.com/SecrtAgntAndrew" target="_blank" rel="noopener noreferrer">
+                        <img src="https://andrewmarth.com/images/twitter.png" alt="X / Twitter">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Unified Form Card Section -->
     <section class="form-card-section">
         <div class="form-card">
@@ -553,37 +589,6 @@
                 <h2>What Does This Look Like For You?</h2>
                 <p>Fill out the information below to see what a purchase using this zero-down program looks like. It is completely zero-pressure and an incredible way to explore your buying power.</p>
                 
-                <!-- Inner Contact Box -->
-                <div class="inner-contact-box">
-                    <div class="inner-contact-image">
-                        <img src="https://andrewmarth.com/images/az_pfp_graded.png" alt="Andrew Marth - Real Estate Agent">
-                    </div>
-                    <div class="inner-contact-details">
-                        <h3>Questions First?</h3>
-                        <p class="inner-subtitle">Call or text me to talk through it.</p>
-                        <p class="inner-link"><strong>Cell:</strong> <a href="tel:4806521330">480.652.1330</a></p>
-                        <p class="inner-link"><strong>Email:</strong> <a href="mailto:andrew@andrewmarth.com">andrew@andrewmarth.com</a></p>
-                        
-                        <div class="inner-socials">
-                            <a href="https://www.instagram.com/secret_agent_andrew/" target="_blank" rel="noopener noreferrer">
-                                <img src="https://andrewmarth.com/images/instagram.png" alt="Instagram">
-                            </a>
-                            <a href="https://www.facebook.com/secret.agent.andrew" target="_blank" rel="noopener noreferrer">
-                                <img src="https://andrewmarth.com/images/facebook.png" alt="Facebook">
-                            </a>
-                            <a href="https://www.threads.com/@secret_agent_andrew" target="_blank" rel="noopener noreferrer">
-                                <img src="https://andrewmarth.com/images/threads.png" alt="Threads">
-                            </a>
-                            <a href="https://www.linkedin.com/in/secret-agent-andrew/" target="_blank" rel="noopener noreferrer">
-                                <img src="https://andrewmarth.com/images/linkedin.png" alt="LinkedIn">
-                            </a>
-                            <a href="https://x.com/SecrtAgntAndrew" target="_blank" rel="noopener noreferrer">
-                                <img src="https://andrewmarth.com/images/twitter.png" alt="X / Twitter">
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
                 <div class="secure-notice">
                     <div class="secure-header">
                         <img src="https://andrewmarth.com/images/lock.png" alt="Secure Lock">
