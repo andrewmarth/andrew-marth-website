@@ -180,6 +180,33 @@
             line-height: 1.7;
         }
 
+        /* --- Proforma Images Section (Floating Effect) --- */
+        .proforma-section {
+            max-width: 1000px;
+            margin: 0 auto 60px auto;
+            padding: 0 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 60px;
+        }
+        .proforma-container {
+            width: 100%;
+            text-align: center;
+        }
+        .proforma-container img {
+            width: 100%;
+            max-width: 600px; /* Reduced to 2/3 size for desktop */
+            height: auto;
+            border-radius: 8px;
+            /* Deep drop shadow for the "floating" effect */
+            box-shadow: 0 20px 50px rgba(0,0,0,0.2); 
+            transition: transform 0.3s ease;
+        }
+        .proforma-container img:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.25);
+        }
+
         /* --- Form Card Section --- */
         .form-card-section {
             max-width: 940px; /* Provides a max width of 900px for the card after padding */
@@ -190,7 +217,7 @@
             background-color: white;
             border-radius: 8px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            border-top: 4px solid #4e513e; /* Matches timeline cards exactly */
+            border-top: 4px solid #4e513e; /* Matches program cards exactly */
             overflow: hidden; /* Keeps the Zapier embed from breaking the rounded corners */
             width: 100%;
             display: flex;
@@ -375,7 +402,6 @@
             .program-card-content {
                 padding: 30px 20px; 
             }
-            /* Form card mobile padding */
             .form-card-text {
                 padding: 40px 20px 20px 20px; 
             }
@@ -431,6 +457,18 @@
                 </div>
             </div>
 
+        </div>
+    </section>
+
+    <!-- Example Purchase Section -->
+    <section class="intro-section" style="margin-top: 20px;">
+        <h2>Example Purchase</h2>
+        <p>See below for a real example of a purchase with this program.</p>
+    </section>
+
+    <section class="proforma-section">
+        <div class="proforma-container">
+            <img src="https://andrewmarth.com/images/example_zero_down.jpg" alt="Zero Down Program Example Proforma">
         </div>
     </section>
 
