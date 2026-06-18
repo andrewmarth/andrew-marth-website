@@ -187,7 +187,7 @@
             text-shadow: 0 1px 3px rgba(0,0,0,0.3);
         }
 
-        /* --- About Me Section (with Soft MD3 Animation) --- */
+        /* --- About Me Section (with MD3 9-Sided Cookie) --- */
         .about-section {
             max-width: 1000px;
             margin: 60px auto 20px auto;
@@ -208,45 +208,32 @@
         .gear-container {
             position: relative;
             width: 100%;
-            max-width: 320px; /* Slightly refined max-width */
+            max-width: 320px; 
             aspect-ratio: 1 / 1;
             display: flex;
             justify-content: center;
             align-items: center;
         }
         
-        /* The rotating element housing the shapes */
+        /* The rotating SVG housing */
         .gear-spinner {
             position: absolute;
             width: 100%;
             height: 100%;
-            animation: spin 24s linear infinite; /* Slowed down for an elegant feel */
+            animation: spin 24s linear infinite; 
             z-index: 0;
-            filter: drop-shadow(0 6px 12px rgba(0,0,0,0.1)); /* Softer drop shadow */
+            filter: drop-shadow(0 6px 12px rgba(0,0,0,0.1)); 
         }
-        
-        /* The 2 softly rounded squares that create the MD3 "flower" */
-        .gear-part {
-            position: absolute;
-            top: 0; 
-            left: 0;
-            width: 100%; 
-            height: 100%;
-            background-color: #4e513e; 
-            border-radius: 35%; /* Much softer curve for the classic Google look */
-        }
-        .gear-part:nth-child(1) { transform: rotate(0deg); }
-        .gear-part:nth-child(2) { transform: rotate(45deg); } /* Reduced to 8 points instead of 12 */
 
         /* The inner profile photo */
         .gear-container img {
-            width: 92%; /* Increased size to thin out the animated border */
-            height: 92%;
+            width: 78%; /* Scaled to fit perfectly inside the 9-sided cookie */
+            height: 78%;
             border-radius: 50%;
             object-fit: cover;
             position: relative;
             z-index: 1;
-            border: 4px solid #e9e2d8; /* Creates a clean, breathable gap between the photo and the background */
+            border: 4px solid #e9e2d8; /* Creates a clean, breathable gap */
         }
 
         /* The infinite spin animation */
@@ -391,8 +378,13 @@
         <div class="about-image">
             <div class="gear-container">
                 <div class="gear-spinner">
-                    <div class="gear-part"></div>
-                    <div class="gear-part"></div>
+                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+                        <polygon points="50,8 77,17.8 91.3,42.7 86.4,71 64.4,89.4 35.6,89.4 13.6,71 8.7,42.7 23,17.8" 
+                                 fill="#4e513e" 
+                                 stroke="#4e513e" 
+                                 stroke-width="12" 
+                                 stroke-linejoin="round" />
+                    </svg>
                 </div>
                 <img src="https://andrewmarth.com/images/az_pfp_graded.png" alt="Andrew Marth - Real Estate Agent">
             </div>
