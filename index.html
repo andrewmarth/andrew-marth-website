@@ -14,8 +14,8 @@
         body {
             font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             line-height: 1.6;
-            color: #4f2d2c; /* Palette Color 6 */
-            background-color: #e9e2d8; /* Palette Color 1 */
+            color: #4f2d2c; 
+            background-color: #e9e2d8; 
             overflow-x: hidden; 
         }
         
@@ -38,14 +38,14 @@
             min-height: 80px;
         }
         .mobile-center-logo {
-            display: none; /* Hidden on desktop */
+            display: none; 
         }
         .hamburger {
             display: none;
             font-size: 2rem;
             background: none;
             border: none;
-            color: #4e513e; /* Palette Color 5 */
+            color: #4e513e; 
             cursor: pointer;
         }
         .nav-menu {
@@ -71,13 +71,13 @@
         }
         .nav-links a {
             text-decoration: none;
-            color: #4f2d2c; /* Palette Color 6 */
+            color: #4f2d2c; 
             font-weight: bold;
             font-size: 1.1rem;
             transition: color 0.3s;
         }
         .nav-links a:hover {
-            color: #9a5d40; /* Palette Color 4 */
+            color: #9a5d40; 
         }
         .close-menu {
             display: none; 
@@ -158,7 +158,6 @@
                 cursor: pointer;
                 line-height: 1;
             }
-            /* Centers the intro text specifically on mobile screens */
             .about-text {
                 text-align: center;
             }
@@ -188,7 +187,7 @@
             text-shadow: 0 1px 3px rgba(0,0,0,0.3);
         }
 
-        /* --- About Me Section --- */
+        /* --- About Me Section (with MD3 Gear Animation) --- */
         .about-section {
             max-width: 1000px;
             margin: 60px auto 20px auto;
@@ -200,16 +199,64 @@
         }
         .about-image {
             flex: 1 1 300px;
-            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
-        .about-image img {
+        
+        /* The container for the animated gear and image */
+        .gear-container {
+            position: relative;
             width: 100%;
             max-width: 350px;
-            border-radius: 50%; 
-            border: 8px solid #4e513e; 
-            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
-            object-fit: cover;
+            aspect-ratio: 1 / 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
+        
+        /* The rotating element housing the gear shapes */
+        .gear-spinner {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            animation: spin 20s linear infinite;
+            z-index: 0;
+            /* Use drop-shadow filter so the shadow doesn't rotate with the shape */
+            filter: drop-shadow(0 8px 12px rgba(0,0,0,0.15));
+        }
+        
+        /* The 3 rounded overlapping squares that create the MD3 gear */
+        .gear-part {
+            position: absolute;
+            top: 0; 
+            left: 0;
+            width: 100%; 
+            height: 100%;
+            background-color: #4e513e; 
+            border-radius: 28%; /* MD3 fluid curve */
+        }
+        .gear-part:nth-child(1) { transform: rotate(0deg); }
+        .gear-part:nth-child(2) { transform: rotate(30deg); }
+        .gear-part:nth-child(3) { transform: rotate(60deg); }
+
+        /* The inner profile photo */
+        .gear-container img {
+            width: 88%;
+            height: 88%;
+            border-radius: 50%;
+            object-fit: cover;
+            position: relative;
+            z-index: 1;
+            border: 4px solid #e9e2d8; /* Creates a clean, breathable gap between the photo and the gear */
+        }
+
+        /* The infinite spin animation */
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
         .about-text {
             flex: 2 1 400px;
         }
@@ -237,7 +284,6 @@
             color: #4f2d2c; 
         }
 
-        /* Flexbox for the 3 columns */
         .services-container {
             display: flex;
             flex-wrap: wrap;
@@ -345,7 +391,14 @@
 
     <section class="about-section">
         <div class="about-image">
-            <img src="https://andrewmarth.com/images/az_pfp_graded.png" alt="Andrew Marth - Real Estate Agent">
+            <div class="gear-container">
+                <div class="gear-spinner">
+                    <div class="gear-part"></div>
+                    <div class="gear-part"></div>
+                    <div class="gear-part"></div>
+                </div>
+                <img src="https://andrewmarth.com/images/az_pfp_graded.png" alt="Andrew Marth - Real Estate Agent">
+            </div>
         </div>
         <div class="about-text">
             <h2>Meet Andrew Marth</h2>
