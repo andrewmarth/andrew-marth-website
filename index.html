@@ -187,7 +187,7 @@
             text-shadow: 0 1px 3px rgba(0,0,0,0.3);
         }
 
-        /* --- About Me Section (with True MD3 9-Sided Cookie) --- */
+        /* --- About Me Section (with Downloaded Cookie Shape) --- */
         .about-section {
             max-width: 1000px;
             margin: 60px auto 20px auto;
@@ -215,7 +215,7 @@
             align-items: center;
         }
         
-        /* The rotating SVG housing */
+        /* The rotating image housing */
         .gear-spinner {
             position: absolute;
             width: 100%;
@@ -224,17 +224,25 @@
             z-index: 0;
             filter: drop-shadow(0 6px 12px rgba(0,0,0,0.1)); 
         }
+        
+        /* The downloaded cookie shape */
+        .cookie-shape {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: contain;
+        }
 
         /* The inner profile photo */
-        .gear-container img {
-            width: 66%; /* Scaled down so it sits comfortably inside the valleys */
-            height: 66%;
+        .gear-container img.profile-pic {
+            width: 74%; /* Scaled nicely to leave a clean border gap */
+            height: 74%;
             border-radius: 50%;
             object-fit: cover;
             position: relative;
             z-index: 1;
-            border: 4px solid #e9e2d8; /* Creates a clean, breathable gap */
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1); /* Subtle inner shadow to lift the photo */
+            border: 4px solid #e9e2d8; 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1); 
         }
 
         /* The infinite spin animation */
@@ -379,15 +387,9 @@
         <div class="about-image">
             <div class="gear-container">
                 <div class="gear-spinner">
-                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
-                        <polygon points="50,10 61.6,18.0 75.7,19.4 79.4,33.0 89.4,43.0 83.5,55.9 84.6,70.0 71.9,76.0 63.7,87.6 50.0,84.0 36.3,87.6 28.1,76.0 15.4,70.0 16.5,55.9 10.6,43.0 20.6,33.0 24.3,19.4 38.4,18.0" 
-                                 fill="#4e513e" 
-                                 stroke="#4e513e" 
-                                 stroke-width="15" 
-                                 stroke-linejoin="round" />
-                    </svg>
+                    <img src="https://andrewmarth.com/images/9_sided_cookie.svg" alt="Decorative Shape" class="cookie-shape" onerror="this.onerror=null; this.src='https://andrewmarth.com/images/9_sided_cookie.png';">
                 </div>
-                <img src="https://andrewmarth.com/images/az_pfp_graded.png" alt="Andrew Marth - Real Estate Agent">
+                <img src="https://andrewmarth.com/images/az_pfp_graded.png" alt="Andrew Marth - Real Estate Agent" class="profile-pic">
             </div>
         </div>
         <div class="about-text">
