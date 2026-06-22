@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zero Down Program | Andrew Marth Real Estate</title>
+    <style>
+        /* --- General Reset & Styling --- */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: #4f2d2c; 
+            background-color: #e9e2d8; 
+            overflow-x: hidden; 
+        }
+        
+        /* --- Navigation Bar (Fixed & Glassmorphism) --- */
+        .navbar {
+            background: rgba(233, 226, 216, 0.85); 
+            backdrop-filter: blur(12px); 
+            -webkit-backdrop-filter: blur(12px); 
+            
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000; 
+            
+            padding: 15px 30px;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid rgba(153, 114, 75, 0.3); 
+            min-height: 80px;
+        }
+        .mobile-center-logo {
+            display: none; 
+        }
+        .hamburger {
+            display: none;
+            font-size: 2rem;
+            background: none;
+            border: none;
+            color: #4e513e; 
+            cursor: pointer;
+        }
+        .nav-menu {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+        .nav-logo img {
+            height: 50px; 
+            width: auto;
+            display: block;
+            border-radius: 4px;
+        }
+        .nav-logo a {
+            text-decoration: none; 
+            display: block;
+        }
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: #4f2d2c; 
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: color 0.3s;
+        }
+        .nav-links a:hover {
+            color: #9a5d40; 
+        }
+        .close-menu {
+            display: none; 
+        }
+
+        /* --- Header / Hero Section --- */
+        header {
+            background: linear-gradient(rgba(78, 81, 62, 0.75), rgba(78, 81, 62, 0.75)), url('https://andrewmarth.com/images/background.jpeg');
+            background-size: cover;
+            background-position: center;
+            padding: 160px 20px 0 20px; 
+            display: flex;
+            justify-content: center;
+        }
+        
+        /* New Overlapping Hero Box */
+        .hero-overlay-box {
+            background: rgba(233, 226, 216, 0.85); 
+            backdrop-filter: blur(12px); 
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(153, 114, 75, 0.3);
+            border-radius: 8px;
+            padding: 40px;
+            max-width: 800px; 
+            width: 100%;
+            transform: translateY(25%); 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            position: relative;
+            z-index: 10;
+        }
+        .hero-overlay-box img {
+            width: 100%;
+            max-width: 500px; 
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+
+        /* --- Intro Section --- */
+        .intro-section {
+            max-width: 900px;
+            margin: 100px auto 40px auto;
+            padding: 0 20px;
+            text-align: center;
+        }
+        .intro-section h2 {
+            font-size: 2.2rem;
+            color: #4f2d2c;
+            margin-bottom: 20px;
+        }
+        .intro-section p {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+        }
+
+        /* --- Single Comprehensive Program Card Section --- */
+        .program-details-section {
+            display: flex;
+            justify-content: center;
+            max-width: 1000px;
+            margin: 0 auto 60px auto;
+            padding: 0 20px;
+        }
+        .program-card {
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            width: 100%;
+            max-width: 800px; 
+            border-top: 4px solid #4e513e;
+            overflow: hidden; 
+        }
+        .program-card-header-img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        .program-card-content {
+            padding: 40px 50px 50px 50px;
+        }
+        .detail-item {
+            margin-bottom: 35px;
+        }
+        .detail-item:last-child {
+            margin-bottom: 0;
+        }
+        .detail-item h3 {
+            color: #4e513e;
+            margin-bottom: 8px;
+            font-size: 1.5rem;
+            border-bottom: 1px solid rgba(153, 114, 75, 0.2);
+            padding-bottom: 5px;
+        }
+        .detail-item p {
+            color: #4f2d2c;
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+
+        /* --- Proforma Images Section (Floating Effect) --- */
+        .proforma-section {
+            max-width: 1000px;
+            margin: 0 auto 60px auto;
+            padding: 0 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 60px;
+        }
+        .proforma-container {
+            width: 100%;
+            text-align: center;
+        }
+        .proforma-container img {
+            width: 100%;
+            max-width: 600px; 
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.2); 
+            transition: transform 0.3s ease;
+        }
+        .proforma-container img:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.25);
+        }
+
+        /* --- Standalone Contact Box Section --- */
+        .contact-card-section {
+            max-width: 940px; 
+            margin: 60px auto 40px auto; 
+            padding: 0 20px;
+        }
+        .inner-contact-box {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 25px;
+            background-color: #ffffff; 
+            border-left: 4px solid #99724b; 
+            padding: 25px 30px;
+            border-radius: 8px;
+            margin: 0 auto;
+            max-width: 600px;
+            text-align: left;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05); 
+        }
+        .inner-contact-image img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 3px solid #4e513e;
+            object-fit: cover;
+            display: block;
+        }
+        .inner-contact-details h3 {
+            font-size: 1.4rem;
+            color: #4e513e;
+            margin-bottom: 5px;
+        }
+        .inner-contact-details p.inner-subtitle {
+            font-size: 1rem;
+            color: #4f2d2c;
+            margin-bottom: 12px;
+            font-style: italic;
+        }
+        .inner-contact-details p.inner-link {
+            font-size: 1.05rem;
+            margin-bottom: 5px;
+            color: #4e513e;
+        }
+        .inner-contact-details a {
+            color: #99724b;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .inner-contact-details a:hover {
+            text-decoration: underline;
+        }
+        .inner-socials {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        .inner-socials img {
+            width: 24px;
+            height: 24px;
+            transition: transform 0.3s ease;
+        }
+        .inner-socials a:hover img {
+            transform: translateY(-3px);
+            opacity: 0.8;
+        }
+
+        /* --- Form Card Section --- */
+        .form-card-section {
+            max-width: 940px; 
+            margin: 0 auto 80px auto; 
+            padding: 0 20px;
+        }
+        .form-card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border-top: 4px solid #4e513e; 
+            overflow: hidden; 
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        .form-card-text {
+            padding: 50px 40px 20px 40px;
+            text-align: center;
+        }
+        .form-card-text h2 {
+            font-size: 2rem;
+            color: #4f2d2c;
+            margin-bottom: 15px;
+        }
+        .form-card-text p {
+            font-size: 1.1rem;
+            color: #4f2d2c;
+            margin-bottom: 30px;
+        }
+
+        /* --- Trust Badge / Secure Notice --- */
+        .secure-notice {
+            text-align: center;
+            max-width: 450px; 
+            margin: 0 auto; 
+        }
+        .secure-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            color: #4e513e; 
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+        .secure-header img {
+            height: 1.2rem; 
+            width: auto;
+            object-fit: contain;
+        }
+        
+        .form-card-text p.secure-disclaimer {
+            font-size: 0.8rem;
+            color: #4f2d2c;
+            opacity: 0.8;
+            line-height: 1.4;
+            font-style: italic; 
+            margin-bottom: 0;
+        }
+
+        /* --- NATIVE MULTI-STEP FORM STYLING --- */
+        .form-container-card {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #e9e2d8; 
+            background-image: url('https://andrewmarth.com/images/tiling_background_alt.png');
+            background-size: 100% auto; 
+            background-repeat: repeat-y; 
+            background-position: top center;
+            border-top: 4px solid #4f2d2c; 
+            padding: 60px 20px;
+        }
+        
+        .native-form-box {
+            background: #ffffff;
+            width: 100%;
+            max-width: 550px;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        
+        /* Step Progress Indicator */
+        .form-progress {
+            font-size: 0.9rem;
+            color: #99724b;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .form-step {
+            display: none;
+            animation: fadeIn 0.4s ease-in-out;
+        }
+        .form-step.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .step-title {
+            font-size: 1.8rem;
+            color: #4e513e;
+            margin-bottom: 25px;
+        }
+
+        /* Form Inputs */
+        .input-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        .input-group label {
+            display: block;
+            font-size: 1rem;
+            color: #4f2d2c;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        .input-group input {
+            width: 100%;
+            padding: 15px;
+            font-size: 1.1rem;
+            color: #4f2d2c;
+            border: 2px solid rgba(153, 114, 75, 0.3);
+            border-radius: 6px;
+            background-color: #fdfbf9;
+            transition: border-color 0.3s, box-shadow 0.3s;
+            font-family: inherit;
+        }
+        .input-group input:focus {
+            outline: none;
+            border-color: #99724b;
+            box-shadow: 0 0 0 3px rgba(153, 114, 75, 0.1);
+        }
+        
+        /* Two column layout for names */
+        .name-row {
+            display: flex;
+            gap: 15px;
+        }
+        .name-row .input-group {
+            flex: 1;
+        }
+
+        /* Form Buttons */
+        .form-actions {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        .btn-primary {
+            background-color: #99724b;
+            color: #ffffff;
+            border: none;
+            padding: 14px 35px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .btn-primary:hover {
+            background-color: #9a5d40;
+        }
+        .btn-primary:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+        .btn-secondary {
+            background-color: transparent;
+            color: #99724b;
+            border: none;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            padding: 10px;
+        }
+        .btn-secondary:hover {
+            text-decoration: underline;
+        }
+
+        /* Success Message */
+        .success-message {
+            display: none;
+            padding: 20px 0;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        .success-icon {
+            width: 60px;
+            height: 60px;
+            background-color: #4e513e;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin: 0 auto 20px auto;
+        }
+        .success-message h3 {
+            font-size: 2rem;
+            color: #4e513e;
+            margin-bottom: 10px;
+        }
+        .success-message p {
+            font-size: 1.1rem;
+            color: #4f2d2c;
+        }
+
+        /* --- Footer --- */
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            background-color: #4e513e; 
+            color: #e9e2d8; 
+            margin-top: 40px;
+        }
+        .footer-contact {
+            margin-bottom: 20px;
+        }
+        .footer-contact p {
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+            color: #e9e2d8;
+        }
+        .footer-contact a {
+            color: #c09050; 
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .footer-contact a:hover {
+            text-decoration: underline;
+        }
+        .footer-disclosure {
+            max-width: 900px;
+            margin: 0 auto 0 auto; 
+            font-size: 0.8rem;
+            color: #e9e2d8; 
+            opacity: 0.75;
+            line-height: 1.5;
+            text-align: justify;
+            text-align-last: center; 
+        }
+
+        /* --- Mobile Responsiveness --- */
+        @media (max-width: 768px) {
+            .navbar {
+                justify-content: flex-end; 
+            }
+            .mobile-center-logo {
+                display: block;
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%); 
+            }
+            .mobile-center-logo img {
+                height: 40px; 
+                width: auto;
+                border-radius: 4px;
+                display: block;
+            }
+            .hamburger {
+                display: block;
+            }
+            .nav-menu {
+                position: fixed;
+                top: 0;
+                right: -100%; 
+                width: 280px;
+                height: 100vh;
+                background: rgba(233, 226, 216, 0.95); 
+                backdrop-filter: blur(15px);
+                -webkit-backdrop-filter: blur(15px);
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: flex-start;
+                padding: 60px 30px 30px 30px;
+                box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+                transition: right 0.3s ease;
+                z-index: 1001; 
+            }
+            .nav-menu.active {
+                right: 0; 
+            }
+            .nav-logo {
+                margin-bottom: 40px;
+                width: 100%;
+                display: flex;
+                justify-content: center;
+            }
+            .nav-logo img {
+                height: 60px;
+            }
+            .nav-links {
+                flex-direction: column;
+                width: 100%;
+                align-items: flex-start;
+                gap: 20px;
+            }
+            .nav-links a {
+                display: block;
+                width: 100%;
+                padding-bottom: 10px;
+                border-bottom: 1px solid rgba(192, 144, 80, 0.4); 
+                font-size: 1.3rem;
+            }
+            .close-menu {
+                display: block;
+                position: absolute;
+                top: 15px;
+                right: 25px;
+                font-size: 2.5rem;
+                background: none;
+                border: none;
+                color: #4f2d2c;
+                cursor: pointer;
+                line-height: 1;
+            }
+            .hero-overlay-box {
+                padding: 20px;
+            }
+            .intro-section {
+                margin-top: 80px;
+            }
+            .program-card-content {
+                padding: 30px 20px; 
+            }
+            .form-card-text {
+                padding: 40px 20px 20px 20px; 
+            }
+            .inner-contact-box {
+                flex-direction: column;
+                text-align: center;
+                padding: 25px 20px;
+            }
+            .inner-socials {
+                justify-content: center;
+            }
+            /* Form adjustments for mobile */
+            .native-form-box {
+                padding: 30px 20px;
+            }
+            .name-row {
+                flex-direction: column;
+                gap: 0;
+            }
+            .step-title {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Placeholder -->
+    <div id="header-placeholder"></div>
+
+    <header>
+        <div class="hero-overlay-box">
+            <img src="https://andrewmarth.com/images/final_zero_down.png" alt="Zero Down Program">
+        </div>
+    </header>
+
+    <section class="intro-section">
+        <h2>Homeownership Just Got More Accessible</h2>
+        <p>Saving for a down payment is often the biggest hurdle to buying a home. That is why I am thrilled to offer an exclusive financing program designed to help you achieve your real estate goals faster and with less out-of-pocket cash.</p>
+        <p>Read through the requirements and benefits of the program below to see how we can put this incredible tool to work for you.</p>
+    </section>
+
+    <section class="program-details-section">
+        <div class="program-card">
+            
+            <img src="https://andrewmarth.com/images/final_free_real_estate.jpg" alt="Free Real Estate" class="program-card-header-img">
+            
+            <div class="program-card-content">
+                <div class="detail-item">
+                    <h3>$0 Down Payment</h3>
+                    <p>This program allows you to purchase a home with absolutely zero dollars required for a down payment, keeping your savings in your pocket where they belong.</p>
+                </div>
+
+                <div class="detail-item">
+                    <h3>$88,000 Income Limit</h3>
+                    <p>The program features a strict income limit of $88,000 per year. However, this limit <strong>only applies to the individual(s) officially listed on the loan</strong>. If two people plan to co-own the home, you can strategically structure it so only the qualifying earner is on the loan.</p>
+                </div>
+
+                <div class="detail-item">
+                    <h3>True Market Interest Rates</h3>
+                    <p>Unlike many specialty financing options, this program provides a standard, competitive market interest rate. There are absolutely no hidden markups on the rate or your closing costs.</p>
+                </div>
+
+                <div class="detail-item">
+                    <h3>Powered by Sunflower Bank</h3>
+                    <p>This program is a highly specialized lending product made possible through my direct professional partnership with the experts at Sunflower Bank.</p>
+                </div>
+
+                <div class="detail-item">
+                    <h3>No Initial Credit Check</h3>
+                    <p>Want to see if this is an option for you? No problem. There is absolutely no hard credit check required to see if your financial scenario qualifies for the program.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Example Purchase Section -->
+    <section class="intro-section" style="margin-top: 20px;">
+        <h2>Example Purchase</h2>
+        <p>See below for a real example of a purchase with this program. Just sign on the dotted line and the house is yours. No catches as long as you qualify.</p>
+    </section>
+
+    <section class="proforma-section">
+        <div class="proforma-container">
+            <img src="https://andrewmarth.com/images/example_zero_down.jpg" alt="Zero Down Program Example Proforma">
+        </div>
+    </section>
+
+    <!-- Standalone Contact Box Section -->
+    <section class="contact-card-section">
+        <div class="inner-contact-box">
+            <div class="inner-contact-image">
+                <img src="https://andrewmarth.com/images/az_pfp_graded.png" alt="Andrew Marth - Real Estate Agent">
+            </div>
+            <div class="inner-contact-details">
+                <h3>Questions First?</h3>
+                <p class="inner-subtitle">Call or text me to talk through it.</p>
+                <p class="inner-link"><strong>Cell:</strong> <a href="tel:4806521330">480.652.1330</a></p>
+                <p class="inner-link"><strong>Email:</strong> <a href="mailto:andrew@andrewmarth.com">andrew@andrewmarth.com</a></p>
+                
+                <div class="inner-socials">
+                    <a href="https://www.instagram.com/secret_agent_andrew/" target="_blank" rel="noopener noreferrer">
+                        <img src="https://andrewmarth.com/images/instagram.png" alt="Instagram">
+                    </a>
+                    <a href="https://www.facebook.com/secret.agent.andrew" target="_blank" rel="noopener noreferrer">
+                        <img src="https://andrewmarth.com/images/facebook.png" alt="Facebook">
+                    </a>
+                    <a href="https://www.threads.com/@secret_agent_andrew" target="_blank" rel="noopener noreferrer">
+                        <img src="https://andrewmarth.com/images/threads.png" alt="Threads">
+                    </a>
+                    <a href="https://www.linkedin.com/in/secret-agent-andrew/" target="_blank" rel="noopener noreferrer">
+                        <img src="https://andrewmarth.com/images/linkedin.png" alt="LinkedIn">
+                    </a>
+                    <a href="https://x.com/SecrtAgntAndrew" target="_blank" rel="noopener noreferrer">
+                        <img src="https://andrewmarth.com/images/twitter.png" alt="X / Twitter">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Unified Form Card Section -->
+    <section class="form-card-section">
+        <div class="form-card">
+            
+            <div class="form-card-text">
+                <h2>What Does This Look Like For You?</h2>
+                <p>Fill out the information below to see what a purchase using this zero-down program looks like. It is completely zero-pressure and an incredible way to explore your buying power.</p>
+                
+                <div class="secure-notice">
+                    <div class="secure-header">
+                        <img src="https://andrewmarth.com/images/lock.png" alt="Secure Lock">
+                        <span>Secure Submission</span>
+                    </div>
+                    <p class="secure-disclaimer">All information is securely submitted and never shared with anyone. This is not a loan application and is only used for informational purposes.</p>
+                </div>
+            </div>
+
+            <!-- NATIVE MULTI-STEP FORM -->
+            <div class="form-container-card">
+                <div class="native-form-box">
+                    
+                    <form id="zero-down-form">
+                        <!-- Hidden field to identify the form inside Zapier -->
+                        <input type="hidden" name="form_source" value="Zero Down Program Form">
+
+                        <!-- Step 1: Name -->
+                        <div class="form-step active" id="step-1">
+                            <span class="form-progress">Step 1 of 3</span>
+                            <h3 class="step-title">Let's start with your name</h3>
+                            <div class="name-row">
+                                <div class="input-group">
+                                    <label for="first_name">First Name</label>
+                                    <input type="text" id="first_name" name="first_name" placeholder="First Name" required>
+                                </div>
+                                <div class="input-group">
+                                    <label for="last_name">Last Name</label>
+                                    <input type="text" id="last_name" name="last_name" placeholder="Last Name" required>
+                                </div>
+                            </div>
+                            <div class="form-actions">
+                                <button type="button" class="btn-primary next-btn">Next</button>
+                            </div>
+                        </div>
+
+                        <!-- Step 2: Phone -->
+                        <div class="form-step" id="step-2">
+                            <span class="form-progress">Step 2 of 3</span>
+                            <h3 class="step-title">What is the best number to reach you?</h3>
+                            <div class="input-group">
+                                <label for="phone">Phone Number</label>
+                                <input type="tel" id="phone" name="phone" placeholder="(555) 555-5555" required>
+                            </div>
+                            <div class="form-actions">
+                                <button type="button" class="btn-secondary prev-btn">Back</button>
+                                <button type="button" class="btn-primary next-btn">Next</button>
+                            </div>
+                        </div>
+
+                        <!-- Step 3: Email -->
+                        <div class="form-step" id="step-3">
+                            <span class="form-progress">Step 3 of 3</span>
+                            <h3 class="step-title">Where should I send the details?</h3>
+                            <div class="input-group">
+                                <label for="email">Email Address</label>
+                                <input type="email" id="email" name="email" placeholder="email@example.com" required>
+                            </div>
+                            <div class="form-actions">
+                                <button type="button" class="btn-secondary prev-btn">Back</button>
+                                <button type="submit" class="btn-primary submit-btn">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+
+                    <!-- Success Message -->
+                    <div class="success-message" id="success-message">
+                        <div class="success-icon">&#10003;</div>
+                        <h3>Information Received!</h3>
+                        <p>Thank you for submitting your details. I will review everything and reach out to you shortly to discuss your options.</p>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer Placeholder -->
+    <div id="footer-placeholder"></div>
+
+    <script>
+        // --- Multi-Step Form Logic ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.getElementById('zero-down-form');
+            const steps = Array.from(document.querySelectorAll('.form-step'));
+            const nextBtns = document.querySelectorAll('.next-btn');
+            const prevBtns = document.querySelectorAll('.prev-btn');
+            const successMsg = document.getElementById('success-message');
+            let currentStep = 0;
+
+            // Function to change visible step
+            function showStep(index) {
+                steps.forEach((step, i) => {
+                    step.classList.toggle('active', i === index);
+                });
+            }
+
+            // Next button logic (includes HTML5 validation)
+            nextBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const inputs = steps[currentStep].querySelectorAll('input');
+                    let valid = true;
+                    
+                    // Force the browser to trigger required/email validation errors
+                    inputs.forEach(input => {
+                        if (!input.checkValidity()) {
+                            input.reportValidity();
+                            valid = false;
+                        }
+                    });
+
+                    if (valid) {
+                        currentStep++;
+                        showStep(currentStep);
+                    }
+                });
+            });
+
+            // Back button logic
+            prevBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    currentStep--;
+                    showStep(currentStep);
+                });
+            });
+
+            // Handle final form submission directly to Zapier
+            form.addEventListener('submit', (e) => {
+                e.preventDefault(); // Stop page from refreshing
+                
+                const submitBtn = form.querySelector('.submit-btn');
+                submitBtn.textContent = 'Submitting...';
+                submitBtn.disabled = true;
+
+                // Gather all form data
+                const formData = new FormData(form);
+
+                // Send to Zapier Webhook
+                fetch('https://hooks.zapier.com/hooks/catch/17339400/42uzmkz/', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(() => {
+                    // Hide the form and show the thank you message
+                    form.style.display = 'none';
+                    successMsg.style.display = 'block';
+                })
+                .catch(error => {
+                    console.error('Error submitting form:', error);
+                    submitBtn.textContent = 'Error. Try Again.';
+                    submitBtn.disabled = false;
+                });
+            });
+        });
+
+        // --- Standard HTML Component Loading ---
+        async function loadComponent(id, file) {
+            try {
+                const response = await fetch(file);
+                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                const html = await response.text();
+                document.getElementById(id).innerHTML = html;
+                
+                if (id === 'header-placeholder') {
+                    initNavigation();
+                }
+            } catch (error) {
+                console.error(`Error loading component ${file}:`, error);
+            }
+        }
+
+        function initNavigation() {
+            const hamburgerBtn = document.getElementById('hamburger-btn');
+            const closeBtn = document.getElementById('close-btn');
+            const navMenu = document.getElementById('nav-menu');
+
+            if(hamburgerBtn && closeBtn && navMenu) {
+                hamburgerBtn.addEventListener('click', () => {
+                    navMenu.classList.add('active');
+                });
+
+                closeBtn.addEventListener('click', () => {
+                    navMenu.classList.remove('active');
+                });
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            loadComponent('header-placeholder', 'header.html');
+            loadComponent('footer-placeholder', 'footer.html');
+        });
+    </script>
+</body>
+</html>
