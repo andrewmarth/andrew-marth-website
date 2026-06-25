@@ -332,19 +332,28 @@
             margin-bottom: 0;
         }
 
-        /* --- NATIVE MULTI-STEP FORM STYLING --- */
+        /* --- NATIVE MULTI-STEP FORM STYLING (WITH VIDEO BG) --- */
         .form-container-card {
             width: 100%;
             display: flex;
             justify-content: center;
             align-items: center;
             background-color: #e9e2d8; 
-            background-image: url('https://andrewmarth.com/images/tiling_background_alt.png');
-            background-size: 100% auto; 
-            background-repeat: repeat-y; 
-            background-position: top center;
             border-top: 4px solid #4f2d2c; 
             padding: 60px 20px;
+            position: relative; /* Required for the absolute video behind it */
+            overflow: hidden; /* Ensures the video doesn't bleed out of the card */
+        }
+
+        /* Video Background Styling */
+        .form-bg-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* This makes the video scale dynamically without distortion! */
+            z-index: 0;
         }
         
         .native-form-box {
@@ -355,6 +364,8 @@
             border-radius: 8px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             text-align: center;
+            position: relative; /* Brings the form box above the video */
+            z-index: 1;
         }
         
         /* Step Progress Indicator */
@@ -638,7 +649,6 @@
 </head>
 <body>
 
-    <!-- Header Placeholder -->
     <div id="header-placeholder"></div>
 
     <header>
@@ -688,7 +698,6 @@
         </div>
     </section>
 
-    <!-- Example Purchase Section -->
     <section class="intro-section" style="margin-top: 20px;">
         <h2>Example Purchase</h2>
         <p>See below for a real example of a purchase with this program. Just sign on the dotted line and the house is yours. No catches as long as you qualify.</p>
@@ -700,7 +709,6 @@
         </div>
     </section>
 
-    <!-- Standalone Contact Box Section -->
     <section class="contact-card-section">
         <div class="inner-contact-box">
             <div class="inner-contact-image">
@@ -733,7 +741,6 @@
         </div>
     </section>
 
-    <!-- Unified Form Card Section -->
     <section class="form-card-section">
         <div class="form-card">
             
@@ -750,15 +757,17 @@
                 </div>
             </div>
 
-            <!-- NATIVE MULTI-STEP FORM -->
             <div class="form-container-card">
+                
+                <video class="form-bg-video" autoplay loop muted playsinline>
+                    <source src="https://andrewmarth.com/images/form_background.mp4" type="video/mp4">
+                </video>
+
                 <div class="native-form-box">
                     
                     <form id="zero-down-form">
-                        <!-- Hidden field to identify the form inside Zapier -->
                         <input type="hidden" name="form_source" value="Zero Down Program Form">
 
-                        <!-- Step 1: Name -->
                         <div class="form-step active" id="step-1">
                             <span class="form-progress">Step 1 of 3</span>
                             <h3 class="step-title">Let's start with your name</h3>
@@ -777,7 +786,6 @@
                             </div>
                         </div>
 
-                        <!-- Step 2: Phone -->
                         <div class="form-step" id="step-2">
                             <span class="form-progress">Step 2 of 3</span>
                             <h3 class="step-title">What is the best number to reach you?</h3>
@@ -791,7 +799,6 @@
                             </div>
                         </div>
 
-                        <!-- Step 3: Email -->
                         <div class="form-step" id="step-3">
                             <span class="form-progress">Step 3 of 3</span>
                             <h3 class="step-title">Where should I send the details?</h3>
@@ -806,7 +813,6 @@
                         </div>
                     </form>
 
-                    <!-- Success Message -->
                     <div class="success-message" id="success-message">
                         <div class="success-icon">&#10003;</div>
                         <h3>Information Received!</h3>
@@ -819,7 +825,6 @@
         </div>
     </section>
 
-    <!-- Footer Placeholder -->
     <div id="footer-placeholder"></div>
 
     <script>
