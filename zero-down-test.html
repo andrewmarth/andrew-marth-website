@@ -176,7 +176,7 @@
             line-height: 1.7;
         }
 
-        /* --- Proforma Images Section (Floating Effect) --- */
+        /* --- Proforma Images Section --- */
         .proforma-section {
             max-width: 1000px;
             margin: 0 auto 60px auto;
@@ -587,7 +587,8 @@
             .inner-contact-box { flex-direction: column; text-align: center; padding: 25px 20px; }
             .inner-socials { justify-content: center; }
             .native-form-box { padding: 30px 20px; }
-            .step-title { font-size: 1.4rem; }
+            .name-row { flex-direction: column; gap: 0; }
+            .step-title { font-size: 1.5rem; }
         }
     </style>
 </head>
@@ -850,7 +851,52 @@
                 container.appendChild(stepDiv);
             });
 
-            // Input Formatters
+            // Re-evaluates action buttons dynamically on change
+            function updateActions() {
+                const currentEl = document.getElementById(`step-${currentStepIndex}`);
+                const actionsEl = document.getElementById(`actions-${currentStepIndex}`);
+                if (!actionsEl) return;
+                
+                actionsEl.innerHTML = '';
+                
+                let nextStepIndex = -1;
+                for(let i = currentStepIndex + 1; i < questions.length; i++) {
+                    if(questions[i].cond()) { nextStepIndex = i; break; }
+                }
+
+                if(stepHistory.length > 0) {
+                    const btnBack = document.createElement('button');
+                    btnBack.type = 'button';
+                    btnBack.className = 'btn-secondary';
+                    btnBack.textContent = 'Back';
+                    btnBack.onclick = () => {
+                        currentStepIndex = stepHistory.pop();
+                        renderFlow();
+                    };
+                    actionsEl.appendChild(btnBack);
+                }
+
+                const btnForward = document.createElement('button');
+                btnForward.className = 'btn-primary btn-forward';
+                
+                if(nextStepIndex === -1) {
+                    btnForward.type = 'submit';
+                    btnForward.textContent = 'Submit';
+                } else {
+                    btnForward.type = 'button';
+                    btnForward.textContent = 'Next';
+                    btnForward.onclick = () => {
+                        if(validateStep(currentEl)) {
+                            stepHistory.push(currentStepIndex);
+                            currentStepIndex = nextStepIndex;
+                            renderFlow();
+                        }
+                    };
+                }
+                actionsEl.appendChild(btnForward);
+            }
+
+            // Input Formatters & Listeners
             container.addEventListener('input', e => {
                 const el = e.target;
                 if(el.classList.contains('fmt-phone')) {
@@ -877,57 +923,23 @@
                         el.value = '';
                     }
                 }
-                el.classList.remove('error'); // clear error styling on type
+                el.classList.remove('error'); 
+            });
+
+            // Watch for selection changes to actively swap "Next" and "Submit" buttons
+            container.addEventListener('change', e => {
+                if(e.target.type === 'radio') {
+                    e.target.closest('.radio-group').classList.remove('error');
+                }
+                updateActions(); 
             });
 
             // Handle UI Flow
             function renderFlow() {
-                // Hide all steps
                 document.querySelectorAll('.form-step').forEach(s => s.classList.remove('active'));
-                
-                // Show current step
                 const currentEl = document.getElementById(`step-${currentStepIndex}`);
                 currentEl.classList.add('active');
-
-                // Determine what the Next step is (to know if we show "Next" or "Submit")
-                let nextStepIndex = -1;
-                for(let i = currentStepIndex + 1; i < questions.length; i++) {
-                    if(questions[i].cond()) { nextStepIndex = i; break; }
-                }
-
-                // Render Buttons Dynamically
-                const actionsEl = document.getElementById(`actions-${currentStepIndex}`);
-                actionsEl.innerHTML = '';
-                
-                if(stepHistory.length > 0) {
-                    const btnBack = document.createElement('button');
-                    btnBack.type = 'button';
-                    btnBack.className = 'btn-secondary';
-                    btnBack.textContent = 'Back';
-                    btnBack.onclick = () => {
-                        currentStepIndex = stepHistory.pop();
-                        renderFlow();
-                    };
-                    actionsEl.appendChild(btnBack);
-                }
-
-                const btnForward = document.createElement('button');
-                btnForward.className = 'btn-primary';
-                if(nextStepIndex === -1) {
-                    btnForward.type = 'submit';
-                    btnForward.textContent = 'Submit';
-                } else {
-                    btnForward.type = 'button';
-                    btnForward.textContent = 'Next';
-                    btnForward.onclick = () => {
-                        if(validateStep(currentEl)) {
-                            stepHistory.push(currentStepIndex);
-                            currentStepIndex = nextStepIndex;
-                            renderFlow();
-                        }
-                    };
-                }
-                actionsEl.appendChild(btnForward);
+                updateActions();
             }
 
             // Manual Validation
@@ -963,24 +975,31 @@
                 return isValid;
             }
 
-            // Watch for radio clicks to instantly remove red error boxes
-            container.addEventListener('change', e => {
-                if(e.target.type === 'radio') {
-                    e.target.closest('.radio-group').classList.remove('error');
-                }
-            });
-
-            // Form Submit via Webhook
+            // Form Submit via Webhook or Enter Key Intercept
             form.addEventListener('submit', e => {
                 e.preventDefault();
                 const currentEl = document.getElementById(`step-${currentStepIndex}`);
                 if(!validateStep(currentEl)) return;
 
-                const submitBtn = currentEl.querySelector('.btn-primary');
+                // Make absolutely sure it is actually the final step before submitting
+                let nextStepIndex = -1;
+                for(let i = currentStepIndex + 1; i < questions.length; i++) {
+                    if(questions[i].cond()) { nextStepIndex = i; break; }
+                }
+                
+                // If the user hit "Enter" but there are still questions left, advance the form instead!
+                if (nextStepIndex !== -1) {
+                    stepHistory.push(currentStepIndex);
+                    currentStepIndex = nextStepIndex;
+                    renderFlow();
+                    return;
+                }
+
+                const submitBtn = currentEl.querySelector('.btn-forward');
                 submitBtn.textContent = 'Submitting...';
                 submitBtn.disabled = true;
 
-                // Strip empty/hidden fields from the final payload to keep Zapier clean
+                // Clean payload data
                 const finalData = new FormData();
                 finalData.append('form_source', 'Zero Down Program Form');
                 
