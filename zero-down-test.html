@@ -975,7 +975,7 @@
                 return isValid;
             }
 
-            // Form Submit via Webhook or Enter Key Intercept
+            // Form Submit via Webhook with NO-CORS mode
             form.addEventListener('submit', e => {
                 e.preventDefault();
                 const currentEl = document.getElementById(`step-${currentStepIndex}`);
@@ -1016,9 +1016,11 @@
                     }
                 });
 
+                // The Magic Fix: mode: 'no-cors' allows browser to bypass CORS blocks to Zapier
                 fetch('https://hooks.zapier.com/hooks/catch/17339400/42uzmkz/', {
                     method: 'POST',
-                    body: finalData
+                    body: finalData,
+                    mode: 'no-cors' 
                 })
                 .then(() => {
                     form.style.display = 'none';
