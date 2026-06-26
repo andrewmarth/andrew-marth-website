@@ -93,7 +93,6 @@
             justify-content: center;
         }
         
-        /* New Overlapping Hero Box */
         .hero-overlay-box {
             background: rgba(233, 226, 216, 0.85); 
             backdrop-filter: blur(12px); 
@@ -332,7 +331,7 @@
             margin-bottom: 0;
         }
 
-        /* --- NATIVE MULTI-STEP FORM STYLING (WITH VIDEO BG) --- */
+        /* --- NATIVE MULTI-STEP FORM STYLING --- */
         .form-container-card {
             width: 100%;
             display: flex;
@@ -341,47 +340,40 @@
             background-color: #e9e2d8; 
             border-top: 4px solid #4f2d2c; 
             padding: 60px 20px;
-            position: relative; /* Required for the absolute video behind it */
-            overflow: hidden; /* Ensures the video doesn't bleed out of the card */
+            position: relative; 
+            overflow: hidden; 
         }
 
-        /* Video Background Styling */
         .form-bg-video {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            object-fit: cover; /* This makes the video scale dynamically without distortion! */
+            object-fit: cover; 
             z-index: 0;
         }
         
         .native-form-box {
             background: #ffffff;
             width: 100%;
-            max-width: 550px;
+            max-width: 600px;
             padding: 40px;
             border-radius: 8px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             text-align: center;
-            position: relative; /* Brings the form box above the video */
+            position: relative; 
             z-index: 1;
-        }
-        
-        /* Step Progress Indicator */
-        .form-progress {
-            font-size: 0.9rem;
-            color: #99724b;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 20px;
-            display: block;
+            min-height: 250px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
 
         .form-step {
             display: none;
             animation: fadeIn 0.4s ease-in-out;
+            width: 100%;
         }
         .form-step.active {
             display: block;
@@ -393,12 +385,13 @@
         }
 
         .step-title {
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             color: #4e513e;
             margin-bottom: 25px;
+            line-height: 1.3;
         }
 
-        /* Form Inputs */
+        /* Input Styles */
         .input-group {
             margin-bottom: 20px;
             text-align: left;
@@ -410,7 +403,7 @@
             margin-bottom: 8px;
             font-weight: bold;
         }
-        .input-group input {
+        .input-group input, .input-group textarea {
             width: 100%;
             padding: 15px;
             font-size: 1.1rem;
@@ -421,19 +414,58 @@
             transition: border-color 0.3s, box-shadow 0.3s;
             font-family: inherit;
         }
-        .input-group input:focus {
+        .input-group textarea {
+            resize: vertical;
+        }
+        .input-group input:focus, .input-group textarea:focus {
             outline: none;
             border-color: #99724b;
             box-shadow: 0 0 0 3px rgba(153, 114, 75, 0.1);
         }
+        .input-group input.error, .input-group textarea.error {
+            border-color: #d9534f;
+            background-color: #fdf2f2;
+        }
         
-        /* Two column layout for names */
-        .name-row {
+        .name-row { display: flex; gap: 15px; flex-wrap: wrap; }
+        .name-row .input-group { flex: 1; min-width: 150px; }
+
+        /* Custom Radio Buttons */
+        .radio-group {
             display: flex;
             gap: 15px;
+            justify-content: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
         }
-        .name-row .input-group {
-            flex: 1;
+        .radio-group.vertical {
+            flex-direction: column;
+            gap: 10px;
+        }
+        .radio-btn input[type="radio"] {
+            display: none;
+        }
+        .radio-btn span {
+            display: block;
+            padding: 15px 25px;
+            background-color: #fdfbf9;
+            border: 2px solid rgba(153, 114, 75, 0.3);
+            border-radius: 6px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #4f2d2c;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: center;
+        }
+        .radio-btn input[type="radio"]:checked + span {
+            background-color: #99724b;
+            border-color: #99724b;
+            color: #ffffff;
+            box-shadow: 0 4px 10px rgba(153, 114, 75, 0.2);
+        }
+        .radio-group.error span {
+            border-color: #d9534f;
         }
 
         /* Form Buttons */
@@ -454,13 +486,10 @@
             border-radius: 4px;
             cursor: pointer;
             transition: background-color 0.3s;
+            min-width: 120px;
         }
         .btn-primary:hover {
             background-color: #9a5d40;
-        }
-        .btn-primary:disabled {
-            background-color: #ccc;
-            cursor: not-allowed;
         }
         .btn-secondary {
             background-color: transparent;
@@ -540,110 +569,25 @@
 
         /* --- Mobile Responsiveness --- */
         @media (max-width: 768px) {
-            .navbar {
-                justify-content: flex-end; 
-            }
-            .mobile-center-logo {
-                display: block;
-                position: absolute;
-                left: 50%;
-                top: 50%;
-                transform: translate(-50%, -50%); 
-            }
-            .mobile-center-logo img {
-                height: 40px; 
-                width: auto;
-                border-radius: 4px;
-                display: block;
-            }
-            .hamburger {
-                display: block;
-            }
-            .nav-menu {
-                position: fixed;
-                top: 0;
-                right: -100%; 
-                width: 280px;
-                height: 100vh;
-                background: rgba(233, 226, 216, 0.95); 
-                backdrop-filter: blur(15px);
-                -webkit-backdrop-filter: blur(15px);
-                flex-direction: column;
-                justify-content: flex-start;
-                align-items: flex-start;
-                padding: 60px 30px 30px 30px;
-                box-shadow: -5px 0 15px rgba(0,0,0,0.1);
-                transition: right 0.3s ease;
-                z-index: 1001; 
-            }
-            .nav-menu.active {
-                right: 0; 
-            }
-            .nav-logo {
-                margin-bottom: 40px;
-                width: 100%;
-                display: flex;
-                justify-content: center;
-            }
-            .nav-logo img {
-                height: 60px;
-            }
-            .nav-links {
-                flex-direction: column;
-                width: 100%;
-                align-items: flex-start;
-                gap: 20px;
-            }
-            .nav-links a {
-                display: block;
-                width: 100%;
-                padding-bottom: 10px;
-                border-bottom: 1px solid rgba(192, 144, 80, 0.4); 
-                font-size: 1.3rem;
-            }
-            .close-menu {
-                display: block;
-                position: absolute;
-                top: 15px;
-                right: 25px;
-                font-size: 2.5rem;
-                background: none;
-                border: none;
-                color: #4f2d2c;
-                cursor: pointer;
-                line-height: 1;
-            }
-            .hero-overlay-box {
-                padding: 20px;
-            }
-            .intro-section {
-                margin-top: 80px;
-            }
-            .program-card-content {
-                padding: 30px 20px; 
-            }
-            .form-card-text {
-                padding: 40px 20px 20px 20px; 
-            }
-            .inner-contact-box {
-                flex-direction: column;
-                text-align: center;
-                padding: 25px 20px;
-            }
-            .inner-socials {
-                justify-content: center;
-            }
-            /* Form adjustments for mobile */
-            .native-form-box {
-                padding: 30px 20px;
-            }
-            .name-row {
-                flex-direction: column;
-                gap: 0;
-            }
-            .step-title {
-                font-size: 1.5rem;
-            }
+            .navbar { justify-content: flex-end; }
+            .mobile-center-logo { display: block; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); }
+            .mobile-center-logo img { height: 40px; width: auto; border-radius: 4px; display: block; }
+            .hamburger { display: block; }
+            .nav-menu { position: fixed; top: 0; right: -100%; width: 280px; height: 100vh; background: rgba(233, 226, 216, 0.95); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); flex-direction: column; justify-content: flex-start; align-items: flex-start; padding: 60px 30px 30px 30px; box-shadow: -5px 0 15px rgba(0,0,0,0.1); transition: right 0.3s ease; z-index: 1001; }
+            .nav-menu.active { right: 0; }
+            .nav-logo { margin-bottom: 40px; width: 100%; display: flex; justify-content: center; }
+            .nav-logo img { height: 60px; }
+            .nav-links { flex-direction: column; width: 100%; align-items: flex-start; gap: 20px; }
+            .nav-links a { display: block; width: 100%; padding-bottom: 10px; border-bottom: 1px solid rgba(192, 144, 80, 0.4); font-size: 1.3rem; }
+            .close-menu { display: block; position: absolute; top: 15px; right: 25px; font-size: 2.5rem; background: none; border: none; color: #4f2d2c; cursor: pointer; line-height: 1; }
+            .hero-overlay-box { padding: 20px; }
+            .intro-section { margin-top: 80px; }
+            .program-card-content { padding: 30px 20px; }
+            .form-card-text { padding: 40px 20px 20px 20px; }
+            .inner-contact-box { flex-direction: column; text-align: center; padding: 25px 20px; }
+            .inner-socials { justify-content: center; }
+            .native-form-box { padding: 30px 20px; }
+            .step-title { font-size: 1.4rem; }
         }
     </style>
 </head>
@@ -665,36 +609,29 @@
 
     <section class="program-details-section">
         <div class="program-card">
-            
             <img src="https://andrewmarth.com/images/final_free_real_estate.jpg" alt="Free Real Estate" class="program-card-header-img">
-            
             <div class="program-card-content">
                 <div class="detail-item">
                     <h3>$0 Down Payment</h3>
                     <p>This program allows you to purchase a home with absolutely zero dollars required for a down payment, keeping your savings in your pocket where they belong.</p>
                 </div>
-
                 <div class="detail-item">
                     <h3>$88,000 Income Limit</h3>
                     <p>The program features a strict income limit of $88,000 per year. However, this limit <strong>only applies to the individual(s) officially listed on the loan</strong>. If two people plan to co-own the home, you can strategically structure it so only the qualifying earner is on the loan.</p>
                 </div>
-
                 <div class="detail-item">
                     <h3>True Market Interest Rates</h3>
                     <p>Unlike many specialty financing options, this program provides a standard, competitive market interest rate. There are absolutely no hidden markups on the rate or your closing costs.</p>
                 </div>
-
                 <div class="detail-item">
                     <h3>Powered by Sunflower Bank</h3>
                     <p>This program is a highly specialized lending product made possible through my direct professional partnership with the experts at Sunflower Bank.</p>
                 </div>
-
                 <div class="detail-item">
                     <h3>No Initial Credit Check</h3>
                     <p>Want to see if this is an option for you? No problem. There is absolutely no hard credit check required to see if your financial scenario qualifies for the program.</p>
                 </div>
             </div>
-
         </div>
     </section>
 
@@ -719,23 +656,12 @@
                 <p class="inner-subtitle">Call or text me to talk through it.</p>
                 <p class="inner-link"><strong>Cell:</strong> <a href="tel:4806521330">480.652.1330</a></p>
                 <p class="inner-link"><strong>Email:</strong> <a href="mailto:andrew@andrewmarth.com">andrew@andrewmarth.com</a></p>
-                
                 <div class="inner-socials">
-                    <a href="https://www.instagram.com/secret_agent_andrew/" target="_blank" rel="noopener noreferrer">
-                        <img src="https://andrewmarth.com/images/instagram.png" alt="Instagram">
-                    </a>
-                    <a href="https://www.facebook.com/secret.agent.andrew" target="_blank" rel="noopener noreferrer">
-                        <img src="https://andrewmarth.com/images/facebook.png" alt="Facebook">
-                    </a>
-                    <a href="https://www.threads.com/@secret_agent_andrew" target="_blank" rel="noopener noreferrer">
-                        <img src="https://andrewmarth.com/images/threads.png" alt="Threads">
-                    </a>
-                    <a href="https://www.linkedin.com/in/secret-agent-andrew/" target="_blank" rel="noopener noreferrer">
-                        <img src="https://andrewmarth.com/images/linkedin.png" alt="LinkedIn">
-                    </a>
-                    <a href="https://x.com/SecrtAgntAndrew" target="_blank" rel="noopener noreferrer">
-                        <img src="https://andrewmarth.com/images/twitter.png" alt="X / Twitter">
-                    </a>
+                    <a href="https://www.instagram.com/secret_agent_andrew/" target="_blank"><img src="https://andrewmarth.com/images/instagram.png" alt="Instagram"></a>
+                    <a href="https://www.facebook.com/secret.agent.andrew" target="_blank"><img src="https://andrewmarth.com/images/facebook.png" alt="Facebook"></a>
+                    <a href="https://www.threads.com/@secret_agent_andrew" target="_blank"><img src="https://andrewmarth.com/images/threads.png" alt="Threads"></a>
+                    <a href="https://www.linkedin.com/in/secret-agent-andrew/" target="_blank"><img src="https://andrewmarth.com/images/linkedin.png" alt="LinkedIn"></a>
+                    <a href="https://x.com/SecrtAgntAndrew" target="_blank"><img src="https://andrewmarth.com/images/twitter.png" alt="X / Twitter"></a>
                 </div>
             </div>
         </div>
@@ -743,11 +669,9 @@
 
     <section class="form-card-section">
         <div class="form-card">
-            
             <div class="form-card-text">
                 <h2>What Does This Look Like For You?</h2>
                 <p>Fill out the information below to see what a purchase using this zero-down program looks like. It is completely zero-pressure and an incredible way to explore your buying power.</p>
-                
                 <div class="secure-notice">
                     <div class="secure-header">
                         <img src="https://andrewmarth.com/images/lock.png" alt="Secure Lock">
@@ -758,59 +682,15 @@
             </div>
 
             <div class="form-container-card">
-                
                 <video class="form-bg-video" autoplay loop muted playsinline>
                     <source src="https://andrewmarth.com/images/form_background.mp4" type="video/mp4">
                 </video>
 
                 <div class="native-form-box">
-                    
-                    <form id="zero-down-form">
+                    <form id="conditional-form">
                         <input type="hidden" name="form_source" value="Zero Down Program Form">
-
-                        <div class="form-step active" id="step-1">
-                            <span class="form-progress">Step 1 of 3</span>
-                            <h3 class="step-title">Let's start with your name</h3>
-                            <div class="name-row">
-                                <div class="input-group">
-                                    <label for="first_name">First Name</label>
-                                    <input type="text" id="first_name" name="first_name" placeholder="First Name" required>
-                                </div>
-                                <div class="input-group">
-                                    <label for="last_name">Last Name</label>
-                                    <input type="text" id="last_name" name="last_name" placeholder="Last Name" required>
-                                </div>
-                            </div>
-                            <div class="form-actions">
-                                <button type="button" class="btn-primary next-btn">Next</button>
-                            </div>
-                        </div>
-
-                        <div class="form-step" id="step-2">
-                            <span class="form-progress">Step 2 of 3</span>
-                            <h3 class="step-title">What is the best number to reach you?</h3>
-                            <div class="input-group">
-                                <label for="phone">Phone Number</label>
-                                <input type="tel" id="phone" name="phone" placeholder="(555) 555-5555" required>
-                            </div>
-                            <div class="form-actions">
-                                <button type="button" class="btn-secondary prev-btn">Back</button>
-                                <button type="button" class="btn-primary next-btn">Next</button>
-                            </div>
-                        </div>
-
-                        <div class="form-step" id="step-3">
-                            <span class="form-progress">Step 3 of 3</span>
-                            <h3 class="step-title">Where should I send the details?</h3>
-                            <div class="input-group">
-                                <label for="email">Email Address</label>
-                                <input type="email" id="email" name="email" placeholder="email@example.com" required>
-                            </div>
-                            <div class="form-actions">
-                                <button type="button" class="btn-secondary prev-btn">Back</button>
-                                <button type="submit" class="btn-primary submit-btn">Submit</button>
-                            </div>
-                        </div>
+                        
+                        <div id="form-steps-container"></div>
                     </form>
 
                     <div class="success-message" id="success-message">
@@ -818,88 +698,322 @@
                         <h3>Information Received!</h3>
                         <p>Thank you for submitting your details. I will review everything and reach out to you shortly to discuss your options.</p>
                     </div>
-
                 </div>
             </div>
-
         </div>
     </section>
 
     <div id="footer-placeholder"></div>
 
     <script>
-        // --- Multi-Step Form Logic ---
         document.addEventListener('DOMContentLoaded', () => {
-            const form = document.getElementById('zero-down-form');
-            const steps = Array.from(document.querySelectorAll('.form-step'));
-            const nextBtns = document.querySelectorAll('.next-btn');
-            const prevBtns = document.querySelectorAll('.prev-btn');
+            const form = document.getElementById('conditional-form');
+            const container = document.getElementById('form-steps-container');
             const successMsg = document.getElementById('success-message');
-            let currentStep = 0;
+            let currentStepIndex = 0;
+            let stepHistory = [];
 
-            // Function to change visible step
-            function showStep(index) {
-                steps.forEach((step, i) => {
-                    step.classList.toggle('active', i === index);
-                });
+            // Helper to get value of an input field at runtime
+            function val(id) {
+                const els = document.getElementsByName(id);
+                if(els.length === 0) return '';
+                if(els[0].type === 'radio') {
+                    const checked = Array.from(els).find(el => el.checked);
+                    return checked ? checked.value : '';
+                }
+                return els[0].value;
             }
 
-            // Next button logic (includes HTML5 validation)
-            nextBtns.forEach(btn => {
-                btn.addEventListener('click', () => {
-                    const inputs = steps[currentStep].querySelectorAll('input');
-                    let valid = true;
-                    
-                    // Force the browser to trigger required/email validation errors
-                    inputs.forEach(input => {
-                        if (!input.checkValidity()) {
-                            input.reportValidity();
-                            valid = false;
-                        }
-                    });
+            // 66 Question Logic Engine
+            const questions = [
+                { id: 'q_name', type: 'name', title: 'What is your name?', cond: () => true },
+                { id: 'q_phone', type: 'phone', title: 'What is the best phone number to reach you?', cond: () => true },
+                { id: 'q_email', type: 'email', title: 'What is your email address?', cond: () => true },
+                { id: 'q_sell_home', type: 'yesno', title: 'Do you have a home to sell?', cond: () => true },
+                { id: 'q_sell_addr', type: 'address', title: 'What is the property address?', cond: () => val('q_sell_home') === 'Yes' },
+                { id: 'q_sell_mort', type: 'curr', title: 'Outstanding Mortgage Balance', cond: () => val('q_sell_home') === 'Yes' },
+                { id: 'q_sell_liens', type: 'yesno', title: 'Are there any other liens or loans on the property?', cond: () => val('q_sell_home') === 'Yes' },
+                { id: 'q_sell_liens_bal', type: 'curr', title: 'Other Liens or Loans Balance', cond: () => val('q_sell_liens') === 'Yes' },
+                { id: 'q_buy_new', type: 'yesno', title: 'Will you be buying a new home as well?', cond: () => val('q_sell_home') === 'Yes' },
+                { id: 'q_breakdown', type: 'yesno', title: 'Do you want a buyer breakdown sheet for your purchase?', cond: () => val('q_buy_new') === 'Yes' || val('q_sell_home') === 'No' },
+                
+                // Primary Income
+                { id: 'q_inc1_type', type: 'radio_inc', title: 'Primary Income Type', cond: () => val('q_breakdown') === 'Yes' },
+                { id: 'q_inc1_title', type: 'text', title: 'Job Title', cond: () => val('q_breakdown') === 'Yes' },
+                { id: 'q_inc1_desc', type: 'textarea', title: 'Quick Description of Income', cond: () => val('q_inc1_type') === 'Commission/1099' },
+                { id: 'q_inc1_sal', type: 'curr', title: 'Weekly Salary Amount', cond: () => val('q_inc1_type') === 'Salary' },
+                { id: 'q_inc1_hrly', type: 'curr_dec', title: 'Hourly Rate', cond: () => val('q_inc1_type') === 'Hourly' },
+                { id: 'q_inc1_hrs', type: 'number', title: 'Average Hours Worked Per Week', cond: () => val('q_inc1_type') === 'Hourly' },
+                { id: 'q_inc1_tips', type: 'yesno', title: 'Do you earn tips as well?', cond: () => val('q_inc1_type') === 'Salary' || val('q_inc1_type') === 'Hourly' },
+                { id: 'q_inc1_tips_amt', type: 'curr', title: 'Average Weekly Tips Earned', cond: () => val('q_inc1_tips') === 'Yes' },
+                { id: 'q_inc1_comm', type: 'yesno', title: 'Do you earn commissions as well?', cond: () => val('q_inc1_type') === 'Salary' || val('q_inc1_type') === 'Hourly' },
+                { id: 'q_inc1_comm_freq', type: 'radio_freq', title: 'How often are your commissions earned?', cond: () => val('q_inc1_comm') === 'Yes' },
+                { id: 'q_inc1_comm_amt', type: 'curr', title: 'Average Commission Amount', cond: () => val('q_inc1_comm') === 'Yes' },
+                { id: 'q_inc1_bonus', type: 'yesno', title: 'Do you earn bonuses as well?', cond: () => val('q_inc1_type') === 'Salary' || val('q_inc1_type') === 'Hourly' },
+                { id: 'q_inc1_bonus_freq', type: 'radio_freq', title: 'How often are your bonuses earned?', cond: () => val('q_inc1_bonus') === 'Yes' },
+                { id: 'q_inc1_bonus_amt', type: 'curr', title: 'Average Bonus Amount', cond: () => val('q_inc1_bonus') === 'Yes' },
+                { id: 'q_inc1_yearly', type: 'curr', title: 'Average Estimated Yearly Income', cond: () => val('q_inc1_type') === 'Commission/1099' },
 
-                    if (valid) {
-                        currentStep++;
-                        showStep(currentStep);
+                // Secondary Income
+                { id: 'q_inc2_has', type: 'yesno', title: 'Do you have any Secondary Income?', cond: () => val('q_breakdown') === 'Yes' },
+                { id: 'q_inc2_type', type: 'radio_inc', title: 'Secondary Income Type', cond: () => val('q_inc2_has') === 'Yes' },
+                { id: 'q_inc2_title', type: 'text', title: 'Job Title (Secondary)', cond: () => val('q_inc2_has') === 'Yes' },
+                { id: 'q_inc2_desc', type: 'textarea', title: 'Quick Description of Income (Secondary)', cond: () => val('q_inc2_type') === 'Commission/1099' },
+                { id: 'q_inc2_sal', type: 'curr', title: 'Weekly Salary Amount (Secondary)', cond: () => val('q_inc2_type') === 'Salary' },
+                { id: 'q_inc2_hrly', type: 'curr_dec', title: 'Hourly Rate (Secondary)', cond: () => val('q_inc2_type') === 'Hourly' },
+                { id: 'q_inc2_hrs', type: 'number', title: 'Average Hours Worked Per Week (Secondary)', cond: () => val('q_inc2_type') === 'Hourly' },
+                { id: 'q_inc2_tips', type: 'yesno', title: 'Do you earn tips as well? (Secondary)', cond: () => val('q_inc2_type') === 'Salary' || val('q_inc2_type') === 'Hourly' },
+                { id: 'q_inc2_tips_amt', type: 'curr', title: 'Average Weekly Tips Earned (Secondary)', cond: () => val('q_inc2_tips') === 'Yes' },
+                { id: 'q_inc2_comm', type: 'yesno', title: 'Do you earn commissions as well? (Secondary)', cond: () => val('q_inc2_type') === 'Salary' || val('q_inc2_type') === 'Hourly' },
+                { id: 'q_inc2_comm_freq', type: 'radio_freq', title: 'How often are your commissions earned? (Secondary)', cond: () => val('q_inc2_comm') === 'Yes' },
+                { id: 'q_inc2_comm_amt', type: 'curr', title: 'Average Commission Amount (Secondary)', cond: () => val('q_inc2_comm') === 'Yes' },
+                { id: 'q_inc2_bonus', type: 'yesno', title: 'Do you earn bonuses as well? (Secondary)', cond: () => val('q_inc2_type') === 'Salary' || val('q_inc2_type') === 'Hourly' },
+                { id: 'q_inc2_bonus_freq', type: 'radio_freq', title: 'How often are your bonuses earned? (Secondary)', cond: () => val('q_inc2_bonus') === 'Yes' },
+                { id: 'q_inc2_bonus_amt', type: 'curr', title: 'Average Bonus Amount (Secondary)', cond: () => val('q_inc2_bonus') === 'Yes' },
+                { id: 'q_inc2_yearly', type: 'curr', title: 'Average Estimated Yearly Income (Secondary)', cond: () => val('q_inc2_type') === 'Commission/1099' },
+
+                // Third Income
+                { id: 'q_inc3_has', type: 'yesno', title: 'Do you have a 3rd Source of Income?', cond: () => val('q_inc2_has') === 'Yes' },
+                { id: 'q_inc3_type', type: 'radio_inc', title: '3rd Source Income Type', cond: () => val('q_inc3_has') === 'Yes' },
+                { id: 'q_inc3_title', type: 'text', title: 'Job Title (3rd Source)', cond: () => val('q_inc3_has') === 'Yes' },
+                { id: 'q_inc3_desc', type: 'textarea', title: 'Quick Description of Income (3rd Source)', cond: () => val('q_inc3_type') === 'Commission/1099' },
+                { id: 'q_inc3_sal', type: 'curr', title: 'Weekly Salary Amount (3rd Source)', cond: () => val('q_inc3_type') === 'Salary' },
+                { id: 'q_inc3_hrly', type: 'curr_dec', title: 'Hourly Rate (3rd Source)', cond: () => val('q_inc3_type') === 'Hourly' },
+                { id: 'q_inc3_hrs', type: 'number', title: 'Average Hours Worked Per Week (3rd Source)', cond: () => val('q_inc3_type') === 'Hourly' },
+                { id: 'q_inc3_tips', type: 'yesno', title: 'Do you earn tips as well? (3rd Source)', cond: () => val('q_inc3_type') === 'Salary' || val('q_inc3_type') === 'Hourly' },
+                { id: 'q_inc3_tips_amt', type: 'curr', title: 'Average Weekly Tips Earned (3rd Source)', cond: () => val('q_inc3_tips') === 'Yes' },
+                { id: 'q_inc3_comm', type: 'yesno', title: 'Do you earn commissions as well? (3rd Source)', cond: () => val('q_inc3_type') === 'Salary' || val('q_inc3_type') === 'Hourly' },
+                { id: 'q_inc3_comm_freq', type: 'radio_freq', title: 'How often are your commissions earned? (3rd Source)', cond: () => val('q_inc3_comm') === 'Yes' },
+                { id: 'q_inc3_comm_amt', type: 'curr', title: 'Average Commission Amount (3rd Source)', cond: () => val('q_inc3_comm') === 'Yes' },
+                { id: 'q_inc3_bonus', type: 'yesno', title: 'Do you earn bonuses as well? (3rd Source)', cond: () => val('q_inc3_type') === 'Salary' || val('q_inc3_type') === 'Hourly' },
+                { id: 'q_inc3_bonus_freq', type: 'radio_freq', title: 'How often are your bonuses earned? (3rd Source)', cond: () => val('q_inc3_bonus') === 'Yes' },
+                { id: 'q_inc3_bonus_amt', type: 'curr', title: 'Average Bonus Amount (3rd Source)', cond: () => val('q_inc3_bonus') === 'Yes' },
+                { id: 'q_inc3_yearly', type: 'curr', title: 'Average Estimated Yearly Income (3rd Source)', cond: () => val('q_inc3_type') === 'Commission/1099' },
+
+                // Debts & Obligations
+                { id: 'q_debt_car', type: 'yesno', title: 'Do you have any Car Payments?', cond: () => val('q_breakdown') === 'Yes' },
+                { id: 'q_debt_car_amt', type: 'curr', title: 'Your Monthly Car Payments', cond: () => val('q_debt_car') === 'Yes' },
+                { id: 'q_debt_mort', type: 'yesno', title: 'Do you have any existing houses with Mortgages?', cond: () => val('q_breakdown') === 'Yes' },
+                { id: 'q_debt_mort_amt', type: 'curr', title: 'Your Existing Mortgage Payments', cond: () => val('q_debt_mort') === 'Yes' },
+                { id: 'q_debt_cc', type: 'yesno', title: 'Do you have any Credit Cards with a balance?', cond: () => val('q_breakdown') === 'Yes' },
+                { id: 'q_debt_cc_amt', type: 'curr', title: 'Your Monthly Minimum Card Payments', cond: () => val('q_debt_cc') === 'Yes' },
+                { id: 'q_debt_oth', type: 'yesno', title: 'Do you have any other Debt Obligations?', cond: () => val('q_breakdown') === 'Yes' },
+                { id: 'q_debt_oth_amt', type: 'curr', title: 'Your Monthly Other Debt Payments', cond: () => val('q_debt_oth') === 'Yes' },
+                { id: 'q_co_borrower', type: 'yesno', title: 'Will another person be a part of the purchase?', cond: () => val('q_buy_new') === 'Yes' || val('q_sell_home') === 'No' }
+            ];
+
+            // Render HTML securely to DOM
+            questions.forEach((q, i) => {
+                let inner = '';
+                if(q.type === 'name') {
+                    inner = `<div class="name-row">
+                                <div class="input-group"><label>First Name</label><input type="text" name="${q.id}_first" placeholder="First"></div>
+                                <div class="input-group"><label>Last Name</label><input type="text" name="${q.id}_last" placeholder="Last"></div>
+                             </div>`;
+                } else if(q.type === 'address') {
+                    inner = `<div class="input-group"><label>Street Address</label><input type="text" name="${q.id}_st" placeholder="123 Main St"></div>
+                             <div class="name-row">
+                                <div class="input-group"><label>City</label><input type="text" name="${q.id}_city" placeholder="City"></div>
+                                <div class="input-group"><label>State</label><input type="text" name="${q.id}_state" placeholder="State"></div>
+                                <div class="input-group"><label>Zip</label><input type="text" name="${q.id}_zip" placeholder="Zip"></div>
+                             </div>`;
+                } else if(q.type === 'yesno') {
+                    inner = `<div class="radio-group">
+                                <label class="radio-btn"><input type="radio" name="${q.id}" value="Yes"><span>Yes</span></label>
+                                <label class="radio-btn"><input type="radio" name="${q.id}" value="No"><span>No</span></label>
+                             </div>`;
+                } else if(q.type === 'radio_inc' || q.type === 'radio_freq') {
+                    const opts = q.type === 'radio_inc' ? ['Salary', 'Hourly', 'Commission/1099'] : ['Weekly', 'Monthly', 'Quarterly', 'Annually', 'Bi-Annually (Twice Per Year)'];
+                    inner = `<div class="radio-group vertical">`;
+                    opts.forEach(opt => inner += `<label class="radio-btn"><input type="radio" name="${q.id}" value="${opt}"><span>${opt}</span></label>`);
+                    inner += `</div>`;
+                } else if(q.type === 'textarea') {
+                    inner = `<div class="input-group"><textarea name="${q.id}" rows="4" placeholder="Briefly describe..."></textarea></div>`;
+                } else {
+                    let cls = '', type = 'text', ph = '';
+                    if(q.type==='email') { type='email'; ph='email@example.com'; }
+                    if(q.type==='phone') { type='tel'; cls='fmt-phone'; ph='(555) 555-5555'; }
+                    if(q.type==='number') { type='number'; cls='fmt-num'; ph='Ex: 40'; }
+                    if(q.type==='curr') { type='text'; cls='fmt-curr'; ph='$0'; }
+                    if(q.type==='curr_dec') { type='text'; cls='fmt-curr-dec'; ph='$0.00'; }
+                    inner = `<div class="input-group"><input type="${type}" name="${q.id}" class="${cls}" placeholder="${ph}"></div>`;
+                }
+
+                const stepDiv = document.createElement('div');
+                stepDiv.className = 'form-step';
+                stepDiv.id = `step-${i}`;
+                stepDiv.innerHTML = `
+                    <h3 class="step-title">${q.title}</h3>
+                    ${inner}
+                    <div class="form-actions" id="actions-${i}"></div>
+                `;
+                container.appendChild(stepDiv);
+            });
+
+            // Input Formatters
+            container.addEventListener('input', e => {
+                const el = e.target;
+                if(el.classList.contains('fmt-phone')) {
+                    let x = el.value.replace(/\D/g, '').match(/(\d{0,3})(\d{0,3})(\d{0,4})/);
+                    el.value = !x[2] ? x[1] : '(' + x[1] + ') ' + x[2] + (x[3] ? '-' + x[3] : '');
+                } else if(el.classList.contains('fmt-num')) {
+                    el.value = el.value.replace(/\D/g, '');
+                } else if(el.classList.contains('fmt-curr')) {
+                    let val = el.value.replace(/\D/g, '');
+                    el.value = val ? '$' + parseInt(val, 10).toLocaleString() : '';
+                } else if(el.classList.contains('fmt-curr-dec')) {
+                    let val = el.value.replace(/[^0-9.]/g, '');
+                    let p = val.split('.');
+                    if(p.length > 2) val = p[0] + '.' + p.slice(1).join('');
+                    if(val) {
+                        if(val.includes('.')) {
+                            let p2 = val.split('.');
+                            let whole = p2[0] ? parseInt(p2[0], 10).toLocaleString() : '0';
+                            el.value = '$' + whole + '.' + p2[1].substring(0,2);
+                        } else {
+                            el.value = '$' + parseInt(val, 10).toLocaleString();
+                        }
+                    } else {
+                        el.value = '';
+                    }
+                }
+                el.classList.remove('error'); // clear error styling on type
+            });
+
+            // Handle UI Flow
+            function renderFlow() {
+                // Hide all steps
+                document.querySelectorAll('.form-step').forEach(s => s.classList.remove('active'));
+                
+                // Show current step
+                const currentEl = document.getElementById(`step-${currentStepIndex}`);
+                currentEl.classList.add('active');
+
+                // Determine what the Next step is (to know if we show "Next" or "Submit")
+                let nextStepIndex = -1;
+                for(let i = currentStepIndex + 1; i < questions.length; i++) {
+                    if(questions[i].cond()) { nextStepIndex = i; break; }
+                }
+
+                // Render Buttons Dynamically
+                const actionsEl = document.getElementById(`actions-${currentStepIndex}`);
+                actionsEl.innerHTML = '';
+                
+                if(stepHistory.length > 0) {
+                    const btnBack = document.createElement('button');
+                    btnBack.type = 'button';
+                    btnBack.className = 'btn-secondary';
+                    btnBack.textContent = 'Back';
+                    btnBack.onclick = () => {
+                        currentStepIndex = stepHistory.pop();
+                        renderFlow();
+                    };
+                    actionsEl.appendChild(btnBack);
+                }
+
+                const btnForward = document.createElement('button');
+                btnForward.className = 'btn-primary';
+                if(nextStepIndex === -1) {
+                    btnForward.type = 'submit';
+                    btnForward.textContent = 'Submit';
+                } else {
+                    btnForward.type = 'button';
+                    btnForward.textContent = 'Next';
+                    btnForward.onclick = () => {
+                        if(validateStep(currentEl)) {
+                            stepHistory.push(currentStepIndex);
+                            currentStepIndex = nextStepIndex;
+                            renderFlow();
+                        }
+                    };
+                }
+                actionsEl.appendChild(btnForward);
+            }
+
+            // Manual Validation
+            function validateStep(stepEl) {
+                let isValid = true;
+                const inputs = stepEl.querySelectorAll('input, textarea');
+                
+                // Handle radio groups explicitly
+                const radioNames = new Set();
+                inputs.forEach(i => { if(i.type === 'radio') radioNames.add(i.name); });
+                radioNames.forEach(name => {
+                    const group = stepEl.querySelector(`.radio-group:has(input[name="${name}"])`);
+                    if(!stepEl.querySelector(`input[name="${name}"]:checked`)) {
+                        isValid = false;
+                        group.classList.add('error');
+                    } else {
+                        group.classList.remove('error');
                     }
                 });
-            });
 
-            // Back button logic
-            prevBtns.forEach(btn => {
-                btn.addEventListener('click', () => {
-                    currentStep--;
-                    showStep(currentStep);
+                // Handle text/number inputs
+                inputs.forEach(i => {
+                    if(i.type !== 'radio') {
+                        if(!i.value.trim()) {
+                            isValid = false; i.classList.add('error');
+                        } else if(i.type === 'email' && !i.value.includes('@')) {
+                            isValid = false; i.classList.add('error');
+                        } else if(i.classList.contains('fmt-phone') && i.value.replace(/\D/g, '').length < 10) {
+                            isValid = false; i.classList.add('error');
+                        }
+                    }
                 });
+                return isValid;
+            }
+
+            // Watch for radio clicks to instantly remove red error boxes
+            container.addEventListener('change', e => {
+                if(e.target.type === 'radio') {
+                    e.target.closest('.radio-group').classList.remove('error');
+                }
             });
 
-            // Handle final form submission directly to Zapier
-            form.addEventListener('submit', (e) => {
-                e.preventDefault(); // Stop page from refreshing
-                
-                const submitBtn = form.querySelector('.submit-btn');
+            // Form Submit via Webhook
+            form.addEventListener('submit', e => {
+                e.preventDefault();
+                const currentEl = document.getElementById(`step-${currentStepIndex}`);
+                if(!validateStep(currentEl)) return;
+
+                const submitBtn = currentEl.querySelector('.btn-primary');
                 submitBtn.textContent = 'Submitting...';
                 submitBtn.disabled = true;
 
-                // Gather all form data
-                const formData = new FormData(form);
+                // Strip empty/hidden fields from the final payload to keep Zapier clean
+                const finalData = new FormData();
+                finalData.append('form_source', 'Zero Down Program Form');
+                
+                questions.forEach(q => {
+                    if(q.cond()) {
+                        const inputs = document.querySelectorAll(`[name^="${q.id}"]`);
+                        inputs.forEach(input => {
+                            if(input.type === 'radio') {
+                                if(input.checked) finalData.append(input.name, input.value);
+                            } else {
+                                finalData.append(input.name, input.value);
+                            }
+                        });
+                    }
+                });
 
-                // Send to Zapier Webhook
                 fetch('https://hooks.zapier.com/hooks/catch/17339400/42uzmkz/', {
                     method: 'POST',
-                    body: formData
+                    body: finalData
                 })
                 .then(() => {
-                    // Hide the form and show the thank you message
                     form.style.display = 'none';
                     successMsg.style.display = 'block';
                 })
                 .catch(error => {
-                    console.error('Error submitting form:', error);
+                    console.error('Error:', error);
                     submitBtn.textContent = 'Error. Try Again.';
                     submitBtn.disabled = false;
                 });
             });
+
+            // Initialize Form
+            renderFlow();
         });
 
         // --- Standard HTML Component Loading ---
@@ -909,28 +1023,17 @@
                 if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
                 const html = await response.text();
                 document.getElementById(id).innerHTML = html;
-                
-                if (id === 'header-placeholder') {
-                    initNavigation();
-                }
-            } catch (error) {
-                console.error(`Error loading component ${file}:`, error);
-            }
+                if (id === 'header-placeholder') initNavigation();
+            } catch (error) { console.error(error); }
         }
 
         function initNavigation() {
             const hamburgerBtn = document.getElementById('hamburger-btn');
             const closeBtn = document.getElementById('close-btn');
             const navMenu = document.getElementById('nav-menu');
-
             if(hamburgerBtn && closeBtn && navMenu) {
-                hamburgerBtn.addEventListener('click', () => {
-                    navMenu.classList.add('active');
-                });
-
-                closeBtn.addEventListener('click', () => {
-                    navMenu.classList.remove('active');
-                });
+                hamburgerBtn.addEventListener('click', () => navMenu.classList.add('active'));
+                closeBtn.addEventListener('click', () => navMenu.classList.remove('active'));
             }
         }
 
