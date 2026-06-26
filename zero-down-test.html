@@ -930,8 +930,8 @@
             container.addEventListener('change', e => {
                 if(e.target.type === 'radio') {
                     e.target.closest('.radio-group').classList.remove('error');
+                    updateActions(); // Re-evaluates action buttons ONLY when a radio button is clicked
                 }
-                updateActions(); 
             });
 
             // Handle UI Flow
