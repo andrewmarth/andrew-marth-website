@@ -999,25 +999,35 @@
                 submitBtn.textContent = 'Submitting...';
                 submitBtn.disabled = true;
 
-                // Clean payload data
+                // Clean payload data AND ensure all questions are passed to Zapier (even if skipped)
                 const finalData = new FormData();
                 finalData.append('form_source', 'Zero Down Program Form');
                 
                 questions.forEach(q => {
-                    if(q.cond()) {
-                        const inputs = document.querySelectorAll(`[name^="${q.id}"]`);
-                        inputs.forEach(input => {
-                            if(input.type === 'radio') {
-                                if(input.checked) finalData.append(input.name, input.value);
+                    const isActive = q.cond();
+                    const inputs = Array.from(document.querySelectorAll(`[name^="${q.id}"]`));
+                    
+                    // Group by exact name (important for radio buttons which share names)
+                    const uniqueNames = [...new Set(inputs.map(i => i.name))];
+                    
+                    uniqueNames.forEach(name => {
+                        if (!isActive) {
+                            // If question was skipped via logic, explicitly send blank string
+                            finalData.append(name, "");
+                        } else {
+                            const els = inputs.filter(i => i.name === name);
+                            if (els[0].type === 'radio') {
+                                const checked = els.find(el => el.checked);
+                                finalData.append(name, checked ? checked.value : "");
                             } else {
-                                finalData.append(input.name, input.value);
+                                finalData.append(name, els[0].value);
                             }
-                        });
-                    }
+                        }
+                    });
                 });
 
                 // The Magic Fix: mode: 'no-cors' allows browser to bypass CORS blocks to Zapier
-                fetch('https://hooks.zapier.com/hooks/catch/17339400/42uzmkz/', {
+                fetch('https://hooks.zapier.com/hooks/catch/17339400/42fpg7w/', {
                     method: 'POST',
                     body: finalData,
                     mode: 'no-cors' 
