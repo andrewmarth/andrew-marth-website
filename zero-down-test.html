@@ -1011,7 +1011,10 @@
                 
                 questions.forEach(q => {
                     const isActive = q.cond();
-                    const inputs = Array.from(document.querySelectorAll(`[name^="${q.id}"]`));
+                    
+                    // NEW FIX: Only look INSIDE the specific step container for inputs
+                    const stepEl = document.getElementById(`step-${questions.indexOf(q)}`);
+                    const inputs = Array.from(stepEl.querySelectorAll('input, textarea'));
                     
                     // Group by exact name (important for radio buttons which share names)
                     const uniqueNames = [...new Set(inputs.map(i => i.name))];
