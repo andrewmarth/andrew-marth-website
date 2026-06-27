@@ -370,15 +370,23 @@
             flex-direction: column;
         }
 
+        /* Force the form and step containers to expand and fill the box */
+        #conditional-form, #form-steps-container {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            width: 100%;
+        }
+
         .form-step {
             display: none;
             animation: fadeIn 0.4s ease-in-out;
             width: 100%;
-            height: 100%;
         }
         .form-step.active {
             display: flex;
             flex-direction: column;
+            flex-grow: 1;
         }
 
         @keyframes fadeIn {
@@ -484,7 +492,8 @@
             justify-content: center;
             align-items: center;
             gap: 15px;
-            margin-top: 0;
+            /* margin-top: auto forces this div to the absolute bottom of the flex container */
+            margin-top: auto; 
             padding-top: 20px;
         }
         .btn-primary {
@@ -520,7 +529,9 @@
             display: none;
             padding: 20px 0;
             animation: fadeIn 0.5s ease-in-out;
-            margin: auto 0; 
+            flex-direction: column;
+            justify-content: center;
+            flex-grow: 1;
         }
         .success-icon {
             width: 60px;
@@ -856,8 +867,6 @@
                 const stepDiv = document.createElement('div');
                 stepDiv.className = 'form-step';
                 stepDiv.id = `step-${i}`;
-                
-                // Wrap inner content in a step-content div for flexible vertical centering
                 stepDiv.innerHTML = `
                     <div class="step-content">
                         <h3 class="step-title">${q.title}</h3>
@@ -1058,8 +1067,6 @@
                 .then(() => {
                     form.style.display = 'none';
                     successMsg.style.display = 'flex';
-                    successMsg.style.flexDirection = 'column';
-                    successMsg.style.justifyContent = 'center';
                 })
                 .catch(error => {
                     console.error('Error:', error);
