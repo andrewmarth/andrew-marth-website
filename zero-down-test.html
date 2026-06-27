@@ -1003,6 +1003,12 @@
                 const finalData = new FormData();
                 finalData.append('form_source', 'Zero Down Program Form');
                 
+                // Generate Arizona Timestamp
+                const azDate = new Date(new Date().toLocaleString("en-US", {timeZone: "America/Phoenix"}));
+                const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+                const formattedDate = monthNames[azDate.getMonth()] + " " + String(azDate.getDate()).padStart(2, '0') + " " + azDate.getFullYear();
+                finalData.append('submission_date', formattedDate);
+                
                 questions.forEach(q => {
                     const isActive = q.cond();
                     const inputs = Array.from(document.querySelectorAll(`[name^="${q.id}"]`));
