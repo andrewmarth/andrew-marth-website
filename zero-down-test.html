@@ -395,11 +395,17 @@
             100% { opacity: 1; transform: translateX(0) scale(1); }
         }
 
-        /* Start screen specific flex rule */
+        /* Anchors the step content to the top */
         .step-content {
             flex-grow: 1;
             display: flex;
             flex-direction: column;
+            justify-content: flex-start;
+            padding-top: 10px;
+        }
+
+        /* Start screen centering override */
+        #start-screen .step-content {
             justify-content: center;
         }
 
@@ -411,12 +417,12 @@
             flex-grow: 1;
             display: flex;
             flex-direction: column;
-            justify-content: center; /* PERFECTLY VERTICALLY CENTERS THE INPUTS */
+            justify-content: center; 
             width: 100%;
         }
 
         .step-title {
-            font-size: 1.7rem;
+            font-size: 1.6rem;
             color: #4e513e;
             margin-bottom: 8px; 
             line-height: 1.3;
@@ -426,7 +432,7 @@
             font-size: 1.05rem;
             color: #4f2d2c;
             opacity: 0.85;
-            margin-bottom: 5px; /* Margin reduced because the inputs box is handling spacing */
+            margin-bottom: 5px; 
             line-height: 1.5;
         }
 
@@ -1007,21 +1013,12 @@
 
                 const btnForward = document.createElement('button');
                 btnForward.className = 'btn-primary btn-forward';
+                btnForward.type = 'submit'; 
                 
                 if(nextStepIndex === -1) {
-                    btnForward.type = 'submit';
                     btnForward.textContent = 'Submit';
                 } else {
-                    btnForward.type = 'button';
                     btnForward.textContent = 'Next';
-                    btnForward.onclick = () => {
-                        if(validateStep(currentEl)) {
-                            slideDirection = 'forward';
-                            stepHistory.push(currentStepIndex);
-                            currentStepIndex = nextStepIndex;
-                            renderFlow();
-                        }
-                    };
                 }
                 actionsEl.appendChild(btnForward);
             }
