@@ -25,10 +25,9 @@
             background-color: #e9e2d8; 
         }
         
-        /* The Iron Curtain: Locks the body and drops a massive background layer to hide the page */
+        /* The Iron Curtain: Locks the body without losing scroll position */
         body.no-scroll {
             overflow: hidden !important;
-            height: 100vh !important;
             touch-action: none;
         }
         body.no-scroll::after {
@@ -47,6 +46,10 @@
             background: rgba(233, 226, 216, 0.85); 
             backdrop-filter: blur(12px); 
             -webkit-backdrop-filter: blur(12px); 
+            
+            /* PERFORMANCE FIX: Forces the transparent navbar onto its own 3D GPU layer */
+            transform: translate3d(0, 0, 0); 
+            backface-visibility: hidden;
             
             position: fixed;
             top: 0;
@@ -322,16 +325,7 @@
             padding: 80px 20px; 
             position: relative; 
             overflow: hidden; 
-            
-            /* PERFORMANCE FIX: Only target specific animations, dropping 'all' to prevent scroll lag */
-            transition: padding 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), 
-                        min-height 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), 
-                        border-radius 0.4s cubic-bezier(0.25, 0.8, 0.25, 1),
-                        top 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-                        
-            /* Force hardware acceleration for the container */
-            transform: translateZ(0);
-            will-change: padding, top;
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
 
         /* FULLSCREEN TAKEOVER STYLING */
@@ -355,11 +349,6 @@
             height: 100%;
             object-fit: cover; 
             z-index: 0;
-            
-            /* PERFORMANCE FIX: Offload video to GPU and ignore mouse hovering */
-            pointer-events: none;
-            transform: translateZ(0); 
-            will-change: transform;
         }
 
         /* Unbinds the video from the shrinking container and pins it to the screen */
@@ -385,7 +374,7 @@
             display: flex;
             flex-direction: column;
             overflow: hidden; 
-            transition: min-height 0.4s ease;
+            transition: all 0.4s ease;
         }
         
         .fullscreen-active .native-form-box {
@@ -908,6 +897,7 @@
             let currentStepIndex = 0;
             let stepHistory = [];
             let slideDirection = 'forward'; 
+            let savedScrollY = 0; // Remembers scroll position
 
             function val(id) {
                 const q = questions.find(q => q.id === id);
@@ -1063,8 +1053,6 @@
                     if (window.visualViewport) {
                         formContainer.style.bottom = 'auto'; 
                         formContainer.style.height = (window.visualViewport.height - offset) + 'px';
-                        document.body.scrollTop = 0; 
-                        document.documentElement.scrollTop = 0;
                     } else {
                         formContainer.style.bottom = 'auto'; 
                         formContainer.style.height = (window.innerHeight - offset) + 'px';
@@ -1078,13 +1066,13 @@
             if (window.visualViewport) {
                 window.visualViewport.addEventListener('resize', adjustFullscreenHeight);
                 window.visualViewport.addEventListener('scroll', () => {
+                    // Locks the background scroll dynamically to prevent mobile wobble
                     if(formContainer.classList.contains('fullscreen-active')) {
-                        window.scrollTo(0, 0); 
+                        window.scrollTo(0, savedScrollY); 
                     }
                 });
             }
 
-            // Detect keyboard natively by focus tracking
             container.addEventListener('focusin', (e) => {
                 if (window.innerWidth <= 768 && (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA')) {
                     formContainer.classList.add('keyboard-open');
@@ -1103,6 +1091,9 @@
             });
 
             btnStart.addEventListener('click', () => {
+                // SAVES POSITION BEFORE ANIMATING
+                savedScrollY = window.scrollY || document.documentElement.scrollTop;
+                
                 document.body.classList.add('no-scroll');
                 formContainer.classList.add('fullscreen-active');
                 startScreen.classList.remove('active');
@@ -1112,19 +1103,27 @@
             });
 
             btnClose.addEventListener('click', () => {
-                document.body.classList.remove('no-scroll');
+                // 1. Instantly return DOM to normal flow so the page height expands back to normal
                 formContainer.classList.remove('fullscreen-active', 'keyboard-open');
                 formContainer.style.height = ''; 
                 formContainer.style.bottom = ''; 
+                
                 form.style.display = 'none';
                 form.reset(); 
                 currentStepIndex = 0;
                 stepHistory = [];
                 document.querySelectorAll('.form-step').forEach(s => s.classList.remove('active', 'active-reverse'));
                 startScreen.classList.add('active');
+                
+                // Unlock the body
+                document.body.classList.remove('no-scroll');
+                
+                // 2. Wait a microscopic 10 milliseconds for the browser to repaint the height, THEN restore scroll
+                setTimeout(() => {
+                    window.scrollTo(0, savedScrollY);
+                }, 10);
             });
 
-            // Re-evaluates action buttons dynamically
             function updateActions() {
                 const currentEl = document.getElementById(`step-${currentStepIndex}`);
                 const actionsEl = document.getElementById(`actions-${currentStepIndex}`);
@@ -1162,7 +1161,6 @@
                 actionsEl.appendChild(btnForward);
             }
 
-            // Input Formatters & Listeners
             container.addEventListener('input', e => {
                 const el = e.target;
                 if(el.classList.contains('fmt-phone')) {
@@ -1192,7 +1190,6 @@
                 el.classList.remove('error'); 
             });
 
-            // Intercept Enter Key to reliably advance the form (ignores Textareas)
             container.addEventListener('keydown', e => {
                 if (e.key === 'Enter' && e.target.tagName !== 'TEXTAREA') {
                     e.preventDefault(); 
@@ -1202,7 +1199,6 @@
                 }
             });
 
-            // Watch for selection changes (with Auto-Advance feature)
             container.addEventListener('change', e => {
                 if(e.target.type === 'radio') {
                     e.target.closest('.radio-group').classList.remove('error');
@@ -1220,7 +1216,6 @@
                 }
             });
 
-            // Handle UI Flow
             function renderFlow() {
                 document.querySelectorAll('.form-step').forEach(s => {
                     s.classList.remove('active', 'active-reverse');
@@ -1235,7 +1230,6 @@
                 
                 updateActions();
 
-                // Auto-focus the first input of the new step if it's a text/number field, skipping mobile to prevent jarring jumps
                 if (window.innerWidth > 768) {
                     const firstInput = currentEl.querySelector('input[type="text"], input[type="tel"], input[type="email"], input[type="number"]');
                     if (firstInput) {
@@ -1244,7 +1238,6 @@
                 }
             }
 
-            // Manual Validation
             function validateStep(stepEl) {
                 let isValid = true;
                 const inputs = stepEl.querySelectorAll('input, textarea');
@@ -1275,7 +1268,6 @@
                 return isValid;
             }
 
-            // Form Submit via Webhook with NO-CORS mode
             form.addEventListener('submit', e => {
                 e.preventDefault();
                 const currentEl = document.getElementById(`step-${currentStepIndex}`);
@@ -1334,7 +1326,6 @@
                     mode: 'no-cors' 
                 })
                 .then(() => {
-                    // Redirects instantly to the thank you page upon success
                     window.location.href = 'https://andrewmarth.com/thank-you';
                 })
                 .catch(error => {
