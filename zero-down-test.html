@@ -18,8 +18,7 @@
             background-color: #e9e2d8; 
             overflow-x: hidden; 
         }
-        
-        /* The Hard Lock: Completely kills background scrolling */
+        /* Locks the body from scrolling when the form is fullscreen */
         body.no-scroll {
             overflow: hidden !important;
             height: 100vh !important;
@@ -294,7 +293,7 @@
             padding: 80px 20px; 
             position: relative; 
             overflow: hidden; 
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
 
         /* FULLSCREEN TAKEOVER STYLING */
@@ -334,7 +333,7 @@
             display: flex;
             flex-direction: column;
             overflow: hidden; 
-            transition: all 0.3s ease;
+            transition: min-height 0.4s ease;
         }
         
         .fullscreen-active .native-form-box {
@@ -369,7 +368,6 @@
             flex-direction: column;
             flex-grow: 1;
             width: 100%;
-            height: 100%;
         }
 
         .form-step {
@@ -685,7 +683,7 @@
                 bottom: 0;
                 padding: 15px;
                 border-radius: 0;
-                overflow: hidden; /* Restricts scroll strictly */
+                overflow: hidden; 
             }
             .fullscreen-active .native-form-box {
                 min-height: 100%;
@@ -696,9 +694,8 @@
             }
 
             /* --- KEYBOARD OPEN COMPRESSION STATE --- */
-            /* These classes dynamically shrink the form when the virtual keyboard is detected */
             .form-container-card.fullscreen-active.keyboard-open {
-                top: 0 !important; /* Covers the navbar to maximize physical screen real estate */
+                top: 0 !important; 
                 z-index: 10000; 
                 padding: 10px !important;
             }
@@ -706,7 +703,7 @@
                 padding: 15px 20px !important;
             }
             .form-container-card.keyboard-open .step-desc {
-                display: none !important; /* Hides the extra text so inputs fit perfectly above the keyboard */
+                display: none !important; 
             }
             .form-container-card.keyboard-open .step-title {
                 font-size: 1.3rem !important;
@@ -716,7 +713,7 @@
                 margin-bottom: 10px !important;
             }
             .form-container-card.keyboard-open .input-group input {
-                padding: 10px 15px !important; /* Thins the inputs slightly */
+                padding: 10px 15px !important; 
             }
             .form-container-card.keyboard-open .form-actions {
                 padding-top: 10px !important;
@@ -1005,12 +1002,17 @@
             // --- Fullscreen Takeover & Mobile Keyboard Logic ---
             function adjustFullscreenHeight() {
                 if (formContainer.classList.contains('fullscreen-active')) {
+                    // Check if the keyboard open class is currently applied
+                    const isKeyboardOpen = formContainer.classList.contains('keyboard-open');
+                    // The navbar is 80px tall. If keyboard is closed, we need to subtract 80px so it doesn't push past the bottom.
+                    const offset = isKeyboardOpen ? 0 : 80; 
+
                     if (window.visualViewport) {
-                        formContainer.style.height = window.visualViewport.height + 'px';
-                        document.body.scrollTop = 0; // Ensures native mobile scroll doesn't misalign the lock
+                        formContainer.style.height = (window.visualViewport.height - offset) + 'px';
+                        document.body.scrollTop = 0; 
                         document.documentElement.scrollTop = 0;
                     } else {
-                        formContainer.style.height = window.innerHeight + 'px';
+                        formContainer.style.height = (window.innerHeight - offset) + 'px';
                     }
                 } else {
                     formContainer.style.height = '';
@@ -1035,7 +1037,6 @@
             });
 
             container.addEventListener('focusout', (e) => {
-                // Short timeout to see if they just moved to another input
                 setTimeout(() => {
                     const activeElement = document.activeElement;
                     if (activeElement.tagName !== 'INPUT' && activeElement.tagName !== 'TEXTAREA') {
