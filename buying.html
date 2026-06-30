@@ -624,6 +624,38 @@
             margin-bottom: 0;
         }
 
+        /* Success Message */
+        .success-message {
+            display: none;
+            padding: 20px 0;
+            animation: slideInRight 0.5s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+            flex-direction: column;
+            justify-content: center;
+            flex-grow: 1;
+        }
+        .success-icon {
+            width: 70px;
+            height: 70px;
+            background-color: #4e513e;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            margin: 0 auto 20px auto;
+            box-shadow: 0 8px 20px rgba(78, 81, 62, 0.3);
+        }
+        .success-message h3 {
+            font-size: 2.2rem;
+            color: #4e513e;
+            margin-bottom: 10px;
+        }
+        .success-message p {
+            font-size: 1.15rem;
+            color: #4f2d2c;
+        }
+
         /* --- Footer --- */
         footer {
             text-align: center;
@@ -763,8 +795,10 @@
     <div id="header-placeholder"></div>
 
     <header>
-        <h1>The Buying Process</h1>
-        <p>A clear, step-by-step guide to securing your dream home with confidence and strategic precision.</p>
+        <div class="hero-overlay-box">
+            <h1>The Buying Process</h1>
+            <p style="margin-top: 10px;">A clear, step-by-step guide to securing your dream home with confidence and strategic precision.</p>
+        </div>
     </header>
 
     <section class="intro-section">
@@ -906,7 +940,7 @@
             let currentStepIndex = 0;
             let stepHistory = [];
             let slideDirection = 'forward'; 
-            let savedScrollY = 0; // Remembers scroll position
+            let savedScrollY = 0; 
 
             function val(id) {
                 const q = questions.find(q => q.id === id);
@@ -1074,12 +1108,6 @@
 
             if (window.visualViewport) {
                 window.visualViewport.addEventListener('resize', adjustFullscreenHeight);
-                window.visualViewport.addEventListener('scroll', () => {
-                    // Locks the background scroll dynamically to prevent mobile wobble
-                    if(formContainer.classList.contains('fullscreen-active')) {
-                        window.scrollTo(0, savedScrollY); 
-                    }
-                });
             }
 
             container.addEventListener('focusin', (e) => {
@@ -1112,20 +1140,25 @@
             });
 
             btnClose.addEventListener('click', () => {
-                document.body.classList.remove('no-scroll');
-                
-                // RESTORES POSITION FOR SEAMLESS ANIMATION
-                window.scrollTo(0, savedScrollY); 
-                
+                // 1. Instantly return DOM to normal flow so the page height expands back to normal
                 formContainer.classList.remove('fullscreen-active', 'keyboard-open');
                 formContainer.style.height = ''; 
                 formContainer.style.bottom = ''; 
+                
                 form.style.display = 'none';
                 form.reset(); 
                 currentStepIndex = 0;
                 stepHistory = [];
                 document.querySelectorAll('.form-step').forEach(s => s.classList.remove('active', 'active-reverse'));
                 startScreen.classList.add('active');
+                
+                // Unlock the body
+                document.body.classList.remove('no-scroll');
+                
+                // 2. Wait a microscopic 10 milliseconds for the browser to repaint the height, THEN restore scroll
+                setTimeout(() => {
+                    window.scrollTo(0, savedScrollY);
+                }, 10);
             });
 
             function updateActions() {
