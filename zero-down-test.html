@@ -53,6 +53,7 @@
             align-items: center;
             border-bottom: 1px solid rgba(153, 114, 75, 0.3); 
             min-height: 80px;
+            transition: transform 0.3s ease;
         }
         .mobile-center-logo {
             display: none; 
@@ -303,8 +304,7 @@
             padding: 80px 20px; 
             position: relative; 
             overflow: hidden; 
-            /* Specific transitions to prevent fixed video clipping */
-            transition: top 0.4s ease, padding 0.4s ease, height 0.4s ease;
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
 
         /* FULLSCREEN TAKEOVER STYLING */
@@ -353,7 +353,7 @@
             display: flex;
             flex-direction: column;
             overflow: hidden; 
-            transition: min-height 0.4s ease;
+            transition: all 0.4s ease;
         }
         
         .fullscreen-active .native-form-box {
@@ -696,11 +696,13 @@
             .name-row { flex-direction: column; gap: 0; }
             .step-title { font-size: 1.5rem; }
             
+            /* Fullscreen standard mobile view */
             .form-container-card.fullscreen-active {
                 top: 80px; 
-                bottom: 0;
+                bottom: auto; /* Released so JS height calculation controls layout */
                 padding: 15px;
                 border-radius: 0;
+                overflow: hidden; 
             }
             .fullscreen-active .native-form-box {
                 min-height: 100%;
@@ -1022,19 +1024,19 @@
                     const isKeyboardOpen = formContainer.classList.contains('keyboard-open');
                     const offset = isKeyboardOpen ? 0 : 80; 
 
-                    // We ONLY resize the white box itself, leaving the background untouched
-                    const formBox = formContainer.querySelector('.native-form-box');
-
+                    // Dynamically resizes the entire outer container. Flexbox perfectly centers everything inside.
                     if (window.visualViewport) {
-                        formBox.style.maxHeight = (window.visualViewport.height - offset - 40) + 'px';
+                        formContainer.style.bottom = 'auto'; 
+                        formContainer.style.height = (window.visualViewport.height - offset) + 'px';
                         document.body.scrollTop = 0; 
                         document.documentElement.scrollTop = 0;
                     } else {
-                        formBox.style.maxHeight = (window.innerHeight - offset - 40) + 'px';
+                        formContainer.style.bottom = 'auto'; 
+                        formContainer.style.height = (window.innerHeight - offset) + 'px';
                     }
                 } else {
-                    const formBox = formContainer.querySelector('.native-form-box');
-                    if(formBox) formBox.style.maxHeight = '';
+                    formContainer.style.height = '';
+                    formContainer.style.bottom = '';
                 }
             }
 
@@ -1077,11 +1079,9 @@
             btnClose.addEventListener('click', () => {
                 document.body.classList.remove('no-scroll');
                 formContainer.classList.remove('fullscreen-active', 'keyboard-open');
+                formContainer.style.height = ''; 
+                formContainer.style.bottom = ''; 
                 form.style.display = 'none';
-                
-                const formBox = formContainer.querySelector('.native-form-box');
-                if(formBox) formBox.style.maxHeight = ''; 
-
                 form.reset(); 
                 currentStepIndex = 0;
                 stepHistory = [];
@@ -1303,10 +1303,8 @@
                     formContainer.classList.remove('fullscreen-active', 'keyboard-open');
                     form.style.display = 'none';
                     btnClose.style.display = 'none';
-                    
-                    const formBox = formContainer.querySelector('.native-form-box');
-                    if(formBox) formBox.style.maxHeight = ''; 
-                    
+                    formContainer.style.height = ''; 
+                    formContainer.style.bottom = ''; 
                     successMsg.style.display = 'flex';
                 })
                 .catch(error => {
