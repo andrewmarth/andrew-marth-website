@@ -395,17 +395,28 @@
             100% { opacity: 1; transform: translateX(0) scale(1); }
         }
 
-        /* Anchors the step content to the top */
+        /* Start screen specific flex rule */
         .step-content {
             flex-grow: 1;
             display: flex;
             flex-direction: column;
-            justify-content: flex-start;
+            justify-content: center;
+        }
+
+        /* Dynamic Step Layout */
+        .step-header {
             padding-top: 10px;
+        }
+        .step-inputs {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center; /* PERFECTLY VERTICALLY CENTERS THE INPUTS */
+            width: 100%;
         }
 
         .step-title {
-            font-size: 1.6rem;
+            font-size: 1.7rem;
             color: #4e513e;
             margin-bottom: 8px; 
             line-height: 1.3;
@@ -415,7 +426,7 @@
             font-size: 1.05rem;
             color: #4f2d2c;
             opacity: 0.85;
-            margin-bottom: 25px;
+            margin-bottom: 5px; /* Margin reduced because the inputs box is handling spacing */
             line-height: 1.5;
         }
 
@@ -936,9 +947,11 @@
                 stepDiv.id = `step-${i}`;
                 
                 stepDiv.innerHTML = `
-                    <div class="step-content">
+                    <div class="step-header">
                         <h3 class="step-title">${q.title}</h3>
                         <p class="step-desc">${q.desc}</p>
+                    </div>
+                    <div class="step-inputs">
                         ${inner}
                     </div>
                     <div class="form-actions" id="actions-${i}"></div>
@@ -950,6 +963,7 @@
             btnStart.addEventListener('click', () => {
                 document.body.classList.add('no-scroll');
                 formContainer.classList.add('fullscreen-active');
+                startScreen.classList.remove('active');
                 form.style.display = 'flex';
                 renderFlow(); 
             });
@@ -961,7 +975,6 @@
                 form.reset(); 
                 currentStepIndex = 0;
                 stepHistory = [];
-                // Reset visual state cleanly
                 document.querySelectorAll('.form-step').forEach(s => s.classList.remove('active', 'active-reverse'));
                 startScreen.classList.add('active');
             });
