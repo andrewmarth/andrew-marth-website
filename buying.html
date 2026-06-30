@@ -25,10 +25,9 @@
             background-color: #e9e2d8; 
         }
         
-        /* The Iron Curtain: Locks the body and drops a massive background layer to hide the page */
+        /* The Iron Curtain: Locks the body without losing scroll position */
         body.no-scroll {
             overflow: hidden !important;
-            height: 100vh !important;
             touch-action: none;
         }
         body.no-scroll::after {
@@ -48,7 +47,6 @@
             backdrop-filter: blur(12px); 
             -webkit-backdrop-filter: blur(12px); 
             
-            /* PERFORMANCE FIX: Forces the transparent navbar onto its own 3D GPU layer so it doesn't lag when scrolling */
             transform: translate3d(0, 0, 0); 
             backface-visibility: hidden;
             
@@ -111,7 +109,7 @@
             display: none; 
         }
 
-        /* --- Header / Hero Section (Matches Homepage) --- */
+        /* --- Header / Hero Section --- */
         header {
             background: linear-gradient(rgba(78, 81, 62, 0.75), rgba(78, 81, 62, 0.75)), url('https://andrewmarth.com/images/background.jpeg');
             background-size: cover;
@@ -163,7 +161,6 @@
             margin: 0 auto;
         }
 
-        /* The central vertical line */
         .timeline::after {
             content: '';
             position: absolute;
@@ -176,7 +173,6 @@
             border-radius: 2px;
         }
 
-        /* Container for each timeline item */
         .timeline-item {
             padding: 10px 40px;
             position: relative;
@@ -184,7 +180,6 @@
             width: 50%;
         }
 
-        /* The circles on the timeline */
         .timeline-item::after {
             content: '';
             position: absolute;
@@ -198,22 +193,10 @@
             z-index: 1;
         }
 
-        /* Place items to the left */
-        .left {
-            left: 0;
-        }
+        .left { left: 0; }
+        .right { left: 50%; }
+        .right::after { left: -12px; }
 
-        /* Place items to the right */
-        .right {
-            left: 50%;
-        }
-
-        /* Fix the circle position for right-aligned items */
-        .right::after {
-            left: -12px;
-        }
-
-        /* Actual content card inside the timeline item */
         .content {
             padding: 25px 30px;
             background-color: white;
@@ -641,38 +624,6 @@
             margin-bottom: 0;
         }
 
-        /* Success Message */
-        .success-message {
-            display: none;
-            padding: 20px 0;
-            animation: slideInRight 0.5s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
-            flex-direction: column;
-            justify-content: center;
-            flex-grow: 1;
-        }
-        .success-icon {
-            width: 70px;
-            height: 70px;
-            background-color: #4e513e;
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2.5rem;
-            margin: 0 auto 20px auto;
-            box-shadow: 0 8px 20px rgba(78, 81, 62, 0.3);
-        }
-        .success-message h3 {
-            font-size: 2.2rem;
-            color: #4e513e;
-            margin-bottom: 10px;
-        }
-        .success-message p {
-            font-size: 1.15rem;
-            color: #4f2d2c;
-        }
-
         /* --- Footer --- */
         footer {
             text-align: center;
@@ -759,6 +710,9 @@
                 flex: none;
                 padding: 15px;
             }
+            
+            .name-row { flex-direction: column; gap: 0; }
+            .step-title { font-size: 1.5rem; }
             
             /* Fullscreen standard mobile view */
             .form-container-card.fullscreen-active {
@@ -934,11 +888,6 @@
                     <div id="form-steps-container"></div>
                 </form>
 
-                <div class="success-message" id="success-message">
-                    <div class="success-icon">&#10003;</div>
-                    <h3>Information Received!</h3>
-                    <p>Thank you for submitting your details. I will review everything and reach out to you shortly to discuss your options.</p>
-                </div>
             </div>
         </div>
     </section>
@@ -951,13 +900,13 @@
             const startScreen = document.getElementById('start-screen');
             const form = document.getElementById('conditional-form');
             const container = document.getElementById('form-steps-container');
-            const successMsg = document.getElementById('success-message');
             const btnStart = document.getElementById('btn-start-form');
             const btnClose = document.getElementById('close-form-btn');
             
             let currentStepIndex = 0;
             let stepHistory = [];
             let slideDirection = 'forward'; 
+            let savedScrollY = 0; // Remembers scroll position
 
             function val(id) {
                 const q = questions.find(q => q.id === id);
@@ -1113,8 +1062,6 @@
                     if (window.visualViewport) {
                         formContainer.style.bottom = 'auto'; 
                         formContainer.style.height = (window.visualViewport.height - offset) + 'px';
-                        document.body.scrollTop = 0; 
-                        document.documentElement.scrollTop = 0;
                     } else {
                         formContainer.style.bottom = 'auto'; 
                         formContainer.style.height = (window.innerHeight - offset) + 'px';
@@ -1128,8 +1075,9 @@
             if (window.visualViewport) {
                 window.visualViewport.addEventListener('resize', adjustFullscreenHeight);
                 window.visualViewport.addEventListener('scroll', () => {
+                    // Locks the background scroll dynamically to prevent mobile wobble
                     if(formContainer.classList.contains('fullscreen-active')) {
-                        window.scrollTo(0, 0); 
+                        window.scrollTo(0, savedScrollY); 
                     }
                 });
             }
@@ -1152,6 +1100,9 @@
             });
 
             btnStart.addEventListener('click', () => {
+                // SAVES POSITION BEFORE ANIMATING
+                savedScrollY = window.scrollY || document.documentElement.scrollTop;
+                
                 document.body.classList.add('no-scroll');
                 formContainer.classList.add('fullscreen-active');
                 startScreen.classList.remove('active');
@@ -1162,6 +1113,10 @@
 
             btnClose.addEventListener('click', () => {
                 document.body.classList.remove('no-scroll');
+                
+                // RESTORES POSITION FOR SEAMLESS ANIMATION
+                window.scrollTo(0, savedScrollY); 
+                
                 formContainer.classList.remove('fullscreen-active', 'keyboard-open');
                 formContainer.style.height = ''; 
                 formContainer.style.bottom = ''; 
@@ -1340,7 +1295,6 @@
                 submitBtn.disabled = true;
 
                 const finalData = new FormData();
-                // Submits exactly which page they filled this out on
                 finalData.append('form_source', 'Buyer Intake Form');
                 
                 const azDate = new Date(new Date().toLocaleString("en-US", {timeZone: "America/Phoenix"}));
