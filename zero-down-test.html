@@ -28,12 +28,12 @@
         body.no-scroll::after {
             content: '';
             position: fixed;
-            top: -10vh; /* Starts high to cover bounces */
+            top: -10vh; 
             left: 0;
             width: 100vw;
-            height: 150vh; /* Massive overshoot to cover keyboard pushes */
+            height: 150vh; 
             background-color: #e9e2d8; 
-            z-index: 998; /* Sits right behind the form (999) but below the navbar (1000) */
+            z-index: 998; 
         }
         
         /* --- Navigation Bar (Fixed & Glassmorphism) --- */
@@ -173,25 +173,37 @@
             display: block;
         }
         .program-card-content {
-            padding: 40px 50px 50px 50px;
+            padding: 50px 50px 30px 50px;
         }
+        
+        /* NEW STYLING: Boxed Detail Items */
         .detail-item {
-            margin-bottom: 35px;
+            position: relative;
+            border: 2px solid rgba(78, 81, 62, 0.8); /* Theme Green */
+            border-radius: 8px;
+            padding: 25px 25px 20px 25px;
+            margin-bottom: 45px; /* Extra space to accommodate the overlapping headers */
         }
         .detail-item:last-child {
-            margin-bottom: 0;
+            margin-bottom: 20px;
         }
         .detail-item h3 {
+            position: absolute;
+            top: -16px; /* Lifts the header exactly halfway through the border */
+            left: 20px;
+            background-color: #ffffff; /* Masks the line behind the text */
+            padding: 0 12px;
             color: #4e513e;
-            margin-bottom: 8px;
-            font-size: 1.5rem;
-            border-bottom: 1px solid rgba(153, 114, 75, 0.2);
-            padding-bottom: 5px;
+            font-size: 1.4rem;
+            font-weight: bold;
+            margin: 0;
+            line-height: 1;
         }
         .detail-item p {
             color: #4f2d2c;
             font-size: 1.1rem;
-            line-height: 1.7;
+            line-height: 1.6;
+            margin: 0;
         }
 
         /* --- Proforma Images Section --- */
@@ -690,16 +702,20 @@
             .close-menu { display: block; position: absolute; top: 15px; right: 25px; font-size: 2.5rem; background: none; border: none; color: #4f2d2c; cursor: pointer; line-height: 1; }
             .hero-overlay-box { padding: 20px; }
             .intro-section { margin-top: 80px; }
-            .program-card-content { padding: 30px 20px; }
+            
+            /* Responsive box sizing for the updated details card */
+            .program-card-content { padding: 40px 20px 20px 20px; }
+            .detail-item h3 { font-size: 1.25rem; left: 15px; }
+            .detail-item { padding: 25px 20px 20px 20px; margin-bottom: 35px; }
+            
             .inner-contact-box { flex-direction: column; text-align: center; padding: 25px 20px; }
             .inner-socials { justify-content: center; }
             .name-row { flex-direction: column; gap: 0; }
             .step-title { font-size: 1.5rem; }
             
-            /* Fullscreen standard mobile view */
             .form-container-card.fullscreen-active {
                 top: 80px; 
-                bottom: auto; /* Released so JS height calculation controls layout */
+                bottom: auto; 
                 padding: 15px;
                 border-radius: 0;
                 overflow: hidden; 
