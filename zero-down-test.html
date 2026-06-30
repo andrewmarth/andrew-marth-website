@@ -274,37 +274,6 @@
             opacity: 0.8;
         }
 
-        /* --- Form Card Section --- */
-        .form-card-section {
-            max-width: 940px; 
-            margin: 0 auto 80px auto; 
-            padding: 0 20px;
-        }
-        .form-card {
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            border-top: 4px solid #4e513e; 
-            overflow: hidden; 
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-        }
-        .form-card-text {
-            padding: 50px 40px 20px 40px;
-            text-align: center;
-        }
-        .form-card-text h2 {
-            font-size: 2rem;
-            color: #4f2d2c;
-            margin-bottom: 15px;
-        }
-        .form-card-text p {
-            font-size: 1.1rem;
-            color: #4f2d2c;
-            margin-bottom: 30px;
-        }
-
         /* --- Trust Badge / Secure Notice --- */
         .secure-notice {
             text-align: center;
@@ -326,8 +295,7 @@
             width: auto;
             object-fit: contain;
         }
-        
-        .form-card-text p.secure-disclaimer {
+        .secure-disclaimer {
             font-size: 0.8rem;
             color: #4f2d2c;
             opacity: 0.8;
@@ -337,13 +305,21 @@
         }
 
         /* --- NATIVE MULTI-STEP FORM STYLING --- */
+        .form-card-section {
+            max-width: 940px; 
+            margin: 0 auto 80px auto; 
+            padding: 0 20px;
+        }
+        
         .form-container-card {
             width: 100%;
             display: flex;
             justify-content: center;
             align-items: center;
             background-color: #e9e2d8; 
-            border-top: 4px solid #4f2d2c; 
+            border-top: 4px solid #4e513e; 
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
             padding: 60px 20px;
             position: relative; 
             overflow: hidden; 
@@ -384,7 +360,7 @@
             text-align: center;
             position: relative; 
             z-index: 1;
-            min-height: 350px; 
+            min-height: 420px; 
             display: flex;
             flex-direction: column;
             overflow: hidden; 
@@ -674,15 +650,14 @@
             .hero-overlay-box { padding: 20px; }
             .intro-section { margin-top: 80px; }
             .program-card-content { padding: 30px 20px; }
-            .form-card-text { padding: 40px 20px 20px 20px; }
             .inner-contact-box { flex-direction: column; text-align: center; padding: 25px 20px; }
             .inner-socials { justify-content: center; }
-            .native-form-box { padding: 30px 20px; }
+            .native-form-box { padding: 30px 20px; min-height: 520px; }
             .name-row { flex-direction: column; gap: 0; }
             .step-title { font-size: 1.5rem; }
             
             .form-container-card.fullscreen-active {
-                height: auto; /* Fallback for Safari */
+                height: auto; 
                 bottom: 0;
             }
             .fullscreen-active .native-form-box {
@@ -769,47 +744,42 @@
     </section>
 
     <section class="form-card-section">
-        <div class="form-card">
-            <div class="form-card-text">
-                <h2>What Does This Look Like For You?</h2>
-                <p>Fill out the information below to see what a purchase using this zero-down program looks like. It is completely zero-pressure and an incredible way to explore your buying power.</p>
-                <div class="secure-notice">
-                    <div class="secure-header">
-                        <img src="https://andrewmarth.com/images/lock.png" alt="Secure Lock">
-                        <span>Secure Submission</span>
+        <div class="form-container-card" id="form-container">
+            <video class="form-bg-video" autoplay loop muted playsinline>
+                <source src="https://andrewmarth.com/images/form_background.mp4" type="video/mp4">
+            </video>
+
+            <div class="native-form-box">
+                <button type="button" class="close-form-btn" id="close-form-btn">&times;</button>
+
+                <div id="start-screen" class="form-step active">
+                    <div class="step-content">
+                        <h2 style="font-size: 2rem; color: #4f2d2c; margin-bottom: 15px;">What Does This Look Like For You?</h2>
+                        <p style="font-size: 1.1rem; color: #4f2d2c; margin-bottom: 25px; line-height: 1.6;">Fill out the information below to see what a purchase using this zero-down program looks like. It is completely zero-pressure and an incredible way to explore your buying power.</p>
+                        
+                        <div class="secure-notice" style="margin-bottom: 20px;">
+                            <div class="secure-header">
+                                <img src="https://andrewmarth.com/images/lock.png" alt="Secure Lock">
+                                <span>Secure Submission</span>
+                            </div>
+                            <p class="secure-disclaimer">All information is securely submitted and never shared with anyone. This is not a loan application and is only used for informational purposes.</p>
+                        </div>
                     </div>
-                    <p class="secure-disclaimer">All information is securely submitted and never shared with anyone. This is not a loan application and is only used for informational purposes.</p>
+                    <div class="form-actions">
+                        <button type="button" class="btn-primary" id="btn-start-form" style="padding: 15px 40px; font-size: 1.2rem;">Get Started</button>
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-container-card" id="form-container">
-                <video class="form-bg-video" autoplay loop muted playsinline>
-                    <source src="https://andrewmarth.com/images/form_background.mp4" type="video/mp4">
-                </video>
+                <form id="conditional-form" style="display: none;">
+                    <input type="hidden" name="form_source" value="Zero Down Program Form">
+                    
+                    <div id="form-steps-container"></div>
+                </form>
 
-                <div class="native-form-box">
-                    <button type="button" class="close-form-btn" id="close-form-btn">&times;</button>
-
-                    <div id="start-screen" class="form-step active">
-                        <div class="step-content">
-                            <h3 class="step-title" style="margin-bottom: 10px;">Ready to Explore Your Options?</h3>
-                            <p style="margin-bottom: 30px; font-size: 1.1rem; color: #4f2d2c;">Answer a few quick questions to see your exact buying power.</p>
-                        </div>
-                        <div class="form-actions">
-                            <button type="button" class="btn-primary" id="btn-start-form">Get Started</button>
-                        </div>
-                    </div>
-
-                    <form id="conditional-form" style="display: none;">
-                        <input type="hidden" name="form_source" value="Zero Down Program Form">
-                        <div id="form-steps-container"></div>
-                    </form>
-
-                    <div class="success-message" id="success-message">
-                        <div class="success-icon">&#10003;</div>
-                        <h3>Information Received!</h3>
-                        <p>Thank you for submitting your details. I will review everything and reach out to you shortly to discuss your options.</p>
-                    </div>
+                <div class="success-message" id="success-message">
+                    <div class="success-icon">&#10003;</div>
+                    <h3>Information Received!</h3>
+                    <p>Thank you for submitting your details. I will review everything and reach out to you shortly to discuss your options.</p>
                 </div>
             </div>
         </div>
