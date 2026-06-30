@@ -322,7 +322,16 @@
             padding: 80px 20px; 
             position: relative; 
             overflow: hidden; 
-            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            
+            /* PERFORMANCE FIX: Only target specific animations, dropping 'all' to prevent scroll lag */
+            transition: padding 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), 
+                        min-height 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), 
+                        border-radius 0.4s cubic-bezier(0.25, 0.8, 0.25, 1),
+                        top 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+                        
+            /* Force hardware acceleration for the container */
+            transform: translateZ(0);
+            will-change: padding, top;
         }
 
         /* FULLSCREEN TAKEOVER STYLING */
@@ -346,6 +355,11 @@
             height: 100%;
             object-fit: cover; 
             z-index: 0;
+            
+            /* PERFORMANCE FIX: Offload video to GPU and ignore mouse hovering */
+            pointer-events: none;
+            transform: translateZ(0); 
+            will-change: transform;
         }
 
         /* Unbinds the video from the shrinking container and pins it to the screen */
@@ -371,7 +385,7 @@
             display: flex;
             flex-direction: column;
             overflow: hidden; 
-            transition: all 0.4s ease;
+            transition: min-height 0.4s ease;
         }
         
         .fullscreen-active .native-form-box {
@@ -627,6 +641,38 @@
             margin-bottom: 0;
         }
 
+        /* Success Message */
+        .success-message {
+            display: none;
+            padding: 20px 0;
+            animation: slideInRight 0.5s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+            flex-direction: column;
+            justify-content: center;
+            flex-grow: 1;
+        }
+        .success-icon {
+            width: 70px;
+            height: 70px;
+            background-color: #4e513e;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            margin: 0 auto 20px auto;
+            box-shadow: 0 8px 20px rgba(78, 81, 62, 0.3);
+        }
+        .success-message h3 {
+            font-size: 2.2rem;
+            color: #4e513e;
+            margin-bottom: 10px;
+        }
+        .success-message p {
+            font-size: 1.15rem;
+            color: #4f2d2c;
+        }
+
         /* --- Footer --- */
         footer {
             text-align: center;
@@ -837,6 +883,12 @@
                     <input type="hidden" name="form_source" value="Zero Down Program Form">
                     <div id="form-steps-container"></div>
                 </form>
+
+                <div class="success-message" id="success-message">
+                    <div class="success-icon">&#10003;</div>
+                    <h3>Information Received!</h3>
+                    <p>Thank you for submitting your details. I will review everything and reach out to you shortly to discuss your options.</p>
+                </div>
             </div>
         </div>
     </section>
@@ -849,6 +901,7 @@
             const startScreen = document.getElementById('start-screen');
             const form = document.getElementById('conditional-form');
             const container = document.getElementById('form-steps-container');
+            const successMsg = document.getElementById('success-message');
             const btnStart = document.getElementById('btn-start-form');
             const btnClose = document.getElementById('close-form-btn');
             
@@ -1007,7 +1060,6 @@
                     const isKeyboardOpen = formContainer.classList.contains('keyboard-open');
                     const offset = isKeyboardOpen ? 0 : 80; 
 
-                    // Dynamically resizes the entire outer container. Flexbox perfectly centers everything inside.
                     if (window.visualViewport) {
                         formContainer.style.bottom = 'auto'; 
                         formContainer.style.height = (window.visualViewport.height - offset) + 'px';
