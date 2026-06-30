@@ -18,6 +18,11 @@
             background-color: #e9e2d8; 
             overflow-x: hidden; 
         }
+        /* Locks the body from scrolling when the form is fullscreen */
+        body.no-scroll {
+            overflow: hidden;
+            height: 100vh;
+        }
         
         /* --- Navigation Bar (Fixed & Glassmorphism) --- */
         .navbar {
@@ -342,6 +347,21 @@
             padding: 60px 20px;
             position: relative; 
             overflow: hidden; 
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        /* FULLSCREEN TAKEOVER STYLING */
+        .form-container-card.fullscreen-active {
+            position: fixed;
+            top: 80px; /* Snaps right under the 80px navbar */
+            left: 0;
+            right: 0;
+            bottom: 0;
+            width: 100vw;
+            z-index: 999;
+            border-top: none;
+            border-radius: 0;
+            padding: 20px;
         }
 
         .form-bg-video {
@@ -360,14 +380,43 @@
             max-width: 600px;
             padding: 40px;
             border-radius: 8px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.15); /* Slightly deeper shadow for sleekness */
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15); 
             text-align: center;
             position: relative; 
             z-index: 1;
-            min-height: 420px; 
+            min-height: 350px; 
             display: flex;
             flex-direction: column;
-            overflow: hidden; /* Contains the sliding animations */
+            overflow: hidden; 
+            transition: min-height 0.4s ease;
+        }
+        
+        /* Expands the white box slightly when in fullscreen for aesthetics */
+        .fullscreen-active .native-form-box {
+            min-height: 500px;
+        }
+
+        /* The Close Button (Only visible in fullscreen) */
+        .close-form-btn {
+            display: none;
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 2.2rem;
+            color: #4f2d2c;
+            cursor: pointer;
+            line-height: 1;
+            opacity: 0.5;
+            transition: opacity 0.3s;
+            z-index: 10;
+        }
+        .close-form-btn:hover {
+            opacity: 1;
+        }
+        .fullscreen-active .close-form-btn {
+            display: block;
         }
 
         #conditional-form, #form-steps-container {
@@ -437,7 +486,6 @@
             padding: 16px;
             font-size: 1.1rem;
             color: #4f2d2c;
-            /* Invisible border and subtle inset shadow by default */
             border: 2px solid transparent;
             background-color: #f7f4f0;
             border-radius: 8px;
@@ -448,7 +496,6 @@
         .input-group textarea {
             resize: vertical;
         }
-        /* The "Lift" effect on focus */
         .input-group input:focus, .input-group textarea:focus {
             outline: none;
             background-color: #ffffff;
@@ -493,11 +540,10 @@
             text-align: center;
             box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
         }
-        /* Active Radio Style */
         .radio-btn input[type="radio"]:checked + span {
             background-color: #99724b;
             color: #ffffff;
-            transform: scale(1.02); /* Slight pop effect */
+            transform: scale(1.02); 
             box-shadow: 0 6px 15px rgba(153, 114, 75, 0.25);
         }
         .radio-group.error span {
@@ -631,9 +677,18 @@
             .form-card-text { padding: 40px 20px 20px 20px; }
             .inner-contact-box { flex-direction: column; text-align: center; padding: 25px 20px; }
             .inner-socials { justify-content: center; }
-            .native-form-box { padding: 30px 20px; min-height: 520px; }
+            .native-form-box { padding: 30px 20px; }
             .name-row { flex-direction: column; gap: 0; }
             .step-title { font-size: 1.5rem; }
+            
+            .form-container-card.fullscreen-active {
+                height: auto; /* Fallback for Safari */
+                bottom: 0;
+            }
+            .fullscreen-active .native-form-box {
+                min-height: 100%;
+                border-radius: 0;
+            }
         }
     </style>
 </head>
@@ -727,15 +782,26 @@
                 </div>
             </div>
 
-            <div class="form-container-card">
+            <div class="form-container-card" id="form-container">
                 <video class="form-bg-video" autoplay loop muted playsinline>
                     <source src="https://andrewmarth.com/images/form_background.mp4" type="video/mp4">
                 </video>
 
                 <div class="native-form-box">
-                    <form id="conditional-form">
+                    <button type="button" class="close-form-btn" id="close-form-btn">&times;</button>
+
+                    <div id="start-screen" class="form-step active">
+                        <div class="step-content">
+                            <h3 class="step-title" style="margin-bottom: 10px;">Ready to Explore Your Options?</h3>
+                            <p style="margin-bottom: 30px; font-size: 1.1rem; color: #4f2d2c;">Answer a few quick questions to see your exact buying power.</p>
+                        </div>
+                        <div class="form-actions">
+                            <button type="button" class="btn-primary" id="btn-start-form">Get Started</button>
+                        </div>
+                    </div>
+
+                    <form id="conditional-form" style="display: none;">
                         <input type="hidden" name="form_source" value="Zero Down Program Form">
-                        
                         <div id="form-steps-container"></div>
                     </form>
 
@@ -753,12 +819,17 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            const formContainer = document.getElementById('form-container');
+            const startScreen = document.getElementById('start-screen');
             const form = document.getElementById('conditional-form');
             const container = document.getElementById('form-steps-container');
             const successMsg = document.getElementById('success-message');
+            const btnStart = document.getElementById('btn-start-form');
+            const btnClose = document.getElementById('close-form-btn');
+            
             let currentStepIndex = 0;
             let stepHistory = [];
-            let slideDirection = 'forward'; // Tracks animation direction
+            let slideDirection = 'forward'; 
 
             function val(id) {
                 const els = document.getElementsByName(id);
@@ -899,6 +970,25 @@
                 container.appendChild(stepDiv);
             });
 
+            // --- Fullscreen Takeover Logic ---
+            btnStart.addEventListener('click', () => {
+                document.body.classList.add('no-scroll');
+                formContainer.classList.add('fullscreen-active');
+                startScreen.classList.remove('active');
+                form.style.display = 'flex';
+                renderFlow(); // Triggers Step 0
+            });
+
+            btnClose.addEventListener('click', () => {
+                document.body.classList.remove('no-scroll');
+                formContainer.classList.remove('fullscreen-active');
+                form.style.display = 'none';
+                form.reset(); // Wipe all data if they close out
+                currentStepIndex = 0;
+                stepHistory = [];
+                startScreen.classList.add('active');
+            });
+
             // Re-evaluates action buttons dynamically
             function updateActions() {
                 const currentEl = document.getElementById(`step-${currentStepIndex}`);
@@ -987,11 +1077,10 @@
                     const fwdBtn = currentEl.querySelector('.btn-forward');
                     if (fwdBtn && fwdBtn.textContent === 'Next') {
                         setTimeout(() => {
-                            // Ensure they haven't manually advanced in the last 350ms
                             if (currentEl.classList.contains('active') || currentEl.classList.contains('active-reverse')) {
                                 fwdBtn.click();
                             }
-                        }, 350); // 350ms delay for visual feedback before auto-advancing
+                        }, 350); 
                     }
                 }
             });
@@ -1045,7 +1134,7 @@
                 return isValid;
             }
 
-            // Form Submit
+            // Form Submit via Webhook with NO-CORS mode
             form.addEventListener('submit', e => {
                 e.preventDefault();
                 const currentEl = document.getElementById(`step-${currentStepIndex}`);
@@ -1104,7 +1193,12 @@
                     mode: 'no-cors' 
                 })
                 .then(() => {
+                    // Close the fullscreen view upon success
+                    document.body.classList.remove('no-scroll');
+                    formContainer.classList.remove('fullscreen-active');
                     form.style.display = 'none';
+                    btnClose.style.display = 'none';
+                    
                     successMsg.style.display = 'flex';
                 })
                 .catch(error => {
@@ -1113,9 +1207,6 @@
                     submitBtn.disabled = false;
                 });
             });
-
-            // Initialize Form
-            renderFlow();
         });
 
         // --- Standard HTML Component Loading ---
