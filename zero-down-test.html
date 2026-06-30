@@ -327,7 +327,7 @@
             text-align: center;
             position: relative; 
             z-index: 1;
-            min-height: 480px; /* Slightly taller to accommodate the descriptions perfectly */
+            min-height: 480px; 
             display: flex;
             flex-direction: column;
             overflow: hidden; 
@@ -395,7 +395,7 @@
             100% { opacity: 1; transform: translateX(0) scale(1); }
         }
 
-        /* Anchors the step content to the top instead of the center */
+        /* Anchors the step content to the top */
         .step-content {
             flex-grow: 1;
             display: flex;
@@ -407,7 +407,7 @@
         .step-title {
             font-size: 1.6rem;
             color: #4e513e;
-            margin-bottom: 8px; /* Tighter gap to the description */
+            margin-bottom: 8px; 
             line-height: 1.3;
         }
 
@@ -946,6 +946,26 @@
                 container.appendChild(stepDiv);
             });
 
+            // --- Fullscreen Takeover Logic ---
+            btnStart.addEventListener('click', () => {
+                document.body.classList.add('no-scroll');
+                formContainer.classList.add('fullscreen-active');
+                form.style.display = 'flex';
+                renderFlow(); 
+            });
+
+            btnClose.addEventListener('click', () => {
+                document.body.classList.remove('no-scroll');
+                formContainer.classList.remove('fullscreen-active');
+                form.style.display = 'none';
+                form.reset(); 
+                currentStepIndex = 0;
+                stepHistory = [];
+                // Reset visual state cleanly
+                document.querySelectorAll('.form-step').forEach(s => s.classList.remove('active', 'active-reverse'));
+                startScreen.classList.add('active');
+            });
+
             // Re-evaluates action buttons dynamically
             function updateActions() {
                 const currentEl = document.getElementById(`step-${currentStepIndex}`);
@@ -1062,7 +1082,7 @@
                 let isValid = true;
                 const inputs = stepEl.querySelectorAll('input, textarea');
                 
-                radioNames = new Set();
+                const radioNames = new Set();
                 inputs.forEach(i => { if(i.type === 'radio') radioNames.add(i.name); });
                 radioNames.forEach(name => {
                     const group = stepEl.querySelector(`.radio-group:has(input[name="${name}"])`);
