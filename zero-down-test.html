@@ -305,9 +305,6 @@
             z-index: 999;
             border-top: none;
             padding: 20px;
-            /* CRITICAL FIX FOR MOBILE: Allows the user to scroll if keyboard pushes content off-screen */
-            overflow-y: auto;
-            -webkit-overflow-scrolling: touch;
         }
 
         .form-bg-video {
@@ -339,7 +336,6 @@
         
         .fullscreen-active .native-form-box {
             min-height: 540px;
-            margin-bottom: 40px; /* Buffer space for smooth scrolling */
         }
 
         /* The Close Button */
@@ -513,6 +509,7 @@
         }
         .radio-btn input[type="radio"]:checked + span {
             background-color: #99724b;
+            border-color: #99724b;
             color: #ffffff;
             transform: scale(1.02); 
             box-shadow: 0 6px 15px rgba(153, 114, 75, 0.25);
@@ -676,19 +673,17 @@
             .program-card-content { padding: 30px 20px; }
             .inner-contact-box { flex-direction: column; text-align: center; padding: 25px 20px; }
             .inner-socials { justify-content: center; }
+            .native-form-box { padding: 30px 20px; min-height: 520px; }
             .name-row { flex-direction: column; gap: 0; }
             .step-title { font-size: 1.5rem; }
             
-            /* Enhanced Mobile Constraints */
             .form-container-card.fullscreen-active {
-                height: 100%; /* Adapts to viewport height changes dynamically */
-                bottom: auto;
-                padding-bottom: 60px; /* Provides visual buffer to scroll past keyboard */
+                height: auto; 
+                bottom: 0;
             }
             .fullscreen-active .native-form-box {
-                min-height: 400px;
-                border-radius: 8px; /* Restoring the polished curves */
-                margin-bottom: 40px; 
+                min-height: 100%;
+                border-radius: 0;
             }
         }
     </style>
@@ -779,7 +774,7 @@
                 <button type="button" class="close-form-btn" id="close-form-btn">&times;</button>
 
                 <div id="start-screen" class="form-step active">
-                    <div class="step-content">
+                    <div class="step-content" style="justify-content: center;">
                         <h2 class="step-title" style="font-size: 2.2rem; margin-bottom: 15px;">What Does This Look Like For You?</h2>
                         <p style="font-size: 1.15rem; color: #4f2d2c; margin-bottom: 0; line-height: 1.6;">Fill out the information below to see what a purchase using this zero-down program looks like. It is completely zero-pressure and an incredible way to explore your buying power.</p>
                     </div>
@@ -1062,10 +1057,10 @@
             // Intercept Enter Key to reliably advance the form (ignores Textareas)
             container.addEventListener('keydown', e => {
                 if (e.key === 'Enter' && e.target.tagName !== 'TEXTAREA') {
-                    e.preventDefault(); // Stop default form submit
+                    e.preventDefault(); 
                     const currentEl = document.getElementById(`step-${currentStepIndex}`);
                     const fwdBtn = currentEl.querySelector('.btn-forward');
-                    if (fwdBtn) fwdBtn.click(); // Trigger our native logic instead
+                    if (fwdBtn) fwdBtn.click(); 
                 }
             });
 
@@ -1105,7 +1100,7 @@
                 // Auto-focus the first input of the new step if it's a text/number field
                 const firstInput = currentEl.querySelector('input[type="text"], input[type="tel"], input[type="email"], input[type="number"]');
                 if (firstInput) {
-                    setTimeout(() => firstInput.focus(), 50); // slight delay ensures smooth focus after animation
+                    setTimeout(() => firstInput.focus(), 50);
                 }
             }
 
