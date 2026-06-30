@@ -18,11 +18,22 @@
             background-color: #e9e2d8; 
             overflow-x: hidden; 
         }
-        /* Locks the body from scrolling when the form is fullscreen */
+        
+        /* The Iron Curtain: Locks the body and drops a massive background layer to hide the page */
         body.no-scroll {
             overflow: hidden !important;
             height: 100vh !important;
             touch-action: none;
+        }
+        body.no-scroll::after {
+            content: '';
+            position: fixed;
+            top: -10vh; /* Starts high to cover bounces */
+            left: 0;
+            width: 100vw;
+            height: 150vh; /* Massive overshoot to cover keyboard pushes */
+            background-color: #e9e2d8; 
+            z-index: 998; /* Sits right behind the form (999) but below the navbar (1000) */
         }
         
         /* --- Navigation Bar (Fixed & Glassmorphism) --- */
@@ -42,7 +53,6 @@
             align-items: center;
             border-bottom: 1px solid rgba(153, 114, 75, 0.3); 
             min-height: 80px;
-            transition: transform 0.3s ease;
         }
         .mobile-center-logo {
             display: none; 
@@ -293,7 +303,8 @@
             padding: 80px 20px; 
             position: relative; 
             overflow: hidden; 
-            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            /* Specific transitions to prevent fixed video clipping */
+            transition: top 0.4s ease, padding 0.4s ease, height 0.4s ease;
         }
 
         /* FULLSCREEN TAKEOVER STYLING */
@@ -317,6 +328,15 @@
             height: 100%;
             object-fit: cover; 
             z-index: 0;
+        }
+
+        /* Unbinds the video from the shrinking container and pins it to the screen */
+        .form-container-card.fullscreen-active .form-bg-video {
+            position: fixed;
+            top: -10vh; 
+            left: 0;
+            width: 100vw;
+            height: 150vh; 
         }
         
         .native-form-box {
@@ -655,7 +675,7 @@
             text-align-last: center; 
         }
 
-        /* --- Mobile Responsiveness & Keyboard Detection Styling --- */
+        /* --- Mobile Responsiveness --- */
         @media (max-width: 768px) {
             .navbar { justify-content: flex-end; }
             .mobile-center-logo { display: block; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); }
@@ -673,17 +693,14 @@
             .program-card-content { padding: 30px 20px; }
             .inner-contact-box { flex-direction: column; text-align: center; padding: 25px 20px; }
             .inner-socials { justify-content: center; }
-            
             .name-row { flex-direction: column; gap: 0; }
             .step-title { font-size: 1.5rem; }
             
-            /* Fullscreen standard mobile view */
             .form-container-card.fullscreen-active {
                 top: 80px; 
                 bottom: 0;
                 padding: 15px;
                 border-radius: 0;
-                overflow: hidden; 
             }
             .fullscreen-active .native-form-box {
                 min-height: 100%;
@@ -1002,20 +1019,22 @@
             // --- Fullscreen Takeover & Mobile Keyboard Logic ---
             function adjustFullscreenHeight() {
                 if (formContainer.classList.contains('fullscreen-active')) {
-                    // Check if the keyboard open class is currently applied
                     const isKeyboardOpen = formContainer.classList.contains('keyboard-open');
-                    // The navbar is 80px tall. If keyboard is closed, we need to subtract 80px so it doesn't push past the bottom.
                     const offset = isKeyboardOpen ? 0 : 80; 
 
+                    // We ONLY resize the white box itself, leaving the background untouched
+                    const formBox = formContainer.querySelector('.native-form-box');
+
                     if (window.visualViewport) {
-                        formContainer.style.height = (window.visualViewport.height - offset) + 'px';
+                        formBox.style.maxHeight = (window.visualViewport.height - offset - 40) + 'px';
                         document.body.scrollTop = 0; 
                         document.documentElement.scrollTop = 0;
                     } else {
-                        formContainer.style.height = (window.innerHeight - offset) + 'px';
+                        formBox.style.maxHeight = (window.innerHeight - offset - 40) + 'px';
                     }
                 } else {
-                    formContainer.style.height = '';
+                    const formBox = formContainer.querySelector('.native-form-box');
+                    if(formBox) formBox.style.maxHeight = '';
                 }
             }
 
@@ -1059,7 +1078,10 @@
                 document.body.classList.remove('no-scroll');
                 formContainer.classList.remove('fullscreen-active', 'keyboard-open');
                 form.style.display = 'none';
-                formContainer.style.height = ''; 
+                
+                const formBox = formContainer.querySelector('.native-form-box');
+                if(formBox) formBox.style.maxHeight = ''; 
+
                 form.reset(); 
                 currentStepIndex = 0;
                 stepHistory = [];
@@ -1281,7 +1303,10 @@
                     formContainer.classList.remove('fullscreen-active', 'keyboard-open');
                     form.style.display = 'none';
                     btnClose.style.display = 'none';
-                    formContainer.style.height = ''; 
+                    
+                    const formBox = formContainer.querySelector('.native-form-box');
+                    if(formBox) formBox.style.maxHeight = ''; 
+                    
                     successMsg.style.display = 'flex';
                 })
                 .catch(error => {
