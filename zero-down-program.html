@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Zero Down Program | Andrew Marth Real Estate</title>
+    <script src="form-logic.js"></script>
     <style>
         /* --- General Reset & Styling --- */
         * {
@@ -47,7 +48,6 @@
             backdrop-filter: blur(12px); 
             -webkit-backdrop-filter: blur(12px); 
             
-            /* PERFORMANCE FIX: Forces the transparent navbar onto its own 3D GPU layer */
             transform: translate3d(0, 0, 0); 
             backface-visibility: hidden;
             
@@ -308,393 +308,64 @@
             opacity: 0.8;
         }
 
-        /* --- FULL WIDTH FORM SECTION --- */
-        .full-width-form-section {
-            width: 100%;
-            margin-top: 40px; 
-            margin-bottom: 0;
-        }
-
-        .form-container-card {
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: #e9e2d8; 
-            border-top: 4px solid #4e513e; 
-            padding: 80px 20px; 
-            position: relative; 
-            overflow: hidden; 
-            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-        }
-
-        /* FULLSCREEN TAKEOVER STYLING */
-        .form-container-card.fullscreen-active {
-            position: fixed;
-            top: 80px; 
-            left: 0;
-            right: 0;
-            bottom: 0;
-            width: 100%;
-            z-index: 999;
-            border-top: none;
-            padding: 20px;
-        }
-
-        .form-bg-video {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover; 
-            z-index: 0;
-        }
-
-        /* Unbinds the video from the shrinking container and pins it to the screen */
-        .form-container-card.fullscreen-active .form-bg-video {
-            position: fixed;
-            top: -10vh; 
-            left: 0;
-            width: 100%;
-            height: 150vh; 
-        }
-        
-        .native-form-box {
-            background: #ffffff;
-            width: 100%;
-            max-width: 600px;
-            padding: 40px;
-            border-radius: 8px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.15); 
-            text-align: center;
-            position: relative; 
-            z-index: 1;
-            min-height: 480px; 
-            display: flex;
-            flex-direction: column;
-            overflow: hidden; 
-            transition: all 0.4s ease;
-        }
-        
-        .fullscreen-active .native-form-box {
-            min-height: 540px;
-        }
-
-        /* The Close Button */
-        .close-form-btn {
-            display: none;
-            position: absolute;
-            top: 15px;
-            right: 20px;
-            background: none;
-            border: none;
-            font-size: 2.2rem;
-            color: #4f2d2c;
-            cursor: pointer;
-            line-height: 1;
-            opacity: 0.5;
-            transition: opacity 0.3s;
-            z-index: 10;
-        }
-        .close-form-btn:hover {
-            opacity: 1;
-        }
-        .fullscreen-active .close-form-btn {
-            display: block;
-        }
-
-        #conditional-form, #form-steps-container {
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1;
-            width: 100%;
-        }
-
-        .form-step {
-            display: none;
-            width: 100%;
-        }
-        
-        .form-step.active {
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1;
-            animation: slideInRight 0.4s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
-        }
-        .form-step.active-reverse {
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1;
-            animation: slideInLeft 0.4s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
-        }
-
-        @keyframes slideInRight {
-            0% { opacity: 0; transform: translateX(40px) scale(0.98); }
-            100% { opacity: 1; transform: translateX(0) scale(1); }
-        }
-        @keyframes slideInLeft {
-            0% { opacity: 0; transform: translateX(-40px) scale(0.98); }
-            100% { opacity: 1; transform: translateX(0) scale(1); }
-        }
-
-        /* Anchors the step content to the top */
-        .step-content {
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-            padding-top: 10px;
-        }
-
-        /* Start screen centering override */
-        #start-screen .step-content {
-            justify-content: center;
-        }
-
-        .step-header {
-            padding-top: 10px;
-        }
-        .step-inputs {
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center; 
-            width: 100%;
-        }
-
-        .step-title {
-            font-size: 1.6rem;
-            color: #4e513e;
-            margin-bottom: 8px; 
-            line-height: 1.3;
-        }
-
-        .step-desc {
-            font-size: 1.05rem;
-            color: #4f2d2c;
-            opacity: 0.85;
-            margin-bottom: 5px; 
-            line-height: 1.5;
-        }
-
-        /* Sleek Input Styles */
-        .input-group {
-            margin-bottom: 20px;
-            text-align: left;
-        }
-        .input-group label {
-            display: block;
-            font-size: 0.95rem;
-            color: #4f2d2c;
-            margin-bottom: 8px;
-            font-weight: bold;
-        }
-        .input-group input, .input-group textarea {
-            width: 100%;
-            padding: 16px;
-            font-size: 1.1rem;
-            color: #4f2d2c;
-            border: 2px solid transparent;
-            background-color: #f7f4f0;
-            border-radius: 8px;
-            box-shadow: inset 0 2px 4px rgba(0,0,0,0.03);
-            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-            font-family: inherit;
-        }
-        .input-group textarea {
-            resize: vertical;
-        }
-        .input-group input:focus, .input-group textarea:focus {
-            outline: none;
-            background-color: #ffffff;
-            border-color: #99724b;
-            box-shadow: 0 8px 20px rgba(153, 114, 75, 0.15);
-            transform: translateY(-2px);
-        }
-        .input-group input.error, .input-group textarea.error {
-            border-color: #d9534f;
-            background-color: #fdf2f2;
-        }
-        
+        /* --- FORM COMPONENT CSS (KEEP THIS IN THE HEADER FOR NOW) --- */
+        .full-width-form-section { width: 100%; margin-top: 40px; margin-bottom: 0; }
+        .form-container-card { width: 100%; display: flex; justify-content: center; align-items: center; background-color: #e9e2d8; border-top: 4px solid #4e513e; padding: 80px 20px; position: relative; overflow: hidden; transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); }
+        .form-container-card.fullscreen-active { position: fixed; top: 80px; left: 0; right: 0; bottom: 0; width: 100%; z-index: 999; border-top: none; padding: 20px; }
+        .form-bg-video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
+        .form-container-card.fullscreen-active .form-bg-video { position: fixed; top: -10vh; left: 0; width: 100%; height: 150vh; }
+        .native-form-box { background: #ffffff; width: 100%; max-width: 600px; padding: 40px; border-radius: 8px; box-shadow: 0 15px 40px rgba(0,0,0,0.15); text-align: center; position: relative; z-index: 1; min-height: 480px; display: flex; flex-direction: column; overflow: hidden; transition: all 0.4s ease; }
+        .fullscreen-active .native-form-box { min-height: 540px; }
+        .close-form-btn { display: none; position: absolute; top: 15px; right: 20px; background: none; border: none; font-size: 2.2rem; color: #4f2d2c; cursor: pointer; line-height: 1; opacity: 0.5; transition: opacity 0.3s; z-index: 10; }
+        .close-form-btn:hover { opacity: 1; }
+        .fullscreen-active .close-form-btn { display: block; }
+        #conditional-form, #form-steps-container { display: flex; flex-direction: column; flex-grow: 1; width: 100%; }
+        .form-step { display: none; width: 100%; }
+        .form-step.active { display: flex; flex-direction: column; flex-grow: 1; animation: slideInRight 0.4s cubic-bezier(0.25, 0.8, 0.25, 1) forwards; }
+        .form-step.active-reverse { display: flex; flex-direction: column; flex-grow: 1; animation: slideInLeft 0.4s cubic-bezier(0.25, 0.8, 0.25, 1) forwards; }
+        @keyframes slideInRight { 0% { opacity: 0; transform: translateX(40px) scale(0.98); } 100% { opacity: 1; transform: translateX(0) scale(1); } }
+        @keyframes slideInLeft { 0% { opacity: 0; transform: translateX(-40px) scale(0.98); } 100% { opacity: 1; transform: translateX(0) scale(1); } }
+        .step-content { flex-grow: 1; display: flex; flex-direction: column; justify-content: flex-start; padding-top: 10px; }
+        #start-screen .step-content { justify-content: center; }
+        .step-header { padding-top: 10px; }
+        .step-inputs { flex-grow: 1; display: flex; flex-direction: column; justify-content: center; width: 100%; }
+        .step-title { font-size: 1.6rem; color: #4e513e; margin-bottom: 8px; line-height: 1.3; }
+        .step-desc { font-size: 1.05rem; color: #4f2d2c; opacity: 0.85; margin-bottom: 5px; line-height: 1.5; }
+        .input-group { margin-bottom: 20px; text-align: left; }
+        .input-group label { display: block; font-size: 0.95rem; color: #4f2d2c; margin-bottom: 8px; font-weight: bold; }
+        .input-group input, .input-group textarea { width: 100%; padding: 16px; font-size: 1.1rem; color: #4f2d2c; border: 2px solid transparent; background-color: #f7f4f0; border-radius: 8px; box-shadow: inset 0 2px 4px rgba(0,0,0,0.03); transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); font-family: inherit; }
+        .input-group textarea { resize: vertical; }
+        .input-group input:focus, .input-group textarea:focus { outline: none; background-color: #ffffff; border-color: #99724b; box-shadow: 0 8px 20px rgba(153, 114, 75, 0.15); transform: translateY(-2px); }
+        .input-group input.error, .input-group textarea.error { border-color: #d9534f; background-color: #fdf2f2; }
         .name-row { display: flex; gap: 15px; flex-wrap: wrap; }
         .name-row .input-group { flex: 1; min-width: 150px; }
-
-        /* Custom Radio Buttons */
-        .radio-group {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-        }
-        .radio-group.vertical {
-            flex-direction: column;
-            gap: 12px;
-        }
-        .radio-btn input[type="radio"] {
-            display: none;
-        }
-        .radio-btn span {
-            display: block;
-            padding: 16px 25px;
-            background-color: #f7f4f0;
-            border: 2px solid transparent;
-            border-radius: 8px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            color: #4f2d2c;
-            cursor: pointer;
-            transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
-            text-align: center;
-            box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
-        }
-        .radio-btn input[type="radio"]:checked + span {
-            background-color: #99724b;
-            color: #ffffff;
-            transform: scale(1.02); 
-            box-shadow: 0 6px 15px rgba(153, 114, 75, 0.25);
-        }
-        .radio-group.error span {
-            border: 2px solid #d9534f;
-        }
-
-        /* Form Buttons anchored to bottom */
-        .form-actions {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 15px;
-            margin-top: auto; 
-            padding-top: 25px;
-        }
-        .btn-primary {
-            background-color: #99724b;
-            color: #ffffff;
-            border: none;
-            padding: 15px 40px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            min-width: 130px;
-            box-shadow: 0 4px 10px rgba(153, 114, 75, 0.2);
-        }
-        .btn-primary:hover {
-            background-color: #9a5d40;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 15px rgba(153, 114, 75, 0.3);
-        }
-        .btn-secondary {
-            background-color: transparent;
-            color: #99724b;
-            border: none;
-            font-size: 1.05rem;
-            font-weight: bold;
-            cursor: pointer;
-            padding: 10px 15px;
-            transition: color 0.3s;
-        }
-        .btn-secondary:hover {
-            color: #4e513e;
-        }
-
-        /* Secure Badge Styling */
-        .secure-notice {
-            text-align: center;
-            max-width: 400px; 
-            margin: 10px auto 0 auto; 
-        }
-        .secure-header {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-            color: #4e513e; 
-            font-weight: bold;
-            font-size: 1rem;
-            margin-bottom: 4px;
-        }
-        .secure-header img {
-            height: 1rem; 
-            width: auto;
-            object-fit: contain;
-        }
-        .secure-disclaimer {
-            font-size: 0.75rem;
-            color: #4f2d2c;
-            opacity: 0.75;
-            line-height: 1.3;
-            font-style: italic; 
-            margin-bottom: 0;
-        }
-
-        /* Success Message */
-        .success-message {
-            display: none;
-            padding: 20px 0;
-            animation: slideInRight 0.5s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
-            flex-direction: column;
-            justify-content: center;
-            flex-grow: 1;
-        }
-        .success-icon {
-            width: 70px;
-            height: 70px;
-            background-color: #4e513e;
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2.5rem;
-            margin: 0 auto 20px auto;
-            box-shadow: 0 8px 20px rgba(78, 81, 62, 0.3);
-        }
-        .success-message h3 {
-            font-size: 2.2rem;
-            color: #4e513e;
-            margin-bottom: 10px;
-        }
-        .success-message p {
-            font-size: 1.15rem;
-            color: #4f2d2c;
-        }
+        .radio-group { display: flex; gap: 15px; justify-content: center; margin-bottom: 20px; flex-wrap: wrap; }
+        .radio-group.vertical { flex-direction: column; gap: 12px; }
+        .radio-btn input[type="radio"] { display: none; }
+        .radio-btn span { display: block; padding: 16px 25px; background-color: #f7f4f0; border: 2px solid transparent; border-radius: 8px; font-size: 1.1rem; font-weight: bold; color: #4f2d2c; cursor: pointer; transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1); text-align: center; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
+        .radio-btn input[type="radio"]:checked + span { background-color: #99724b; color: #ffffff; transform: scale(1.02); box-shadow: 0 6px 15px rgba(153, 114, 75, 0.25); }
+        .radio-group.error span { border: 2px solid #d9534f; }
+        .form-actions { display: flex; justify-content: center; align-items: center; gap: 15px; margin-top: auto; padding-top: 25px; }
+        .btn-primary { background-color: #99724b; color: #ffffff; border: none; padding: 15px 40px; font-size: 1.1rem; font-weight: bold; border-radius: 6px; cursor: pointer; transition: all 0.3s ease; min-width: 130px; box-shadow: 0 4px 10px rgba(153, 114, 75, 0.2); }
+        .btn-primary:hover { background-color: #9a5d40; transform: translateY(-2px); box-shadow: 0 6px 15px rgba(153, 114, 75, 0.3); }
+        .btn-secondary { background-color: transparent; color: #99724b; border: none; font-size: 1.05rem; font-weight: bold; cursor: pointer; padding: 10px 15px; transition: color 0.3s; }
+        .btn-secondary:hover { color: #4e513e; }
+        .secure-notice { text-align: center; max-width: 400px; margin: 10px auto 0 auto; }
+        .secure-header { display: flex; align-items: center; justify-content: center; gap: 6px; color: #4e513e; font-weight: bold; font-size: 1rem; margin-bottom: 4px; }
+        .secure-header img { height: 1rem; width: auto; object-fit: contain; }
+        .secure-disclaimer { font-size: 0.75rem; color: #4f2d2c; opacity: 0.75; line-height: 1.3; font-style: italic; margin-bottom: 0; }
+        .success-message { display: none; padding: 20px 0; animation: slideInRight 0.5s cubic-bezier(0.25, 0.8, 0.25, 1) forwards; flex-direction: column; justify-content: center; flex-grow: 1; }
+        .success-icon { width: 70px; height: 70px; background-color: #4e513e; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; margin: 0 auto 20px auto; box-shadow: 0 8px 20px rgba(78, 81, 62, 0.3); }
+        .success-message h3 { font-size: 2.2rem; color: #4e513e; margin-bottom: 10px; }
+        .success-message p { font-size: 1.15rem; color: #4f2d2c; }
 
         /* --- Footer --- */
-        footer {
-            text-align: center;
-            padding: 40px 20px;
-            background-color: #4e513e; 
-            color: #e9e2d8; 
-        }
-        .footer-contact {
-            margin-bottom: 20px;
-        }
-        .footer-contact p {
-            margin-bottom: 8px;
-            font-size: 1.1rem;
-            color: #e9e2d8;
-        }
-        .footer-contact a {
-            color: #c09050; 
-            text-decoration: none;
-            font-weight: bold;
-        }
-        .footer-contact a:hover {
-            text-decoration: underline;
-        }
-        .footer-disclosure {
-            max-width: 900px;
-            margin: 0 auto 0 auto; 
-            font-size: 0.8rem;
-            color: #e9e2d8; 
-            opacity: 0.75;
-            line-height: 1.5;
-            text-align: justify;
-            text-align-last: center; 
-        }
+        footer { text-align: center; padding: 40px 20px; background-color: #4e513e; color: #e9e2d8; }
+        .footer-contact { margin-bottom: 20px; }
+        .footer-contact p { margin-bottom: 8px; font-size: 1.1rem; color: #e9e2d8; }
+        .footer-contact a { color: #c09050; text-decoration: none; font-weight: bold; }
+        .footer-contact a:hover { text-decoration: underline; }
+        .footer-disclosure { max-width: 900px; margin: 0 auto 0 auto; font-size: 0.8rem; color: #e9e2d8; opacity: 0.75; line-height: 1.5; text-align: justify; text-align-last: center; }
 
         /* --- Mobile Responsiveness --- */
         @media (max-width: 768px) {
@@ -721,47 +392,15 @@
             .name-row { flex-direction: column; gap: 0; }
             .step-title { font-size: 1.5rem; }
             
-            /* Fullscreen standard mobile view */
-            .form-container-card.fullscreen-active {
-                top: 80px; 
-                bottom: auto; 
-                padding: 15px;
-                border-radius: 0;
-                overflow: hidden; 
-            }
-            .fullscreen-active .native-form-box {
-                min-height: 100%;
-                height: 100%;
-                border-radius: 8px;
-                margin-bottom: 0;
-                padding: 30px 20px; 
-            }
-
-            /* --- KEYBOARD OPEN COMPRESSION STATE --- */
-            .form-container-card.fullscreen-active.keyboard-open {
-                top: 0 !important; 
-                z-index: 10000; 
-                padding: 10px !important;
-            }
-            .form-container-card.keyboard-open .native-form-box {
-                padding: 15px 20px !important;
-            }
-            .form-container-card.keyboard-open .step-desc {
-                display: none !important; 
-            }
-            .form-container-card.keyboard-open .step-title {
-                font-size: 1.3rem !important;
-                margin-bottom: 10px !important;
-            }
-            .form-container-card.keyboard-open .input-group {
-                margin-bottom: 10px !important;
-            }
-            .form-container-card.keyboard-open .input-group input {
-                padding: 10px 15px !important; 
-            }
-            .form-container-card.keyboard-open .form-actions {
-                padding-top: 10px !important;
-            }
+            .form-container-card.fullscreen-active { top: 80px; bottom: auto; padding: 15px; border-radius: 0; overflow: hidden; }
+            .fullscreen-active .native-form-box { min-height: 100%; height: 100%; border-radius: 8px; margin-bottom: 0; padding: 30px 20px; }
+            .form-container-card.fullscreen-active.keyboard-open { top: 0 !important; z-index: 10000; padding: 10px !important; }
+            .form-container-card.keyboard-open .native-form-box { padding: 15px 20px !important; }
+            .form-container-card.keyboard-open .step-desc { display: none !important; }
+            .form-container-card.keyboard-open .step-title { font-size: 1.3rem !important; margin-bottom: 10px !important; }
+            .form-container-card.keyboard-open .input-group { margin-bottom: 10px !important; }
+            .form-container-card.keyboard-open .input-group input { padding: 10px 15px !important; }
+            .form-container-card.keyboard-open .form-actions { padding-top: 10px !important; }
         }
     </style>
 </head>
@@ -841,508 +480,23 @@
         </div>
     </section>
 
-    <section class="full-width-form-section">
-        <div class="form-container-card" id="form-container">
-            <video class="form-bg-video" autoplay loop muted playsinline>
-                <source src="https://andrewmarth.com/images/form_background.mp4" type="video/mp4">
-            </video>
-
-            <div class="native-form-box">
-                <button type="button" class="close-form-btn" id="close-form-btn">&times;</button>
-
-                <div id="start-screen" class="form-step active">
-                    <div class="step-content" style="justify-content: center;">
-                        <h2 class="step-title" style="font-size: 2.2rem; margin-bottom: 15px;">What Does This Look Like For You?</h2>
-                        <p style="font-size: 1.15rem; color: #4f2d2c; margin-bottom: 0; line-height: 1.6;">Fill out the information below to see what a purchase using this zero-down program looks like. It is completely zero-pressure and an incredible way to explore your buying power.</p>
-                    </div>
-                    <div class="form-actions" style="flex-direction: column; gap: 20px;">
-                        <button type="button" class="btn-primary" id="btn-start-form" style="padding: 15px 40px; font-size: 1.2rem; min-width: 200px;">Get Started</button>
-                        
-                        <div class="secure-notice">
-                            <div class="secure-header">
-                                <img src="https://andrewmarth.com/images/lock.png" alt="Secure Lock">
-                                <span>Secure Submission</span>
-                            </div>
-                            <p class="secure-disclaimer">All information is securely submitted and never shared with anyone. This is not a loan application and is only used for informational purposes.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <form id="conditional-form" style="display: none;">
-                    <input type="hidden" name="form_source" value="Zero Down Program Form">
-                    <div id="form-steps-container"></div>
-                </form>
-
-                <div class="success-message" id="success-message">
-                    <div class="success-icon">&#10003;</div>
-                    <h3>Information Received!</h3>
-                    <p>Thank you for submitting your details. I will review everything and reach out to you shortly to discuss your options.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+    <div id="form-placeholder" 
+         data-form-source="Zero Down Program Form" 
+         data-form-title="What Does This Look Like For You?" 
+         data-form-desc="Fill out the information below to see what a purchase using this zero-down program looks like. It is completely zero-pressure and an incredible way to explore your buying power.">
+    </div>
 
     <div id="footer-placeholder"></div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const formContainer = document.getElementById('form-container');
-            const startScreen = document.getElementById('start-screen');
-            const form = document.getElementById('conditional-form');
-            const container = document.getElementById('form-steps-container');
-            const successMsg = document.getElementById('success-message');
-            const btnStart = document.getElementById('btn-start-form');
-            const btnClose = document.getElementById('close-form-btn');
-            
-            let currentStepIndex = 0;
-            let stepHistory = [];
-            let slideDirection = 'forward'; 
-            let savedScrollY = 0; // Remembers scroll position
-
-            function val(id) {
-                const q = questions.find(q => q.id === id);
-                if (q && !q.cond()) return '';
-
-                const els = document.getElementsByName(id);
-                if(els.length === 0) return '';
-                if(els[0].type === 'radio') {
-                    const checked = Array.from(els).find(el => el.checked);
-                    return checked ? checked.value : '';
-                }
-                return els[0].value;
-            }
-
-            // 66 Question Logic Engine
-            const questions = [
-                { id: 'q_name', type: 'name', title: 'What is your name?', desc: 'Please provide your legal first and last name.', cond: () => true },
-                { id: 'q_phone', type: 'phone', title: 'What is the best phone number to reach you?', desc: 'I will use this to call or text you regarding your options.', cond: () => true },
-                { id: 'q_email', type: 'email', title: 'What is your email address?', desc: 'Your detailed buyer breakdown will be sent here.', cond: () => true },
-                { id: 'q_sell_home', type: 'yesno', title: 'Do you have a home to sell?', desc: 'Let me know if you have an existing property you plan to sell.', cond: () => true },
-                { id: 'q_sell_addr', type: 'address', title: 'What is the property address?', desc: 'Where is the property you are selling located?', cond: () => val('q_sell_home') === 'Yes' },
-                { id: 'q_sell_mort', type: 'curr', title: 'Outstanding Mortgage Balance', desc: 'Enter the approximate remaining balance on your current mortgage.', cond: () => val('q_sell_home') === 'Yes' },
-                { id: 'q_sell_liens', type: 'yesno', title: 'Are there any other liens or loans on the property?', desc: 'This includes home equity loans, solar liens, or tax liens.', cond: () => val('q_sell_home') === 'Yes' },
-                { id: 'q_sell_liens_bal', type: 'curr', title: 'Other Liens or Loans Balance', desc: 'What is the total combined balance of these additional liens?', cond: () => val('q_sell_liens') === 'Yes' },
-                { id: 'q_buy_new', type: 'yesno', title: 'Will you be buying a new home as well?', desc: 'Are you looking to purchase a new property after selling?', cond: () => val('q_sell_home') === 'Yes' },
-                { id: 'q_breakdown', type: 'yesno', title: 'Do you want a buyer breakdown sheet for your purchase?', desc: 'This provides a detailed estimate of your buying power and monthly costs.', cond: () => val('q_buy_new') === 'Yes' || val('q_sell_home') === 'No' },
-                
-                // Primary Income
-                { id: 'q_inc1_type', type: 'radio_inc', title: 'Primary Income Type', desc: 'Select how you earn your primary income.', cond: () => val('q_breakdown') === 'Yes' },
-                { id: 'q_inc1_title', type: 'text', title: 'Job Title', desc: 'What is your official job title or role?', cond: () => val('q_breakdown') === 'Yes' },
-                { id: 'q_inc1_desc', type: 'textarea', title: 'Quick Description of Income', desc: 'Briefly explain your business or how you earn this income.', cond: () => val('q_inc1_type') === 'Commission/1099' },
-                { id: 'q_inc1_sal', type: 'curr', title: 'Weekly Salary Amount', desc: 'Your gross weekly salary before taxes.', cond: () => val('q_inc1_type') === 'Salary' },
-                { id: 'q_inc1_hrly', type: 'curr_dec', title: 'Hourly Rate', desc: 'Your gross hourly pay rate before taxes.', cond: () => val('q_inc1_type') === 'Hourly' },
-                { id: 'q_inc1_hrs', type: 'number', title: 'Average Hours Worked Per Week', desc: 'How many hours do you typically work in a week?', cond: () => val('q_inc1_type') === 'Hourly' },
-                { id: 'q_inc1_tips', type: 'yesno', title: 'Do you earn tips as well?', desc: 'Do you regularly receive tips as part of your job?', cond: () => val('q_inc1_type') === 'Salary' || val('q_inc1_type') === 'Hourly' },
-                { id: 'q_inc1_tips_amt', type: 'curr', title: 'Average Weekly Tips Earned', desc: 'Estimated weekly tips before taxes.', cond: () => val('q_inc1_tips') === 'Yes' },
-                { id: 'q_inc1_comm', type: 'yesno', title: 'Do you earn commissions as well?', desc: 'Do you receive commission pay on top of your base?', cond: () => val('q_inc1_type') === 'Salary' || val('q_inc1_type') === 'Hourly' },
-                { id: 'q_inc1_comm_freq', type: 'radio_freq', title: 'How often are your commissions earned?', desc: 'How often are these commissions paid out?', cond: () => val('q_inc1_comm') === 'Yes' },
-                { id: 'q_inc1_comm_amt', type: 'curr', title: 'Average Commission Amount', desc: 'Average amount per commission payout before taxes.', cond: () => val('q_inc1_comm') === 'Yes' },
-                { id: 'q_inc1_bonus', type: 'yesno', title: 'Do you earn bonuses as well?', desc: 'Do you receive regular bonuses?', cond: () => val('q_inc1_type') === 'Salary' || val('q_inc1_type') === 'Hourly' },
-                { id: 'q_inc1_bonus_freq', type: 'radio_freq', title: 'How often are your bonuses earned?', desc: 'How often are these bonuses paid out?', cond: () => val('q_inc1_bonus') === 'Yes' },
-                { id: 'q_inc1_bonus_amt', type: 'curr', title: 'Average Bonus Amount', desc: 'Average amount per bonus payout before taxes.', cond: () => val('q_inc1_bonus') === 'Yes' },
-                { id: 'q_inc1_yearly', type: 'curr', title: 'Average Estimated Yearly Income', desc: 'Estimated total gross income for the year before taxes.', cond: () => val('q_inc1_type') === 'Commission/1099' },
-
-                // Secondary Income
-                { id: 'q_inc2_has', type: 'yesno', title: 'Do you have any Secondary Income?', desc: 'Let me know if you have a second job or income source.', cond: () => val('q_breakdown') === 'Yes' },
-                { id: 'q_inc2_type', type: 'radio_inc', title: 'Secondary Income Type', desc: 'Select how you earn this secondary income.', cond: () => val('q_inc2_has') === 'Yes' },
-                { id: 'q_inc2_title', type: 'text', title: 'Job Title (Secondary)', desc: 'What is your official job title or role?', cond: () => val('q_inc2_has') === 'Yes' },
-                { id: 'q_inc2_desc', type: 'textarea', title: 'Quick Description of Income (Secondary)', desc: 'Briefly explain your business or how you earn this income.', cond: () => val('q_inc2_type') === 'Commission/1099' },
-                { id: 'q_inc2_sal', type: 'curr', title: 'Weekly Salary Amount (Secondary)', desc: 'Your gross weekly salary before taxes.', cond: () => val('q_inc2_type') === 'Salary' },
-                { id: 'q_inc2_hrly', type: 'curr_dec', title: 'Hourly Rate (Secondary)', desc: 'Your gross hourly pay rate before taxes.', cond: () => val('q_inc2_type') === 'Hourly' },
-                { id: 'q_inc2_hrs', type: 'number', title: 'Average Hours Worked Per Week (Secondary)', desc: 'How many hours do you typically work in a week?', cond: () => val('q_inc2_type') === 'Hourly' },
-                { id: 'q_inc2_tips', type: 'yesno', title: 'Do you earn tips as well? (Secondary)', desc: 'Do you regularly receive tips as part of your job?', cond: () => val('q_inc2_type') === 'Salary' || val('q_inc2_type') === 'Hourly' },
-                { id: 'q_inc2_tips_amt', type: 'curr', title: 'Average Weekly Tips Earned (Secondary)', desc: 'Estimated weekly tips before taxes.', cond: () => val('q_inc2_tips') === 'Yes' },
-                { id: 'q_inc2_comm', type: 'yesno', title: 'Do you earn commissions as well? (Secondary)', desc: 'Do you receive commission pay on top of your base?', cond: () => val('q_inc2_type') === 'Salary' || val('q_inc2_type') === 'Hourly' },
-                { id: 'q_inc2_comm_freq', type: 'radio_freq', title: 'How often are your commissions earned? (Secondary)', desc: 'How often are these commissions paid out?', cond: () => val('q_inc2_comm') === 'Yes' },
-                { id: 'q_inc2_comm_amt', type: 'curr', title: 'Average Commission Amount (Secondary)', desc: 'Average amount per commission payout before taxes.', cond: () => val('q_inc2_comm') === 'Yes' },
-                { id: 'q_inc2_bonus', type: 'yesno', title: 'Do you earn bonuses as well? (Secondary)', desc: 'Do you receive regular bonuses?', cond: () => val('q_inc2_type') === 'Salary' || val('q_inc2_type') === 'Hourly' },
-                { id: 'q_inc2_bonus_freq', type: 'radio_freq', title: 'How often are your bonuses earned? (Secondary)', desc: 'How often are these bonuses paid out?', cond: () => val('q_inc2_bonus') === 'Yes' },
-                { id: 'q_inc2_bonus_amt', type: 'curr', title: 'Average Bonus Amount (Secondary)', desc: 'Average amount per bonus payout before taxes.', cond: () => val('q_inc2_bonus') === 'Yes' },
-                { id: 'q_inc2_yearly', type: 'curr', title: 'Average Estimated Yearly Income (Secondary)', desc: 'Estimated total gross income for the year before taxes.', cond: () => val('q_inc2_type') === 'Commission/1099' },
-
-                // Third Income
-                { id: 'q_inc3_has', type: 'yesno', title: 'Do you have a 3rd Source of Income?', desc: 'Let me know if you have a third job or income source.', cond: () => val('q_inc2_has') === 'Yes' },
-                { id: 'q_inc3_type', type: 'radio_inc', title: '3rd Source Income Type', desc: 'Select how you earn this third income.', cond: () => val('q_inc3_has') === 'Yes' },
-                { id: 'q_inc3_title', type: 'text', title: 'Job Title (3rd Source)', desc: 'What is your official job title or role?', cond: () => val('q_inc3_has') === 'Yes' },
-                { id: 'q_inc3_desc', type: 'textarea', title: 'Quick Description of Income (3rd Source)', desc: 'Briefly explain your business or how you earn this income.', cond: () => val('q_inc3_type') === 'Commission/1099' },
-                { id: 'q_inc3_sal', type: 'curr', title: 'Weekly Salary Amount (3rd Source)', desc: 'Your gross weekly salary before taxes.', cond: () => val('q_inc3_type') === 'Salary' },
-                { id: 'q_inc3_hrly', type: 'curr_dec', title: 'Hourly Rate (3rd Source)', desc: 'Your gross hourly pay rate before taxes.', cond: () => val('q_inc3_type') === 'Hourly' },
-                { id: 'q_inc3_hrs', type: 'number', title: 'Average Hours Worked Per Week (3rd Source)', desc: 'How many hours do you typically work in a week?', cond: () => val('q_inc3_type') === 'Hourly' },
-                { id: 'q_inc3_tips', type: 'yesno', title: 'Do you earn tips as well? (3rd Source)', desc: 'Do you regularly receive tips as part of your job?', cond: () => val('q_inc3_type') === 'Salary' || val('q_inc3_type') === 'Hourly' },
-                { id: 'q_inc3_tips_amt', type: 'curr', title: 'Average Weekly Tips Earned (3rd Source)', desc: 'Estimated weekly tips before taxes.', cond: () => val('q_inc3_tips') === 'Yes' },
-                { id: 'q_inc3_comm', type: 'yesno', title: 'Do you earn commissions as well? (3rd Source)', desc: 'Do you receive commission pay on top of your base?', cond: () => val('q_inc3_type') === 'Salary' || val('q_inc3_type') === 'Hourly' },
-                { id: 'q_inc3_comm_freq', type: 'radio_freq', title: 'How often are your commissions earned? (3rd Source)', desc: 'How often are these commissions paid out?', cond: () => val('q_inc3_comm') === 'Yes' },
-                { id: 'q_inc3_comm_amt', type: 'curr', title: 'Average Commission Amount (3rd Source)', desc: 'Average amount per commission payout before taxes.', cond: () => val('q_inc3_comm') === 'Yes' },
-                { id: 'q_inc3_bonus', type: 'yesno', title: 'Do you earn bonuses as well? (3rd Source)', desc: 'Do you receive regular bonuses?', cond: () => val('q_inc3_type') === 'Salary' || val('q_inc3_type') === 'Hourly' },
-                { id: 'q_inc3_bonus_freq', type: 'radio_freq', title: 'How often are your bonuses earned? (3rd Source)', desc: 'How often are these bonuses paid out?', cond: () => val('q_inc3_bonus') === 'Yes' },
-                { id: 'q_inc3_bonus_amt', type: 'curr', title: 'Average Bonus Amount (3rd Source)', desc: 'Average amount per bonus payout before taxes.', cond: () => val('q_inc3_bonus') === 'Yes' },
-                { id: 'q_inc3_yearly', type: 'curr', title: 'Average Estimated Yearly Income (3rd Source)', desc: 'Estimated total gross income for the year before taxes.', cond: () => val('q_inc3_type') === 'Commission/1099' },
-
-                // Debts & Obligations
-                { id: 'q_debt_car', type: 'yesno', title: 'Do you have any Car Payments?', desc: 'Do you have any auto loans or leases currently in your name?', cond: () => val('q_breakdown') === 'Yes' },
-                { id: 'q_debt_car_amt', type: 'curr', title: 'Your Monthly Car Payments', desc: 'What is the total combined minimum monthly payment?', cond: () => val('q_debt_car') === 'Yes' },
-                { id: 'q_debt_mort', type: 'yesno', title: 'Do you have any existing houses with Mortgages?', desc: 'Are you officially listed on the mortgage for any other properties?', cond: () => val('q_breakdown') === 'Yes' },
-                { id: 'q_debt_mort_amt', type: 'curr', title: 'Your Existing Mortgage Payments', desc: 'What is the total combined monthly payment for these properties?', cond: () => val('q_debt_mort') === 'Yes' },
-                { id: 'q_debt_cc', type: 'yesno', title: 'Do you have any Credit Cards with a balance?', desc: 'Do you carry a balance on any credit cards?', cond: () => val('q_breakdown') === 'Yes' },
-                { id: 'q_debt_cc_amt', type: 'curr', title: 'Your Monthly Minimum Card Payments', desc: 'What is the total combined minimum monthly payment across all cards?', cond: () => val('q_debt_cc') === 'Yes' },
-                { id: 'q_debt_oth', type: 'yesno', title: 'Do you have any other Debt Obligations?', desc: 'Includes student loans, personal loans, child support, or alimony.', cond: () => val('q_breakdown') === 'Yes' },
-                { id: 'q_debt_oth_amt', type: 'curr', title: 'Your Monthly Other Debt Payments', desc: 'What is the total combined minimum monthly payment for these obligations?', cond: () => val('q_debt_oth') === 'Yes' },
-                { id: 'q_co_borrower', type: 'yesno', title: 'Will another person be a part of the purchase?', desc: 'Will a spouse, partner, or co-signer be applying for the loan with you?', cond: () => val('q_buy_new') === 'Yes' || val('q_sell_home') === 'No' }
-            ];
-
-            // Render HTML securely to DOM
-            questions.forEach((q, i) => {
-                let inner = '';
-                if(q.type === 'name') {
-                    inner = `<div class="name-row">
-                                <div class="input-group"><label>First Name</label><input type="text" name="${q.id}_first" placeholder="First"></div>
-                                <div class="input-group"><label>Last Name</label><input type="text" name="${q.id}_last" placeholder="Last"></div>
-                             </div>`;
-                } else if(q.type === 'address') {
-                    inner = `<div class="input-group"><label>Street Address</label><input type="text" name="${q.id}_st" placeholder="123 Main St"></div>
-                             <div class="name-row">
-                                <div class="input-group"><label>City</label><input type="text" name="${q.id}_city" placeholder="City"></div>
-                                <div class="input-group"><label>State</label><input type="text" name="${q.id}_state" placeholder="State"></div>
-                                <div class="input-group"><label>Zip</label><input type="text" name="${q.id}_zip" placeholder="Zip"></div>
-                             </div>`;
-                } else if(q.type === 'yesno') {
-                    inner = `<div class="radio-group">
-                                <label class="radio-btn"><input type="radio" name="${q.id}" value="Yes"><span>Yes</span></label>
-                                <label class="radio-btn"><input type="radio" name="${q.id}" value="No"><span>No</span></label>
-                             </div>`;
-                } else if(q.type === 'radio_inc' || q.type === 'radio_freq') {
-                    const opts = q.type === 'radio_inc' ? ['Salary', 'Hourly', 'Commission/1099'] : ['Weekly', 'Monthly', 'Quarterly', 'Annually', 'Bi-Annually (Twice Per Year)'];
-                    inner = `<div class="radio-group vertical">`;
-                    opts.forEach(opt => inner += `<label class="radio-btn"><input type="radio" name="${q.id}" value="${opt}"><span>${opt}</span></label>`);
-                    inner += `</div>`;
-                } else if(q.type === 'textarea') {
-                    inner = `<div class="input-group"><textarea name="${q.id}" rows="4" placeholder="Briefly describe..."></textarea></div>`;
-                } else {
-                    let cls = '', type = 'text', ph = '';
-                    if(q.type==='email') { type='email'; ph='email@example.com'; }
-                    if(q.type==='phone') { type='tel'; cls='fmt-phone'; ph='(555) 555-5555'; }
-                    if(q.type==='number') { type='number'; cls='fmt-num'; ph='Ex: 40'; }
-                    if(q.type==='curr') { type='text'; cls='fmt-curr'; ph='$0'; }
-                    if(q.type==='curr_dec') { type='text'; cls='fmt-curr-dec'; ph='$0.00'; }
-                    inner = `<div class="input-group"><input type="${type}" name="${q.id}" class="${cls}" placeholder="${ph}"></div>`;
-                }
-
-                const stepDiv = document.createElement('div');
-                stepDiv.className = 'form-step';
-                stepDiv.id = `step-${i}`;
-                
-                stepDiv.innerHTML = `
-                    <div class="step-header">
-                        <h3 class="step-title">${q.title}</h3>
-                        <p class="step-desc">${q.desc}</p>
-                    </div>
-                    <div class="step-inputs">
-                        ${inner}
-                    </div>
-                    <div class="form-actions" id="actions-${i}"></div>
-                `;
-                container.appendChild(stepDiv);
-            });
-
-            // --- Fullscreen Takeover & Mobile Keyboard Logic ---
-            function adjustFullscreenHeight() {
-                if (formContainer.classList.contains('fullscreen-active')) {
-                    const isKeyboardOpen = formContainer.classList.contains('keyboard-open');
-                    const offset = isKeyboardOpen ? 0 : 80; 
-
-                    if (window.visualViewport) {
-                        formContainer.style.bottom = 'auto'; 
-                        formContainer.style.height = (window.visualViewport.height - offset) + 'px';
-                    } else {
-                        formContainer.style.bottom = 'auto'; 
-                        formContainer.style.height = (window.innerHeight - offset) + 'px';
-                    }
-                } else {
-                    formContainer.style.height = '';
-                    formContainer.style.bottom = '';
-                }
-            }
-
-            if (window.visualViewport) {
-                window.visualViewport.addEventListener('resize', adjustFullscreenHeight);
-                window.visualViewport.addEventListener('scroll', () => {
-                    // Locks the background scroll dynamically to prevent mobile wobble
-                    if(formContainer.classList.contains('fullscreen-active')) {
-                        window.scrollTo(0, savedScrollY); 
-                    }
-                });
-            }
-
-            container.addEventListener('focusin', (e) => {
-                if (window.innerWidth <= 768 && (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA')) {
-                    formContainer.classList.add('keyboard-open');
-                    setTimeout(adjustFullscreenHeight, 50); 
-                }
-            });
-
-            container.addEventListener('focusout', (e) => {
-                setTimeout(() => {
-                    const activeElement = document.activeElement;
-                    if (activeElement.tagName !== 'INPUT' && activeElement.tagName !== 'TEXTAREA') {
-                        formContainer.classList.remove('keyboard-open');
-                        adjustFullscreenHeight();
-                    }
-                }, 50);
-            });
-
-            btnStart.addEventListener('click', () => {
-                // SAVES POSITION BEFORE ANIMATING
-                savedScrollY = window.scrollY || document.documentElement.scrollTop;
-                
-                document.body.classList.add('no-scroll');
-                formContainer.classList.add('fullscreen-active');
-                startScreen.classList.remove('active');
-                form.style.display = 'flex';
-                adjustFullscreenHeight(); 
-                renderFlow(); 
-            });
-
-            btnClose.addEventListener('click', () => {
-                // 1. Instantly return DOM to normal flow so the page height expands back to normal
-                formContainer.classList.remove('fullscreen-active', 'keyboard-open');
-                formContainer.style.height = ''; 
-                formContainer.style.bottom = ''; 
-                
-                form.style.display = 'none';
-                form.reset(); 
-                currentStepIndex = 0;
-                stepHistory = [];
-                document.querySelectorAll('.form-step').forEach(s => s.classList.remove('active', 'active-reverse'));
-                startScreen.classList.add('active');
-                
-                // Unlock the body
-                document.body.classList.remove('no-scroll');
-                
-                // 2. Wait a microscopic 10 milliseconds for the browser to repaint the height, THEN restore scroll
-                setTimeout(() => {
-                    window.scrollTo(0, savedScrollY);
-                }, 10);
-            });
-
-            function updateActions() {
-                const currentEl = document.getElementById(`step-${currentStepIndex}`);
-                const actionsEl = document.getElementById(`actions-${currentStepIndex}`);
-                if (!actionsEl) return;
-                
-                actionsEl.innerHTML = '';
-                
-                let nextStepIndex = -1;
-                for(let i = currentStepIndex + 1; i < questions.length; i++) {
-                    if(questions[i].cond()) { nextStepIndex = i; break; }
-                }
-
-                if(stepHistory.length > 0) {
-                    const btnBack = document.createElement('button');
-                    btnBack.type = 'button';
-                    btnBack.className = 'btn-secondary';
-                    btnBack.textContent = 'Back';
-                    btnBack.onclick = () => {
-                        slideDirection = 'backward';
-                        currentStepIndex = stepHistory.pop();
-                        renderFlow();
-                    };
-                    actionsEl.appendChild(btnBack);
-                }
-
-                const btnForward = document.createElement('button');
-                btnForward.className = 'btn-primary btn-forward';
-                btnForward.type = 'submit'; 
-                
-                if(nextStepIndex === -1) {
-                    btnForward.textContent = 'Submit';
-                } else {
-                    btnForward.textContent = 'Next';
-                }
-                actionsEl.appendChild(btnForward);
-            }
-
-            container.addEventListener('input', e => {
-                const el = e.target;
-                if(el.classList.contains('fmt-phone')) {
-                    let x = el.value.replace(/\D/g, '').match(/(\d{0,3})(\d{0,3})(\d{0,4})/);
-                    el.value = !x[2] ? x[1] : '(' + x[1] + ') ' + x[2] + (x[3] ? '-' + x[3] : '');
-                } else if(el.classList.contains('fmt-num')) {
-                    el.value = el.value.replace(/\D/g, '');
-                } else if(el.classList.contains('fmt-curr')) {
-                    let val = el.value.replace(/\D/g, '');
-                    el.value = val ? '$' + parseInt(val, 10).toLocaleString() : '';
-                } else if(el.classList.contains('fmt-curr-dec')) {
-                    let val = el.value.replace(/[^0-9.]/g, '');
-                    let p = val.split('.');
-                    if(p.length > 2) val = p[0] + '.' + p.slice(1).join('');
-                    if(val) {
-                        if(val.includes('.')) {
-                            let p2 = val.split('.');
-                            let whole = p2[0] ? parseInt(p2[0], 10).toLocaleString() : '0';
-                            el.value = '$' + whole + '.' + p2[1].substring(0,2);
-                        } else {
-                            el.value = '$' + parseInt(val, 10).toLocaleString();
-                        }
-                    } else {
-                        el.value = '';
-                    }
-                }
-                el.classList.remove('error'); 
-            });
-
-            container.addEventListener('keydown', e => {
-                if (e.key === 'Enter' && e.target.tagName !== 'TEXTAREA') {
-                    e.preventDefault(); 
-                    const currentEl = document.getElementById(`step-${currentStepIndex}`);
-                    const fwdBtn = currentEl.querySelector('.btn-forward');
-                    if (fwdBtn) fwdBtn.click(); 
-                }
-            });
-
-            container.addEventListener('change', e => {
-                if(e.target.type === 'radio') {
-                    e.target.closest('.radio-group').classList.remove('error');
-                    updateActions(); 
-                    
-                    const currentEl = document.getElementById(`step-${currentStepIndex}`);
-                    const fwdBtn = currentEl.querySelector('.btn-forward');
-                    if (fwdBtn && fwdBtn.textContent === 'Next') {
-                        setTimeout(() => {
-                            if (currentEl.classList.contains('active') || currentEl.classList.contains('active-reverse')) {
-                                fwdBtn.click();
-                            }
-                        }, 350); 
-                    }
-                }
-            });
-
-            function renderFlow() {
-                document.querySelectorAll('.form-step').forEach(s => {
-                    s.classList.remove('active', 'active-reverse');
-                });
-                
-                const currentEl = document.getElementById(`step-${currentStepIndex}`);
-                if(slideDirection === 'forward') {
-                    currentEl.classList.add('active');
-                } else {
-                    currentEl.classList.add('active-reverse');
-                }
-                
-                updateActions();
-
-                if (window.innerWidth > 768) {
-                    const firstInput = currentEl.querySelector('input[type="text"], input[type="tel"], input[type="email"], input[type="number"]');
-                    if (firstInput) {
-                        setTimeout(() => firstInput.focus(), 50);
-                    }
-                }
-            }
-
-            function validateStep(stepEl) {
-                let isValid = true;
-                const inputs = stepEl.querySelectorAll('input, textarea');
-                
-                const radioNames = new Set();
-                inputs.forEach(i => { if(i.type === 'radio') radioNames.add(i.name); });
-                radioNames.forEach(name => {
-                    const group = stepEl.querySelector(`.radio-group:has(input[name="${name}"])`);
-                    if(!stepEl.querySelector(`input[name="${name}"]:checked`)) {
-                        isValid = false;
-                        group.classList.add('error');
-                    } else {
-                        group.classList.remove('error');
-                    }
-                });
-
-                inputs.forEach(i => {
-                    if(i.type !== 'radio') {
-                        if(!i.value.trim()) {
-                            isValid = false; i.classList.add('error');
-                        } else if(i.type === 'email' && !i.value.includes('@')) {
-                            isValid = false; i.classList.add('error');
-                        } else if(i.classList.contains('fmt-phone') && i.value.replace(/\D/g, '').length < 10) {
-                            isValid = false; i.classList.add('error');
-                        }
-                    }
-                });
-                return isValid;
-            }
-
-            form.addEventListener('submit', e => {
-                e.preventDefault();
-                const currentEl = document.getElementById(`step-${currentStepIndex}`);
-                if(!validateStep(currentEl)) return;
-
-                let nextStepIndex = -1;
-                for(let i = currentStepIndex + 1; i < questions.length; i++) {
-                    if(questions[i].cond()) { nextStepIndex = i; break; }
-                }
-                
-                if (nextStepIndex !== -1) {
-                    slideDirection = 'forward';
-                    stepHistory.push(currentStepIndex);
-                    currentStepIndex = nextStepIndex;
-                    renderFlow();
-                    return;
-                }
-
-                const submitBtn = currentEl.querySelector('.btn-forward');
-                submitBtn.textContent = 'Submitting...';
-                submitBtn.disabled = true;
-
-                const finalData = new FormData();
-                finalData.append('form_source', 'Zero Down Program Form');
-                
-                const azDate = new Date(new Date().toLocaleString("en-US", {timeZone: "America/Phoenix"}));
-                const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-                const formattedDate = monthNames[azDate.getMonth()] + " " + String(azDate.getDate()).padStart(2, '0') + " " + azDate.getFullYear();
-                finalData.append('submission_date', formattedDate);
-                
-                questions.forEach(q => {
-                    const isActive = q.cond();
-                    const stepEl = document.getElementById(`step-${questions.indexOf(q)}`);
-                    const inputs = Array.from(stepEl.querySelectorAll('input, textarea'));
-                    
-                    const uniqueNames = [...new Set(inputs.map(i => i.name))];
-                    
-                    uniqueNames.forEach(name => {
-                        if (!isActive) {
-                            finalData.append(name, "");
-                        } else {
-                            const els = inputs.filter(i => i.name === name);
-                            if (els[0].type === 'radio') {
-                                const checked = els.find(el => el.checked);
-                                finalData.append(name, checked ? checked.value : "");
-                            } else {
-                                finalData.append(name, els[0].value);
-                            }
-                        }
-                    });
-                });
-
-                fetch('https://hooks.zapier.com/hooks/catch/17339400/42fpg7w/', {
-                    method: 'POST',
-                    body: finalData,
-                    mode: 'no-cors' 
-                })
-                .then(() => {
-                    window.location.href = 'https://andrewmarth.com/thank-you';
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    submitBtn.textContent = 'Error. Try Again.';
-                    submitBtn.disabled = false;
-                });
-            });
-        });
-
-        // --- Standard HTML Component Loading ---
         async function loadComponent(id, file) {
             try {
                 const response = await fetch(file);
                 if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
                 const html = await response.text();
-                document.getElementById(id).innerHTML = html;
+                const el = document.getElementById(id);
+                if(el) el.innerHTML = html;
+                
                 if (id === 'header-placeholder') initNavigation();
             } catch (error) { console.error(error); }
         }
@@ -1357,9 +511,22 @@
             }
         }
 
-        document.addEventListener('DOMContentLoaded', () => {
-            loadComponent('header-placeholder', 'header.html');
-            loadComponent('footer-placeholder', 'footer.html');
+        document.addEventListener('DOMContentLoaded', async () => {
+            // Wait for header and footer to load
+            await loadComponent('header-placeholder', 'header.html');
+            await loadComponent('footer-placeholder', 'footer.html');
+            
+            // Check if this page needs the dynamic form
+            const formPlaceholder = document.getElementById('form-placeholder');
+            if(formPlaceholder) {
+                // Load the HTML component
+                await loadComponent('form-placeholder', 'form-component.html');
+                
+                // Fire up the logic engine once the HTML is successfully injected!
+                if (typeof initDynamicForm === 'function') {
+                    initDynamicForm();
+                }
+            }
         });
     </script>
 </body>
