@@ -1,0 +1,40 @@
+<section class="full-width-form-section">
+    <div class="form-container-card" id="form-container">
+        <video class="form-bg-video" autoplay loop muted playsinline>
+            <source src="https://andrewmarth.com/images/form_background.mp4" type="video/mp4">
+        </video>
+
+        <div class="native-form-box">
+            <button type="button" class="close-form-btn" id="close-form-btn">&times;</button>
+
+            <div id="start-screen" class="form-step active">
+                <div class="step-content" style="justify-content: center;">
+                    <h2 class="step-title" id="dynamic-form-title" style="font-size: 2.2rem; margin-bottom: 15px;">Ready to Take the First Step?</h2>
+                    <p id="dynamic-form-desc" style="font-size: 1.15rem; color: #4f2d2c; margin-bottom: 0; line-height: 1.6;">Fill out the information below to get started.</p>
+                </div>
+                <div class="form-actions" style="flex-direction: column; gap: 20px;">
+                    <button type="button" class="btn-primary" id="btn-start-form" style="padding: 15px 40px; font-size: 1.2rem; min-width: 200px;">Get Started</button>
+                    
+                    <div class="secure-notice">
+                        <div class="secure-header">
+                            <img src="https://andrewmarth.com/images/lock.png" alt="Secure Lock">
+                            <span>Secure Submission</span>
+                        </div>
+                        <p class="secure-disclaimer">All information is securely submitted and never shared with anyone. This is not a loan application and is only used for informational purposes.</p>
+                    </div>
+                </div>
+            </div>
+
+            <form id="conditional-form" style="display: none;">
+                <input type="hidden" name="form_source" id="dynamic-form-source" value="General Form">
+                <div id="form-steps-container"></div>
+            </form>
+            
+            <div class="success-message" id="success-message">
+                <div class="success-icon">&#10003;</div>
+                <h3>Information Received!</h3>
+                <p>Thank you for submitting your details. I will review everything and reach out to you shortly to discuss your options.</p>
+            </div>
+        </div>
+    </div>
+</section>
