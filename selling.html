@@ -4,481 +4,259 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Selling a Home | Andrew Marth Real Estate</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Familjen+Grotesk:wght@400..700&display=swap" rel="stylesheet">
+    
+    <script src="form-logic.js"></script>
     <style>
         /* --- General Reset & Styling --- */
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-        body {
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            line-height: 1.6;
-            color: #4f2d2c; 
-            background-color: #e9e2d8; 
-            overflow-x: hidden; 
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        /* The Absolute Hard Lock: Prevents ALL horizontal scrolling across all mobile browsers */
+        html, body { width: 100%; max-width: 100%; overflow-x: hidden; position: relative; }
+        
+        body { font-family: 'Familjen Grotesk', sans-serif; line-height: 1.6; color: #4f2d2c; background-color: #e9e2d8; }
+        
+        /* Updated Header Font */
+        h1, h2, h3, h4, h5, h6 { font-family: 'Bricolage Grotesque', sans-serif; }
+        
+        body.no-scroll { overflow: hidden !important; touch-action: none; }
+        body.no-scroll::after { content: ''; position: fixed; top: -10vh; left: 0; width: 100%; height: 150vh; background-color: #e9e2d8; z-index: 998; }
+        
+        .navbar { background: rgba(233, 226, 216, 0.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); transform: translate3d(0, 0, 0); backface-visibility: hidden; position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; padding: 15px 30px; display: flex; align-items: center; border-bottom: 1px solid rgba(153, 114, 75, 0.3); min-height: 80px; transition: transform 0.3s ease; }
+        .mobile-center-logo { display: none; }
+        .hamburger { display: none; font-size: 2rem; background: none; border: none; color: #4e513e; cursor: pointer; }
+        .nav-menu { display: flex; justify-content: space-between; align-items: center; width: 100%; }
+        .nav-logo img { height: 50px; width: auto; display: block; border-radius: 4px; }
+        .nav-logo a { text-decoration: none; display: block; }
+        .nav-links { display: flex; gap: 30px; align-items: center; }
+        .nav-links a { text-decoration: none; color: #4f2d2c; font-weight: bold; font-size: 1.1rem; transition: color 0.3s; }
+        .nav-links a:hover { color: #9a5d40; }
+        .close-menu { display: none; }
+
+        header { background: linear-gradient(rgba(78, 81, 62, 0.75), rgba(78, 81, 62, 0.75)), url('https://andrewmarth.com/images/background.jpeg'); background-size: cover; background-position: center; color: #e9e2d8; padding: 160px 20px 100px 20px; text-align: center; }
+        header h1 { font-size: 3rem; margin-bottom: 15px; letter-spacing: 2px; text-shadow: 0 2px 4px rgba(0,0,0,0.3); }
+        header p { font-size: 1.3rem; color: #e9e2d8; opacity: 0.95; max-width: 700px; margin: 0 auto; text-shadow: 0 1px 3px rgba(0,0,0,0.3); }
+
+        /* --- Unified Roadmap Section (Card + Timeline) --- */
+        .roadmap-section {
+            padding: 60px 20px;
+            background-color: #e9e2d8;
         }
         
-        /* --- Navigation Bar (Fixed & Glassmorphism) --- */
-        .navbar {
-            background: rgba(233, 226, 216, 0.85); 
-            backdrop-filter: blur(12px); 
-            -webkit-backdrop-filter: blur(12px); 
-            
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000; 
-            
-            padding: 15px 30px;
-            display: flex;
-            align-items: center;
-            border-bottom: 1px solid rgba(153, 114, 75, 0.3); 
-            min-height: 80px;
-        }
-        .mobile-center-logo {
-            display: none; 
-        }
-        .hamburger {
-            display: none;
-            font-size: 2rem;
-            background: none;
-            border: none;
-            color: #4e513e; 
-            cursor: pointer;
-        }
-        .nav-menu {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 100%;
-        }
-        .nav-logo img {
-            height: 50px; 
-            width: auto;
-            display: block;
-            border-radius: 4px;
-        }
-        .nav-logo a {
-            text-decoration: none; 
-            display: block;
-        }
-        .nav-links {
-            display: flex;
-            gap: 30px;
-            align-items: center;
-        }
-        .nav-links a {
-            text-decoration: none;
-            color: #4f2d2c; 
-            font-weight: bold;
-            font-size: 1.1rem;
-            transition: color 0.3s;
-        }
-        .nav-links a:hover {
-            color: #9a5d40; 
-        }
-        .close-menu {
-            display: none; 
-        }
-
-        /* Mobile Navigation Styles */
-        @media (max-width: 768px) {
-            .navbar {
-                justify-content: flex-end; 
-            }
-            .mobile-center-logo {
-                display: block;
-                position: absolute;
-                left: 50%;
-                top: 50%;
-                transform: translate(-50%, -50%); 
-            }
-            .mobile-center-logo img {
-                height: 40px; 
-                width: auto;
-                border-radius: 4px;
-                display: block;
-            }
-            .hamburger {
-                display: block;
-            }
-            .nav-menu {
-                position: fixed;
-                top: 0;
-                right: -100%; 
-                width: 280px;
-                height: 100vh;
-                background: rgba(233, 226, 216, 0.95); 
-                backdrop-filter: blur(15px);
-                -webkit-backdrop-filter: blur(15px);
-                flex-direction: column;
-                justify-content: flex-start;
-                align-items: flex-start;
-                padding: 60px 30px 30px 30px;
-                box-shadow: -5px 0 15px rgba(0,0,0,0.1);
-                transition: right 0.3s ease;
-                z-index: 1001; 
-            }
-            .nav-menu.active {
-                right: 0; 
-            }
-            .nav-logo {
-                margin-bottom: 40px;
-                width: 100%;
-                display: flex;
-                justify-content: center;
-            }
-            .nav-logo img {
-                height: 60px;
-            }
-            .nav-links {
-                flex-direction: column;
-                width: 100%;
-                align-items: flex-start;
-                gap: 20px;
-            }
-            .nav-links a {
-                display: block;
-                width: 100%;
-                padding-bottom: 10px;
-                border-bottom: 1px solid rgba(192, 144, 80, 0.4); 
-                font-size: 1.3rem;
-            }
-            .close-menu {
-                display: block;
-                position: absolute;
-                top: 15px;
-                right: 25px;
-                font-size: 2.5rem;
-                background: none;
-                border: none;
-                color: #4f2d2c;
-                cursor: pointer;
-                line-height: 1;
-            }
-        }
-
-        /* --- Header / Hero Section (Matches Homepage) --- */
-        header {
-            background: linear-gradient(rgba(78, 81, 62, 0.75), rgba(78, 81, 62, 0.75)), url('https://andrewmarth.com/images/background.jpeg');
-            background-size: cover;
-            background-position: center;
-            color: #e9e2d8; 
-            padding: 160px 20px 100px 20px; 
-            text-align: center;
-        }
-        header h1 {
-            font-size: 3rem; 
-            margin-bottom: 15px;
-            letter-spacing: 2px;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.3); 
-        }
-        header p {
-            font-size: 1.3rem;
-            color: #e9e2d8; 
-            opacity: 0.95; 
-            max-width: 700px;
-            margin: 0 auto;
-            text-shadow: 0 1px 3px rgba(0,0,0,0.3);
-        }
-
-        /* --- Intro Section --- */
-        .intro-section {
-            max-width: 900px;
-            margin: 60px auto 20px auto;
-            padding: 0 20px;
-            text-align: center;
-        }
-        .intro-section h2 {
-            font-size: 2.2rem;
-            color: #4f2d2c;
-            margin-bottom: 20px;
-        }
-        .intro-section p {
-            font-size: 1.1rem;
-            margin-bottom: 15px;
-        }
-
-        /* --- Timeline Section --- */
-        .timeline-section {
-            padding: 40px 20px 60px 20px;
-            background-color: #e9e2d8;
-        }
-        .timeline {
-            position: relative;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        /* The central vertical line */
-        .timeline::after {
-            content: '';
-            position: absolute;
-            width: 4px;
-            background-color: #99724b; 
-            top: 0;
-            bottom: 0;
-            left: 50%;
-            margin-left: -2px;
-            border-radius: 2px;
-        }
-
-        /* Container for each timeline item */
-        .timeline-item {
-            padding: 10px 40px;
-            position: relative;
-            background-color: inherit;
-            width: 50%;
-        }
-
-        /* The circles on the timeline */
-        .timeline-item::after {
-            content: '';
-            position: absolute;
-            width: 24px;
-            height: 24px;
-            right: -12px;
-            background-color: #e9e2d8;
-            border: 4px solid #4e513e; 
-            top: 25px;
-            border-radius: 50%;
-            z-index: 1;
-        }
-
-        /* Place items to the left */
-        .left {
-            left: 0;
-        }
-
-        /* Place items to the right */
-        .right {
-            left: 50%;
-        }
-
-        /* Fix the circle position for right-aligned items */
-        .right::after {
-            left: -12px;
-        }
-
-        /* Actual content card inside the timeline item */
-        .content {
-            padding: 25px 30px;
-            background-color: white;
-            position: relative;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            border-top: 4px solid #4e513e;
-        }
-        .content h3 {
-            color: #4e513e;
-            font-size: 1.4rem;
-            margin-bottom: 10px;
-        }
-        .content p {
-            font-size: 1.05rem;
-            color: #4f2d2c;
-        }
-        .step-number {
-            font-size: 0.9rem;
-            color: #99724b;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 5px;
-            display: block;
-        }
-
-        /* Small Button specifically for the timeline */
-        .timeline-btn {
-            display: inline-block;
-            margin-top: 15px;
-            padding: 10px 18px;
-            background-color: #99724b;
-            color: #e9e2d8;
-            text-decoration: none;
-            border-radius: 4px;
-            font-weight: bold;
-            font-size: 0.95rem;
-            transition: background-color 0.3s;
-        }
-        .timeline-btn:hover {
-            background-color: #9a5d40;
-        }
-
-        /* --- Call to Action Section --- */
-        .cta-section {
-            max-width: 800px;
-            margin: 0 auto 80px auto; 
-            padding: 40px 20px;
-            text-align: center;
+        .intro-card {
             background-color: #ffffff;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            border-top: 4px solid #99724b; 
+            border-radius: 20px;
+            border: 2px solid #0E2A3B;
+            box-shadow: 6px 6px 0px #0E2A3B;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 50px 40px;
+            text-align: center;
+            position: relative;
+            z-index: 2; /* Forces the card to sit visually above the timeline line */
         }
-        .cta-section h2 {
-            font-size: 2rem;
-            color: #4f2d2c;
-            margin-bottom: 15px;
+        .intro-card h2 { font-size: 2.2rem; color: #4f2d2c; margin-bottom: 20px; }
+        .intro-card p { font-size: 1.1rem; margin-bottom: 15px; }
+        .intro-card p:last-child { margin-bottom: 0; }
+
+        .timeline { position: relative; max-width: 1000px; margin: 0 auto; padding-top: 50px; }
+        
+        /* The central vertical line connects cleanly under the intro card */
+        .timeline::after { 
+            content: ''; 
+            position: absolute; 
+            width: 4px; 
+            background-color: #99724b; 
+            top: -10px; /* Tucks seamlessly under the card's border */
+            bottom: 0; 
+            left: 50%; 
+            margin-left: -2px; 
+            border-radius: 2px; 
+            z-index: 1; /* Keeps line behind the card */
         }
-        .cta-section p {
-            font-size: 1.1rem;
-            color: #4f2d2c;
-            margin-bottom: 30px;
+        
+        .timeline-item { padding: 10px 40px; position: relative; background-color: inherit; width: 50%; }
+        .timeline-item::after { content: ''; position: absolute; width: 24px; height: 24px; right: -12px; background-color: #e9e2d8; border: 4px solid #4e513e; top: 25px; border-radius: 50%; z-index: 3; }
+        .left { left: 0; }
+        .right { left: 50%; }
+        .right::after { left: -12px; }
+        
+        /* Updated Timeline Cards */
+        .content { 
+            padding: 25px 30px; 
+            background-color: white; 
+            position: relative; 
+            border-radius: 20px; 
+            border: 2px solid #0E2A3B; 
+            box-shadow: 6px 6px 0px #0E2A3B; 
         }
-        .cta-btn {
+        .content h3 { color: #4e513e; font-size: 1.4rem; margin-bottom: 10px; }
+        .content p { font-size: 1.05rem; color: #4f2d2c; margin-bottom: 0; }
+        .step-number { font-size: 0.9rem; color: #99724b; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; display: block; }
+
+        /* Unified Button Styling */
+        .btn {
             display: inline-block;
-            padding: 15px 35px;
-            background-color: #99724b; /* Matched to the timeline brown/gold */
-            color: #e9e2d8;
+            background-color: #99724b; 
+            color: #e9e2d8; 
             text-decoration: none;
-            border-radius: 4px;
+            padding: 12px 28px;
+            border-radius: 999px; /* Pill shape */
             font-weight: bold;
-            font-size: 1.1rem;
-            transition: background-color 0.3s;
+            transition: all 0.3s ease;
+            margin-top: 15px;
         }
-        .cta-btn:hover {
-            background-color: #9a5d40; /* Matched hover color */
+        .btn:hover {
+            background-color: #9a5d40; 
+            transform: translateY(-5px); 
+            box-shadow: 0 8px 15px rgba(0,0,0,0.1); 
         }
+
+        /* --- FORM COMPONENT CSS --- */
+        .full-width-form-section { width: 100%; margin-top: 40px; margin-bottom: 0; }
+        .form-container-card { width: 100%; display: flex; justify-content: center; align-items: center; background-color: #e9e2d8; border-top: 4px solid #4e513e; padding: 80px 20px; position: relative; overflow: hidden; transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); }
+        .form-container-card.fullscreen-active { position: fixed; top: 80px; left: 0; right: 0; bottom: 0; width: 100%; z-index: 999; border-top: none; padding: 20px; }
+        .form-bg-video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
+        .form-container-card.fullscreen-active .form-bg-video { position: fixed; top: -10vh; left: 0; width: 100%; height: 150vh; }
+        
+        /* Updated Native Form Box styling to match cards */
+        .native-form-box { 
+            background: #ffffff; 
+            width: 100%; 
+            max-width: 600px; 
+            padding: 40px; 
+            border-radius: 20px; 
+            border: 2px solid #0E2A3B;
+            box-shadow: 6px 6px 0px #0E2A3B; 
+            text-align: center; 
+            position: relative; 
+            z-index: 1; 
+            min-height: 480px; 
+            display: flex; 
+            flex-direction: column; 
+            overflow: hidden; 
+            transition: all 0.4s ease; 
+        }
+        .fullscreen-active .native-form-box { min-height: 540px; border-radius: 20px; }
+        .close-form-btn { display: none; position: absolute; top: 15px; right: 20px; background: none; border: none; font-size: 2.2rem; color: #4f2d2c; cursor: pointer; line-height: 1; opacity: 0.5; transition: opacity 0.3s; z-index: 10; }
+        .close-form-btn:hover { opacity: 1; }
+        .fullscreen-active .close-form-btn { display: block; }
+        #conditional-form, #form-steps-container { display: flex; flex-direction: column; flex-grow: 1; width: 100%; }
+        .form-step { display: none; width: 100%; }
+        .form-step.active { display: flex; flex-direction: column; flex-grow: 1; animation: slideInRight 0.4s cubic-bezier(0.25, 0.8, 0.25, 1) forwards; }
+        .form-step.active-reverse { display: flex; flex-direction: column; flex-grow: 1; animation: slideInLeft 0.4s cubic-bezier(0.25, 0.8, 0.25, 1) forwards; }
+        @keyframes slideInRight { 0% { opacity: 0; transform: translateX(40px) scale(0.98); } 100% { opacity: 1; transform: translateX(0) scale(1); } }
+        @keyframes slideInLeft { 0% { opacity: 0; transform: translateX(-40px) scale(0.98); } 100% { opacity: 1; transform: translateX(0) scale(1); } }
+        .step-content { flex-grow: 1; display: flex; flex-direction: column; justify-content: flex-start; padding-top: 10px; }
+        #start-screen .step-content { justify-content: center; }
+        .step-header { padding-top: 10px; }
+        .step-inputs { flex-grow: 1; display: flex; flex-direction: column; justify-content: center; width: 100%; }
+        .step-title { font-size: 1.6rem; color: #4e513e; margin-bottom: 8px; line-height: 1.3; }
+        .step-desc { font-size: 1.05rem; color: #4f2d2c; opacity: 0.85; margin-bottom: 5px; line-height: 1.5; }
+        
+        /* Updated Input Styles */
+        .input-group { margin-bottom: 20px; text-align: left; }
+        .input-group label { display: block; font-size: 0.95rem; color: #4f2d2c; margin-bottom: 8px; font-weight: bold; }
+        .input-group input, .input-group textarea { width: 100%; font-size: 1.1rem; color: #4f2d2c; border: 2px solid transparent; background-color: #f7f4f0; box-shadow: inset 0 2px 4px rgba(0,0,0,0.03); transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); font-family: inherit; }
+        .input-group input { border-radius: 999px; padding: 16px 25px; } 
+        .input-group textarea { border-radius: 20px; padding: 16px 20px; resize: vertical; } 
+        .input-group input:focus, .input-group textarea:focus { outline: none; background-color: #ffffff; border-color: #99724b; box-shadow: 0 8px 20px rgba(153, 114, 75, 0.15); transform: translateY(-2px); }
+        .input-group input.error, .input-group textarea.error { border-color: #d9534f; background-color: #fdf2f2; }
+        .name-row { display: flex; gap: 15px; flex-wrap: wrap; }
+        .name-row .input-group { flex: 1; min-width: 150px; }
+        
+        /* Updated Radio Buttons */
+        .radio-group { display: flex; gap: 15px; justify-content: center; margin-bottom: 20px; flex-wrap: wrap; }
+        .radio-group.vertical { flex-direction: column; gap: 12px; }
+        .radio-btn input[type="radio"] { display: none; }
+        .radio-btn span { display: block; padding: 16px 25px; background-color: #f7f4f0; border: 2px solid transparent; border-radius: 999px; font-size: 1.1rem; font-weight: bold; color: #4f2d2c; cursor: pointer; transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1); text-align: center; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
+        .radio-btn input[type="radio"]:checked + span { background-color: #99724b; color: #ffffff; transform: scale(1.02); box-shadow: 0 6px 15px rgba(153, 114, 75, 0.25); }
+        .radio-group.error span { border: 2px solid #d9534f; }
+        
+        .form-actions { display: flex; justify-content: center; align-items: center; gap: 15px; margin-top: auto; padding-top: 25px; }
+        
+        /* Updated Form Buttons */
+        .btn-primary { 
+            background-color: #99724b; 
+            color: #ffffff; 
+            border: none; 
+            padding: 15px 40px; 
+            font-size: 1.1rem; 
+            font-weight: bold; 
+            border-radius: 999px; 
+            cursor: pointer; 
+            transition: all 0.3s ease; 
+            min-width: 130px; 
+            box-shadow: 0 4px 10px rgba(153, 114, 75, 0.2); 
+        }
+        .btn-primary:hover { 
+            background-color: #9a5d40; 
+            transform: translateY(-5px); 
+            box-shadow: 0 8px 15px rgba(0,0,0,0.1); 
+        }
+        .btn-secondary { background-color: transparent; color: #99724b; border: none; font-size: 1.05rem; font-weight: bold; cursor: pointer; padding: 10px 15px; transition: color 0.3s; }
+        .btn-secondary:hover { color: #4e513e; }
+        .secure-notice { text-align: center; max-width: 400px; margin: 10px auto 0 auto; }
+        .secure-header { display: flex; align-items: center; justify-content: center; gap: 6px; color: #4e513e; font-weight: bold; font-size: 1rem; margin-bottom: 4px; }
+        .secure-header img { height: 1rem; width: auto; object-fit: contain; }
+        .secure-disclaimer { font-size: 0.75rem; color: #4f2d2c; opacity: 0.75; line-height: 1.3; font-style: italic; margin-bottom: 0; }
+        .success-message { display: none; padding: 20px 0; animation: slideInRight 0.5s cubic-bezier(0.25, 0.8, 0.25, 1) forwards; flex-direction: column; justify-content: center; flex-grow: 1; }
+        .success-icon { width: 70px; height: 70px; background-color: #4e513e; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; margin: 0 auto 20px auto; box-shadow: 0 8px 20px rgba(78, 81, 62, 0.3); }
+        .success-message h3 { font-size: 2.2rem; color: #4e513e; margin-bottom: 10px; }
+        .success-message p { font-size: 1.15rem; color: #4f2d2c; }
 
         /* --- Footer --- */
-        footer {
-            text-align: center;
-            padding: 40px 20px;
-            background-color: #4e513e; 
-            color: #e9e2d8; 
-        }
-        .footer-contact {
-            margin-bottom: 20px;
-        }
-        .footer-contact p {
-            margin-bottom: 8px;
-            font-size: 1.1rem;
-            color: #e9e2d8;
-        }
-        .footer-contact a {
-            color: #c09050; 
-            text-decoration: none;
-            font-weight: bold;
-        }
-        .footer-contact a:hover {
-            text-decoration: underline;
-        }
-        .footer-disclosure {
-            max-width: 900px;
-            margin: 0 auto 0 auto; 
-            font-size: 0.8rem;
-            color: #e9e2d8; 
-            opacity: 0.75;
-            line-height: 1.5;
-            text-align: justify;
-            text-align-last: center; 
-        }
+        footer { text-align: center; padding: 40px 20px; background-color: #4e513e; color: #e9e2d8; }
+        .footer-contact { margin-bottom: 20px; }
+        .footer-contact p { margin-bottom: 8px; font-size: 1.1rem; color: #e9e2d8; }
+        .footer-contact a { color: #c09050; text-decoration: none; font-weight: bold; }
+        .footer-contact a:hover { text-decoration: underline; }
+        .footer-disclosure { max-width: 900px; margin: 0 auto 0 auto; font-size: 0.8rem; color: #e9e2d8; opacity: 0.75; line-height: 1.5; text-align: justify; text-align-last: center; }
 
-        /* --- Mobile Responsiveness --- */
         @media (max-width: 768px) {
-            .navbar {
-                justify-content: flex-end; 
-            }
-            .mobile-center-logo {
-                display: block;
-                position: absolute;
-                left: 50%;
-                top: 50%;
-                transform: translate(-50%, -50%); 
-            }
-            .mobile-center-logo img {
-                height: 40px; 
-                width: auto;
-                border-radius: 4px;
-                display: block;
-            }
-            .hamburger {
-                display: block;
-            }
-            .nav-menu {
-                position: fixed;
-                top: 0;
-                right: -100%; 
-                width: 280px;
-                height: 100vh;
-                background: rgba(233, 226, 216, 0.95); 
-                backdrop-filter: blur(15px);
-                -webkit-backdrop-filter: blur(15px);
-                flex-direction: column;
-                justify-content: flex-start;
-                align-items: flex-start;
-                padding: 60px 30px 30px 30px;
-                box-shadow: -5px 0 15px rgba(0,0,0,0.1);
-                transition: right 0.3s ease;
-                z-index: 1001; 
-            }
-            .nav-menu.active {
-                right: 0; 
-            }
-            .nav-logo {
-                margin-bottom: 40px;
-                width: 100%;
-                display: flex;
-                justify-content: center;
-            }
-            .nav-logo img {
-                height: 60px;
-            }
-            .nav-links {
-                flex-direction: column;
-                width: 100%;
-                align-items: flex-start;
-                gap: 20px;
-            }
-            .nav-links a {
-                display: block;
-                width: 100%;
-                padding-bottom: 10px;
-                border-bottom: 1px solid rgba(192, 144, 80, 0.4); 
-                font-size: 1.3rem;
-            }
-            .close-menu {
-                display: block;
-                position: absolute;
-                top: 15px;
-                right: 25px;
-                font-size: 2.5rem;
-                background: none;
-                border: none;
-                color: #4f2d2c;
-                cursor: pointer;
-                line-height: 1;
-            }
-
-            /* Timeline Mobile Fixes (Snaps to left) */
-            .timeline::after {
-                left: 31px; 
-            }
-            .timeline-item {
-                width: 100%;
-                padding-left: 70px;
-                padding-right: 15px;
-            }
-            .timeline-item::after {
-                left: 19px; 
-            }
-            .right {
-                left: 0; 
-            }
+            .navbar { justify-content: flex-end; }
+            .mobile-center-logo { display: block; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); }
+            .mobile-center-logo img { height: 40px; width: auto; border-radius: 4px; display: block; }
+            .hamburger { display: block; }
+            .nav-menu { position: fixed; top: 0; right: -100%; width: 280px; height: 100vh; background: rgba(233, 226, 216, 0.95); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); flex-direction: column; justify-content: flex-start; align-items: flex-start; padding: 60px 30px 30px 30px; box-shadow: -5px 0 15px rgba(0,0,0,0.1); transition: right 0.3s ease; z-index: 1001; }
+            .nav-menu.active { right: 0; }
+            .nav-logo { margin-bottom: 40px; width: 100%; display: flex; justify-content: center; }
+            .nav-logo img { height: 60px; }
+            .nav-links { flex-direction: column; width: 100%; align-items: flex-start; gap: 20px; }
+            .nav-links a { display: block; width: 100%; padding-bottom: 10px; border-bottom: 1px solid rgba(192, 144, 80, 0.4); font-size: 1.3rem; }
+            .close-menu { display: block; position: absolute; top: 15px; right: 25px; font-size: 2.5rem; background: none; border: none; color: #4f2d2c; cursor: pointer; line-height: 1; }
             
-            /* Give CTA section some breathing room on mobile */
-            .cta-section {
-                margin: 20px 20px 80px 20px; 
-            }
+            .roadmap-section { padding: 40px 20px; }
+            .intro-card { width: calc(100% - 6px); padding: 40px 20px; margin: 0 auto; }
+            .intro-card h2 { font-size: 1.8rem; }
+            
+            .timeline::after { left: 31px; }
+            .timeline-item { width: 100%; padding-left: 70px; padding-right: 15px; }
+            .timeline-item::after { left: 19px; }
+            .right { left: 0; }
+            
+            .name-row { flex-direction: column; gap: 0; }
+            .step-title { font-size: 1.5rem; }
+            .form-container-card.fullscreen-active { top: 80px; bottom: auto; padding: 15px; border-radius: 0; overflow: hidden; }
+            .fullscreen-active .native-form-box { min-height: 100%; height: 100%; border-radius: 20px; margin-bottom: 0; padding: 30px 20px; }
+            .form-container-card.fullscreen-active.keyboard-open { top: 0 !important; z-index: 10000; padding: 10px !important; }
+            .form-container-card.keyboard-open .native-form-box { padding: 15px 20px !important; }
+            .form-container-card.keyboard-open .step-desc { display: none !important; }
+            .form-container-card.keyboard-open .step-title { font-size: 1.3rem !important; margin-bottom: 10px !important; }
+            .form-container-card.keyboard-open .input-group { margin-bottom: 10px !important; }
+            
+            /* Updated keyboard mobile padding for inputs */
+            .form-container-card.keyboard-open .input-group input { padding: 10px 20px !important; }
+            
+            .form-container-card.keyboard-open .form-actions { padding-top: 10px !important; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Header Placeholder -->
     <div id="header-placeholder"></div>
 
     <header>
@@ -486,21 +264,20 @@
         <p>A clear, step-by-step guide to maximizing your home's value and selling with confidence.</p>
     </header>
 
-    <section class="intro-section">
-        <h2>Your Path to a Successful Sale</h2>
-        <p>Selling your house is a major financial milestone. Navigating the Arizona real estate market requires an organized strategy, aggressive marketing, and a relentless advocate in your corner.</p>
-        <p>Below is a roadmap of what you can expect when we partner together to list your property. From our very first conversation to the moment your home officially closes, I am here to ensure the process is seamless, profitable, and entirely stress-free.</p>
-    </section>
+    <section class="roadmap-section">
+        <div class="intro-card">
+            <h2>Your Path to a Successful Sale</h2>
+            <p>Selling your house is a major financial milestone. Navigating the Arizona real estate market requires an organized strategy, aggressive marketing, and a relentless advocate in your corner.</p>
+            <p>Below is a roadmap of what you can expect when we partner together to list your property. From our very first conversation to the moment your home officially closes, I am here to ensure the process is seamless, profitable, and entirely stress-free.</p>
+        </div>
 
-    <section class="timeline-section">
         <div class="timeline">
-            
             <div class="timeline-item left">
                 <div class="content">
                     <span class="step-number">Step 01</span>
                     <h3>Initial Information</h3>
                     <p>To get started, simply fill out my brief intake form. This provides me with the essential initial information regarding your property, timeline, and unique goals.</p>
-                    <a href="intake" class="timeline-btn">Fill Out the Form</a>
+                    <a href="#form-placeholder" class="btn">Fill Out the Form</a>
                 </div>
             </div>
 
@@ -551,17 +328,15 @@
                     <p>Congratulations, your home is officially sold! After the final paperwork is signed and the deed is recorded, you can celebrate your successful sale. And don't worry—I am never afraid to roll up my sleeves and help you move!</p>
                 </div>
             </div>
-
         </div>
     </section>
 
-    <section class="cta-section">
-        <h2>Ready to Take the First Step?</h2>
-        <p>Before we can start preparing your home for the market, we have to start with Step 1. Filling out the initial intake form is completely zero-pressure. It is simply the best way for us to connect and start exploring your property's potential value.</p>
-        <a href="intake" class="cta-btn">Get Started</a>
-    </section>
+    <div id="form-placeholder" 
+         data-form-source="Seller Intake Form" 
+         data-form-title="Ready to Take the First Step?" 
+         data-form-desc="Before we can start preparing your home for the market, we have to start with Step 1. Filling out the initial intake form is completely zero-pressure. It is simply the best way for us to connect and start exploring your property's potential value.">
+    </div>
 
-    <!-- Footer Placeholder -->
     <div id="footer-placeholder"></div>
 
     <script>
@@ -599,10 +374,23 @@
             }
         }
 
-        // Load the header and footer when the DOM is ready
-        document.addEventListener('DOMContentLoaded', () => {
-            loadComponent('header-placeholder', 'header.html');
-            loadComponent('footer-placeholder', 'footer.html');
+        // Load the header, footer, and form logic when the DOM is ready
+        document.addEventListener('DOMContentLoaded', async () => {
+            // Wait for header and footer
+            await loadComponent('header-placeholder', 'header.html');
+            await loadComponent('footer-placeholder', 'footer.html');
+            
+            // Check if this page needs the form
+            const formPlaceholder = document.getElementById('form-placeholder');
+            if(formPlaceholder) {
+                // Load the HTML
+                await loadComponent('form-placeholder', 'form-component.html');
+                
+                // Once HTML is in the page, run the form logic!
+                if (typeof initDynamicForm === 'function') {
+                    initDynamicForm();
+                }
+            }
         });
     </script>
 </body>
