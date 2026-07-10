@@ -4,12 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Buying a Home | Andrew Marth Real Estate</title>
+    
+    <!-- Google Fonts Import -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Familjen+Grotesk:wght@400..700&display=swap" rel="stylesheet">
+    
     <script src="form-logic.js"></script>
     <style>
         /* --- General Reset & Styling --- */
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        html, body { max-width: 100%; overflow-x: hidden; }
-        body { font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; color: #4f2d2c; background-color: #e9e2d8; }
+        
+        /* The Absolute Hard Lock: Prevents ALL horizontal scrolling across all mobile browsers */
+        html, body { width: 100%; max-width: 100%; overflow-x: hidden; position: relative; }
+        
+        body { font-family: 'Familjen Grotesk', sans-serif; line-height: 1.6; color: #4f2d2c; background-color: #e9e2d8; }
+        
+        /* Updated Header Font */
+        h1, h2, h3, h4, h5, h6 { font-family: 'Bricolage Grotesque', sans-serif; }
         
         body.no-scroll { overflow: hidden !important; touch-action: none; }
         body.no-scroll::after { content: ''; position: fixed; top: -10vh; left: 0; width: 100%; height: 150vh; background-color: #e9e2d8; z-index: 998; }
@@ -41,7 +53,16 @@
         .left { left: 0; }
         .right { left: 50%; }
         .right::after { left: -12px; }
-        .content { padding: 25px 30px; background-color: white; position: relative; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border-top: 4px solid #4e513e; }
+        
+        /* Updated Timeline Cards */
+        .content { 
+            padding: 25px 30px; 
+            background-color: white; 
+            position: relative; 
+            border-radius: 20px; 
+            border: 2px solid #0E2A3B; 
+            box-shadow: 6px 6px 0px #0E2A3B; 
+        }
         .content h3 { color: #4e513e; font-size: 1.4rem; margin-bottom: 10px; }
         .content p { font-size: 1.05rem; color: #4f2d2c; }
         .step-number { font-size: 0.9rem; color: #99724b; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; display: block; }
@@ -50,8 +71,18 @@
         .programs-header { text-align: center; margin-bottom: 40px; }
         .programs-header h2 { font-size: 2.2rem; color: #4f2d2c; margin-bottom: 15px; }
         .programs-header p { font-size: 1.1rem; color: #4f2d2c; max-width: 800px; margin: 0 auto; }
-        .program-link-card { display: flex; align-items: stretch; background-color: #ffffff; border-left: 4px solid #99724b; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); margin-bottom: 25px; transition: transform 0.3s ease, box-shadow 0.3s ease; overflow: hidden; }
-        .program-link-card:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(0,0,0,0.1); }
+        
+        /* Updated Program Links Cards */
+        .program-link-card { 
+            display: flex; 
+            align-items: stretch; 
+            background-color: #ffffff; 
+            border-radius: 20px; 
+            border: 2px solid #0E2A3B;
+            box-shadow: 6px 6px 0px #0E2A3B; 
+            margin-bottom: 25px; 
+            overflow: hidden; 
+        }
         .program-link-image { flex: 0 0 240px; padding: 30px 0 30px 30px; display: flex; align-items: center; }
         .program-link-image img { width: 100%; height: auto; display: block; transition: opacity 0.3s ease; }
         .program-link-image a:hover img { opacity: 0.85; }
@@ -66,8 +97,26 @@
         .form-container-card.fullscreen-active { position: fixed; top: 80px; left: 0; right: 0; bottom: 0; width: 100%; z-index: 999; border-top: none; padding: 20px; }
         .form-bg-video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
         .form-container-card.fullscreen-active .form-bg-video { position: fixed; top: -10vh; left: 0; width: 100%; height: 150vh; }
-        .native-form-box { background: #ffffff; width: 100%; max-width: 600px; padding: 40px; border-radius: 8px; box-shadow: 0 15px 40px rgba(0,0,0,0.15); text-align: center; position: relative; z-index: 1; min-height: 480px; display: flex; flex-direction: column; overflow: hidden; transition: all 0.4s ease; }
-        .fullscreen-active .native-form-box { min-height: 540px; }
+        
+        /* Updated Native Form Box styling to match cards */
+        .native-form-box { 
+            background: #ffffff; 
+            width: 100%; 
+            max-width: 600px; 
+            padding: 40px; 
+            border-radius: 20px; 
+            border: 2px solid #0E2A3B;
+            box-shadow: 6px 6px 0px #0E2A3B; 
+            text-align: center; 
+            position: relative; 
+            z-index: 1; 
+            min-height: 480px; 
+            display: flex; 
+            flex-direction: column; 
+            overflow: hidden; 
+            transition: all 0.4s ease; 
+        }
+        .fullscreen-active .native-form-box { min-height: 540px; border-radius: 20px; }
         .close-form-btn { display: none; position: absolute; top: 15px; right: 20px; background: none; border: none; font-size: 2.2rem; color: #4f2d2c; cursor: pointer; line-height: 1; opacity: 0.5; transition: opacity 0.3s; z-index: 10; }
         .close-form-btn:hover { opacity: 1; }
         .fullscreen-active .close-form-btn { display: block; }
@@ -98,8 +147,26 @@
         .radio-btn input[type="radio"]:checked + span { background-color: #99724b; color: #ffffff; transform: scale(1.02); box-shadow: 0 6px 15px rgba(153, 114, 75, 0.25); }
         .radio-group.error span { border: 2px solid #d9534f; }
         .form-actions { display: flex; justify-content: center; align-items: center; gap: 15px; margin-top: auto; padding-top: 25px; }
-        .btn-primary { background-color: #99724b; color: #ffffff; border: none; padding: 15px 40px; font-size: 1.1rem; font-weight: bold; border-radius: 6px; cursor: pointer; transition: all 0.3s ease; min-width: 130px; box-shadow: 0 4px 10px rgba(153, 114, 75, 0.2); }
-        .btn-primary:hover { background-color: #9a5d40; transform: translateY(-2px); box-shadow: 0 6px 15px rgba(153, 114, 75, 0.3); }
+        
+        /* Updated Form Buttons */
+        .btn-primary { 
+            background-color: #99724b; 
+            color: #ffffff; 
+            border: none; 
+            padding: 15px 40px; 
+            font-size: 1.1rem; 
+            font-weight: bold; 
+            border-radius: 999px; 
+            cursor: pointer; 
+            transition: all 0.3s ease; 
+            min-width: 130px; 
+            box-shadow: 0 4px 10px rgba(153, 114, 75, 0.2); 
+        }
+        .btn-primary:hover { 
+            background-color: #9a5d40; 
+            transform: translateY(-5px); 
+            box-shadow: 0 8px 15px rgba(0,0,0,0.1); 
+        }
         .btn-secondary { background-color: transparent; color: #99724b; border: none; font-size: 1.05rem; font-weight: bold; cursor: pointer; padding: 10px 15px; transition: color 0.3s; }
         .btn-secondary:hover { color: #4e513e; }
         .secure-notice { text-align: center; max-width: 400px; margin: 10px auto 0 auto; }
@@ -136,14 +203,21 @@
             .timeline-item { width: 100%; padding-left: 70px; padding-right: 15px; }
             .timeline-item::after { left: 19px; }
             .right { left: 0; }
-            .program-link-card { flex-direction: column; }
+            
+            /* Program Link Cards Mobile Fixes */
+            .program-link-card { 
+                flex-direction: column; 
+                width: calc(100% - 6px); 
+                margin-bottom: 30px; 
+            }
             .program-link-image { flex: none; width: 100%; max-width: 250px; padding: 30px 20px 10px 20px; margin: 0 auto; }
             .program-link-content { padding: 10px 20px 30px 20px; text-align: center; }
             .program-link-action { width: 100%; flex: none; padding: 15px; }
+            
             .name-row { flex-direction: column; gap: 0; }
             .step-title { font-size: 1.5rem; }
             .form-container-card.fullscreen-active { top: 80px; bottom: auto; padding: 15px; border-radius: 0; overflow: hidden; }
-            .fullscreen-active .native-form-box { min-height: 100%; height: 100%; border-radius: 8px; margin-bottom: 0; padding: 30px 20px; }
+            .fullscreen-active .native-form-box { min-height: 100%; height: 100%; border-radius: 20px; margin-bottom: 0; padding: 30px 20px; }
             .form-container-card.fullscreen-active.keyboard-open { top: 0 !important; z-index: 10000; padding: 10px !important; }
             .form-container-card.keyboard-open .native-form-box { padding: 15px 20px !important; }
             .form-container-card.keyboard-open .step-desc { display: none !important; }
