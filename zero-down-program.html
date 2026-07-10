@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Zero Down Program | Andrew Marth Real Estate</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Familjen+Grotesk:wght@400..700&display=swap" rel="stylesheet">
+    
     <script src="form-logic.js"></script>
     <style>
         /* --- General Reset & Styling --- */
@@ -13,17 +18,24 @@
             padding: 0;
         }
         
-        /* The Hard Lock: Prevents ALL horizontal scrolling across all mobile browsers */
+        /* The Absolute Hard Lock: Prevents ALL horizontal scrolling across all mobile browsers */
         html, body {
+            width: 100%;
             max-width: 100%;
             overflow-x: hidden;
+            position: relative;
         }
         
         body {
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'Familjen Grotesk', sans-serif; 
             line-height: 1.6;
             color: #4f2d2c; 
             background-color: #e9e2d8; 
+        }
+        
+        /* Updated Header Font */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Bricolage Grotesque', sans-serif;
         }
         
         /* The Iron Curtain: Locks the body without losing scroll position */
@@ -167,29 +179,32 @@
             margin: 0 auto 60px auto;
             padding: 0 20px;
         }
+        
+        /* Updated Card Styling */
         .program-card {
             background: #ffffff;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border-radius: 20px;
+            border: 2px solid #0E2A3B;
+            box-shadow: 6px 6px 0px #0E2A3B;
             width: 100%;
             max-width: 800px; 
-            border-top: 4px solid #4e513e;
             overflow: hidden; 
         }
         .program-card-header-img {
             width: 100%;
             height: auto;
             display: block;
+            border-bottom: 2px solid #0E2A3B;
         }
         .program-card-content {
             padding: 50px 50px 30px 50px;
         }
         
-        /* Boxed Detail Items */
+        /* Boxed Detail Items (Updated to match theme) */
         .detail-item {
             position: relative;
-            border: 2px solid rgba(78, 81, 62, 0.8); 
-            border-radius: 8px;
+            border: 2px solid #0E2A3B; 
+            border-radius: 16px;
             padding: 25px 25px 20px 25px;
             margin-bottom: 45px; 
         }
@@ -215,7 +230,7 @@
             margin: 0;
         }
 
-        /* --- Proforma Images Section --- */
+        /* --- Proforma Images Section (Updated) --- */
         .proforma-section {
             max-width: 1000px;
             margin: 0 auto 60px auto;
@@ -232,16 +247,12 @@
             width: 100%;
             max-width: 600px; 
             height: auto;
-            border-radius: 8px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.2); 
-            transition: transform 0.3s ease;
-        }
-        .proforma-container img:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 30px 60px rgba(0,0,0,0.25);
+            border-radius: 20px;
+            border: 2px solid #0E2A3B;
+            box-shadow: 6px 6px 0px #0E2A3B; 
         }
 
-        /* --- Standalone Contact Box Section --- */
+        /* --- Standalone Contact Box Section (Updated) --- */
         .contact-card-section {
             max-width: 940px; 
             margin: 60px auto 40px auto; 
@@ -253,13 +264,13 @@
             justify-content: center;
             gap: 25px;
             background-color: #ffffff; 
-            border-left: 4px solid #99724b; 
+            border: 2px solid #0E2A3B; 
+            border-radius: 20px;
+            box-shadow: 6px 6px 0px #0E2A3B; 
             padding: 25px 30px;
-            border-radius: 8px;
             margin: 0 auto;
             max-width: 600px;
             text-align: left;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05); 
         }
         .inner-contact-image img {
             width: 100px;
@@ -308,14 +319,32 @@
             opacity: 0.8;
         }
 
-        /* --- FORM COMPONENT CSS (KEEP THIS IN THE HEADER FOR NOW) --- */
+        /* --- FORM COMPONENT CSS --- */
         .full-width-form-section { width: 100%; margin-top: 40px; margin-bottom: 0; }
         .form-container-card { width: 100%; display: flex; justify-content: center; align-items: center; background-color: #e9e2d8; border-top: 4px solid #4e513e; padding: 80px 20px; position: relative; overflow: hidden; transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); }
         .form-container-card.fullscreen-active { position: fixed; top: 80px; left: 0; right: 0; bottom: 0; width: 100%; z-index: 999; border-top: none; padding: 20px; }
         .form-bg-video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
         .form-container-card.fullscreen-active .form-bg-video { position: fixed; top: -10vh; left: 0; width: 100%; height: 150vh; }
-        .native-form-box { background: #ffffff; width: 100%; max-width: 600px; padding: 40px; border-radius: 8px; box-shadow: 0 15px 40px rgba(0,0,0,0.15); text-align: center; position: relative; z-index: 1; min-height: 480px; display: flex; flex-direction: column; overflow: hidden; transition: all 0.4s ease; }
-        .fullscreen-active .native-form-box { min-height: 540px; }
+        
+        /* Updated Native Form Box styling to match cards */
+        .native-form-box { 
+            background: #ffffff; 
+            width: 100%; 
+            max-width: 600px; 
+            padding: 40px; 
+            border-radius: 20px; 
+            border: 2px solid #0E2A3B;
+            box-shadow: 6px 6px 0px #0E2A3B; 
+            text-align: center; 
+            position: relative; 
+            z-index: 1; 
+            min-height: 480px; 
+            display: flex; 
+            flex-direction: column; 
+            overflow: hidden; 
+            transition: all 0.4s ease; 
+        }
+        .fullscreen-active .native-form-box { min-height: 540px; border-radius: 20px; }
         .close-form-btn { display: none; position: absolute; top: 15px; right: 20px; background: none; border: none; font-size: 2.2rem; color: #4f2d2c; cursor: pointer; line-height: 1; opacity: 0.5; transition: opacity 0.3s; z-index: 10; }
         .close-form-btn:hover { opacity: 1; }
         .fullscreen-active .close-form-btn { display: block; }
@@ -331,25 +360,84 @@
         .step-inputs { flex-grow: 1; display: flex; flex-direction: column; justify-content: center; width: 100%; }
         .step-title { font-size: 1.6rem; color: #4e513e; margin-bottom: 8px; line-height: 1.3; }
         .step-desc { font-size: 1.05rem; color: #4f2d2c; opacity: 0.85; margin-bottom: 5px; line-height: 1.5; }
+        
+        /* Updated Input Styles */
         .input-group { margin-bottom: 20px; text-align: left; }
         .input-group label { display: block; font-size: 0.95rem; color: #4f2d2c; margin-bottom: 8px; font-weight: bold; }
-        .input-group input, .input-group textarea { width: 100%; padding: 16px; font-size: 1.1rem; color: #4f2d2c; border: 2px solid transparent; background-color: #f7f4f0; border-radius: 8px; box-shadow: inset 0 2px 4px rgba(0,0,0,0.03); transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); font-family: inherit; }
-        .input-group textarea { resize: vertical; }
+        .input-group input, .input-group textarea { width: 100%; font-size: 1.1rem; color: #4f2d2c; border: 2px solid transparent; background-color: #f7f4f0; box-shadow: inset 0 2px 4px rgba(0,0,0,0.03); transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); font-family: inherit; }
+        .input-group input { border-radius: 999px; padding: 16px 25px; } 
+        .input-group textarea { border-radius: 20px; padding: 16px 20px; resize: vertical; } 
         .input-group input:focus, .input-group textarea:focus { outline: none; background-color: #ffffff; border-color: #99724b; box-shadow: 0 8px 20px rgba(153, 114, 75, 0.15); transform: translateY(-2px); }
         .input-group input.error, .input-group textarea.error { border-color: #d9534f; background-color: #fdf2f2; }
         .name-row { display: flex; gap: 15px; flex-wrap: wrap; }
         .name-row .input-group { flex: 1; min-width: 150px; }
+        
+        /* Updated Radio Buttons */
         .radio-group { display: flex; gap: 15px; justify-content: center; margin-bottom: 20px; flex-wrap: wrap; }
         .radio-group.vertical { flex-direction: column; gap: 12px; }
         .radio-btn input[type="radio"] { display: none; }
-        .radio-btn span { display: block; padding: 16px 25px; background-color: #f7f4f0; border: 2px solid transparent; border-radius: 8px; font-size: 1.1rem; font-weight: bold; color: #4f2d2c; cursor: pointer; transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1); text-align: center; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
+        .radio-btn span { display: block; padding: 16px 25px; background-color: #f7f4f0; border: 2px solid transparent; border-radius: 999px; font-size: 1.1rem; font-weight: bold; color: #4f2d2c; cursor: pointer; transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1); text-align: center; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
         .radio-btn input[type="radio"]:checked + span { background-color: #99724b; color: #ffffff; transform: scale(1.02); box-shadow: 0 6px 15px rgba(153, 114, 75, 0.25); }
         .radio-group.error span { border: 2px solid #d9534f; }
+        
         .form-actions { display: flex; justify-content: center; align-items: center; gap: 15px; margin-top: auto; padding-top: 25px; }
-        .btn-primary { background-color: #99724b; color: #ffffff; border: none; padding: 15px 40px; font-size: 1.1rem; font-weight: bold; border-radius: 6px; cursor: pointer; transition: all 0.3s ease; min-width: 130px; box-shadow: 0 4px 10px rgba(153, 114, 75, 0.2); }
-        .btn-primary:hover { background-color: #9a5d40; transform: translateY(-2px); box-shadow: 0 6px 15px rgba(153, 114, 75, 0.3); }
-        .btn-secondary { background-color: transparent; color: #99724b; border: none; font-size: 1.05rem; font-weight: bold; cursor: pointer; padding: 10px 15px; transition: color 0.3s; }
+        
+        /* Form Buttons (Animated Arrows Added) */
+        .btn-primary { 
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background-color: #99724b; 
+            color: #ffffff; 
+            border: none; 
+            padding: 15px 40px; 
+            font-size: 1.1rem; 
+            font-weight: bold; 
+            border-radius: 999px; 
+            cursor: pointer; 
+            transition: all 0.3s ease; 
+            min-width: 130px; 
+            box-shadow: 0 4px 10px rgba(153, 114, 75, 0.2); 
+        }
+        .btn-primary:hover { 
+            background-color: #9a5d40; 
+            transform: translateY(-5px); 
+            box-shadow: 0 8px 15px rgba(0,0,0,0.1); 
+        }
+        .btn-primary::after {
+            content: '\2192'; 
+            font-size: 1.2em;
+            transition: transform 0.3s ease;
+        }
+        .btn-primary:hover::after {
+            transform: translateX(5px); 
+        }
+
+        .btn-secondary { 
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            background-color: transparent; 
+            color: #99724b; 
+            border: none; 
+            font-size: 1.05rem; 
+            font-weight: bold; 
+            cursor: pointer; 
+            padding: 10px 15px; 
+            transition: color 0.3s ease; 
+        }
         .btn-secondary:hover { color: #4e513e; }
+        .btn-secondary::before {
+            content: '\2190'; 
+            font-size: 1.2em;
+            transition: transform 0.3s ease;
+        }
+        .btn-secondary:hover::before {
+            transform: translateX(-4px); 
+        }
+
         .secure-notice { text-align: center; max-width: 400px; margin: 10px auto 0 auto; }
         .secure-header { display: flex; align-items: center; justify-content: center; gap: 6px; color: #4e513e; font-weight: bold; font-size: 1rem; margin-bottom: 4px; }
         .secure-header img { height: 1rem; width: auto; object-fit: contain; }
@@ -360,12 +448,38 @@
         .success-message p { font-size: 1.15rem; color: #4f2d2c; }
 
         /* --- Footer --- */
-        footer { text-align: center; padding: 40px 20px; background-color: #4e513e; color: #e9e2d8; }
-        .footer-contact { margin-bottom: 20px; }
-        .footer-contact p { margin-bottom: 8px; font-size: 1.1rem; color: #e9e2d8; }
-        .footer-contact a { color: #c09050; text-decoration: none; font-weight: bold; }
-        .footer-contact a:hover { text-decoration: underline; }
-        .footer-disclosure { max-width: 900px; margin: 0 auto 0 auto; font-size: 0.8rem; color: #e9e2d8; opacity: 0.75; line-height: 1.5; text-align: justify; text-align-last: center; }
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            background-color: #4e513e; 
+            color: #e9e2d8; 
+        }
+        .footer-contact {
+            margin-bottom: 20px;
+        }
+        .footer-contact p {
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+            color: #e9e2d8;
+        }
+        .footer-contact a {
+            color: #c09050; 
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .footer-contact a:hover {
+            text-decoration: underline;
+        }
+        .footer-disclosure {
+            max-width: 900px;
+            margin: 0 auto 0 auto; 
+            font-size: 0.8rem;
+            color: #e9e2d8; 
+            opacity: 0.75;
+            line-height: 1.5;
+            text-align: justify;
+            text-align-last: center; 
+        }
 
         /* --- Mobile Responsiveness --- */
         @media (max-width: 768px) {
@@ -389,17 +503,28 @@
             
             .inner-contact-box { flex-direction: column; text-align: center; padding: 25px 20px; }
             .inner-socials { justify-content: center; }
+            
+            /* Responsive formatting to prevent horizontal bleed */
+            .program-card, .proforma-container img, .inner-contact-box {
+                width: calc(100% - 6px);
+                margin-left: auto;
+                margin-right: auto;
+                margin-bottom: 6px;
+            }
+            
             .name-row { flex-direction: column; gap: 0; }
             .step-title { font-size: 1.5rem; }
-            
             .form-container-card.fullscreen-active { top: 80px; bottom: auto; padding: 15px; border-radius: 0; overflow: hidden; }
-            .fullscreen-active .native-form-box { min-height: 100%; height: 100%; border-radius: 8px; margin-bottom: 0; padding: 30px 20px; }
+            .fullscreen-active .native-form-box { min-height: 100%; height: 100%; border-radius: 20px; margin-bottom: 0; padding: 30px 20px; }
             .form-container-card.fullscreen-active.keyboard-open { top: 0 !important; z-index: 10000; padding: 10px !important; }
             .form-container-card.keyboard-open .native-form-box { padding: 15px 20px !important; }
             .form-container-card.keyboard-open .step-desc { display: none !important; }
             .form-container-card.keyboard-open .step-title { font-size: 1.3rem !important; margin-bottom: 10px !important; }
             .form-container-card.keyboard-open .input-group { margin-bottom: 10px !important; }
-            .form-container-card.keyboard-open .input-group input { padding: 10px 15px !important; }
+            
+            /* Updated keyboard mobile padding for inputs */
+            .form-container-card.keyboard-open .input-group input { padding: 10px 20px !important; }
+            
             .form-container-card.keyboard-open .form-actions { padding-top: 10px !important; }
         }
     </style>
