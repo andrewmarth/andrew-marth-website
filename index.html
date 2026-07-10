@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Andrew Marth | Real Estate Agent</title>
     
-    <!-- Google Fonts Import -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Familjen+Grotesk:wght@400..700&display=swap" rel="stylesheet">
@@ -113,19 +112,19 @@
         }
         header h1 {
             font-size: 4.5rem; 
-            margin-bottom: 0px; /* Reduced gap */
-            line-height: 1.1; /* Tightens the invisible padding around the text */
+            margin-bottom: 0px; 
+            line-height: 1.1; 
             letter-spacing: 2px;
             text-shadow: 0 2px 4px rgba(0,0,0,0.3); 
         }
         .hero-subtitle {
-            font-size: 1.3rem; /* Scaled down */
+            font-size: 1.3rem; 
             font-family: 'Familjen Grotesk', sans-serif;
             color: #e9e2d8;
             letter-spacing: 3px;
             text-transform: uppercase;
             font-weight: 600;
-            margin-top: 5px; /* Brings it right up under the name */
+            margin-top: 5px; 
             margin-bottom: 20px;
             text-shadow: 0 1px 3px rgba(0,0,0,0.3);
         }
@@ -135,7 +134,7 @@
             opacity: 0.95; 
             max-width: 700px;
             margin: 0 auto;
-            font-style: italic; /* Added slight italic for the quote */
+            font-style: italic; 
             text-shadow: 0 1px 3px rgba(0,0,0,0.3);
         }
 
@@ -269,7 +268,10 @@
 
         /* --- Buttons --- */
         .btn {
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
             background-color: #99724b; 
             color: #e9e2d8; 
             text-decoration: none;
@@ -282,6 +284,16 @@
             background-color: #9a5d40; 
             transform: translateY(-5px); 
             box-shadow: 0 8px 15px rgba(0,0,0,0.1); 
+        }
+
+        /* Right Arrow Injection & Animation */
+        .btn::after {
+            content: '\2192'; 
+            font-size: 1.2em;
+            transition: transform 0.3s ease;
+        }
+        .btn:hover::after {
+            transform: translateX(5px); 
         }
 
         /* --- Footer --- */
@@ -479,7 +491,6 @@
     <div id="footer-placeholder"></div>
 
     <script>
-        // Function to load external HTML components
         async function loadComponent(id, file) {
             try {
                 const response = await fetch(file);
@@ -487,7 +498,6 @@
                 const html = await response.text();
                 document.getElementById(id).innerHTML = html;
                 
-                // If we just loaded the header, initialize the hamburger menu logic
                 if (id === 'header-placeholder') {
                     initNavigation();
                 }
@@ -496,7 +506,6 @@
             }
         }
 
-        // Initialize mobile navigation logic
         function initNavigation() {
             const hamburgerBtn = document.getElementById('hamburger-btn');
             const closeBtn = document.getElementById('close-btn');
@@ -513,7 +522,6 @@
             }
         }
 
-        // Load the header and footer when the DOM is ready
         document.addEventListener('DOMContentLoaded', () => {
             loadComponent('header-placeholder', 'header.html');
             loadComponent('footer-placeholder', 'footer.html');
