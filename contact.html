@@ -138,16 +138,58 @@
         }
         .about-image {
             flex: 1 1 300px;
-            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
-        .about-image img {
+
+        /* The container for the animated background and image */
+        .gear-container {
+            position: relative;
             width: 100%;
-            max-width: 350px;
-            border-radius: 50%; 
-            border: 8px solid #4e513e; 
-            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
-            object-fit: cover;
+            max-width: 350px; 
+            aspect-ratio: 1 / 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
+        
+        /* The rotating image housing */
+        .gear-spinner {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            animation: spin 24s linear infinite; 
+            z-index: 0;
+            filter: drop-shadow(0 6px 12px rgba(0,0,0,0.1)); 
+        }
+        
+        /* The downloaded cookie shape */
+        .cookie-shape {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: contain;
+        }
+
+        /* The inner profile photo */
+        .gear-container img.profile-pic {
+            width: 74%; 
+            height: 74%;
+            border-radius: 50%;
+            object-fit: cover;
+            position: relative;
+            z-index: 1;
+            border: 4px solid #e9e2d8; 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1); 
+        }
+
+        /* The infinite spin animation */
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
         .about-text {
             flex: 2 1 400px;
         }
@@ -424,7 +466,12 @@
 
     <section class="about-section">
         <div class="about-image">
-            <img src="https://andrewmarth.com/images/az_pfp_graded.png" alt="Andrew Marth - Real Estate Agent">
+            <div class="gear-container">
+                <div class="gear-spinner">
+                    <img src="https://andrewmarth.com/images/9_sided_cookie.svg" alt="Decorative Shape" class="cookie-shape" onerror="this.onerror=null; this.src='https://andrewmarth.com/images/9_sided_cookie.png';">
+                </div>
+                <img src="https://andrewmarth.com/images/az_pfp_graded.png" alt="Andrew Marth - Real Estate Agent" class="profile-pic">
+            </div>
         </div>
         <div class="about-text">
             <h2>Let's Connect</h2>
