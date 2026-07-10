@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Capital Partnerships | Andrew Marth Real Estate</title>
+    
+    <!-- Google Fonts Import -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Familjen+Grotesk:wght@400..700&display=swap" rel="stylesheet">
+    
     <style>
         /* --- General Reset & Styling --- */
         * {
@@ -11,12 +17,25 @@
             margin: 0;
             padding: 0;
         }
+        
+        /* The Absolute Hard Lock: Prevents ALL horizontal scrolling across all mobile browsers */
+        html, body {
+            width: 100%;
+            max-width: 100%;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
         body {
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'Familjen Grotesk', sans-serif; 
             line-height: 1.6;
             color: #4f2d2c; 
             background-color: #e9e2d8; 
-            overflow-x: hidden; 
+        }
+        
+        /* Updated Header Font */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Bricolage Grotesque', sans-serif;
         }
         
         /* --- Navigation Bar (Fixed & Glassmorphism) --- */
@@ -83,7 +102,266 @@
             display: none; 
         }
 
-        /* Mobile Navigation Styles */
+        /* --- Header / Hero Section --- */
+        header {
+            background: linear-gradient(rgba(78, 81, 62, 0.75), rgba(78, 81, 62, 0.75)), url('https://andrewmarth.com/images/background.jpeg');
+            background-size: cover;
+            background-position: center;
+            color: #e9e2d8; 
+            padding: 160px 20px 100px 20px; 
+            text-align: center;
+        }
+        header h1 {
+            font-size: 3rem; 
+            margin-bottom: 15px;
+            letter-spacing: 2px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3); 
+        }
+        header p {
+            font-size: 1.3rem;
+            color: #e9e2d8; 
+            opacity: 0.95; 
+            max-width: 700px;
+            margin: 0 auto;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+        }
+
+        /* --- Intro Section (Updated to Card Styling) --- */
+        .intro-wrapper {
+            padding: 0 20px;
+        }
+        .intro-card {
+            background-color: #ffffff;
+            border-radius: 20px;
+            border: 2px solid #0E2A3B;
+            box-shadow: 6px 6px 0px #0E2A3B;
+            max-width: 900px;
+            margin: 60px auto 40px auto;
+            padding: 50px 40px;
+            text-align: center;
+        }
+        .intro-card h2 {
+            font-size: 2.2rem;
+            color: #4f2d2c;
+            margin-bottom: 20px;
+        }
+        .intro-card p {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+        }
+        .intro-card p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* --- Proforma Images Section (Updated to solid shadow cards) --- */
+        .proforma-section {
+            max-width: 1000px;
+            margin: 0 auto 60px auto;
+            padding: 0 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 60px; 
+        }
+        .proforma-container {
+            width: 100%;
+            text-align: center;
+        }
+        .proforma-container img {
+            width: 100%;
+            max-width: 600px; 
+            height: auto;
+            border-radius: 20px;
+            border: 2px solid #0E2A3B;
+            box-shadow: 6px 6px 0px #0E2A3B;
+        }
+
+        /* --- Timeline Section --- */
+        .timeline-section {
+            padding: 40px 20px 60px 20px;
+            background-color: #e9e2d8;
+        }
+        .timeline {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 4px;
+            background-color: #99724b; 
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -2px;
+            border-radius: 2px;
+        }
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            background-color: inherit;
+            width: 50%;
+        }
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            right: -12px;
+            background-color: #e9e2d8;
+            border: 4px solid #4e513e; 
+            top: 25px;
+            border-radius: 50%;
+            z-index: 1;
+        }
+        .left { left: 0; }
+        .right { left: 50%; }
+        .right::after { left: -12px; }
+
+        /* Updated Timeline Cards */
+        .content {
+            padding: 25px 30px;
+            background-color: white;
+            position: relative;
+            border-radius: 20px;
+            border: 2px solid #0E2A3B;
+            box-shadow: 6px 6px 0px #0E2A3B;
+        }
+        .content h3 {
+            color: #4e513e;
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+        }
+        .content p {
+            font-size: 1.05rem;
+            color: #4f2d2c;
+            margin-bottom: 10px;
+        }
+        .content p:last-child {
+            margin-bottom: 0;
+        }
+        .step-number {
+            font-size: 0.9rem;
+            color: #99724b;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        /* Logo specific styling */
+        .dixon-logo {
+            max-width: 140px;
+            margin-top: 25px; 
+            display: block;
+        }
+        .wynwest-logo {
+            max-width: 210px; 
+            margin-top: 25px; 
+            display: block;
+        }
+
+        /* --- Call to Action Section (Updated to solid shadow cards) --- */
+        .cta-section {
+            max-width: 800px;
+            margin: 80px auto; 
+            padding: 40px 20px;
+            text-align: center;
+            background-color: #ffffff;
+            border-radius: 20px;
+            border: 2px solid #0E2A3B;
+            box-shadow: 6px 6px 0px #0E2A3B; 
+        }
+        .cta-section h2 {
+            font-size: 2rem;
+            color: #4f2d2c;
+            margin-bottom: 15px;
+        }
+        .cta-section p {
+            font-size: 1.1rem;
+            color: #4f2d2c;
+            margin-bottom: 30px;
+        }
+
+        /* --- Buttons (Pill Shape + Animated Arrow) --- */
+        .cta-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 15px 35px;
+            background-color: #99724b; 
+            color: #e9e2d8;
+            text-decoration: none;
+            border-radius: 999px; /* Pill shape */
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            margin: 0 10px 10px 10px;
+            border: 2px solid transparent;
+        }
+        .cta-btn:hover {
+            background-color: #9a5d40; 
+            transform: translateY(-5px); /* Upward float */
+            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+        }
+        .cta-btn::after {
+            content: '\2192'; /* Right arrow */
+            font-size: 1.2em;
+            transition: transform 0.3s ease;
+        }
+        .cta-btn:hover::after {
+            transform: translateX(5px); /* Shifting arrow */
+        }
+        
+        /* Secondary transparent button style */
+        .cta-btn-outline {
+            background-color: transparent;
+            color: #99724b;
+            border: 2px solid #99724b;
+        }
+        .cta-btn-outline:hover {
+            background-color: #99724b;
+            color: #e9e2d8;
+            border: 2px solid #99724b;
+        }
+
+        /* --- Footer --- */
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            background-color: #4e513e; 
+            color: #e9e2d8; 
+        }
+        .footer-contact {
+            margin-bottom: 20px;
+        }
+        .footer-contact p {
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+            color: #e9e2d8;
+        }
+        .footer-contact a {
+            color: #c09050; 
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .footer-contact a:hover {
+            text-decoration: underline;
+        }
+        .footer-disclosure {
+            max-width: 900px;
+            margin: 0 auto 0 auto; 
+            font-size: 0.8rem;
+            color: #e9e2d8; 
+            opacity: 0.75;
+            line-height: 1.5;
+            text-align: justify;
+            text-align-last: center; 
+        }
+
+        /* --- Mobile Responsiveness --- */
         @media (max-width: 768px) {
             .navbar {
                 justify-content: flex-end; 
@@ -158,8 +436,15 @@
                 cursor: pointer;
                 line-height: 1;
             }
-
-            /* Timeline Mobile Fixes (Snaps to left) */
+            
+            /* Responsive formatting to prevent horizontal bleed */
+            .intro-card, .cta-section {
+                width: calc(100% - 6px);
+                margin-left: auto;
+                margin-right: auto;
+                padding: 30px 20px;
+            }
+            
             .timeline::after {
                 left: 31px; 
             }
@@ -174,279 +459,11 @@
             .right {
                 left: 0; 
             }
-        }
-
-        /* --- Header / Hero Section --- */
-        header {
-            background: linear-gradient(rgba(78, 81, 62, 0.75), rgba(78, 81, 62, 0.75)), url('https://andrewmarth.com/images/background.jpeg');
-            background-size: cover;
-            background-position: center;
-            color: #e9e2d8; 
-            padding: 160px 20px 100px 20px; 
-            text-align: center;
-        }
-        header h1 {
-            font-size: 3rem; 
-            margin-bottom: 15px;
-            letter-spacing: 2px;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.3); 
-        }
-        header p {
-            font-size: 1.3rem;
-            color: #e9e2d8; 
-            opacity: 0.95; 
-            max-width: 700px;
-            margin: 0 auto;
-            text-shadow: 0 1px 3px rgba(0,0,0,0.3);
-        }
-
-        /* --- Intro Section --- */
-        .intro-section {
-            max-width: 900px;
-            margin: 60px auto 40px auto;
-            padding: 0 20px;
-            text-align: center;
-        }
-        .intro-section h2 {
-            font-size: 2.2rem;
-            color: #4f2d2c;
-            margin-bottom: 20px;
-        }
-        .intro-section p {
-            font-size: 1.1rem;
-            margin-bottom: 15px;
-        }
-
-        /* --- Proforma Images Section (Floating Effect) --- */
-        .proforma-section {
-            max-width: 1000px;
-            margin: 0 auto 60px auto;
-            padding: 0 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 60px; /* Space between the two images */
-        }
-        .proforma-container {
-            width: 100%;
-            text-align: center;
-        }
-        .proforma-container img {
-            width: 100%;
-            max-width: 600px; /* Reduced to 2/3 size for desktop */
-            height: auto;
-            border-radius: 8px;
-            /* Deep drop shadow for the "floating" effect */
-            box-shadow: 0 20px 50px rgba(0,0,0,0.2); 
-            transition: transform 0.3s ease;
-        }
-        .proforma-container img:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 30px 60px rgba(0,0,0,0.25);
-        }
-
-        /* --- Timeline Section --- */
-        .timeline-section {
-            padding: 40px 20px 60px 20px;
-            background-color: #e9e2d8;
-        }
-        .timeline {
-            position: relative;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        /* The central vertical line */
-        .timeline::after {
-            content: '';
-            position: absolute;
-            width: 4px;
-            background-color: #99724b; 
-            top: 0;
-            bottom: 0;
-            left: 50%;
-            margin-left: -2px;
-            border-radius: 2px;
-        }
-
-        /* Container for each timeline item */
-        .timeline-item {
-            padding: 10px 40px;
-            position: relative;
-            background-color: inherit;
-            width: 50%;
-        }
-
-        /* The circles on the timeline */
-        .timeline-item::after {
-            content: '';
-            position: absolute;
-            width: 24px;
-            height: 24px;
-            right: -12px;
-            background-color: #e9e2d8;
-            border: 4px solid #4e513e; 
-            top: 25px;
-            border-radius: 50%;
-            z-index: 1;
-        }
-
-        /* Place items to the left */
-        .left {
-            left: 0;
-        }
-
-        /* Place items to the right */
-        .right {
-            left: 50%;
-        }
-
-        /* Fix the circle position for right-aligned items */
-        .right::after {
-            left: -12px;
-        }
-
-        /* Actual content card inside the timeline item */
-        .content {
-            padding: 25px 30px;
-            background-color: white;
-            position: relative;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            border-top: 4px solid #4e513e;
-        }
-        .content h3 {
-            color: #4e513e;
-            font-size: 1.4rem;
-            margin-bottom: 10px;
-        }
-        .content p {
-            font-size: 1.05rem;
-            color: #4f2d2c;
-            margin-bottom: 10px;
-        }
-        .content p:last-child {
-            margin-bottom: 0;
-        }
-        .step-number {
-            font-size: 0.9rem;
-            color: #99724b;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 5px;
-            display: block;
-        }
-
-        /* Small Button specifically for the timeline */
-        .timeline-btn {
-            display: inline-block;
-            margin-top: 15px;
-            padding: 10px 18px;
-            background-color: #99724b;
-            color: #e9e2d8;
-            text-decoration: none;
-            border-radius: 4px;
-            font-weight: bold;
-            font-size: 0.95rem;
-            transition: background-color 0.3s;
-        }
-        .timeline-btn:hover {
-            background-color: #9a5d40;
-        }
-
-        /* Logo specific styling */
-        .dixon-logo {
-            max-width: 140px;
-            margin-top: 25px; /* Added more space above the logo */
-            display: block;
-        }
-        
-        .wynwest-logo {
-            max-width: 210px; 
-            margin-top: 25px; /* Added more space above the logo */
-            display: block;
-        }
-
-        /* --- Call to Action Section --- */
-        .cta-section {
-            max-width: 800px;
-            margin: 80px auto; 
-            padding: 40px 20px;
-            text-align: center;
-            background-color: #ffffff;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            border-top: 4px solid #99724b; 
-        }
-        .cta-section h2 {
-            font-size: 2rem;
-            color: #4f2d2c;
-            margin-bottom: 15px;
-        }
-        .cta-section p {
-            font-size: 1.1rem;
-            color: #4f2d2c;
-            margin-bottom: 30px;
-        }
-        .cta-btn {
-            display: inline-block;
-            padding: 15px 35px;
-            background-color: #99724b; 
-            color: #e9e2d8;
-            text-decoration: none;
-            border-radius: 4px;
-            font-weight: bold;
-            font-size: 1.1rem;
-            transition: background-color 0.3s;
-            margin: 0 10px 10px 10px;
-        }
-        .cta-btn:hover {
-            background-color: #9a5d40; 
-        }
-        
-        /* Secondary transparent button style for Contact */
-        .cta-btn-outline {
-            background-color: transparent;
-            color: #99724b;
-            border: 2px solid #99724b;
-        }
-        .cta-btn-outline:hover {
-            background-color: #99724b;
-            color: #e9e2d8;
-        }
-
-        /* --- Footer --- */
-        footer {
-            text-align: center;
-            padding: 40px 20px;
-            background-color: #4e513e; 
-            color: #e9e2d8; 
-        }
-        .footer-contact {
-            margin-bottom: 20px;
-        }
-        .footer-contact p {
-            margin-bottom: 8px;
-            font-size: 1.1rem;
-            color: #e9e2d8;
-        }
-        .footer-contact a {
-            color: #c09050; 
-            text-decoration: none;
-            font-weight: bold;
-        }
-        .footer-contact a:hover {
-            text-decoration: underline;
-        }
-        .footer-disclosure {
-            max-width: 900px;
-            margin: 0 auto 0 auto; 
-            font-size: 0.8rem;
-            color: #e9e2d8; 
-            opacity: 0.75;
-            line-height: 1.5;
-            text-align: justify;
-            text-align-last: center; 
+            
+            .cta-btn {
+                display: flex; /* Makes buttons stack cleanly on mobile */
+                width: 100%;
+            }
         }
     </style>
 </head>
@@ -460,10 +477,12 @@
         <p>High-yield real estate returns without the burden of day-to-day management.</p>
     </header>
 
-    <section class="intro-section">
-        <h2>Passive Investing, Active Returns</h2>
-        <p>A capital partnership allows you to participate in the lucrative Arizona fix-and-flip market without having to swing a hammer or manage a job site. You provide the funding, and I handle the acquisition, project management, and final sale.</p>
-        <p>Take a look at the example proforma below to see the level of analytical detail, transparency, and profit-sharing structure I provide for every joint venture.</p>
+    <section class="intro-wrapper">
+        <div class="intro-card">
+            <h2>Passive Investing, Active Returns</h2>
+            <p>A capital partnership allows you to participate in the lucrative Arizona fix-and-flip market without having to swing a hammer or manage a job site. You provide the funding, and I handle the acquisition, project management, and final sale.</p>
+            <p>Take a look at the example proforma below to see the level of analytical detail, transparency, and profit-sharing structure I provide for every joint venture.</p>
+        </div>
     </section>
 
     <section class="proforma-section">
@@ -483,7 +502,6 @@
                     <span class="step-number">Step 01</span>
                     <h3>Connect</h3>
                     <p>We will connect to discuss the capital you are looking to invest, what the end-to-end process looks like, and establish a realistic timeline.</p>
-                    <a href="partnership-intake" class="timeline-btn">Get Started</a>
                 </div>
             </div>
 
