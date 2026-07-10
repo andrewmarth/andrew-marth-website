@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Buying a Home | Andrew Marth Real Estate</title>
     
-    <!-- Google Fonts Import -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Familjen+Grotesk:wght@400..700&display=swap" rel="stylesheet">
@@ -98,6 +97,35 @@
         .content p { font-size: 1.05rem; color: #4f2d2c; margin-bottom: 0; }
         .step-number { font-size: 0.9rem; color: #99724b; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; display: block; }
 
+        /* Unified Button Styling & Arrows */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px; 
+            background-color: #99724b; 
+            color: #e9e2d8; 
+            text-decoration: none;
+            padding: 12px 28px;
+            border-radius: 999px; /* Pill shape */
+            font-weight: bold;
+            transition: all 0.3s ease;
+            margin-top: 15px;
+        }
+        .btn:hover {
+            background-color: #9a5d40; 
+            transform: translateY(-5px); 
+            box-shadow: 0 8px 15px rgba(0,0,0,0.1); 
+        }
+        .btn::after {
+            content: '\2192'; 
+            font-size: 1.2em;
+            transition: transform 0.3s ease;
+        }
+        .btn:hover::after {
+            transform: translateX(5px); 
+        }
+
         .programs-section { max-width: 940px; margin: 60px auto 40px auto; padding: 0 20px; }
         .programs-header { text-align: center; margin-bottom: 40px; }
         .programs-header h2 { font-size: 2.2rem; color: #4f2d2c; margin-bottom: 15px; }
@@ -185,8 +213,12 @@
         
         .form-actions { display: flex; justify-content: center; align-items: center; gap: 15px; margin-top: auto; padding-top: 25px; }
         
-        /* Updated Form Buttons */
+        /* Form Buttons (Animated Arrows Added) */
         .btn-primary { 
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
             background-color: #99724b; 
             color: #ffffff; 
             border: none; 
@@ -204,8 +236,39 @@
             transform: translateY(-5px); 
             box-shadow: 0 8px 15px rgba(0,0,0,0.1); 
         }
-        .btn-secondary { background-color: transparent; color: #99724b; border: none; font-size: 1.05rem; font-weight: bold; cursor: pointer; padding: 10px 15px; transition: color 0.3s; }
+        .btn-primary::after {
+            content: '\2192'; 
+            font-size: 1.2em;
+            transition: transform 0.3s ease;
+        }
+        .btn-primary:hover::after {
+            transform: translateX(5px); 
+        }
+
+        .btn-secondary { 
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            background-color: transparent; 
+            color: #99724b; 
+            border: none; 
+            font-size: 1.05rem; 
+            font-weight: bold; 
+            cursor: pointer; 
+            padding: 10px 15px; 
+            transition: color 0.3s ease; 
+        }
         .btn-secondary:hover { color: #4e513e; }
+        .btn-secondary::before {
+            content: '\2190'; 
+            font-size: 1.2em;
+            transition: transform 0.3s ease;
+        }
+        .btn-secondary:hover::before {
+            transform: translateX(-4px); 
+        }
+
         .secure-notice { text-align: center; max-width: 400px; margin: 10px auto 0 auto; }
         .secure-header { display: flex; align-items: center; justify-content: center; gap: 6px; color: #4e513e; font-weight: bold; font-size: 1rem; margin-bottom: 4px; }
         .secure-header img { height: 1rem; width: auto; object-fit: contain; }
@@ -215,6 +278,7 @@
         .success-message h3 { font-size: 2.2rem; color: #4e513e; margin-bottom: 10px; }
         .success-message p { font-size: 1.15rem; color: #4f2d2c; }
 
+        /* --- Footer --- */
         footer { text-align: center; padding: 40px 20px; background-color: #4e513e; color: #e9e2d8; }
         .footer-contact { margin-bottom: 20px; }
         .footer-contact p { margin-bottom: 8px; font-size: 1.1rem; color: #e9e2d8; }
