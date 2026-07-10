@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Buying a Home | Andrew Marth Real Estate</title>
     
-    <!-- Google Fonts Import -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Familjen+Grotesk:wght@400..700&display=swap" rel="stylesheet">
@@ -132,20 +131,26 @@
         .step-inputs { flex-grow: 1; display: flex; flex-direction: column; justify-content: center; width: 100%; }
         .step-title { font-size: 1.6rem; color: #4e513e; margin-bottom: 8px; line-height: 1.3; }
         .step-desc { font-size: 1.05rem; color: #4f2d2c; opacity: 0.85; margin-bottom: 5px; line-height: 1.5; }
+        
+        /* Updated Input Styles */
         .input-group { margin-bottom: 20px; text-align: left; }
         .input-group label { display: block; font-size: 0.95rem; color: #4f2d2c; margin-bottom: 8px; font-weight: bold; }
-        .input-group input, .input-group textarea { width: 100%; padding: 16px; font-size: 1.1rem; color: #4f2d2c; border: 2px solid transparent; background-color: #f7f4f0; border-radius: 8px; box-shadow: inset 0 2px 4px rgba(0,0,0,0.03); transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); font-family: inherit; }
-        .input-group textarea { resize: vertical; }
+        .input-group input, .input-group textarea { width: 100%; font-size: 1.1rem; color: #4f2d2c; border: 2px solid transparent; background-color: #f7f4f0; box-shadow: inset 0 2px 4px rgba(0,0,0,0.03); transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); font-family: inherit; }
+        .input-group input { border-radius: 999px; padding: 16px 25px; } 
+        .input-group textarea { border-radius: 20px; padding: 16px 20px; resize: vertical; } 
         .input-group input:focus, .input-group textarea:focus { outline: none; background-color: #ffffff; border-color: #99724b; box-shadow: 0 8px 20px rgba(153, 114, 75, 0.15); transform: translateY(-2px); }
         .input-group input.error, .input-group textarea.error { border-color: #d9534f; background-color: #fdf2f2; }
         .name-row { display: flex; gap: 15px; flex-wrap: wrap; }
         .name-row .input-group { flex: 1; min-width: 150px; }
+        
+        /* Updated Radio Buttons */
         .radio-group { display: flex; gap: 15px; justify-content: center; margin-bottom: 20px; flex-wrap: wrap; }
         .radio-group.vertical { flex-direction: column; gap: 12px; }
         .radio-btn input[type="radio"] { display: none; }
-        .radio-btn span { display: block; padding: 16px 25px; background-color: #f7f4f0; border: 2px solid transparent; border-radius: 8px; font-size: 1.1rem; font-weight: bold; color: #4f2d2c; cursor: pointer; transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1); text-align: center; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
+        .radio-btn span { display: block; padding: 16px 25px; background-color: #f7f4f0; border: 2px solid transparent; border-radius: 999px; font-size: 1.1rem; font-weight: bold; color: #4f2d2c; cursor: pointer; transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1); text-align: center; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
         .radio-btn input[type="radio"]:checked + span { background-color: #99724b; color: #ffffff; transform: scale(1.02); box-shadow: 0 6px 15px rgba(153, 114, 75, 0.25); }
         .radio-group.error span { border: 2px solid #d9534f; }
+        
         .form-actions { display: flex; justify-content: center; align-items: center; gap: 15px; margin-top: auto; padding-top: 25px; }
         
         /* Updated Form Buttons */
@@ -223,7 +228,10 @@
             .form-container-card.keyboard-open .step-desc { display: none !important; }
             .form-container-card.keyboard-open .step-title { font-size: 1.3rem !important; margin-bottom: 10px !important; }
             .form-container-card.keyboard-open .input-group { margin-bottom: 10px !important; }
-            .form-container-card.keyboard-open .input-group input { padding: 10px 15px !important; }
+            
+            /* Updated keyboard mobile padding for inputs */
+            .form-container-card.keyboard-open .input-group input { padding: 10px 20px !important; }
+            
             .form-container-card.keyboard-open .form-actions { padding-top: 10px !important; }
         }
     </style>
