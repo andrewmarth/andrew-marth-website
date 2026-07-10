@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Andrew Marth | Real Estate Agent</title>
     
+    <!-- Google Fonts Import -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Familjen+Grotesk:wght@400..700&display=swap" rel="stylesheet">
@@ -112,17 +113,19 @@
         }
         header h1 {
             font-size: 4.5rem; 
-            margin-bottom: 5px; 
+            margin-bottom: 0px; /* Reduced gap */
+            line-height: 1.1; /* Tightens the invisible padding around the text */
             letter-spacing: 2px;
             text-shadow: 0 2px 4px rgba(0,0,0,0.3); 
         }
         .hero-subtitle {
-            font-size: 1.6rem;
+            font-size: 1.3rem; /* Scaled down */
             font-family: 'Familjen Grotesk', sans-serif;
             color: #e9e2d8;
             letter-spacing: 3px;
             text-transform: uppercase;
             font-weight: 600;
+            margin-top: 5px; /* Brings it right up under the name */
             margin-bottom: 20px;
             text-shadow: 0 1px 3px rgba(0,0,0,0.3);
         }
@@ -132,6 +135,7 @@
             opacity: 0.95; 
             max-width: 700px;
             margin: 0 auto;
+            font-style: italic; /* Added slight italic for the quote */
             text-shadow: 0 1px 3px rgba(0,0,0,0.3);
         }
 
@@ -244,7 +248,7 @@
             width: 100%;
             height: 220px;
             object-fit: cover;
-            border-bottom: 2px solid #0E2A3B; /* Adds separation under the image */
+            border-bottom: 2px solid #0E2A3B; 
         }
         .card-content {
             padding: 25px;
@@ -391,24 +395,22 @@
                 line-height: 1;
             }
             
-            /* Reduced hero font slightly so it doesn't force a horizontal stretch */
             header h1 { font-size: 2.8rem; }
-            .hero-subtitle { font-size: 1.1rem; letter-spacing: 2px; margin-bottom: 15px; }
+            .hero-subtitle { font-size: 1rem; letter-spacing: 2px; margin-bottom: 15px; margin-top: 5px; }
             header p { font-size: 1.05rem; }
             
             .about-text {
                 text-align: center;
             }
             
-            /* Modifies grid logic so the card + shadow fits entirely within the screen */
             .services-container {
                 flex-direction: column;
                 gap: 35px;
             }
             .card {
                 min-width: 0;
-                width: calc(100% - 6px); /* Subtracts the shadow width mathematically */
-                margin-bottom: 6px;      /* Subtracts the shadow height mathematically */
+                width: calc(100% - 6px); 
+                margin-bottom: 6px;      
             }
         }
     </style>
@@ -420,7 +422,7 @@
     <header>
         <h1>Andrew Marth</h1>
         <h2 class="hero-subtitle">Real Estate Agent</h2>
-        <p>I can't be satisfied until you're satisfied</p>
+        <p>"Everything I touch turns to sold."</p>
     </header>
 
     <section class="about-section">
