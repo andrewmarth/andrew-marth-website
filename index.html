@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Andrew Marth | Real Estate Agent</title>
     
-    <!-- Google Fonts Import -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Familjen+Grotesk:wght@400..700&display=swap" rel="stylesheet">
@@ -17,12 +16,20 @@
             margin: 0;
             padding: 0;
         }
+        
+        /* The Absolute Hard Lock: Prevents ALL horizontal scrolling across all mobile browsers */
+        html, body {
+            width: 100%;
+            max-width: 100%;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
         body {
-            font-family: 'Familjen Grotesk', sans-serif; /* Updated Body Font */
+            font-family: 'Familjen Grotesk', sans-serif; 
             line-height: 1.6;
             color: #4f2d2c; 
             background-color: #e9e2d8; 
-            overflow-x: hidden; 
         }
         
         /* Updated Header Font */
@@ -94,7 +101,221 @@
             display: none; 
         }
 
-        /* Mobile Navigation Styles */
+        /* --- Header / Hero Section --- */
+        header {
+            background: linear-gradient(rgba(78, 81, 62, 0.75), rgba(78, 81, 62, 0.75)), url('https://andrewmarth.com/images/background.jpeg');
+            background-size: cover;
+            background-position: center;
+            color: #e9e2d8; 
+            padding: 160px 20px 100px 20px; 
+            text-align: center;
+        }
+        header h1 {
+            font-size: 4.5rem; 
+            margin-bottom: 5px; 
+            letter-spacing: 2px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3); 
+        }
+        .hero-subtitle {
+            font-size: 1.6rem;
+            font-family: 'Familjen Grotesk', sans-serif;
+            color: #e9e2d8;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-weight: 600;
+            margin-bottom: 20px;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+        }
+        header p {
+            font-size: 1.3rem;
+            color: #e9e2d8; 
+            opacity: 0.95; 
+            max-width: 700px;
+            margin: 0 auto;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+        }
+
+        /* --- About Me Section --- */
+        .about-section {
+            max-width: 1000px;
+            margin: 60px auto 20px auto;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            flex-wrap: wrap; 
+        }
+        .about-image {
+            flex: 1 1 300px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .gear-container {
+            position: relative;
+            width: 100%;
+            max-width: 350px; 
+            aspect-ratio: 1 / 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .gear-spinner {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            animation: spin 24s linear infinite; 
+            z-index: 0;
+            filter: drop-shadow(0 6px 12px rgba(0,0,0,0.1)); 
+        }
+        
+        .cookie-shape {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: contain;
+        }
+
+        .gear-container img.profile-pic {
+            width: 74%; 
+            height: 74%;
+            border-radius: 50%;
+            object-fit: cover;
+            position: relative;
+            z-index: 1;
+            border: 4px solid #e9e2d8; 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1); 
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .about-text {
+            flex: 2 1 400px;
+        }
+        .about-text h2 {
+            font-size: 2rem;
+            color: #4f2d2c; 
+            margin-bottom: 20px;
+        }
+        .about-text p {
+            color: #4f2d2c; 
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+        }
+
+        /* --- Main Services Section --- */
+        .services-section {
+            max-width: 1200px;
+            margin: 60px auto;
+            padding: 0 20px;
+            text-align: center;
+        }
+        .services-section h2 {
+            font-size: 2rem;
+            margin-bottom: 40px;
+            color: #4f2d2c; 
+        }
+
+        .services-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 30px;
+        }
+
+        /* --- Individual Service Cards --- */
+        .card {
+            background: #ffffff;
+            border-radius: 20px; 
+            border: 2px solid #0E2A3B; 
+            box-shadow: 6px 6px 0px #0E2A3B; 
+            overflow: hidden;
+            flex: 1 1 calc(33.333% - 30px);
+            min-width: 300px; 
+            display: flex;
+            flex-direction: column;
+        }
+        .card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-bottom: 2px solid #0E2A3B; /* Adds separation under the image */
+        }
+        .card-content {
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+        .card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: #4e513e; 
+        }
+        .card p {
+            color: #4f2d2c; 
+            margin-bottom: 25px;
+            flex-grow: 1; 
+        }
+
+        /* --- Buttons --- */
+        .btn {
+            display: inline-block;
+            background-color: #99724b; 
+            color: #e9e2d8; 
+            text-decoration: none;
+            padding: 12px 28px;
+            border-radius: 999px; 
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        .btn:hover {
+            background-color: #9a5d40; 
+            transform: translateY(-5px); 
+            box-shadow: 0 8px 15px rgba(0,0,0,0.1); 
+        }
+
+        /* --- Footer --- */
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            background-color: #4e513e; 
+            color: #e9e2d8; 
+            margin-top: 40px;
+        }
+        .footer-contact {
+            margin-bottom: 20px;
+        }
+        .footer-contact p {
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+            color: #e9e2d8;
+        }
+        .footer-contact a {
+            color: #c09050; 
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .footer-contact a:hover {
+            text-decoration: underline;
+        }
+        .footer-disclosure {
+            max-width: 900px;
+            margin: 0 auto 0 auto; 
+            font-size: 0.8rem;
+            color: #e9e2d8; 
+            opacity: 0.75;
+            line-height: 1.5;
+            text-align: justify;
+            text-align-last: center; 
+        }
+
+        /* Mobile Responsive Overrides */
         @media (max-width: 768px) {
             .navbar {
                 justify-content: flex-end; 
@@ -169,217 +390,26 @@
                 cursor: pointer;
                 line-height: 1;
             }
+            
+            /* Reduced hero font slightly so it doesn't force a horizontal stretch */
+            header h1 { font-size: 2.8rem; }
+            .hero-subtitle { font-size: 1.1rem; letter-spacing: 2px; margin-bottom: 15px; }
+            header p { font-size: 1.05rem; }
+            
             .about-text {
                 text-align: center;
             }
-        }
-
-        /* --- Header / Hero Section --- */
-        header {
-            background: linear-gradient(rgba(78, 81, 62, 0.75), rgba(78, 81, 62, 0.75)), url('https://andrewmarth.com/images/background.jpeg');
-            background-size: cover;
-            background-position: center;
-            color: #e9e2d8; 
-            padding: 160px 20px 100px 20px; 
-            text-align: center;
-        }
-        header h1 {
-            font-size: 3rem; 
-            margin-bottom: 15px;
-            letter-spacing: 2px;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.3); 
-        }
-        header p {
-            font-size: 1.3rem;
-            color: #e9e2d8; 
-            opacity: 0.95; 
-            max-width: 700px;
-            margin: 0 auto;
-            text-shadow: 0 1px 3px rgba(0,0,0,0.3);
-        }
-
-        /* --- About Me Section (with Downloaded Cookie Shape) --- */
-        .about-section {
-            max-width: 1000px;
-            margin: 60px auto 20px auto;
-            padding: 0 20px;
-            display: flex;
-            align-items: center;
-            gap: 50px;
-            flex-wrap: wrap; 
-        }
-        .about-image {
-            flex: 1 1 300px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        
-        /* The container for the animated background and image */
-        .gear-container {
-            position: relative;
-            width: 100%;
-            max-width: 350px; 
-            aspect-ratio: 1 / 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        
-        /* The rotating image housing */
-        .gear-spinner {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            animation: spin 24s linear infinite; 
-            z-index: 0;
-            filter: drop-shadow(0 6px 12px rgba(0,0,0,0.1)); 
-        }
-        
-        /* The downloaded cookie shape */
-        .cookie-shape {
-            width: 100%;
-            height: 100%;
-            display: block;
-            object-fit: contain;
-        }
-
-        /* The inner profile photo */
-        .gear-container img.profile-pic {
-            width: 74%; /* Scaled nicely to leave a clean border gap */
-            height: 74%;
-            border-radius: 50%;
-            object-fit: cover;
-            position: relative;
-            z-index: 1;
-            border: 4px solid #e9e2d8; 
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1); 
-        }
-
-        /* The infinite spin animation */
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .about-text {
-            flex: 2 1 400px;
-        }
-        .about-text h2 {
-            font-size: 2rem;
-            color: #4f2d2c; 
-            margin-bottom: 20px;
-        }
-        .about-text p {
-            color: #4f2d2c; 
-            font-size: 1.1rem;
-            margin-bottom: 15px;
-        }
-
-        /* --- Main Services Section --- */
-        .services-section {
-            max-width: 1200px;
-            margin: 60px auto;
-            padding: 0 20px;
-            text-align: center;
-        }
-        .services-section h2 {
-            font-size: 2rem;
-            margin-bottom: 40px;
-            color: #4f2d2c; 
-        }
-
-        .services-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            gap: 30px;
-        }
-
-        /* --- Individual Service Cards --- */
-        .card {
-            background: #ffffff;
-            border-radius: 20px; /* Made rounder per request */
-            box-shadow: 6px 6px 0px #0E2A3B; /* Updated solid drop shadow */
-            overflow: hidden;
-            flex: 1 1 calc(33.333% - 30px);
-            min-width: 300px; 
-            display: flex;
-            flex-direction: column;
-            /* Removed hover transitions for the cards */
-        }
-        .card img {
-            width: 100%;
-            height: 220px;
-            object-fit: cover;
-        }
-        .card-content {
-            padding: 25px;
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1;
-        }
-        .card h3 {
-            font-size: 1.4rem;
-            margin-bottom: 15px;
-            color: #4e513e; 
-        }
-        .card p {
-            color: #4f2d2c; 
-            margin-bottom: 25px;
-            flex-grow: 1; 
-        }
-
-        /* --- Buttons --- */
-        .btn {
-            display: inline-block;
-            background-color: #99724b; 
-            color: #e9e2d8; 
-            text-decoration: none;
-            padding: 12px 28px;
-            border-radius: 999px; /* Fully rounded pill shape */
-            font-weight: bold;
-            transition: all 0.3s ease;
-        }
-        .btn:hover {
-            background-color: #9a5d40; 
-            transform: translateY(-5px); /* Transferred card hover animation here */
-            box-shadow: 0 8px 15px rgba(0,0,0,0.1); 
-        }
-
-        /* --- Footer --- */
-        footer {
-            text-align: center;
-            padding: 40px 20px;
-            background-color: #4e513e; 
-            color: #e9e2d8; 
-            margin-top: 40px;
-        }
-        .footer-contact {
-            margin-bottom: 20px;
-        }
-        .footer-contact p {
-            margin-bottom: 8px;
-            font-size: 1.1rem;
-            color: #e9e2d8;
-        }
-        .footer-contact a {
-            color: #c09050; 
-            text-decoration: none;
-            font-weight: bold;
-        }
-        .footer-contact a:hover {
-            text-decoration: underline;
-        }
-        .footer-disclosure {
-            max-width: 900px;
-            margin: 0 auto 0 auto; 
-            font-size: 0.8rem;
-            color: #e9e2d8; 
-            opacity: 0.75;
-            line-height: 1.5;
-            text-align: justify;
-            text-align-last: center; 
+            
+            /* Modifies grid logic so the card + shadow fits entirely within the screen */
+            .services-container {
+                flex-direction: column;
+                gap: 35px;
+            }
+            .card {
+                min-width: 0;
+                width: calc(100% - 6px); /* Subtracts the shadow width mathematically */
+                margin-bottom: 6px;      /* Subtracts the shadow height mathematically */
+            }
         }
     </style>
 </head>
@@ -389,7 +419,7 @@
 
     <header>
         <h1>Andrew Marth</h1>
-        <!-- Updated Hero Banner Text -->
+        <h2 class="hero-subtitle">Real Estate Agent</h2>
         <p>I can't be satisfied until you're satisfied</p>
     </header>
 
