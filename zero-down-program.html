@@ -257,7 +257,6 @@
             margin-bottom: 15px;
             line-height: 1;
             letter-spacing: 0.5px;
-            /* Ensures it completely detaches cleanly and has a border footprint of its own */
             border: 2px solid #0E2A3B; 
         }
         
@@ -519,11 +518,14 @@
                 width: calc(100% - 6px);
                 margin-left: auto;
                 margin-right: auto;
-                margin-bottom: 6px;
             }
             .intro-card {
                 padding: 40px 20px;
                 margin-top: 80px; 
+                margin-bottom: 40px !important; /* Adds clear separation before the details card on mobile */
+            }
+            .program-card, .proforma-container img, .inner-contact-box {
+                margin-bottom: 6px;
             }
             
             .name-row { flex-direction: column; gap: 0; }
@@ -566,23 +568,23 @@
             <img src="https://andrewmarth.com/images/final_free_real_estate.jpg" alt="Free Real Estate" class="program-card-header-img">
             <div class="program-card-content">
                 <div class="detail-item">
-                    <h3>✦ $0 Down Payment</h3>
+                    <h3>✦&nbsp;&nbsp;$0 Down Payment</h3>
                     <p>This program allows you to purchase a home with absolutely zero dollars required for a down payment, keeping your savings in your pocket where they belong.</p>
                 </div>
                 <div class="detail-item">
-                    <h3>✦ $88,000 Income Limit</h3>
+                    <h3>✦&nbsp;&nbsp;$88,000 Income Limit</h3>
                     <p>The program features a strict income limit of $88,000 per year. However, this limit <strong>only applies to the individual(s) officially listed on the loan</strong>. If two people plan to co-own the home, you can strategically structure it so only the qualifying earner is on the loan.</p>
                 </div>
                 <div class="detail-item">
-                    <h3>✦ True Market Interest Rates</h3>
+                    <h3>✦&nbsp;&nbsp;True Market Interest Rates</h3>
                     <p>Unlike many specialty financing options, this program provides a standard, competitive market interest rate. There are absolutely no hidden markups on the rate or your closing costs.</p>
                 </div>
                 <div class="detail-item">
-                    <h3>✦ Powered by Sunflower Bank</h3>
+                    <h3>✦&nbsp;&nbsp;Powered by Sunflower Bank</h3>
                     <p>This program is a highly specialized lending product made possible through my direct professional partnership with the experts at Sunflower Bank.</p>
                 </div>
                 <div class="detail-item">
-                    <h3>✦ No Initial Credit Check</h3>
+                    <h3>✦&nbsp;&nbsp;No Initial Credit Check</h3>
                     <p>Want to see if this is an option for you? No problem. There is absolutely no hard credit check required to see if your financial scenario qualifies for the program.</p>
                 </div>
             </div>
