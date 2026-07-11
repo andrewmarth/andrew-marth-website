@@ -182,23 +182,6 @@
             margin-bottom: 0;
         }
 
-        /* General plain text intro block (used for 'Example Purchase') */
-        .intro-section {
-            max-width: 900px;
-            margin: 40px auto;
-            padding: 0 20px;
-            text-align: center;
-        }
-        .intro-section h2 {
-            font-size: 2.2rem;
-            color: #4f2d2c;
-            margin-bottom: 20px;
-        }
-        .intro-section p {
-            font-size: 1.1rem;
-            margin-bottom: 15px;
-        }
-
         /* --- Single Comprehensive Program Card Section --- */
         .program-details-section {
             display: flex;
@@ -277,7 +260,7 @@
             border: 2px solid #0E2A3B;
             box-shadow: 6px 6px 0px #0E2A3B;
             width: 100%;
-            max-width: 600px; /* Reduced back to 600px to match the original image size */
+            max-width: 600px; 
             overflow: hidden;
             text-align: center;
         }
@@ -298,7 +281,33 @@
             width: 100%;
             height: auto;
             display: block;
-            border-top: 2px solid #0E2A3B;
+        }
+
+        /* Scrolling Marquee Banner */
+        .marquee-banner {
+            background-color: #0E2A3B; 
+            color: #e9e2d8; 
+            overflow: hidden;
+            white-space: nowrap;
+            padding: 12px 0;
+            display: flex;
+        }
+        .marquee-content {
+            display: inline-block;
+            white-space: nowrap;
+            animation: marquee-scroll 20s linear infinite;
+            font-family: 'Bricolage Grotesque', sans-serif;
+            font-weight: bold;
+            font-size: 1.1rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+        .marquee-content span {
+            display: inline-block;
+        }
+        @keyframes marquee-scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
         }
 
         /* --- Standalone Contact Box Section --- */
@@ -373,7 +382,7 @@
         .form-container-card { width: 100%; display: flex; justify-content: center; align-items: center; background-color: #e9e2d8; border-top: 4px solid #4e513e; padding: 80px 20px; position: relative; overflow: hidden; transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); }
         .form-container-card.fullscreen-active { position: fixed; top: 80px; left: 0; right: 0; bottom: 0; width: 100%; z-index: 999; border-top: none; padding: 20px; }
         .form-bg-video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
-        .form-container-card.fullscreen-active .form-bg-video { fixed; top: -10vh; left: 0; width: 100%; height: 150vh; }
+        .form-container-card.fullscreen-active .form-bg-video { position: fixed; top: -10vh; left: 0; width: 100%; height: 150vh; }
         
         .native-form-box { 
             background: #ffffff; 
@@ -608,6 +617,14 @@
                 <h2>Example Purchase</h2>
                 <p>See below for a real example of a purchase with this program. Just sign on the dotted line and the house is yours. No catches as long as you qualify.</p>
             </div>
+            
+            <div class="marquee-banner">
+                <div class="marquee-content">
+                    <span>✦&nbsp;&nbsp;It's closer than you think&nbsp;&nbsp;✦&nbsp;&nbsp;Lets work together&nbsp;&nbsp;✦&nbsp;&nbsp;Lets make it happen&nbsp;&nbsp;✦&nbsp;&nbsp;It's closer than you think&nbsp;&nbsp;✦&nbsp;&nbsp;Lets work together&nbsp;&nbsp;✦&nbsp;&nbsp;Lets make it happen&nbsp;&nbsp;</span><!--
+                    --><span>✦&nbsp;&nbsp;It's closer than you think&nbsp;&nbsp;✦&nbsp;&nbsp;Lets work together&nbsp;&nbsp;✦&nbsp;&nbsp;Lets make it happen&nbsp;&nbsp;✦&nbsp;&nbsp;It's closer than you think&nbsp;&nbsp;✦&nbsp;&nbsp;Lets work together&nbsp;&nbsp;✦&nbsp;&nbsp;Lets make it happen&nbsp;&nbsp;</span>
+                </div>
+            </div>
+
             <img src="https://andrewmarth.com/images/example_zero_down.jpg" alt="Zero Down Program Example Proforma">
         </div>
     </section>
