@@ -227,22 +227,18 @@
             padding: 60px 50px 30px 50px;
         }
         
-        /* Boxed Detail Items */
+        /* Boxed Detail Items (Updated: Removed borders for a cleaner look) */
         .detail-item {
-            position: relative;
-            border: 2px solid #0E2A3B; 
-            border-radius: 16px;
-            padding: 25px 25px 20px 25px;
-            margin-bottom: 50px; 
+            margin-bottom: 40px; 
             display: flex;
             flex-direction: column;
-            align-items: flex-start; /* Keeps the badge tightly aligned left */
+            align-items: flex-start; 
         }
         .detail-item:last-child {
             margin-bottom: 20px;
         }
         
-        /* Updated Title Header to be a clean background-contrasting Pill Badge */
+        /* Clean background-contrasting Pill Badge */
         .detail-item h3 {
             display: inline-flex;
             align-items: center;
@@ -253,11 +249,9 @@
             font-weight: bold;
             padding: 8px 20px;
             border-radius: 999px; /* Pill Shape */
-            margin-top: -42px; /* Pulls it up perfectly centered on the box border */
-            margin-bottom: 15px;
+            margin-bottom: 12px;
             line-height: 1;
             letter-spacing: 0.5px;
-            border: 2px solid #0E2A3B; 
         }
         
         .detail-item p {
@@ -266,6 +260,7 @@
             line-height: 1.6;
             margin: 0;
             width: 100%;
+            padding-left: 5px; /* Tiny indent so text aligns nicely under the pill curve */
         }
 
         /* --- Proforma Images Section --- */
@@ -507,8 +502,8 @@
             .program-card-content { padding: 40px 20px 20px 20px; }
             
             /* Responsive Badge overrides for mobile view */
-            .detail-item h3 { font-size: 1.1rem; padding: 6px 15px; margin-top: -38px; }
-            .detail-item { padding: 25px 20px 20px 20px; margin-bottom: 40px; }
+            .detail-item h3 { font-size: 1.1rem; padding: 6px 15px; }
+            .detail-item { margin-bottom: 30px; }
             
             .inner-contact-box { flex-direction: column; text-align: center; padding: 25px 20px; }
             .inner-socials { justify-content: center; }
@@ -518,6 +513,7 @@
                 width: calc(100% - 6px);
                 margin-left: auto;
                 margin-right: auto;
+                margin-bottom: 6px;
             }
             .intro-card {
                 padding: 40px 20px;
