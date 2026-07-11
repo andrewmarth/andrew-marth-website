@@ -182,23 +182,6 @@
             margin-bottom: 0;
         }
 
-        /* General plain text intro block (used for 'Example Purchase') */
-        .intro-section {
-            max-width: 900px;
-            margin: 40px auto;
-            padding: 0 20px;
-            text-align: center;
-        }
-        .intro-section h2 {
-            font-size: 2.2rem;
-            color: #4f2d2c;
-            margin-bottom: 20px;
-        }
-        .intro-section p {
-            font-size: 1.1rem;
-            margin-bottom: 15px;
-        }
-
         /* --- Single Comprehensive Program Card Section --- */
         .program-details-section {
             display: flex;
@@ -227,7 +210,7 @@
             padding: 60px 50px 30px 50px;
         }
         
-        /* Boxed Detail Items (Updated: Removed borders for a cleaner look) */
+        /* Boxed Detail Items */
         .detail-item {
             margin-bottom: 40px; 
             display: flex;
@@ -243,12 +226,12 @@
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            background-color: #4e513e; /* Brand Green Container */
-            color: #e9e2d8; /* High-contrast Background Cream Text */
+            background-color: #4e513e; 
+            color: #e9e2d8; 
             font-size: 1.2rem;
             font-weight: bold;
             padding: 8px 20px;
-            border-radius: 999px; /* Pill Shape */
+            border-radius: 999px; 
             margin-bottom: 12px;
             line-height: 1;
             letter-spacing: 0.5px;
@@ -260,29 +243,45 @@
             line-height: 1.6;
             margin: 0;
             width: 100%;
-            padding-left: 5px; /* Tiny indent so text aligns nicely under the pill curve */
+            padding-left: 5px; 
         }
 
-        /* --- Proforma Images Section --- */
-        .proforma-section {
+        /* --- Example Purchase Card Section --- */
+        .example-purchase-section {
+            display: flex;
+            justify-content: center;
             max-width: 1000px;
             margin: 0 auto 60px auto;
             padding: 0 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 60px;
         }
-        .proforma-container {
-            width: 100%;
-            text-align: center;
-        }
-        .proforma-container img {
-            width: 100%;
-            max-width: 600px; 
-            height: auto;
+        .example-card {
+            background: #ffffff;
             border-radius: 20px;
             border: 2px solid #0E2A3B;
-            box-shadow: 6px 6px 0px #0E2A3B; 
+            box-shadow: 6px 6px 0px #0E2A3B;
+            width: 100%;
+            max-width: 800px; 
+            overflow: hidden;
+            text-align: center;
+        }
+        .example-card-content {
+            padding: 50px 40px 30px 40px;
+        }
+        .example-card-content h2 {
+            font-size: 2.2rem;
+            color: #4f2d2c;
+            margin-bottom: 15px;
+        }
+        .example-card-content p {
+            font-size: 1.1rem;
+            color: #4f2d2c;
+            margin-bottom: 0;
+        }
+        .example-card img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-top: 2px solid #0E2A3B;
         }
 
         /* --- Standalone Contact Box Section --- */
@@ -502,25 +501,27 @@
             .program-card-content { padding: 40px 20px 20px 20px; }
             
             /* Responsive Badge overrides for mobile view */
-            .detail-item h3 { font-size: 1.1rem; padding: 6px 15px; }
+            .detail-item h3 { font-size: 1.1rem; padding: 6px 15px; margin-bottom: 15px; }
             .detail-item { margin-bottom: 30px; }
+            
+            .example-card-content { padding: 40px 20px 20px 20px; }
+            .example-card-content h2 { font-size: 1.8rem; }
             
             .inner-contact-box { flex-direction: column; text-align: center; padding: 25px 20px; }
             .inner-socials { justify-content: center; }
             
             /* Responsive formatting to prevent horizontal bleed for shadow cards */
-            .intro-card, .program-card, .proforma-container img, .inner-contact-box {
+            .intro-card, .program-card, .example-card, .inner-contact-box {
                 width: calc(100% - 6px);
                 margin-left: auto;
                 margin-right: auto;
-                margin-bottom: 6px;
             }
             .intro-card {
                 padding: 40px 20px;
                 margin-top: 80px; 
-                margin-bottom: 40px !important; /* Adds clear separation before the details card on mobile */
+                margin-bottom: 40px !important; 
             }
-            .program-card, .proforma-container img, .inner-contact-box {
+            .program-card, .example-card, .inner-contact-box {
                 margin-bottom: 6px;
             }
             
@@ -533,10 +534,7 @@
             .form-container-card.keyboard-open .step-desc { display: none !important; }
             .form-container-card.keyboard-open .step-title { font-size: 1.3rem !important; margin-bottom: 10px !important; }
             .form-container-card.keyboard-open .input-group { margin-bottom: 10px !important; }
-            
-            /* Updated keyboard mobile padding for inputs */
             .form-container-card.keyboard-open .input-group input { padding: 10px 20px !important; }
-            
             .form-container-card.keyboard-open .form-actions { padding-top: 10px !important; }
         }
     </style>
@@ -587,13 +585,12 @@
         </div>
     </section>
 
-    <section class="intro-section" style="margin-top: 20px;">
-        <h2>Example Purchase</h2>
-        <p>See below for a real example of a purchase with this program. Just sign on the dotted line and the house is yours. No catches as long as you qualify.</p>
-    </section>
-
-    <section class="proforma-section">
-        <div class="proforma-container">
+    <section class="example-purchase-section">
+        <div class="example-card">
+            <div class="example-card-content">
+                <h2>Example Purchase</h2>
+                <p>See below for a real example of a purchase with this program. Just sign on the dotted line and the house is yours. No catches as long as you qualify.</p>
+            </div>
             <img src="https://andrewmarth.com/images/example_zero_down.jpg" alt="Zero Down Program Example Proforma">
         </div>
     </section>
