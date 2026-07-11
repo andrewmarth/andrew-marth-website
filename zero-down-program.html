@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Zero Down Program | Andrew Marth Real Estate</title>
     
+    <!-- Google Fonts Import -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Familjen+Grotesk:wght@400..700&display=swap" rel="stylesheet">
@@ -159,11 +160,12 @@
             width: 100%;
             display: flex;
             justify-content: center;
+            padding: 0 20px; /* Keeps the image off the edges on mobile */
         }
         
         .hero-content img {
             width: 100%;
-            max-width: 450px; 
+            max-width: 800px; /* Updated to exactly match the cards below */
             height: auto;
             display: block;
             filter: drop-shadow(0 10px 25px rgba(0,0,0,0.3)); /* Drop shadow to make it pop off the video */
@@ -179,7 +181,7 @@
             border: 2px solid #0E2A3B;
             box-shadow: 6px 6px 0px #0E2A3B;
             max-width: 800px; 
-            margin: 60px auto 40px auto; /* Adjusted top margin since it no longer overlaps */
+            margin: 60px auto 40px auto; 
             padding: 50px 40px;
             text-align: center;
         }
@@ -637,7 +639,8 @@
             
             <div class="marquee-banner">
                 <div class="marquee-content">
-                    <span>✦&nbsp;&nbsp;It's closer than you think&nbsp;&nbsp;✦&nbsp;&nbsp;Lets work together&nbsp;&nbsp;✦&nbsp;&nbsp;Lets make it happen&nbsp;&nbsp;✦&nbsp;&nbsp;It's closer than you think&nbsp;&nbsp;✦&nbsp;&nbsp;Lets work together&nbsp;&nbsp;✦&nbsp;&nbsp;Lets make it happen&nbsp;&nbsp;</span><span>✦&nbsp;&nbsp;It's closer than you think&nbsp;&nbsp;✦&nbsp;&nbsp;Lets work together&nbsp;&nbsp;✦&nbsp;&nbsp;Lets make it happen&nbsp;&nbsp;✦&nbsp;&nbsp;It's closer than you think&nbsp;&nbsp;✦&nbsp;&nbsp;Lets work together&nbsp;&nbsp;✦&nbsp;&nbsp;Lets make it happen&nbsp;&nbsp;</span>
+                    <span>✦&nbsp;&nbsp;It's closer than you think&nbsp;&nbsp;✦&nbsp;&nbsp;Lets work together&nbsp;&nbsp;✦&nbsp;&nbsp;Lets make it happen&nbsp;&nbsp;✦&nbsp;&nbsp;It's closer than you think&nbsp;&nbsp;✦&nbsp;&nbsp;Lets work together&nbsp;&nbsp;✦&nbsp;&nbsp;Lets make it happen&nbsp;&nbsp;</span><!--
+                    --><span>✦&nbsp;&nbsp;It's closer than you think&nbsp;&nbsp;✦&nbsp;&nbsp;Lets work together&nbsp;&nbsp;✦&nbsp;&nbsp;Lets make it happen&nbsp;&nbsp;✦&nbsp;&nbsp;It's closer than you think&nbsp;&nbsp;✦&nbsp;&nbsp;Lets work together&nbsp;&nbsp;✦&nbsp;&nbsp;Lets make it happen&nbsp;&nbsp;</span>
                 </div>
             </div>
 
@@ -666,6 +669,7 @@
         </div>
     </section>
 
+    <!-- DYNAMIC FORM PLACEHOLDER WITH ZERO DOWN SPECIFIC TEXT -->
     <div id="form-placeholder" 
          data-form-source="Zero Down Program Form" 
          data-form-title="What Does This Look Like For You?" 
