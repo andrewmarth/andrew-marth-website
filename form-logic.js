@@ -1,6 +1,6 @@
 function initDynamicForm() {
+    const overlayBg = document.getElementById('form-overlay-bg');
     const formContainer = document.getElementById('form-container');
-    const startScreen = document.getElementById('start-screen');
     const form = document.getElementById('conditional-form');
     const container = document.getElementById('form-steps-container');
     const btnStart = document.getElementById('btn-start-form');
@@ -35,74 +35,74 @@ function initDynamicForm() {
         return els[0].value;
     }
 
-    // 66 Question Logic Engine
+    // Full 66 Question Logic Engine
     const questions = [
-        { id: 'q_name', type: 'name', title: 'What is your name?', desc: 'Please provide your legal first and last name.', cond: () => true },
-        { id: 'q_phone', type: 'phone', title: 'What is the best phone number to reach you?', desc: 'I will use this to call or text you regarding your options.', cond: () => true },
-        { id: 'q_email', type: 'email', title: 'What is your email address?', desc: 'Your detailed buyer breakdown will be sent here.', cond: () => true },
-        { id: 'q_sell_home', type: 'yesno', title: 'Do you have a home to sell?', desc: 'Let me know if you have an existing property you plan to sell.', cond: () => true },
-        { id: 'q_sell_addr', type: 'address', title: 'What is the property address?', desc: 'Where is the property you are selling located?', cond: () => val('q_sell_home') === 'Yes' },
-        { id: 'q_sell_mort', type: 'curr', title: 'Outstanding Mortgage Balance', desc: 'Enter the approximate remaining balance on your current mortgage.', cond: () => val('q_sell_home') === 'Yes' },
-        { id: 'q_sell_liens', type: 'yesno', title: 'Are there any other liens or loans on the property?', desc: 'This includes home equity loans, solar liens, or tax liens.', cond: () => val('q_sell_home') === 'Yes' },
-        { id: 'q_sell_liens_bal', type: 'curr', title: 'Other Liens or Loans Balance', desc: 'What is the total combined balance of these additional liens?', cond: () => val('q_sell_liens') === 'Yes' },
-        { id: 'q_buy_new', type: 'yesno', title: 'Will you be buying a new home as well?', desc: 'Are you looking to purchase a new property after selling?', cond: () => val('q_sell_home') === 'Yes' },
-        { id: 'q_breakdown', type: 'yesno', title: 'Do you want a buyer breakdown sheet for your purchase?', desc: 'This provides a detailed estimate of your buying power and monthly costs.', cond: () => val('q_buy_new') === 'Yes' || val('q_sell_home') === 'No' },
-        { id: 'q_inc1_type', type: 'radio_inc', title: 'Primary Income Type', desc: 'Select how you earn your primary income.', cond: () => val('q_breakdown') === 'Yes' },
-        { id: 'q_inc1_title', type: 'text', title: 'Job Title', desc: 'What is your official job title or role?', cond: () => val('q_breakdown') === 'Yes' },
-        { id: 'q_inc1_desc', type: 'textarea', title: 'Quick Description of Income', desc: 'Briefly explain your business or how you earn this income.', cond: () => val('q_inc1_type') === 'Commission/1099' },
-        { id: 'q_inc1_sal', type: 'curr', title: 'Weekly Salary Amount', desc: 'Your gross weekly salary before taxes.', cond: () => val('q_inc1_type') === 'Salary' },
-        { id: 'q_inc1_hrly', type: 'curr_dec', title: 'Hourly Rate', desc: 'Your gross hourly pay rate before taxes.', cond: () => val('q_inc1_type') === 'Hourly' },
-        { id: 'q_inc1_hrs', type: 'number', title: 'Average Hours Worked Per Week', desc: 'How many hours do you typically work in a week?', cond: () => val('q_inc1_type') === 'Hourly' },
-        { id: 'q_inc1_tips', type: 'yesno', title: 'Do you earn tips as well?', desc: 'Do you regularly receive tips as part of your job?', cond: () => val('q_inc1_type') === 'Salary' || val('q_inc1_type') === 'Hourly' },
-        { id: 'q_inc1_tips_amt', type: 'curr', title: 'Average Weekly Tips Earned', desc: 'Estimated weekly tips before taxes.', cond: () => val('q_inc1_tips') === 'Yes' },
-        { id: 'q_inc1_comm', type: 'yesno', title: 'Do you earn commissions as well?', desc: 'Do you receive commission pay on top of your base?', cond: () => val('q_inc1_type') === 'Salary' || val('q_inc1_type') === 'Hourly' },
-        { id: 'q_inc1_comm_freq', type: 'radio_freq', title: 'How often are your commissions earned?', desc: 'How often are these commissions paid out?', cond: () => val('q_inc1_comm') === 'Yes' },
-        { id: 'q_inc1_comm_amt', type: 'curr', title: 'Average Commission Amount', desc: 'Average amount per commission payout before taxes.', cond: () => val('q_inc1_comm') === 'Yes' },
-        { id: 'q_inc1_bonus', type: 'yesno', title: 'Do you earn bonuses as well?', desc: 'Do you receive regular bonuses?', cond: () => val('q_inc1_type') === 'Salary' || val('q_inc1_type') === 'Hourly' },
-        { id: 'q_inc1_bonus_freq', type: 'radio_freq', title: 'How often are your bonuses earned?', desc: 'How often are these bonuses paid out?', cond: () => val('q_inc1_bonus') === 'Yes' },
-        { id: 'q_inc1_bonus_amt', type: 'curr', title: 'Average Bonus Amount', desc: 'Average amount per bonus payout before taxes.', cond: () => val('q_inc1_bonus') === 'Yes' },
-        { id: 'q_inc1_yearly', type: 'curr', title: 'Average Estimated Yearly Income', desc: 'Estimated total gross income for the year before taxes.', cond: () => val('q_inc1_type') === 'Commission/1099' },
-        { id: 'q_inc2_has', type: 'yesno', title: 'Do you have any Secondary Income?', desc: 'Let me know if you have a second job or income source.', cond: () => val('q_breakdown') === 'Yes' },
-        { id: 'q_inc2_type', type: 'radio_inc', title: 'Secondary Income Type', desc: 'Select how you earn this secondary income.', cond: () => val('q_inc2_has') === 'Yes' },
-        { id: 'q_inc2_title', type: 'text', title: 'Job Title (Secondary)', desc: 'What is your official job title or role?', cond: () => val('q_inc2_has') === 'Yes' },
-        { id: 'q_inc2_desc', type: 'textarea', title: 'Quick Description of Income (Secondary)', desc: 'Briefly explain your business or how you earn this income.', cond: () => val('q_inc2_type') === 'Commission/1099' },
-        { id: 'q_inc2_sal', type: 'curr', title: 'Weekly Salary Amount (Secondary)', desc: 'Your gross weekly salary before taxes.', cond: () => val('q_inc2_type') === 'Salary' },
-        { id: 'q_inc2_hrly', type: 'curr_dec', title: 'Hourly Rate (Secondary)', desc: 'Your gross hourly pay rate before taxes.', cond: () => val('q_inc2_type') === 'Hourly' },
-        { id: 'q_inc2_hrs', type: 'number', title: 'Average Hours Worked Per Week (Secondary)', desc: 'How many hours do you typically work in a week?', cond: () => val('q_inc2_type') === 'Hourly' },
-        { id: 'q_inc2_tips', type: 'yesno', title: 'Do you earn tips as well? (Secondary)', desc: 'Do you regularly receive tips as part of your job?', cond: () => val('q_inc2_type') === 'Salary' || val('q_inc2_type') === 'Hourly' },
-        { id: 'q_inc2_tips_amt', type: 'curr', title: 'Average Weekly Tips Earned (Secondary)', desc: 'Estimated weekly tips before taxes.', cond: () => val('q_inc2_tips') === 'Yes' },
-        { id: 'q_inc2_comm', type: 'yesno', title: 'Do you earn commissions as well? (Secondary)', desc: 'Do you receive commission pay on top of your base?', cond: () => val('q_inc2_type') === 'Salary' || val('q_inc2_type') === 'Hourly' },
-        { id: 'q_inc2_comm_freq', type: 'radio_freq', title: 'How often are your commissions earned? (Secondary)', desc: 'How often are these commissions paid out?', cond: () => val('q_inc2_comm') === 'Yes' },
-        { id: 'q_inc2_comm_amt', type: 'curr', title: 'Average Commission Amount (Secondary)', desc: 'Average amount per commission payout before taxes.', cond: () => val('q_inc2_comm') === 'Yes' },
-        { id: 'q_inc2_bonus', type: 'yesno', title: 'Do you earn bonuses as well? (Secondary)', desc: 'Do you receive regular bonuses?', cond: () => val('q_inc2_type') === 'Salary' || val('q_inc2_type') === 'Hourly' },
-        { id: 'q_inc2_bonus_freq', type: 'radio_freq', title: 'How often are your bonuses earned? (Secondary)', desc: 'How often are these bonuses paid out?', cond: () => val('q_inc2_bonus') === 'Yes' },
-        { id: 'q_inc2_bonus_amt', type: 'curr', title: 'Average Bonus Amount (Secondary)', desc: 'Average amount per bonus payout before taxes.', cond: () => val('q_inc2_bonus') === 'Yes' },
-        { id: 'q_inc2_yearly', type: 'curr', title: 'Average Estimated Yearly Income (Secondary)', desc: 'Estimated total gross income for the year before taxes.', cond: () => val('q_inc2_type') === 'Commission/1099' },
-        { id: 'q_inc3_has', type: 'yesno', title: 'Do you have a 3rd Source of Income?', desc: 'Let me know if you have a third job or income source.', cond: () => val('q_inc2_has') === 'Yes' },
-        { id: 'q_inc3_type', type: 'radio_inc', title: '3rd Source Income Type', desc: 'Select how you earn this third income.', cond: () => val('q_inc3_has') === 'Yes' },
-        { id: 'q_inc3_title', type: 'text', title: 'Job Title (3rd Source)', desc: 'What is your official job title or role?', cond: () => val('q_inc3_has') === 'Yes' },
-        { id: 'q_inc3_desc', type: 'textarea', title: 'Quick Description of Income (3rd Source)', desc: 'Briefly explain your business or how you earn this income.', cond: () => val('q_inc3_type') === 'Commission/1099' },
-        { id: 'q_inc3_sal', type: 'curr', title: 'Weekly Salary Amount (3rd Source)', desc: 'Your gross weekly salary before taxes.', cond: () => val('q_inc3_type') === 'Salary' },
-        { id: 'q_inc3_hrly', type: 'curr_dec', title: 'Hourly Rate (3rd Source)', desc: 'Your gross hourly pay rate before taxes.', cond: () => val('q_inc3_type') === 'Hourly' },
-        { id: 'q_inc3_hrs', type: 'number', title: 'Average Hours Worked Per Week (3rd Source)', desc: 'How many hours do you typically work in a week?', cond: () => val('q_inc3_type') === 'Hourly' },
-        { id: 'q_inc3_tips', type: 'yesno', title: 'Do you earn tips as well? (3rd Source)', desc: 'Do you regularly receive tips as part of your job?', cond: () => val('q_inc3_type') === 'Salary' || val('q_inc3_type') === 'Hourly' },
-        { id: 'q_inc3_tips_amt', type: 'curr', title: 'Average Weekly Tips Earned (3rd Source)', desc: 'Estimated weekly tips before taxes.', cond: () => val('q_inc3_tips') === 'Yes' },
-        { id: 'q_inc3_comm', type: 'yesno', title: 'Do you earn commissions as well? (3rd Source)', desc: 'Do you receive commission pay on top of your base?', cond: () => val('q_inc3_type') === 'Salary' || val('q_inc3_type') === 'Hourly' },
-        { id: 'q_inc3_comm_freq', type: 'radio_freq', title: 'How often are your commissions earned? (3rd Source)', desc: 'How often are these commissions paid out?', cond: () => val('q_inc3_comm') === 'Yes' },
-        { id: 'q_inc3_comm_amt', type: 'curr', title: 'Average Commission Amount (3rd Source)', desc: 'Average amount per commission payout before taxes.', cond: () => val('q_inc3_comm') === 'Yes' },
-        { id: 'q_inc3_bonus', type: 'yesno', title: 'Do you earn bonuses as well? (3rd Source)', desc: 'Do you receive regular bonuses?', cond: () => val('q_inc3_type') === 'Salary' || val('q_inc3_type') === 'Hourly' },
-        { id: 'q_inc3_bonus_freq', type: 'radio_freq', title: 'How often are your bonuses earned? (3rd Source)', desc: 'How often are these bonuses paid out?', cond: () => val('q_inc3_bonus') === 'Yes' },
-        { id: 'q_inc3_bonus_amt', type: 'curr', title: 'Average Bonus Amount (3rd Source)', desc: 'Average amount per bonus payout before taxes.', cond: () => val('q_inc3_bonus') === 'Yes' },
-        { id: 'q_inc3_yearly', type: 'curr', title: 'Average Estimated Yearly Income (3rd Source)', desc: 'Estimated total gross income for the year before taxes.', cond: () => val('q_inc3_type') === 'Commission/1099' },
-        { id: 'q_debt_car', type: 'yesno', title: 'Do you have any Car Payments?', desc: 'Do you have any auto loans or leases currently in your name?', cond: () => val('q_breakdown') === 'Yes' },
-        { id: 'q_debt_car_amt', type: 'curr', title: 'Your Monthly Car Payments', desc: 'What is the total combined minimum monthly payment?', cond: () => val('q_debt_car') === 'Yes' },
-        { id: 'q_debt_mort', type: 'yesno', title: 'Do you have any existing houses with Mortgages?', desc: 'Are you officially listed on the mortgage for any other properties?', cond: () => val('q_breakdown') === 'Yes' },
-        { id: 'q_debt_mort_amt', type: 'curr', title: 'Your Existing Mortgage Payments', desc: 'What is the total combined monthly payment for these properties?', cond: () => val('q_debt_mort') === 'Yes' },
-        { id: 'q_debt_cc', type: 'yesno', title: 'Do you have any Credit Cards with a balance?', desc: 'Do you carry a balance on any credit cards?', cond: () => val('q_breakdown') === 'Yes' },
-        { id: 'q_debt_cc_amt', type: 'curr', title: 'Your Monthly Minimum Card Payments', desc: 'What is the total combined minimum monthly payment across all cards?', cond: () => val('q_debt_cc') === 'Yes' },
-        { id: 'q_debt_oth', type: 'yesno', title: 'Do you have any other Debt Obligations?', desc: 'Includes student loans, personal loans, child support, or alimony.', cond: () => val('q_breakdown') === 'Yes' },
-        { id: 'q_debt_oth_amt', type: 'curr', title: 'Your Monthly Other Debt Payments', desc: 'What is the total combined minimum monthly payment for these obligations?', cond: () => val('q_debt_oth') === 'Yes' },
-        { id: 'q_co_borrower', type: 'yesno', title: 'Will another person be a part of the purchase?', desc: 'Will a spouse, partner, or co-signer be applying for the loan with you?', cond: () => val('q_buy_new') === 'Yes' || val('q_sell_home') === 'No' }
+        { id: 'q_name', type: 'name', title: 'What is your name?', cond: () => true },
+        { id: 'q_phone', type: 'phone', title: 'What is the best phone number to reach you?', cond: () => true },
+        { id: 'q_email', type: 'email', title: 'What is your email address?', cond: () => true },
+        { id: 'q_sell_home', type: 'yesno', title: 'Do you have a home to sell?', cond: () => true },
+        { id: 'q_sell_addr', type: 'address', title: 'What is the property address?', cond: () => val('q_sell_home') === 'Yes' },
+        { id: 'q_sell_mort', type: 'curr', title: 'Outstanding Mortgage Balance', cond: () => val('q_sell_home') === 'Yes' },
+        { id: 'q_sell_liens', type: 'yesno', title: 'Are there any other liens or loans on the property?', cond: () => val('q_sell_home') === 'Yes' },
+        { id: 'q_sell_liens_bal', type: 'curr', title: 'Other Liens or Loans Balance', cond: () => val('q_sell_liens') === 'Yes' },
+        { id: 'q_buy_new', type: 'yesno', title: 'Will you be buying a new home as well?', cond: () => val('q_sell_home') === 'Yes' },
+        { id: 'q_breakdown', type: 'yesno', title: 'Do you want a buyer breakdown sheet for your purchase?', cond: () => val('q_buy_new') === 'Yes' || val('q_sell_home') === 'No' },
+        { id: 'q_inc1_type', type: 'radio_inc', title: 'Primary Income Type', cond: () => val('q_breakdown') === 'Yes' },
+        { id: 'q_inc1_title', type: 'text', title: 'Job Title', cond: () => val('q_breakdown') === 'Yes' },
+        { id: 'q_inc1_desc', type: 'textarea', title: 'Quick Description of Income', cond: () => val('q_inc1_type') === 'Commission/1099' },
+        { id: 'q_inc1_sal', type: 'curr', title: 'Weekly Salary Amount', cond: () => val('q_inc1_type') === 'Salary' },
+        { id: 'q_inc1_hrly', type: 'curr_dec', title: 'Hourly Rate', cond: () => val('q_inc1_type') === 'Hourly' },
+        { id: 'q_inc1_hrs', type: 'number', title: 'Average Hours Worked Per Week', cond: () => val('q_inc1_type') === 'Hourly' },
+        { id: 'q_inc1_tips', type: 'yesno', title: 'Do you earn tips as well?', cond: () => val('q_inc1_type') === 'Salary' || val('q_inc1_type') === 'Hourly' },
+        { id: 'q_inc1_tips_amt', type: 'curr', title: 'Average Weekly Tips Earned', cond: () => val('q_inc1_tips') === 'Yes' },
+        { id: 'q_inc1_comm', type: 'yesno', title: 'Do you earn commissions as well?', cond: () => val('q_inc1_type') === 'Salary' || val('q_inc1_type') === 'Hourly' },
+        { id: 'q_inc1_comm_freq', type: 'radio_freq', title: 'How often are your commissions earned?', cond: () => val('q_inc1_comm') === 'Yes' },
+        { id: 'q_inc1_comm_amt', type: 'curr', title: 'Average Commission Amount', cond: () => val('q_inc1_comm') === 'Yes' },
+        { id: 'q_inc1_bonus', type: 'yesno', title: 'Do you earn bonuses as well?', cond: () => val('q_inc1_type') === 'Salary' || val('q_inc1_type') === 'Hourly' },
+        { id: 'q_inc1_bonus_freq', type: 'radio_freq', title: 'How often are your bonuses earned?', cond: () => val('q_inc1_bonus') === 'Yes' },
+        { id: 'q_inc1_bonus_amt', type: 'curr', title: 'Average Bonus Amount', cond: () => val('q_inc1_bonus') === 'Yes' },
+        { id: 'q_inc1_yearly', type: 'curr', title: 'Average Estimated Yearly Income', cond: () => val('q_inc1_type') === 'Commission/1099' },
+        { id: 'q_inc2_has', type: 'yesno', title: 'Do you have any Secondary Income?', cond: () => val('q_breakdown') === 'Yes' },
+        { id: 'q_inc2_type', type: 'radio_inc', title: 'Secondary Income Type', cond: () => val('q_inc2_has') === 'Yes' },
+        { id: 'q_inc2_title', type: 'text', title: 'Job Title (Secondary)', cond: () => val('q_inc2_has') === 'Yes' },
+        { id: 'q_inc2_desc', type: 'textarea', title: 'Quick Description of Income (Secondary)', cond: () => val('q_inc2_type') === 'Commission/1099' },
+        { id: 'q_inc2_sal', type: 'curr', title: 'Weekly Salary Amount (Secondary)', cond: () => val('q_inc2_type') === 'Salary' },
+        { id: 'q_inc2_hrly', type: 'curr_dec', title: 'Hourly Rate (Secondary)', cond: () => val('q_inc2_type') === 'Hourly' },
+        { id: 'q_inc2_hrs', type: 'number', title: 'Average Hours Worked Per Week (Secondary)', cond: () => val('q_inc2_type') === 'Hourly' },
+        { id: 'q_inc2_tips', type: 'yesno', title: 'Do you earn tips as well? (Secondary)', cond: () => val('q_inc2_type') === 'Salary' || val('q_inc2_type') === 'Hourly' },
+        { id: 'q_inc2_tips_amt', type: 'curr', title: 'Average Weekly Tips Earned (Secondary)', cond: () => val('q_inc2_tips') === 'Yes' },
+        { id: 'q_inc2_comm', type: 'yesno', title: 'Do you earn commissions as well? (Secondary)', cond: () => val('q_inc2_type') === 'Salary' || val('q_inc2_type') === 'Hourly' },
+        { id: 'q_inc2_comm_freq', type: 'radio_freq', title: 'How often are your commissions earned? (Secondary)', cond: () => val('q_inc2_comm') === 'Yes' },
+        { id: 'q_inc2_comm_amt', type: 'curr', title: 'Average Commission Amount (Secondary)', cond: () => val('q_inc2_comm') === 'Yes' },
+        { id: 'q_inc2_bonus', type: 'yesno', title: 'Do you earn bonuses as well? (Secondary)', cond: () => val('q_inc2_type') === 'Salary' || val('q_inc2_type') === 'Hourly' },
+        { id: 'q_inc2_bonus_freq', type: 'radio_freq', title: 'How often are your bonuses earned? (Secondary)', cond: () => val('q_inc2_bonus') === 'Yes' },
+        { id: 'q_inc2_bonus_amt', type: 'curr', title: 'Average Bonus Amount (Secondary)', cond: () => val('q_inc2_bonus') === 'Yes' },
+        { id: 'q_inc2_yearly', type: 'curr', title: 'Average Estimated Yearly Income (Secondary)', cond: () => val('q_inc2_type') === 'Commission/1099' },
+        { id: 'q_inc3_has', type: 'yesno', title: 'Do you have a 3rd Source of Income?', cond: () => val('q_inc2_has') === 'Yes' },
+        { id: 'q_inc3_type', type: 'radio_inc', title: '3rd Source Income Type', cond: () => val('q_inc3_has') === 'Yes' },
+        { id: 'q_inc3_title', type: 'text', title: 'Job Title (3rd Source)', cond: () => val('q_inc3_has') === 'Yes' },
+        { id: 'q_inc3_desc', type: 'textarea', title: 'Quick Description of Income (3rd Source)', cond: () => val('q_inc3_type') === 'Commission/1099' },
+        { id: 'q_inc3_sal', type: 'curr', title: 'Weekly Salary Amount (3rd Source)', cond: () => val('q_inc3_type') === 'Salary' },
+        { id: 'q_inc3_hrly', type: 'curr_dec', title: 'Hourly Rate (3rd Source)', cond: () => val('q_inc3_type') === 'Hourly' },
+        { id: 'q_inc3_hrs', type: 'number', title: 'Average Hours Worked Per Week (3rd Source)', cond: () => val('q_inc3_type') === 'Hourly' },
+        { id: 'q_inc3_tips', type: 'yesno', title: 'Do you earn tips as well? (3rd Source)', cond: () => val('q_inc3_type') === 'Salary' || val('q_inc3_type') === 'Hourly' },
+        { id: 'q_inc3_tips_amt', type: 'curr', title: 'Average Weekly Tips Earned (3rd Source)', cond: () => val('q_inc3_tips') === 'Yes' },
+        { id: 'q_inc3_comm', type: 'yesno', title: 'Do you earn commissions as well? (3rd Source)', cond: () => val('q_inc3_type') === 'Salary' || val('q_inc3_type') === 'Hourly' },
+        { id: 'q_inc3_comm_freq', type: 'radio_freq', title: 'How often are your commissions earned? (3rd Source)', cond: () => val('q_inc3_comm') === 'Yes' },
+        { id: 'q_inc3_comm_amt', type: 'curr', title: 'Average Commission Amount (3rd Source)', cond: () => val('q_inc3_comm') === 'Yes' },
+        { id: 'q_inc3_bonus', type: 'yesno', title: 'Do you earn bonuses as well? (3rd Source)', cond: () => val('q_inc3_type') === 'Salary' || val('q_inc3_type') === 'Hourly' },
+        { id: 'q_inc3_bonus_freq', type: 'radio_freq', title: 'How often are your bonuses earned? (3rd Source)', cond: () => val('q_inc3_bonus') === 'Yes' },
+        { id: 'q_inc3_bonus_amt', type: 'curr', title: 'Average Bonus Amount (3rd Source)', cond: () => val('q_inc3_bonus') === 'Yes' },
+        { id: 'q_inc3_yearly', type: 'curr', title: 'Average Estimated Yearly Income (3rd Source)', cond: () => val('q_inc3_type') === 'Commission/1099' },
+        { id: 'q_debt_car', type: 'yesno', title: 'Do you have any Car Payments?', cond: () => val('q_breakdown') === 'Yes' },
+        { id: 'q_debt_car_amt', type: 'curr', title: 'Your Monthly Car Payments', cond: () => val('q_debt_car') === 'Yes' },
+        { id: 'q_debt_mort', type: 'yesno', title: 'Do you have any existing houses with Mortgages?', cond: () => val('q_breakdown') === 'Yes' },
+        { id: 'q_debt_mort_amt', type: 'curr', title: 'Your Existing Mortgage Payments', cond: () => val('q_debt_mort') === 'Yes' },
+        { id: 'q_debt_cc', type: 'yesno', title: 'Do you have any Credit Cards with a balance?', cond: () => val('q_breakdown') === 'Yes' },
+        { id: 'q_debt_cc_amt', type: 'curr', title: 'Your Monthly Minimum Card Payments', cond: () => val('q_debt_cc') === 'Yes' },
+        { id: 'q_debt_oth', type: 'yesno', title: 'Do you have any other Debt Obligations?', cond: () => val('q_breakdown') === 'Yes' },
+        { id: 'q_debt_oth_amt', type: 'curr', title: 'Your Monthly Other Debt Payments', cond: () => val('q_debt_oth') === 'Yes' },
+        { id: 'q_co_borrower', type: 'yesno', title: 'Will another person be a part of the purchase?', cond: () => val('q_buy_new') === 'Yes' || val('q_sell_home') === 'No' }
     ];
 
     questions.forEach((q, i) => {
@@ -147,7 +147,6 @@ function initDynamicForm() {
         stepDiv.innerHTML = `
             <div class="step-header">
                 <h3 class="step-title">${q.title}</h3>
-                <p class="step-desc">${q.desc}</p>
             </div>
             <div class="step-inputs">${inner}</div>
             <div class="form-actions" id="actions-${i}"></div>
@@ -156,30 +155,23 @@ function initDynamicForm() {
     });
 
     function adjustFullscreenHeight() {
-        if (formContainer.classList.contains('fullscreen-active')) {
-            const isKeyboardOpen = formContainer.classList.contains('keyboard-open');
-            const offset = isKeyboardOpen ? 0 : 80; 
-
+        if (formContainer.classList.contains('is-open')) {
             if (window.visualViewport) {
-                formContainer.style.bottom = 'auto'; 
-                formContainer.style.height = (window.visualViewport.height - offset) + 'px';
+                formContainer.style.height = window.visualViewport.height + 'px';
+                formContainer.style.top = window.visualViewport.offsetTop + 'px';
             } else {
-                formContainer.style.bottom = 'auto'; 
-                formContainer.style.height = (window.innerHeight - offset) + 'px';
+                formContainer.style.height = window.innerHeight + 'px';
+                formContainer.style.top = '0px';
             }
         } else {
             formContainer.style.height = '';
-            formContainer.style.bottom = '';
+            formContainer.style.top = '';
         }
     }
 
     if (window.visualViewport) {
         window.visualViewport.addEventListener('resize', adjustFullscreenHeight);
-        window.visualViewport.addEventListener('scroll', () => {
-            if(formContainer.classList.contains('fullscreen-active')) {
-                window.scrollTo(0, savedScrollY); 
-            }
-        });
+        window.visualViewport.addEventListener('scroll', adjustFullscreenHeight);
     }
 
     container.addEventListener('focusin', (e) => {
@@ -199,29 +191,60 @@ function initDynamicForm() {
         }, 50);
     });
 
-    btnStart.addEventListener('click', () => {
-        savedScrollY = window.scrollY || document.documentElement.scrollTop;
-        document.body.classList.add('no-scroll');
-        formContainer.classList.add('fullscreen-active');
-        startScreen.classList.remove('active');
-        form.style.display = 'flex';
-        adjustFullscreenHeight(); 
-        renderFlow(); 
-    });
+    // --- The Beautiful Native Pop-Out Trigger ---
+    if (btnStart) {
+        btnStart.addEventListener('click', () => {
+            savedScrollY = window.scrollY || document.documentElement.scrollTop;
+            document.body.classList.add('form-open', 'no-scroll');
+            
+            // Calculate Origin relative to the button's exact position
+            const rect = btnStart.getBoundingClientRect();
+            const originX = rect.left + rect.width / 2;
+            const originY = rect.top + rect.height / 2; 
+            
+            formContainer.style.transformOrigin = `${originX}px ${originY}px`;
+            
+            overlayBg.classList.add('is-open');
+            formContainer.classList.add('is-open');
+            
+            adjustFullscreenHeight(); 
+            renderFlow(); 
+            
+            requestAnimationFrame(() => {
+                requestAnimationFrame(() => {
+                    formContainer.classList.add('show');
+                });
+            });
+        });
+    }
 
-    btnClose.addEventListener('click', () => {
-        formContainer.classList.remove('fullscreen-active', 'keyboard-open');
-        formContainer.style.height = ''; 
-        formContainer.style.bottom = ''; 
-        form.style.display = 'none';
-        form.reset(); 
-        currentStepIndex = 0;
-        stepHistory = [];
-        document.querySelectorAll('.form-step').forEach(s => s.classList.remove('active', 'active-reverse'));
-        startScreen.classList.add('active');
-        document.body.classList.remove('no-scroll');
-        setTimeout(() => window.scrollTo(0, savedScrollY), 10);
-    });
+    // Smooth Pop-In Animation Trigger
+    if (btnClose) {
+        btnClose.addEventListener('click', () => {
+            if (btnStart) {
+                const rect = btnStart.getBoundingClientRect();
+                const originX = rect.left + rect.width / 2;
+                const originY = rect.top + rect.height / 2; 
+                formContainer.style.transformOrigin = `${originX}px ${originY}px`;
+            }
+            
+            formContainer.classList.remove('show');
+            overlayBg.classList.remove('is-open');
+
+            setTimeout(() => {
+                formContainer.classList.remove('keyboard-open', 'is-open');
+                formContainer.style.transformOrigin = ''; 
+                formContainer.style.height = ''; 
+                formContainer.style.top = ''; 
+                form.reset(); 
+                currentStepIndex = 0;
+                stepHistory = [];
+                document.querySelectorAll('.form-step').forEach(s => s.classList.remove('active', 'active-reverse'));
+                document.body.classList.remove('form-open', 'no-scroll');
+                window.scrollTo(0, savedScrollY);
+            }, 400); 
+        });
+    }
 
     function updateActions() {
         const currentEl = document.getElementById(`step-${currentStepIndex}`);
@@ -239,7 +262,7 @@ function initDynamicForm() {
             const btnBack = document.createElement('button');
             btnBack.type = 'button';
             btnBack.className = 'btn-secondary';
-            btnBack.textContent = 'Back';
+            btnBack.innerHTML = `<img src="https://andrewmarth.com/images/arrow_back.png" alt="Back" class="btn-icon btn-icon-back"> Back`;
             btnBack.onclick = () => {
                 slideDirection = 'backward';
                 currentStepIndex = stepHistory.pop();
@@ -251,7 +274,13 @@ function initDynamicForm() {
         const btnForward = document.createElement('button');
         btnForward.className = 'btn-primary btn-forward';
         btnForward.type = 'submit'; 
-        btnForward.textContent = nextStepIndex === -1 ? 'Submit' : 'Next';
+        
+        if (nextStepIndex === -1) {
+            btnForward.innerHTML = `Submit <img src="https://andrewmarth.com/images/submit.png" alt="Submit" class="btn-icon btn-icon-forward">`;
+        } else {
+            btnForward.innerHTML = `Next <img src="https://andrewmarth.com/images/arrow_forward.png" alt="Next" class="btn-icon btn-icon-forward">`;
+        }
+        
         actionsEl.appendChild(btnForward);
     }
 
@@ -299,7 +328,7 @@ function initDynamicForm() {
             updateActions(); 
             const currentEl = document.getElementById(`step-${currentStepIndex}`);
             const fwdBtn = currentEl.querySelector('.btn-forward');
-            if (fwdBtn && fwdBtn.textContent === 'Next') {
+            if (fwdBtn && fwdBtn.textContent.includes('Next')) {
                 setTimeout(() => {
                     if (currentEl.classList.contains('active') || currentEl.classList.contains('active-reverse')) {
                         fwdBtn.click();
@@ -405,6 +434,7 @@ function initDynamicForm() {
             });
         });
 
+        // Retains the original Webhook endpoint provided in your snippet
         fetch('https://hooks.zapier.com/hooks/catch/17339400/42fpg7w/', {
             method: 'POST',
             body: finalData,
