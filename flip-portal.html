@@ -528,15 +528,18 @@
                 justify-content: center;
             }
             
-            /* EXTREME CSS compression when the keyboard is open to guarantee a perfect fit */
+            /* EXTREME CSS compression to stretch perfectly between the top edge and the keyboard */
             .form-container-card.keyboard-open { 
                 padding: 10px !important; 
-                align-items: flex-start !important; /* Anchors form to the top so it doesn't get pushed off-screen */
+                align-items: stretch !important; /* Forces the card to stretch full available height, eliminating gaps */
             }
             .form-container-card.keyboard-open .native-form-box { 
                 padding: 15px 20px !important; 
                 margin: 0 auto !important; 
                 box-shadow: 4px 4px 0px #0E2A3B !important; /* Slightly smaller shadow to save space */
+                height: auto !important; 
+                max-height: none !important; 
+                min-height: 0 !important; 
             }
             .form-container-card.keyboard-open .step-desc { display: none !important; }
             .form-container-card.keyboard-open .step-title { font-size: 1.15rem !important; margin-bottom: 2px !important; }
@@ -611,7 +614,7 @@
     <!-- Hidden Form Modal (Animated Pop-Out) -->
     <div class="form-container-card" id="form-container">
         
-        <!-- RESTORED: Video Background behind the form modal -->
+        <!-- Video Background behind the form modal -->
         <video class="form-bg-video" autoplay loop muted playsinline>
             <source src="https://andrewmarth.com/images/form_background.mp4" type="video/mp4">
         </video>
@@ -731,7 +734,6 @@
                 document.body.classList.add('form-open', 'no-scroll');
                 
                 // 1. Calculate Origin relative to the button's exact position
-                // (No 80px offset subtraction anymore because the header is physically hidden!)
                 const rect = btnStart.getBoundingClientRect();
                 const originX = rect.left + rect.width / 2;
                 const originY = rect.top + rect.height / 2; 
