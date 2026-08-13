@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Not Found | Andrew Marth Real Estate</title>
+    
+    <!-- Google Fonts Import -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Familjen+Grotesk:wght@400..700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- General Reset & Styling --- */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        html, body {
+            width: 100%;
+            max-width: 100%;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        body {
+            font-family: 'Familjen Grotesk', sans-serif; 
+            line-height: 1.6;
+            color: #4f2d2c; 
+            background-color: #e9e2d8; 
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Bricolage Grotesque', sans-serif;
+        }
+        
+        /* --- Navigation Bar (Global Styles) --- */
+        .navbar {
+            background: rgba(233, 226, 216, 0.85); 
+            backdrop-filter: blur(12px); 
+            -webkit-backdrop-filter: blur(12px); 
+            position: fixed;
+            top: 0; left: 0; width: 100%;
+            z-index: 1000; 
+            padding: 15px 30px;
+            display: flex; align-items: center;
+            border-bottom: 1px solid rgba(153, 114, 75, 0.3); 
+            min-height: 80px;
+        }
+        .mobile-center-logo { display: none; }
+        .hamburger { display: none; font-size: 2rem; background: none; border: none; color: #4e513e; cursor: pointer; }
+        .nav-menu { display: flex; justify-content: space-between; align-items: center; width: 100%; }
+        .nav-logo img { height: 50px; width: auto; display: block; border-radius: 4px; }
+        .nav-logo a { text-decoration: none; display: block; }
+        .nav-links { display: flex; gap: 30px; align-items: center; }
+        .nav-links a { text-decoration: none; color: #4f2d2c; font-weight: bold; font-size: 1.1rem; transition: color 0.3s; }
+        .nav-links a:hover { color: #9a5d40; }
+        .close-menu { display: none; }
+
+        /* --- Main 404 Section --- */
+        main {
+            flex-grow: 1; /* Pushes the footer to the bottom */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 140px 20px 80px 20px; /* Accounts for fixed navbar */
+        }
+
+        .error-card {
+            background-color: #ffffff;
+            border-radius: 20px;
+            border: 2px solid #0E2A3B;
+            box-shadow: 6px 6px 0px #0E2A3B;
+            padding: 70px 40px;
+            text-align: center;
+            max-width: 600px;
+            width: 100%;
+            transition: transform 0.3s ease;
+        }
+        
+        .error-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .error-card h1 {
+            font-size: 7rem;
+            color: #4e513e;
+            line-height: 1;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 0px rgba(78, 81, 62, 0.1);
+        }
+
+        .error-card h2 {
+            font-size: 2rem;
+            color: #99724b;
+            margin-bottom: 20px;
+        }
+
+        .error-card p {
+            font-size: 1.15rem;
+            color: #4f2d2c;
+            margin-bottom: 35px;
+            line-height: 1.6;
+            opacity: 0.9;
+        }
+
+        /* --- Oversized Primary Button --- */
+        .btn-large {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px; 
+            background-color: #99724b; 
+            color: #e9e2d8; 
+            text-decoration: none;
+            padding: 18px 45px;
+            border-radius: 999px; 
+            font-weight: bold;
+            font-size: 1.2rem;
+            border: 2px solid #0E2A3B;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.2); 
+            transition: all 0.3s ease; 
+            cursor: pointer;
+        }
+        
+        .btn-large:hover {
+            background-color: #9a5d40; 
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15); 
+        }
+        
+        .btn-large .btn-icon {
+            width: 20px; 
+            height: 20px;
+            object-fit: contain;
+            transition: transform 0.3s ease;
+        }
+
+        .btn-large:hover .btn-icon {
+            transform: translateX(4px);
+        }
+
+        /* --- Footer --- */
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            background-color: #4e513e; 
+            color: #e9e2d8; 
+            width: 100%;
+        }
+        .footer-contact { margin-bottom: 20px; }
+        .footer-contact p { margin-bottom: 8px; font-size: 1.1rem; color: #e9e2d8; }
+        .footer-contact a { color: #c09050; text-decoration: none; font-weight: bold; }
+        .footer-contact a:hover { text-decoration: underline; }
+        .footer-disclosure { max-width: 900px; margin: 0 auto; font-size: 0.8rem; color: #e9e2d8; opacity: 0.75; line-height: 1.5; text-align: justify; text-align-last: center; }
+
+        /* --- Mobile Responsiveness --- */
+        @media (max-width: 768px) {
+            .navbar { justify-content: flex-end; }
+            .mobile-center-logo { display: block; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); }
+            .mobile-center-logo img { height: 40px; width: auto; border-radius: 4px; display: block; }
+            .hamburger { display: block; }
+            .nav-menu { position: fixed; top: 0; right: -100%; width: 280px; height: 100vh; background: rgba(233, 226, 216, 0.95); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); flex-direction: column; justify-content: flex-start; align-items: flex-start; padding: 60px 30px 30px 30px; box-shadow: -5px 0 15px rgba(0,0,0,0.1); transition: right 0.3s ease; z-index: 1001; }
+            .nav-menu.active { right: 0; }
+            .nav-logo { margin-bottom: 40px; width: 100%; display: flex; justify-content: center; }
+            .nav-logo img { height: 60px; }
+            .nav-links { flex-direction: column; width: 100%; align-items: flex-start; gap: 20px; }
+            .nav-links a { display: block; width: 100%; padding-bottom: 10px; border-bottom: 1px solid rgba(192, 144, 80, 0.4); font-size: 1.3rem; }
+            .close-menu { display: block; position: absolute; top: 15px; right: 25px; font-size: 2.5rem; background: none; border: none; color: #4f2d2c; cursor: pointer; line-height: 1; }
+            
+            main { padding: 120px 15px 60px 15px; }
+            .error-card { padding: 50px 20px; width: calc(100% - 6px); }
+            .error-card h1 { font-size: 5rem; }
+            .error-card h2 { font-size: 1.6rem; }
+            .error-card p { font-size: 1.05rem; }
+            .btn-large { font-size: 1.1rem; padding: 15px 35px; width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Placeholder -->
+    <div id="header-placeholder"></div>
+
+    <!-- Main Content -->
+    <main>
+        <div class="error-card">
+            <h1>404</h1>
+            <h2>Page Not Found</h2>
+            <p>The page you are looking for might have been moved, renamed, or doesn't exist. Let's get you back on track.</p>
+            <a href="https://andrewmarth.com/" class="btn-large">
+                Return Home
+                <img src="https://andrewmarth.com/images/arrow_forward.png" alt="Go" class="btn-icon">
+            </a>
+        </div>
+    </main>
+
+    <!-- Footer Placeholder -->
+    <div id="footer-placeholder"></div>
+
+    <script>
+        // Global DOM Load for Header and Footer
+        async function loadComponent(id, file) {
+            try {
+                const response = await fetch(file);
+                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                const html = await response.text();
+                document.getElementById(id).innerHTML = html;
+                
+                // Initialize mobile menu once header loads
+                if (id === 'header-placeholder') {
+                    initNavigation();
+                }
+            } catch (error) {
+                console.error(`Error loading component ${file}:`, error);
+            }
+        }
+
+        function initNavigation() {
+            const hamburgerBtn = document.getElementById('hamburger-btn');
+            const closeBtn = document.getElementById('close-btn');
+            const navMenu = document.getElementById('nav-menu');
+
+            if(hamburgerBtn && closeBtn && navMenu) {
+                hamburgerBtn.addEventListener('click', () => navMenu.classList.add('active'));
+                closeBtn.addEventListener('click', () => navMenu.classList.remove('active'));
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Adjust the paths to your actual header and footer files if they live in a specific directory
+            loadComponent('header-placeholder', 'header.html');
+            loadComponent('footer-placeholder', 'footer.html');
+        });
+    </script>
+</body>
+</html>
