@@ -101,16 +101,49 @@
             display: none; 
         }
 
-        /* --- Header / Hero Section --- */
+        /* --- Header / Hero Section (Video Background) --- */
         header {
-            background: linear-gradient(rgba(78, 81, 62, 0.75), rgba(78, 81, 62, 0.75)), url('https://andrewmarth.com/images/background.jpeg');
-            background-size: cover;
-            background-position: center;
-            color: #e9e2d8; 
+            position: relative;
             padding: 160px 20px 100px 20px; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            min-height: 45vh;
             text-align: center;
         }
+        
+        .hero-video-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+        }
+        
+        .hero-color-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(78, 81, 62, 0.75);
+            z-index: 1;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
         header h1 {
+            color: #e9e2d8;
             font-size: 4.5rem; 
             margin-bottom: 0px; 
             line-height: 1.1; 
@@ -435,9 +468,15 @@
     <div id="header-placeholder"></div>
 
     <header>
-        <h1>Andrew Marth</h1>
-        <h2 class="hero-subtitle">Real Estate Agent</h2>
-        <p>"Everything I touch turns to sold."</p>
+        <video class="hero-video-bg" autoplay loop muted playsinline>
+            <source src="https://andrewmarth.com/images/banner.mp4" type="video/mp4">
+        </video>
+        <div class="hero-color-overlay"></div>
+        <div class="hero-content">
+            <h1>Andrew Marth</h1>
+            <h2 class="hero-subtitle">Real Estate Agent</h2>
+            <p>"Everything I touch turns to sold."</p>
+        </div>
     </header>
 
     <section class="about-section">
