@@ -214,12 +214,15 @@
             display: flex;
             flex-direction: column;
         }
-        .card img {
+        
+        /* FIX: Ensure only the main card image gets this border, not the button icon */
+        .card > img {
             width: 100%;
             height: 240px;
             object-fit: cover;
             border-bottom: 2px solid #0E2A3B; 
         }
+        
         .card-content {
             padding: 30px;
             display: flex;
@@ -262,11 +265,14 @@
             transform: translateY(-4px); 
             box-shadow: 0 8px 15px rgba(0,0,0,0.1); 
         }
+        
+        /* Explicitly clear inherited borders from icons */
         .btn .btn-icon {
             width: 18px; 
             height: 18px;
             object-fit: contain;
             transition: transform 0.3s ease;
+            border: none; 
         }
         .btn:hover .btn-icon {
             transform: translateX(4px); 
