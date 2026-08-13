@@ -201,7 +201,8 @@
             background-color: #000; /* Deep backdrop to make the image stand out */
         }
 
-        .portal-image-wrapper img {
+        /* Specific class for the background image so it doesn't affect the button icon */
+        .portal-bg-image {
             width: 100%;
             height: 100%;
             object-fit: cover;
@@ -243,10 +244,15 @@
         .btn-large:hover {
             background-color: #9a5d40; 
         }
+        
         .btn-large .btn-icon {
             width: 22px; /* Nicely sized next to 1.3rem text */
             height: 22px;
             object-fit: contain;
+            /* Ensures no inherited blur applies to the icon */
+            filter: none;
+            opacity: 1;
+            transform: none;
         }
 
         /* --- Footer --- */
@@ -403,7 +409,8 @@
     <section class="portal-section">
         <div class="portal-card">
             <div class="portal-image-wrapper">
-                <img src="https://andrewmarth.com/images/map_background.jpg" alt="Off-Market Map Portal">
+                <!-- Specific class added here -->
+                <img src="https://andrewmarth.com/images/map_background.jpg" alt="Off-Market Map Portal" class="portal-bg-image">
                 <div class="portal-overlay">
                     <a href="https://portal.andrewmarth.com/properties" target="_blank" rel="noopener noreferrer" class="btn-large">
                         Open Portal
