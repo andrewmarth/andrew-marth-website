@@ -1,6 +1,13 @@
 <style>
     /* --- FORM COMPONENT CSS --- */
     
+    /* Hides global external headers instantly when the form is open to reclaim screen space */
+    body.form-open .navbar, 
+    body.form-open header, 
+    body.form-open #header-placeholder {
+        display: none !important;
+    }
+    
     /* Blur Background Overlay */
     .form-overlay-bg { 
         position: fixed;
@@ -136,7 +143,7 @@
         justify-content: center;
         gap: 6px;
         background-color: #ffffff; 
-        color: #99724b; 
+        color: #99724b !important; /* Forced to never change color on hover */
         border: 2px solid #0E2A3B; 
         font-size: 1.05rem; 
         font-weight: bold; 
@@ -216,6 +223,7 @@
             padding: 10px !important; 
             align-items: stretch !important; 
         }
+        
         .form-container-card.keyboard-open .native-form-box { 
             padding: 20px !important; 
             margin: 0 auto !important; 
@@ -225,17 +233,12 @@
             min-height: 0 !important; 
         }
         
-        .form-container-card.keyboard-open .step-title { margin-bottom: 10px !important; font-size: 1.4rem !important; }
+        /* Font sizes and padding shrink rules REMOVED to keep native size! */
+        .form-container-card.keyboard-open .step-title { margin-bottom: 10px !important; }
         .form-container-card.keyboard-open .input-group { margin-bottom: 10px !important; }
         .form-container-card.keyboard-open .input-group label { margin-bottom: 5px !important; }
-        .form-container-card.keyboard-open .radio-group { margin-bottom: 10px !important; gap: 8px !important; }
-        .form-container-card.keyboard-open .radio-btn span { padding: 10px 15px !important; font-size: 1rem !important; }
-        .form-container-card.keyboard-open textarea { padding: 10px !important; height: 70px !important; }
         .form-container-card.keyboard-open .form-actions { padding-top: 10px !important; margin-top: auto !important; }
-        
-        .form-container-card.keyboard-open .btn-primary,
-        .form-container-card.keyboard-open .btn-secondary { padding: 10px 20px !important; font-size: 1rem !important; }
-        .form-container-card.keyboard-open .close-form-btn { top: 10px !important; right: 15px !important; font-size: 1.8rem !important; }
+        .form-container-card.keyboard-open .close-form-btn { top: 10px !important; right: 15px !important; }
     }
 </style>
 
