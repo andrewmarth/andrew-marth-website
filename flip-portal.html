@@ -283,11 +283,21 @@
             visibility: visible;
         }
         
-        .form-container-card { width: 100%; display: flex; justify-content: center; align-items: center; background-color: transparent; position: relative; overflow: hidden; }
+        .form-container-card { 
+            width: 100%; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            background-color: transparent; 
+            position: relative; 
+            overflow: hidden; 
+        }
         
         /* The Pop-Out Animation Magic */
         .form-container-card.fullscreen-active { 
-            position: fixed; top: 80px; left: 0; right: 0; bottom: 0; width: 100%; z-index: 999; padding: 20px; 
+            position: fixed; 
+            top: 80px; left: 0; right: 0; bottom: 0; 
+            width: 100%; z-index: 999; padding: 20px; 
             transform: scale(0.05); /* Starts incredibly tiny */
             opacity: 0;
             /* Cubic bezier gives it a very slight, premium 'bounce' as it expands */
@@ -552,7 +562,7 @@
         </div>
     </section>
 
-    <!-- Hidden Form Overlay (Animated) -->
+    <!-- Hidden Form Overlay (Animated Pop-Out) -->
     <div class="form-overlay-wrapper" id="form-overlay-wrapper">
         <div class="form-container-card" id="form-container">
             <video class="form-bg-video" autoplay loop muted playsinline>
@@ -692,11 +702,13 @@
                 adjustFullscreenHeight(); 
                 renderFlow(); 
                 
-                // Force a browser reflow so the transition fires perfectly
-                void formContainer.offsetWidth;
-                
-                // Pop the form up smoothly
-                formContainer.classList.add('show');
+                // Force a browser paint of the tiny element before triggering the transition
+                requestAnimationFrame(() => {
+                    requestAnimationFrame(() => {
+                        // Pop the form up smoothly
+                        formContainer.classList.add('show');
+                    });
+                });
             });
 
             // Smooth Pop-In Animation Trigger
