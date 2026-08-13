@@ -102,28 +102,31 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 8px; 
+            gap: 10px; 
             background-color: #99724b; 
             color: #e9e2d8; 
             text-decoration: none;
-            padding: 12px 28px;
+            padding: 15px 35px;
             border-radius: 999px; /* Pill shape */
             font-weight: bold;
+            font-size: 1.1rem;
+            border: 2px solid #0E2A3B;
+            box-shadow: 0 4px 10px rgba(153, 114, 75, 0.2);
             transition: all 0.3s ease;
-            margin-top: 15px;
         }
         .btn:hover {
             background-color: #9a5d40; 
-            transform: translateY(-5px); 
+            transform: translateY(-4px); 
             box-shadow: 0 8px 15px rgba(0,0,0,0.1); 
         }
-        .btn::after {
-            content: '\2192'; 
-            font-size: 1.2em;
+        .btn .btn-icon {
+            width: 18px; 
+            height: 18px;
+            object-fit: contain;
             transition: transform 0.3s ease;
         }
-        .btn:hover::after {
-            transform: translateX(5px); 
+        .btn:hover .btn-icon {
+            transform: translateX(4px); 
         }
 
         .programs-section { max-width: 940px; margin: 60px auto 40px auto; padding: 0 20px; }
@@ -134,7 +137,7 @@
         /* Updated Program Links Cards */
         .program-link-card { 
             display: flex; 
-            align-items: stretch; 
+            align-items: center; /* Vertically centers the content and button natively */
             background-color: #ffffff; 
             border-radius: 20px; 
             border: 2px solid #0E2A3B;
@@ -147,8 +150,7 @@
         .program-link-image a:hover img { opacity: 0.85; }
         .program-link-content { flex: 1; padding: 30px; display: flex; align-items: center; }
         .program-link-content p { font-size: 1.1rem; color: #4f2d2c; margin-bottom: 0; line-height: 1.6; }
-        .program-link-action { flex: 0 0 80px; background-color: #99724b; color: #e9e2d8; display: flex; align-items: center; justify-content: center; font-size: 2rem; text-decoration: none; transition: background-color 0.3s; }
-        .program-link-action:hover { background-color: #9a5d40; }
+        .program-link-action-container { flex: 0 0 auto; padding: 30px 30px 30px 0; display: flex; align-items: center; justify-content: center; }
 
         /* --- FORM COMPONENT CSS --- */
         .full-width-form-section { width: 100%; margin-top: 40px; margin-bottom: 0; }
@@ -315,8 +317,8 @@
                 margin: 0 auto 30px auto; 
             }
             .program-link-image { flex: none; width: 100%; max-width: 250px; padding: 30px 20px 10px 20px; margin: 0 auto; }
-            .program-link-content { padding: 10px 20px 30px 20px; text-align: center; }
-            .program-link-action { width: 100%; flex: none; padding: 15px; }
+            .program-link-content { padding: 10px 20px 20px 20px; text-align: center; }
+            .program-link-action-container { width: 100%; flex: none; padding: 0 20px 30px 20px; }
             
             .name-row { flex-direction: column; gap: 0; }
             .step-title { font-size: 1.5rem; }
@@ -419,9 +421,12 @@
             <div class="program-link-content">
                 <p>A highly specialized buying program that allows you to purchase a home with absolutely zero dollars out of pocket, without sacrificing true market interest rates.</p>
             </div>
-            <a href="zero-down-program" class="program-link-action">
-                &#8594;
-            </a>
+            <div class="program-link-action-container">
+                <a href="zero-down-program" class="btn">
+                    Explore
+                    <img src="https://andrewmarth.com/images/arrow_forward.png" alt="Explore" class="btn-icon">
+                </a>
+            </div>
         </div>
     </section>
 
