@@ -294,18 +294,18 @@
         /* Interactive Form Modal Container */
         .form-container-card { 
             position: fixed; 
-            top: 0; left: 0; right: 0; bottom: 0; /* Starts at true 0 because header is hidden */
+            top: 0; left: 0; right: 0; bottom: 0; 
             width: 100%; 
             padding: 20px;
             z-index: 999;
             display: flex; justify-content: center; align-items: center; 
             background-color: transparent; 
-            overflow: hidden !important; /* Strict no scrolling */
+            overflow: hidden !important; 
             
             /* Native Animation Base State */
             opacity: 0;
             visibility: hidden;
-            transform: scale(0.05); /* Starts incredibly tiny at the button */
+            transform: scale(0.05);
             pointer-events: none;
             
             /* High-end spring animation */
@@ -357,16 +357,17 @@
         .step-content { flex-grow: 1; display: flex; flex-direction: column; justify-content: flex-start; padding-top: 10px; overflow: hidden !important; }
         .step-header { padding-top: 10px; flex-shrink: 0; }
         .step-inputs { flex-grow: 1; display: flex; flex-direction: column; justify-content: center; width: 100%; overflow: hidden !important; }
-        .step-title { font-size: 1.6rem; color: #4e513e; margin-bottom: 8px; line-height: 1.3; }
-        .step-desc { font-size: 1.05rem; color: #4f2d2c; opacity: 0.85; margin-bottom: 5px; line-height: 1.5; }
+        .step-title { font-size: 1.6rem; color: #4e513e; margin-bottom: 15px; line-height: 1.3; }
         
         .input-group { margin-bottom: 20px; text-align: left; }
         .input-group label { display: block; font-size: 0.95rem; color: #4f2d2c; margin-bottom: 8px; font-weight: bold; }
         .input-group input { width: 100%; font-size: 1.1rem; color: #4f2d2c; border: 2px solid #0E2A3B; background-color: #f7f4f0; box-shadow: inset 0 2px 4px rgba(0,0,0,0.03); transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); font-family: inherit; border-radius: 999px; padding: 16px 25px; } 
         .input-group input:focus { outline: none; background-color: #ffffff; border-color: #99724b; box-shadow: 0 8px 20px rgba(153, 114, 75, 0.15); transform: translateY(-2px); }
         .input-group input.error { border-color: #d9534f; background-color: #fdf2f2; }
-        .name-row { display: flex; gap: 15px; flex-wrap: wrap; }
-        .name-row .input-group { flex: 1; min-width: 150px; }
+        
+        /* Force Name row to ALWAYS stay side by side */
+        .name-row { display: flex; gap: 15px; flex-wrap: nowrap; width: 100%; }
+        .name-row .input-group { flex: 1; min-width: 0; }
         
         .form-actions { display: flex; justify-content: center; align-items: center; gap: 15px; margin-top: auto; padding-top: 25px; flex-shrink: 0; }
         
@@ -510,13 +511,11 @@
             .portal-image-wrapper { height: 300px; }
             .btn-large { font-size: 1.1rem; padding: 15px 35px; }
             
-            /* Form Mobile Resets - ZERO Scrolling Permitted */
-            .name-row { flex-direction: column; gap: 0; }
+            /* Form Mobile Resets */
             .step-title { font-size: 1.5rem; }
             
             .form-container-card { padding: 15px !important; }
             
-            /* RESTORED: Keep the card styling on mobile! */
             .native-form-box { 
                 min-height: auto !important; 
                 height: auto !important; 
@@ -528,31 +527,26 @@
                 justify-content: center;
             }
             
-            /* EXTREME CSS compression to stretch perfectly between the top edge and the keyboard */
+            /* Ensure the form stretches without shrinking the actual inputs */
             .form-container-card.keyboard-open { 
                 padding: 10px !important; 
-                align-items: stretch !important; /* Forces the card to stretch full available height, eliminating gaps */
+                align-items: stretch !important; 
             }
             .form-container-card.keyboard-open .native-form-box { 
-                padding: 15px 20px !important; 
+                padding: 20px !important; 
                 margin: 0 auto !important; 
-                box-shadow: 4px 4px 0px #0E2A3B !important; /* Slightly smaller shadow to save space */
+                box-shadow: 4px 4px 0px #0E2A3B !important; 
                 height: auto !important; 
                 max-height: none !important; 
                 min-height: 0 !important; 
             }
-            .form-container-card.keyboard-open .step-desc { display: none !important; }
-            .form-container-card.keyboard-open .step-title { font-size: 1.15rem !important; margin-bottom: 2px !important; }
-            .form-container-card.keyboard-open .input-group { margin-bottom: 5px !important; }
-            .form-container-card.keyboard-open .input-group label { margin-bottom: 2px !important; font-size: 0.8rem !important; }
-            .form-container-card.keyboard-open .input-group input { padding: 8px 15px !important; font-size: 1rem !important; }
-            .form-container-card.keyboard-open .form-actions { padding-top: 5px !important; margin-top: auto !important; }
-            .form-container-card.keyboard-open .btn-primary { padding: 10px 20px !important; min-width: 100px !important; font-size: 1rem !important; }
+            /* Light reduction in margins to ensure it fits, but inputs stay native size */
+            .form-container-card.keyboard-open .step-title { margin-bottom: 10px !important; font-size: 1.4rem !important; }
+            .form-container-card.keyboard-open .input-group { margin-bottom: 10px !important; }
+            .form-container-card.keyboard-open .input-group label { margin-bottom: 5px !important; }
+            .form-container-card.keyboard-open .form-actions { padding-top: 10px !important; margin-top: auto !important; }
             
-            /* Force the Name inputs to stay side-by-side to save massive vertical space */
-            .form-container-card.keyboard-open .name-row { flex-direction: row !important; gap: 10px !important; }
-            .form-container-card.keyboard-open .name-row .input-group { min-width: 0 !important; }
-            .form-container-card.keyboard-open .close-form-btn { top: 5px !important; right: 15px !important; font-size: 1.8rem !important; }
+            .form-container-card.keyboard-open .close-form-btn { top: 10px !important; right: 15px !important; font-size: 1.8rem !important; }
         }
     </style>
 </head>
@@ -653,11 +647,11 @@
             let slideDirection = 'forward'; 
             let savedScrollY = 0; 
 
-            // Simplified 3-Question Logic Engine
+            // Simplified 3-Question Logic Engine (Descriptions removed from UI generation)
             const questions = [
-                { id: 'q_name', type: 'name', title: 'What is your name?', desc: 'Please provide your first and last name.', cond: () => true },
-                { id: 'q_phone', type: 'phone', title: 'What is the best phone number to reach you?', desc: 'I will use this to text you your secure access code.', cond: () => true },
-                { id: 'q_email', type: 'email', title: 'What is your email address?', desc: 'I will also email the code here for your records.', cond: () => true }
+                { id: 'q_name', type: 'name', title: 'What is your name?', cond: () => true },
+                { id: 'q_phone', type: 'phone', title: 'What is the best phone number to reach you?', cond: () => true },
+                { id: 'q_email', type: 'email', title: 'What is your email address?', cond: () => true }
             ];
 
             questions.forEach((q, i) => {
@@ -680,7 +674,6 @@
                 stepDiv.innerHTML = `
                     <div class="step-header">
                         <h3 class="step-title">${q.title}</h3>
-                        <p class="step-desc">${q.desc}</p>
                     </div>
                     <div class="step-inputs">${inner}</div>
                     <div class="form-actions" id="actions-${i}"></div>
