@@ -294,7 +294,7 @@
         /* Interactive Form Modal Container */
         .form-container-card { 
             position: fixed; 
-            top: 0; left: 0; right: 0; bottom: 0; /* Form now starts at true 0 because header is hidden */
+            top: 0; left: 0; right: 0; bottom: 0; /* Starts at true 0 because header is hidden */
             width: 100%; 
             padding: 20px;
             z-index: 999;
@@ -319,7 +319,13 @@
             pointer-events: auto;
         }
 
-        .form-bg-video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
+        .form-bg-video { 
+            position: absolute; 
+            top: 0; left: 0; 
+            width: 100%; height: 100%; 
+            object-fit: cover; 
+            z-index: 0; 
+        }
         
         .native-form-box { 
             background: #ffffff; 
@@ -507,23 +513,30 @@
             /* Form Mobile Resets - ZERO Scrolling Permitted */
             .name-row { flex-direction: column; gap: 0; }
             .step-title { font-size: 1.5rem; }
-            .form-container-card { padding: 0 !important; overflow: hidden !important; }
             
-            /* The native box now strictly fills the available screen real estate without scrollbars */
+            .form-container-card { padding: 15px !important; }
+            
+            /* RESTORED: Keep the card styling on mobile! */
             .native-form-box { 
-                min-height: 0 !important; 
-                height: 100% !important; 
-                border-radius: 0 !important; 
-                padding: 20px 15px; 
+                min-height: auto !important; 
+                height: auto !important; 
+                border-radius: 20px !important; 
+                border: 2px solid #0E2A3B !important;
+                box-shadow: 6px 6px 0px #0E2A3B !important;
+                padding: 30px 20px !important; 
                 overflow: hidden !important; 
                 justify-content: center;
-                border: none !important;
             }
             
             /* EXTREME CSS compression when the keyboard is open to guarantee a perfect fit */
-            .form-container-card.keyboard-open { padding: 0 !important; }
+            .form-container-card.keyboard-open { 
+                padding: 10px !important; 
+                align-items: flex-start !important; /* Anchors form to the top so it doesn't get pushed off-screen */
+            }
             .form-container-card.keyboard-open .native-form-box { 
-                padding: 10px 15px !important; 
+                padding: 15px 20px !important; 
+                margin: 0 auto !important; 
+                box-shadow: 4px 4px 0px #0E2A3B !important; /* Slightly smaller shadow to save space */
             }
             .form-container-card.keyboard-open .step-desc { display: none !important; }
             .form-container-card.keyboard-open .step-title { font-size: 1.15rem !important; margin-bottom: 2px !important; }
@@ -597,6 +610,12 @@
     
     <!-- Hidden Form Modal (Animated Pop-Out) -->
     <div class="form-container-card" id="form-container">
+        
+        <!-- RESTORED: Video Background behind the form modal -->
+        <video class="form-bg-video" autoplay loop muted playsinline>
+            <source src="https://andrewmarth.com/images/form_background.mp4" type="video/mp4">
+        </video>
+
         <div class="native-form-box">
             <button type="button" class="close-form-btn" id="close-form-btn">&times;</button>
 
@@ -666,7 +685,7 @@
                 container.appendChild(stepDiv);
             });
 
-            // STRICT Viewport adjustments. Because the header is removed, it relies purely on visualViewport.height
+            // STRICT Viewport adjustments. Because the header is hidden, it calculates exactly what screen space is available
             function adjustFullscreenHeight() {
                 if (formContainer.classList.contains('is-open')) {
                     if (window.visualViewport) {
@@ -740,13 +759,14 @@
 
             // Smooth Pop-In Animation Trigger
             btnClose.addEventListener('click', () => {
+                
                 // Re-calculate the origin point so it shrinks exactly back to the button
                 const rect = btnStart.getBoundingClientRect();
                 const originX = rect.left + rect.width / 2;
                 const originY = rect.top + rect.height / 2; 
                 formContainer.style.transformOrigin = `${originX}px ${originY}px`;
                 
-                // Remove the 'is-open' class to trigger the reverse spring animation
+                // Remove the 'show' class to trigger the reverse spring animation
                 formContainer.classList.remove('show');
                 
                 // Fade out the background blur
