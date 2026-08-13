@@ -1,10 +1,59 @@
 <style>
     /* --- FORM COMPONENT CSS --- */
-    .full-width-form-section { width: 100%; margin-top: 40px; margin-bottom: 0; }
-    .form-container-card { width: 100%; display: flex; justify-content: center; align-items: center; background-color: #e9e2d8; border-top: 4px solid #4e513e; padding: 80px 20px; position: relative; overflow: hidden; transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); }
-    .form-container-card.fullscreen-active { position: fixed; top: 80px; left: 0; right: 0; bottom: 0; width: 100%; z-index: 999; border-top: none; padding: 20px; }
-    .form-bg-video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
-    .form-container-card.fullscreen-active .form-bg-video { position: fixed; top: -10vh; left: 0; width: 100%; height: 150vh; }
+    
+    /* Blur Background Overlay */
+    .form-overlay-bg { 
+        position: fixed;
+        top: 0; left: 0;
+        width: 100vw; height: 100vh;
+        background-color: rgba(233, 226, 216, 0.7); 
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        z-index: 998;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.4s ease, visibility 0.4s ease;
+    }
+    .form-overlay-bg.is-open { 
+        opacity: 1;
+        visibility: visible;
+    }
+    
+    /* Interactive Form Modal Container */
+    .form-container-card { 
+        position: fixed; 
+        top: 0; left: 0; right: 0; bottom: 0; 
+        width: 100%; 
+        padding: 20px;
+        z-index: 999;
+        display: flex; justify-content: center; align-items: center; 
+        background-color: transparent; 
+        overflow: hidden !important; 
+        
+        /* Native Animation Base State */
+        opacity: 0;
+        visibility: hidden;
+        transform: scale(0.05); 
+        pointer-events: none;
+        
+        /* High-end spring animation */
+        transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease, visibility 0.5s ease;
+    }
+    
+    .form-container-card.is-open {
+        opacity: 1;
+        visibility: visible;
+        transform: scale(1);
+        pointer-events: auto;
+    }
+
+    .form-bg-video { 
+        position: absolute; 
+        top: 0; left: 0; 
+        width: 100%; height: 100%; 
+        object-fit: cover; 
+        z-index: 0; 
+    }
     
     .native-form-box { 
         background: #ffffff; 
@@ -20,35 +69,34 @@
         min-height: 480px; 
         display: flex; 
         flex-direction: column; 
-        overflow: hidden; 
-        transition: all 0.4s ease; 
+        overflow: hidden !important; 
     }
-    .fullscreen-active .native-form-box { min-height: 540px; border-radius: 20px; }
-    .close-form-btn { display: none; position: absolute; top: 15px; right: 20px; background: none; border: none; font-size: 2.2rem; color: #4f2d2c; cursor: pointer; line-height: 1; opacity: 0.5; transition: opacity 0.3s; z-index: 10; }
+    
+    .close-form-btn { display: block; position: absolute; top: 15px; right: 20px; background: none; border: none; font-size: 2.2rem; color: #4f2d2c; cursor: pointer; line-height: 1; opacity: 0.5; transition: opacity 0.3s; z-index: 10; }
     .close-form-btn:hover { opacity: 1; }
-    .fullscreen-active .close-form-btn { display: block; }
-    #conditional-form, #form-steps-container { display: flex; flex-direction: column; flex-grow: 1; width: 100%; }
-    .form-step { display: none; width: 100%; }
+    
+    #conditional-form, #form-steps-container { display: flex; flex-direction: column; flex-grow: 1; width: 100%; overflow: hidden !important; }
+    .form-step { display: none; width: 100%; overflow: hidden !important; }
     .form-step.active { display: flex; flex-direction: column; flex-grow: 1; animation: slideInRight 0.4s cubic-bezier(0.25, 0.8, 0.25, 1) forwards; }
     .form-step.active-reverse { display: flex; flex-direction: column; flex-grow: 1; animation: slideInLeft 0.4s cubic-bezier(0.25, 0.8, 0.25, 1) forwards; }
     @keyframes slideInRight { 0% { opacity: 0; transform: translateX(40px) scale(0.98); } 100% { opacity: 1; transform: translateX(0) scale(1); } }
     @keyframes slideInLeft { 0% { opacity: 0; transform: translateX(-40px) scale(0.98); } 100% { opacity: 1; transform: translateX(0) scale(1); } }
-    .step-content { flex-grow: 1; display: flex; flex-direction: column; justify-content: flex-start; padding-top: 10px; }
-    #start-screen .step-content { justify-content: center; }
-    .step-header { padding-top: 10px; }
-    .step-inputs { flex-grow: 1; display: flex; flex-direction: column; justify-content: center; width: 100%; }
-    .step-title { font-size: 1.6rem; color: #4e513e; margin-bottom: 8px; line-height: 1.3; }
-    .step-desc { font-size: 1.05rem; color: #4f2d2c; opacity: 0.85; margin-bottom: 5px; line-height: 1.5; }
+    
+    .step-content { flex-grow: 1; display: flex; flex-direction: column; justify-content: flex-start; padding-top: 10px; overflow: hidden !important; }
+    .step-header { padding-top: 10px; flex-shrink: 0; }
+    .step-inputs { flex-grow: 1; display: flex; flex-direction: column; justify-content: center; width: 100%; overflow: hidden !important; }
+    .step-title { font-size: 1.6rem; color: #4e513e; margin-bottom: 15px; line-height: 1.3; }
     
     .input-group { margin-bottom: 20px; text-align: left; }
     .input-group label { display: block; font-size: 0.95rem; color: #4f2d2c; margin-bottom: 8px; font-weight: bold; }
-    .input-group input, .input-group textarea { width: 100%; font-size: 1.1rem; color: #4f2d2c; border: 2px solid #0E2A3B; background-color: #f7f4f0; box-shadow: inset 0 2px 4px rgba(0,0,0,0.03); transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); font-family: inherit; }
+    .input-group input, .input-group textarea { width: 100%; font-size: 1.1rem; color: #4f2d2c; border: 2px solid #0E2A3B; background-color: #f7f4f0; box-shadow: inset 0 2px 4px rgba(0,0,0,0.03); transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); font-family: inherit; } 
     .input-group input { border-radius: 999px; padding: 16px 25px; } 
     .input-group textarea { border-radius: 20px; padding: 16px 20px; resize: vertical; } 
     .input-group input:focus, .input-group textarea:focus { outline: none; background-color: #ffffff; border-color: #99724b; box-shadow: 0 8px 20px rgba(153, 114, 75, 0.15); transform: translateY(-2px); }
     .input-group input.error, .input-group textarea.error { border-color: #d9534f; background-color: #fdf2f2; }
-    .name-row { display: flex; gap: 15px; flex-wrap: wrap; }
-    .name-row .input-group { flex: 1; min-width: 150px; }
+    
+    .name-row { display: flex; gap: 15px; flex-wrap: nowrap; width: 100%; }
+    .name-row .input-group { flex: 1; min-width: 0; }
     
     .radio-group { display: flex; gap: 15px; justify-content: center; margin-bottom: 20px; flex-wrap: wrap; }
     .radio-group.vertical { flex-direction: column; gap: 12px; }
@@ -56,8 +104,8 @@
     .radio-btn span { display: block; padding: 16px 25px; background-color: #f7f4f0; border: 2px solid #0E2A3B; border-radius: 999px; font-size: 1.1rem; font-weight: bold; color: #4f2d2c; cursor: pointer; transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1); text-align: center; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
     .radio-btn input[type="radio"]:checked + span { background-color: #99724b; color: #ffffff; transform: scale(1.02); box-shadow: 0 6px 15px rgba(153, 114, 75, 0.25); border-color: #0E2A3B; }
     .radio-group.error span { border: 2px solid #d9534f; }
-    
-    .form-actions { display: flex; justify-content: center; align-items: center; gap: 15px; margin-top: auto; padding-top: 25px; }
+
+    .form-actions { display: flex; justify-content: center; align-items: center; gap: 15px; margin-top: auto; padding-top: 25px; flex-shrink: 0; }
     
     .btn-primary { 
         display: inline-flex;
@@ -65,7 +113,7 @@
         justify-content: center;
         gap: 8px;
         background-color: #99724b; 
-        color: #ffffff; 
+        color: #e9e2d8; 
         border: 2px solid #0E2A3B; 
         padding: 15px 40px; 
         font-size: 1.1rem; 
@@ -81,21 +129,13 @@
         transform: translateY(-5px); 
         box-shadow: 0 8px 15px rgba(0,0,0,0.1); 
     }
-    .btn-primary::after {
-        content: '\2192'; 
-        font-size: 1.2em;
-        transition: transform 0.3s ease;
-    }
-    .btn-primary:hover::after {
-        transform: translateX(5px); 
-    }
 
     .btn-secondary { 
         display: inline-flex;
         align-items: center;
         justify-content: center;
         gap: 6px;
-        background-color: #e9e2d8; 
+        background-color: #ffffff; 
         color: #99724b; 
         border: 2px solid #0E2A3B; 
         font-size: 1.05rem; 
@@ -106,81 +146,139 @@
         transition: all 0.3s ease; 
     }
     .btn-secondary:hover { 
-        color: #4e513e; 
         transform: translateY(-5px); 
         box-shadow: 0 8px 15px rgba(0,0,0,0.1); 
     }
-    .btn-secondary::before {
-        content: '\2190'; 
-        font-size: 1.2em;
+    
+    .btn-primary .btn-icon, .btn-secondary .btn-icon {
+        width: 18px;
+        height: 18px;
+        object-fit: contain;
         transition: transform 0.3s ease;
     }
-    .btn-secondary:hover::before {
-        transform: translateX(-4px); 
-    }
+    .btn-primary:hover .btn-icon-forward { transform: translateX(4px); }
+    .btn-secondary:hover .btn-icon-back { transform: translateX(-4px); }
 
-    .secure-notice { text-align: center; max-width: 400px; margin: 10px auto 0 auto; }
-    .secure-header { display: flex; align-items: center; justify-content: center; gap: 6px; color: #4e513e; font-weight: bold; font-size: 1rem; margin-bottom: 4px; }
-    .secure-header img { height: 1rem; width: auto; object-fit: contain; }
-    .secure-disclaimer { font-size: 0.75rem; color: #4f2d2c; opacity: 0.75; line-height: 1.3; font-style: italic; margin-bottom: 0; }
     .success-message { display: none; padding: 20px 0; animation: slideInRight 0.5s cubic-bezier(0.25, 0.8, 0.25, 1) forwards; flex-direction: column; justify-content: center; flex-grow: 1; }
     .success-icon { width: 70px; height: 70px; background-color: #4e513e; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; margin: 0 auto 20px auto; box-shadow: 0 8px 20px rgba(78, 81, 62, 0.3); }
     .success-message h3 { font-size: 2.2rem; color: #4e513e; margin-bottom: 10px; }
     .success-message p { font-size: 1.15rem; color: #4f2d2c; }
 
+    /* Native page trigger styling */
+    .trigger-card {
+        background-color: #ffffff;
+        border-radius: 20px;
+        border: 2px solid #0E2A3B;
+        box-shadow: 6px 6px 0px #0E2A3B;
+        padding: 50px 40px;
+        text-align: center;
+        max-width: 900px;
+        margin: 40px auto;
+    }
+    .trigger-card h2 { font-size: 2.2rem; color: #4e513e; margin-bottom: 15px; }
+    .trigger-card p { font-size: 1.15rem; color: #4f2d2c; margin-bottom: 25px; line-height: 1.6; }
+    .btn-large-trigger {
+        display: inline-flex; align-items: center; justify-content: center; gap: 12px; 
+        background-color: #99724b; color: #e9e2d8; padding: 18px 45px; 
+        border-radius: 999px; font-weight: bold; font-size: 1.3rem; 
+        border: 2px solid #0E2A3B; box-shadow: 0 6px 15px rgba(0,0,0,0.2); 
+        cursor: pointer; transition: background-color 0.3s ease;
+    }
+    .btn-large-trigger:hover { background-color: #9a5d40; }
+    .btn-large-trigger .btn-icon { width: 22px; height: 22px; object-fit: contain; }
+    
+    .secure-notice { text-align: center; max-width: 400px; margin: 20px auto 0 auto; }
+    .secure-header { display: flex; align-items: center; justify-content: center; gap: 6px; color: #4e513e; font-weight: bold; font-size: 1rem; margin-bottom: 4px; }
+    .secure-header img { height: 1rem; width: auto; object-fit: contain; }
+    .secure-disclaimer { font-size: 0.75rem; color: #4f2d2c; opacity: 0.75; line-height: 1.3; font-style: italic; margin-bottom: 0; }
+
     /* Form Mobile Responsiveness */
     @media (max-width: 768px) {
-        .name-row { flex-direction: column; gap: 0; }
+        .trigger-card { padding: 40px 20px; width: calc(100% - 6px); }
+        .trigger-card h2 { font-size: 1.8rem; }
+        .btn-large-trigger { font-size: 1.1rem; padding: 15px 35px; }
+        
         .step-title { font-size: 1.5rem; }
-        .form-container-card.fullscreen-active { top: 80px; bottom: auto; padding: 15px; border-radius: 0; overflow: hidden; }
-        .fullscreen-active .native-form-box { min-height: 100%; height: 100%; border-radius: 20px; margin-bottom: 0; padding: 30px 20px; }
-        .form-container-card.fullscreen-active.keyboard-open { top: 0 !important; z-index: 10000; padding: 10px !important; }
-        .form-container-card.keyboard-open .native-form-box { padding: 15px 20px !important; }
-        .form-container-card.keyboard-open .step-desc { display: none !important; }
-        .form-container-card.keyboard-open .step-title { font-size: 1.3rem !important; margin-bottom: 10px !important; }
+        .form-container-card { padding: 15px !important; }
+        
+        .native-form-box { 
+            min-height: auto !important; 
+            height: auto !important; 
+            border-radius: 20px !important; 
+            border: 2px solid #0E2A3B !important;
+            box-shadow: 6px 6px 0px #0E2A3B !important;
+            padding: 30px 20px !important; 
+            overflow: hidden !important; 
+            justify-content: center;
+        }
+        
+        .form-container-card.keyboard-open { 
+            padding: 10px !important; 
+            align-items: stretch !important; 
+        }
+        .form-container-card.keyboard-open .native-form-box { 
+            padding: 20px !important; 
+            margin: 0 auto !important; 
+            box-shadow: 4px 4px 0px #0E2A3B !important; 
+            height: auto !important; 
+            max-height: none !important; 
+            min-height: 0 !important; 
+        }
+        
+        .form-container-card.keyboard-open .step-title { margin-bottom: 10px !important; font-size: 1.4rem !important; }
         .form-container-card.keyboard-open .input-group { margin-bottom: 10px !important; }
-        .form-container-card.keyboard-open .input-group input { padding: 10px 20px !important; }
-        .form-container-card.keyboard-open .form-actions { padding-top: 10px !important; }
+        .form-container-card.keyboard-open .input-group label { margin-bottom: 5px !important; }
+        .form-container-card.keyboard-open .radio-group { margin-bottom: 10px !important; gap: 8px !important; }
+        .form-container-card.keyboard-open .radio-btn span { padding: 10px 15px !important; font-size: 1rem !important; }
+        .form-container-card.keyboard-open textarea { padding: 10px !important; height: 70px !important; }
+        .form-container-card.keyboard-open .form-actions { padding-top: 10px !important; margin-top: auto !important; }
+        
+        .form-container-card.keyboard-open .btn-primary,
+        .form-container-card.keyboard-open .btn-secondary { padding: 10px 20px !important; font-size: 1rem !important; }
+        .form-container-card.keyboard-open .close-form-btn { top: 10px !important; right: 15px !important; font-size: 1.8rem !important; }
     }
 </style>
 
-<section class="full-width-form-section">
-    <div class="form-container-card" id="form-container">
-        <video class="form-bg-video" autoplay loop muted playsinline>
-            <source src="https://andrewmarth.com/images/form_background.mp4" type="video/mp4">
-        </video>
-
-        <div class="native-form-box">
-            <button type="button" class="close-form-btn" id="close-form-btn">&times;</button>
-
-            <div id="start-screen" class="form-step active">
-                <div class="step-content" style="justify-content: center;">
-                    <h2 class="step-title" id="dynamic-form-title" style="font-size: 2.2rem; margin-bottom: 15px;">Ready to Take the First Step?</h2>
-                    <p id="dynamic-form-desc" style="font-size: 1.15rem; color: #4f2d2c; margin-bottom: 0; line-height: 1.6;">Fill out the information below to get started.</p>
-                </div>
-                <div class="form-actions" style="flex-direction: column; gap: 20px;">
-                    <button type="button" class="btn-primary" id="btn-start-form">Get Started</button>
-                    
-                    <div class="secure-notice">
-                        <div class="secure-header">
-                            <img src="https://andrewmarth.com/images/lock.png" alt="Secure Lock">
-                            <span>Secure Submission</span>
-                        </div>
-                        <p class="secure-disclaimer">All information is securely submitted and never shared with anyone. This is not a loan application and is only used for informational purposes.</p>
-                    </div>
-                </div>
+<!-- In-Page Trigger Section -->
+<section class="full-width-form-section" style="padding: 0 20px;">
+    <div class="trigger-card">
+        <h2 id="dynamic-form-title">Ready to Take the First Step?</h2>
+        <p id="dynamic-form-desc">Fill out the information below to get started.</p>
+        <button type="button" class="btn-large-trigger" id="btn-start-form">
+            Get Started
+            <img src="https://andrewmarth.com/images/fullscreen.png" alt="Open Form" class="btn-icon">
+        </button>
+        <div class="secure-notice">
+            <div class="secure-header">
+                <img src="https://andrewmarth.com/images/lock.png" alt="Secure Lock">
+                <span>Secure Submission</span>
             </div>
-
-            <form id="conditional-form" style="display: none;">
-                <input type="hidden" name="form_source" id="dynamic-form-source" value="General Form">
-                <div id="form-steps-container"></div>
-            </form>
-            
-            <div class="success-message" id="success-message">
-                <div class="success-icon">&#10003;</div>
-                <h3>Information Received!</h3>
-                <p>Thank you for submitting your details. I will review everything and reach out to you shortly to discuss your options.</p>
-            </div>
+            <p class="secure-disclaimer">All information is securely submitted and never shared with anyone. This is not a loan application and is only used for informational purposes.</p>
         </div>
     </div>
 </section>
+
+<!-- Hidden Blur Background -->
+<div class="form-overlay-bg" id="form-overlay-bg"></div>
+
+<!-- Hidden Form Modal (Animated Pop-Out) -->
+<div class="form-container-card" id="form-container">
+    <video class="form-bg-video" autoplay loop muted playsinline>
+        <source src="https://andrewmarth.com/images/form_background.mp4" type="video/mp4">
+    </video>
+
+    <div class="native-form-box">
+        <button type="button" class="close-form-btn" id="close-form-btn">&times;</button>
+
+        <form id="conditional-form" style="display: flex;">
+            <input type="hidden" name="form_source" id="dynamic-form-source" value="General Web Form">
+            <div id="form-steps-container"></div>
+        </form>
+        
+        <div class="success-message" id="success-message">
+            <div class="success-icon">&#10003;</div>
+            <h3>Information Received!</h3>
+            <p>Thank you for submitting your details. I will review everything and reach out to you shortly to discuss your options.</p>
+        </div>
+    </div>
+</div>
