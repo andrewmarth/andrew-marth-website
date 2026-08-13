@@ -499,21 +499,22 @@
             /* Form Mobile Resets */
             .name-row { flex-direction: column; gap: 0; }
             .step-title { font-size: 1.5rem; }
-            .form-container-card { top: 80px; bottom: auto; padding: 15px; }
+            .form-container-card { padding: 15px; }
             
-            /* Ensure the modal doesn't scroll inside */
-            .native-form-box { min-height: 100%; height: 100%; border-radius: 20px; padding: 30px 20px; overflow: hidden; }
+            /* Ensure the modal doesn't stretch past its bounds */
+            .native-form-box { min-height: auto; height: auto; border-radius: 20px; padding: 30px 20px; overflow: hidden; }
             
-            /* Aggressive CSS compression when the keyboard is open to ensure everything fits without scrolling */
+            /* Aggressive CSS rule when the keyboard is open to ensure everything fits without needing to scroll the container */
             .form-container-card.keyboard-open { 
-                top: 0 !important; 
                 padding: 10px !important; 
-                align-items: flex-start !important; /* Anchors form to the top so it doesn't get pushed off-screen */
+                display: block !important; /* Disables flexbox centering which causes the top-cut-off bug */
+                overflow-y: auto !important; /* Makes the wrapper scrollable if needed */
             }
             .form-container-card.keyboard-open .native-form-box { 
                 padding: 15px 20px !important; 
+                margin: 0 auto !important; 
                 height: auto !important; 
-                max-height: 100% !important; 
+                max-height: none !important; 
                 min-height: 0 !important; 
             }
             .form-container-card.keyboard-open .step-desc { display: none !important; }
@@ -660,31 +661,28 @@
                 container.appendChild(stepDiv);
             });
 
+            // Dynamically pins the top of the form and resizes the height based on keyboard presence
             function adjustFullscreenHeight() {
                 if (formContainer.classList.contains('is-open')) {
                     const isKeyboardOpen = formContainer.classList.contains('keyboard-open');
                     const offset = isKeyboardOpen ? 0 : 80; 
 
                     if (window.visualViewport) {
-                        formContainer.style.bottom = 'auto'; 
                         formContainer.style.height = (window.visualViewport.height - offset) + 'px';
+                        formContainer.style.top = (window.visualViewport.offsetTop + offset) + 'px';
                     } else {
-                        formContainer.style.bottom = 'auto'; 
                         formContainer.style.height = (window.innerHeight - offset) + 'px';
+                        formContainer.style.top = offset + 'px';
                     }
                 } else {
                     formContainer.style.height = '';
-                    formContainer.style.bottom = '';
+                    formContainer.style.top = '';
                 }
             }
 
             if (window.visualViewport) {
                 window.visualViewport.addEventListener('resize', adjustFullscreenHeight);
-                window.visualViewport.addEventListener('scroll', () => {
-                    if(formContainer.classList.contains('is-open')) {
-                        window.scrollTo(0, savedScrollY); 
-                    }
-                });
+                window.visualViewport.addEventListener('scroll', adjustFullscreenHeight);
             }
 
             container.addEventListener('focusin', (e) => {
@@ -712,8 +710,6 @@
                 // 1. Calculate Origin relative to the button's exact position
                 const rect = btnStart.getBoundingClientRect();
                 const originX = rect.left + rect.width / 2;
-                
-                // Subtract 80px from the originY because the formContainer sits below the 80px fixed navbar
                 const originY = (rect.top + rect.height / 2) - 80; 
                 
                 // Set the exact coordinate for the animation to start from
@@ -728,29 +724,33 @@
                 adjustFullscreenHeight(); 
                 renderFlow(); 
                 
-                // Force a browser paint of the tiny element before triggering the transition
-                requestAnimationFrame(() => {
-                    requestAnimationFrame(() => {
-                        // Pop the form up smoothly
-                        formContainer.classList.add('show');
-                    });
-                });
+                // Once the opening animation completes, clear the origin so it doesn't mess with mobile resizing
+                setTimeout(() => {
+                    formContainer.style.transformOrigin = '';
+                }, 500);
             });
 
             // Smooth Pop-In Animation Trigger
             btnClose.addEventListener('click', () => {
-                // Shrink the form back into the button
-                formContainer.classList.remove('show');
+                
+                // Re-calculate the origin point so it shrinks exactly back to the button
+                const rect = btnStart.getBoundingClientRect();
+                const originX = rect.left + rect.width / 2;
+                const originY = (rect.top + rect.height / 2) - 80; 
+                formContainer.style.transformOrigin = `${originX}px ${originY}px`;
+                
+                // Remove the 'is-open' class to trigger the reverse spring animation
+                formContainer.classList.remove('is-open');
                 
                 // Fade out the background blur
                 overlayBg.classList.remove('is-open');
 
                 // Wait 400ms for the animation to complete before resetting states
                 setTimeout(() => {
-                    formContainer.classList.remove('fullscreen-active', 'keyboard-open', 'is-open');
+                    formContainer.classList.remove('keyboard-open');
                     formContainer.style.transformOrigin = ''; 
                     formContainer.style.height = ''; 
-                    formContainer.style.bottom = ''; 
+                    formContainer.style.top = ''; 
                     form.reset(); 
                     currentStepIndex = 0;
                     stepHistory = [];
