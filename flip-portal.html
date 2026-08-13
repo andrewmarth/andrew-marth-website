@@ -266,7 +266,9 @@
         }
 
         /* --- FORM COMPONENT CSS --- */
-        .form-overlay-wrapper { 
+        
+        /* Blur Background Overlay */
+        .form-overlay-bg { 
             position: fixed;
             top: 0; left: 0;
             width: 100vw; height: 100vh;
@@ -278,39 +280,39 @@
             visibility: hidden;
             transition: opacity 0.4s ease, visibility 0.4s ease;
         }
-        .form-overlay-wrapper.is-open { 
+        .form-overlay-bg.is-open { 
             opacity: 1;
             visibility: visible;
         }
         
+        /* Interactive Form Modal Container */
         .form-container-card { 
-            width: 100%; 
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-            background-color: transparent; 
-            position: relative; 
-            overflow: hidden; 
-        }
-        
-        /* The Pop-Out Animation Magic */
-        .form-container-card.fullscreen-active { 
             position: fixed; 
             top: 80px; left: 0; right: 0; bottom: 0; 
-            width: 100%; z-index: 999; padding: 20px; 
-            transform: scale(0.05); /* Starts incredibly tiny */
+            width: 100%; 
+            padding: 20px;
+            z-index: 999;
+            display: flex; justify-content: center; align-items: center; 
+            background-color: transparent; 
+            
+            /* Native Animation Base State */
             opacity: 0;
-            /* Cubic bezier gives it a very slight, premium 'bounce' as it expands */
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1), opacity 0.3s ease;
-        }
-        .form-container-card.fullscreen-active.show {
-            transform: scale(1); /* Expands to full size */
-            opacity: 1;
+            visibility: hidden;
+            transform: scale(0.05); /* Starts incredibly tiny at the button */
+            pointer-events: none;
+            
+            /* High-end spring animation */
+            transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease, visibility 0.5s ease;
         }
         
-        /* Make sure the video stays trapped inside the scaling card */
-        .form-bg-video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; border-radius: 20px 20px 0 0; }
-        .form-container-card.fullscreen-active .form-bg-video { position: absolute; top: -10vh; left: 0; width: 100%; height: 150vh; border-radius: 0; }
+        .form-container-card.is-open {
+            opacity: 1;
+            visibility: visible;
+            transform: scale(1);
+            pointer-events: auto;
+        }
+
+        .form-bg-video { position: absolute; top: -10vh; left: 0; width: 100%; height: 150vh; object-fit: cover; z-index: 0; }
         
         .native-form-box { 
             background: #ffffff; 
@@ -323,16 +325,15 @@
             text-align: center; 
             position: relative; 
             z-index: 1; 
-            min-height: 480px; 
+            min-height: 540px; 
             display: flex; 
             flex-direction: column; 
             overflow: hidden; 
-            transition: all 0.4s ease; 
         }
-        .fullscreen-active .native-form-box { min-height: 540px; border-radius: 20px; }
-        .close-form-btn { display: none; position: absolute; top: 15px; right: 20px; background: none; border: none; font-size: 2.2rem; color: #4f2d2c; cursor: pointer; line-height: 1; opacity: 0.5; transition: opacity 0.3s; z-index: 10; }
+        
+        .close-form-btn { display: block; position: absolute; top: 15px; right: 20px; background: none; border: none; font-size: 2.2rem; color: #4f2d2c; cursor: pointer; line-height: 1; opacity: 0.5; transition: opacity 0.3s; z-index: 10; }
         .close-form-btn:hover { opacity: 1; }
-        .fullscreen-active .close-form-btn { display: block; }
+        
         #conditional-form, #form-steps-container { display: flex; flex-direction: column; flex-grow: 1; width: 100%; }
         .form-step { display: none; width: 100%; }
         .form-step.active { display: flex; flex-direction: column; flex-grow: 1; animation: slideInRight 0.4s cubic-bezier(0.25, 0.8, 0.25, 1) forwards; }
@@ -498,9 +499,11 @@
             /* Form Mobile Resets */
             .name-row { flex-direction: column; gap: 0; }
             .step-title { font-size: 1.5rem; }
-            .form-container-card.fullscreen-active { top: 80px; bottom: auto; padding: 15px; border-radius: 0; overflow: hidden; }
-            .fullscreen-active .native-form-box { min-height: 100%; height: 100%; border-radius: 20px; margin-bottom: 0; padding: 30px 20px; }
-            .form-container-card.fullscreen-active.keyboard-open { top: 0 !important; z-index: 10000; padding: 10px !important; }
+            .form-container-card { top: 80px; bottom: auto; padding: 15px; }
+            .native-form-box { min-height: 100%; height: 100%; border-radius: 20px; padding: 30px 20px; }
+            
+            /* Fixes specific to mobile keyboard pop-ups */
+            .form-container-card.keyboard-open { top: 0 !important; padding: 10px !important; }
             .form-container-card.keyboard-open .native-form-box { padding: 15px 20px !important; }
             .form-container-card.keyboard-open .step-desc { display: none !important; }
             .form-container-card.keyboard-open .step-title { font-size: 1.3rem !important; margin-bottom: 10px !important; }
@@ -548,7 +551,7 @@
         </div>
     </section>
 
-    <!-- NEW Access Request Card -->
+    <!-- Access Request Card -->
     <section class="intro-section" style="margin-top: 0; margin-bottom: 80px;">
         <div class="intro-card">
             <h2>Get Access</h2>
@@ -562,26 +565,27 @@
         </div>
     </section>
 
-    <!-- Hidden Form Overlay (Animated Pop-Out) -->
-    <div class="form-overlay-wrapper" id="form-overlay-wrapper">
-        <div class="form-container-card" id="form-container">
-            <video class="form-bg-video" autoplay loop muted playsinline>
-                <source src="https://andrewmarth.com/images/form_background.mp4" type="video/mp4">
-            </video>
+    <!-- Hidden Blur Background -->
+    <div class="form-overlay-bg" id="form-overlay-bg"></div>
+    
+    <!-- Hidden Form Modal (Animated Pop-Out) -->
+    <div class="form-container-card" id="form-container">
+        <video class="form-bg-video" autoplay loop muted playsinline>
+            <source src="https://andrewmarth.com/images/form_background.mp4" type="video/mp4">
+        </video>
 
-            <div class="native-form-box">
-                <button type="button" class="close-form-btn" id="close-form-btn">&times;</button>
+        <div class="native-form-box">
+            <button type="button" class="close-form-btn" id="close-form-btn">&times;</button>
 
-                <form id="conditional-form" style="display: flex;">
-                    <input type="hidden" name="form_source" id="dynamic-form-source" value="Flip Portal Access Request">
-                    <div id="form-steps-container"></div>
-                </form>
-                
-                <div class="success-message" id="success-message">
-                    <div class="success-icon">&#10003;</div>
-                    <h3>Information Received!</h3>
-                    <p>Thank you for submitting your details. I will review everything and reach out to you shortly with your access code.</p>
-                </div>
+            <form id="conditional-form" style="display: flex;">
+                <input type="hidden" name="form_source" id="dynamic-form-source" value="Flip Portal Access Request">
+                <div id="form-steps-container"></div>
+            </form>
+            
+            <div class="success-message" id="success-message">
+                <div class="success-icon">&#10003;</div>
+                <h3>Information Received!</h3>
+                <p>Thank you for submitting your details. I will review everything and reach out to you shortly with your access code.</p>
             </div>
         </div>
     </div>
@@ -592,7 +596,7 @@
     <script>
         // Form Engine
         function initDynamicForm() {
-            const overlayWrapper = document.getElementById('form-overlay-wrapper');
+            const overlayBg = document.getElementById('form-overlay-bg');
             const formContainer = document.getElementById('form-container');
             const form = document.getElementById('conditional-form');
             const container = document.getElementById('form-steps-container');
@@ -640,7 +644,7 @@
             });
 
             function adjustFullscreenHeight() {
-                if (formContainer.classList.contains('fullscreen-active')) {
+                if (formContainer.classList.contains('is-open')) {
                     const isKeyboardOpen = formContainer.classList.contains('keyboard-open');
                     const offset = isKeyboardOpen ? 0 : 80; 
 
@@ -660,7 +664,7 @@
             if (window.visualViewport) {
                 window.visualViewport.addEventListener('resize', adjustFullscreenHeight);
                 window.visualViewport.addEventListener('scroll', () => {
-                    if(formContainer.classList.contains('fullscreen-active')) {
+                    if(formContainer.classList.contains('is-open')) {
                         window.scrollTo(0, savedScrollY); 
                     }
                 });
@@ -683,45 +687,42 @@
                 }, 50);
             });
 
-            // Smooth Pop-Out Animation Trigger
+            // --- The Beautiful Native Pop-Out Trigger ---
             btnStart.addEventListener('click', () => {
                 savedScrollY = window.scrollY || document.documentElement.scrollTop;
                 document.body.classList.add('no-scroll');
                 
-                // Calculate Origin relative to the button's exact position
+                // 1. Calculate Origin relative to the button's exact position
                 const rect = btnStart.getBoundingClientRect();
                 const originX = rect.left + rect.width / 2;
-                const originY = (rect.top + rect.height / 2) - 80; // 80px offset for the fixed navbar
+                
+                // Subtract 80px from the originY because the formContainer sits below the 80px fixed navbar
+                const originY = (rect.top + rect.height / 2) - 80; 
+                
+                // Set the exact coordinate for the animation to start from
                 formContainer.style.transformOrigin = `${originX}px ${originY}px`;
                 
-                // Show the background blur overlay
-                overlayWrapper.classList.add('is-open');
+                // 2. Open the background blur immediately
+                overlayBg.classList.add('is-open');
                 
-                // Give the form the structure it needs
-                formContainer.classList.add('fullscreen-active');
+                // 3. Trigger the actual spring animation
+                formContainer.classList.add('is-open');
+                
                 adjustFullscreenHeight(); 
                 renderFlow(); 
-                
-                // Force a browser paint of the tiny element before triggering the transition
-                requestAnimationFrame(() => {
-                    requestAnimationFrame(() => {
-                        // Pop the form up smoothly
-                        formContainer.classList.add('show');
-                    });
-                });
             });
 
             // Smooth Pop-In Animation Trigger
             btnClose.addEventListener('click', () => {
-                // Shrink the form back into the button
-                formContainer.classList.remove('show');
+                // Remove the 'is-open' class to trigger the reverse spring animation
+                formContainer.classList.remove('is-open');
                 
-                // Begin fading out the background blur
-                overlayWrapper.classList.remove('is-open');
+                // Fade out the background blur
+                overlayBg.classList.remove('is-open');
 
-                // Wait 400ms for the animation to complete before removing from DOM flow
+                // Wait 400ms for the animation to complete before resetting states
                 setTimeout(() => {
-                    formContainer.classList.remove('fullscreen-active', 'keyboard-open');
+                    formContainer.classList.remove('keyboard-open');
                     formContainer.style.transformOrigin = ''; 
                     formContainer.style.height = ''; 
                     formContainer.style.bottom = ''; 
