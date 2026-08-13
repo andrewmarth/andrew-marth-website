@@ -325,7 +325,7 @@
             text-align: center; 
             position: relative; 
             z-index: 1; 
-            min-height: 540px; 
+            min-height: 480px; 
             display: flex; 
             flex-direction: column; 
             overflow: hidden; 
@@ -500,16 +500,24 @@
             .name-row { flex-direction: column; gap: 0; }
             .step-title { font-size: 1.5rem; }
             .form-container-card { top: 80px; bottom: auto; padding: 15px; }
-            .native-form-box { min-height: 100%; height: 100%; border-radius: 20px; padding: 30px 20px; }
             
-            /* Fixes specific to mobile keyboard pop-ups */
+            /* Ensure the modal doesn't scroll inside */
+            .native-form-box { min-height: 100%; height: 100%; border-radius: 20px; padding: 30px 20px; overflow: hidden; }
+            
+            /* Aggressive CSS compression when the keyboard is open to ensure everything fits without scrolling */
             .form-container-card.keyboard-open { top: 0 !important; padding: 10px !important; }
-            .form-container-card.keyboard-open .native-form-box { padding: 15px 20px !important; }
+            .form-container-card.keyboard-open .native-form-box { padding: 15px 20px !important; height: 100% !important; min-height: 0 !important; }
             .form-container-card.keyboard-open .step-desc { display: none !important; }
-            .form-container-card.keyboard-open .step-title { font-size: 1.3rem !important; margin-bottom: 10px !important; }
-            .form-container-card.keyboard-open .input-group { margin-bottom: 10px !important; }
-            .form-container-card.keyboard-open .input-group input { padding: 10px 20px !important; }
-            .form-container-card.keyboard-open .form-actions { padding-top: 10px !important; }
+            .form-container-card.keyboard-open .step-title { font-size: 1.3rem !important; margin-bottom: 5px !important; }
+            .form-container-card.keyboard-open .input-group { margin-bottom: 8px !important; }
+            .form-container-card.keyboard-open .input-group label { margin-bottom: 4px !important; font-size: 0.85rem !important; }
+            .form-container-card.keyboard-open .input-group input { padding: 10px 15px !important; }
+            .form-container-card.keyboard-open .form-actions { padding-top: 5px !important; margin-top: auto !important; }
+            
+            /* Force the Name inputs to stay side-by-side to save massive vertical space */
+            .form-container-card.keyboard-open .name-row { flex-direction: row !important; gap: 10px !important; }
+            .form-container-card.keyboard-open .name-row .input-group { min-width: 0 !important; }
+            .form-container-card.keyboard-open .close-form-btn { top: 5px !important; right: 15px !important; }
         }
     </style>
 </head>
@@ -710,19 +718,27 @@
                 
                 adjustFullscreenHeight(); 
                 renderFlow(); 
+                
+                // Force a browser paint of the tiny element before triggering the transition
+                requestAnimationFrame(() => {
+                    requestAnimationFrame(() => {
+                        // Pop the form up smoothly
+                        formContainer.classList.add('show');
+                    });
+                });
             });
 
             // Smooth Pop-In Animation Trigger
             btnClose.addEventListener('click', () => {
-                // Remove the 'is-open' class to trigger the reverse spring animation
-                formContainer.classList.remove('is-open');
+                // Shrink the form back into the button
+                formContainer.classList.remove('show');
                 
                 // Fade out the background blur
                 overlayBg.classList.remove('is-open');
 
                 // Wait 400ms for the animation to complete before resetting states
                 setTimeout(() => {
-                    formContainer.classList.remove('keyboard-open');
+                    formContainer.classList.remove('fullscreen-active', 'keyboard-open', 'is-open');
                     formContainer.style.transformOrigin = ''; 
                     formContainer.style.height = ''; 
                     formContainer.style.bottom = ''; 
