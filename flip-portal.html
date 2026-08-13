@@ -159,26 +159,37 @@
             text-shadow: 0 1px 3px rgba(0,0,0,0.3);
         }
 
-        /* --- Intro Section --- */
+        /* --- Intro Section (Now a Card) --- */
         .intro-section {
             max-width: 900px;
             margin: 60px auto 40px auto;
             padding: 0 20px;
+        }
+        .intro-card {
+            background-color: #ffffff;
+            border-radius: 20px;
+            border: 2px solid #0E2A3B;
+            box-shadow: 6px 6px 0px #0E2A3B;
+            padding: 50px 40px;
             text-align: center;
         }
-        .intro-section h2 {
+        .intro-card h2 {
             font-size: 2.2rem;
-            color: #4f2d2c;
+            color: #4e513e;
             margin-bottom: 20px;
         }
-        .intro-section p {
+        .intro-card p {
             font-size: 1.1rem;
             margin-bottom: 15px;
+            color: #4f2d2c;
+        }
+        .intro-card p:last-child {
+            margin-bottom: 0;
         }
 
         /* --- Single Portal Card Section --- */
         .portal-section {
-            max-width: 1000px; /* Slightly narrower than standard container for visual weight */
+            max-width: 1000px; 
             margin: 0 auto 80px auto;
             padding: 0 20px;
         }
@@ -196,20 +207,20 @@
         .portal-image-wrapper {
             position: relative;
             width: 100%;
-            height: 450px; /* Gives a massive, impressive viewing window */
+            height: 450px; 
             overflow: hidden;
-            background-color: #000; /* Deep backdrop to make the image stand out */
+            background-color: #000; 
         }
 
-        /* Specific class for the background image so it doesn't affect the button icon */
+        /* Specific class for the background image */
         .portal-bg-image {
             width: 100%;
             height: 100%;
             object-fit: cover;
             display: block;
-            filter: blur(3px); /* The very subtle blur */
-            transform: scale(1.02); /* Prevents the blur from fading the edges to white */
-            opacity: 0.75; /* Dims the image slightly so the button jumps off the screen */
+            filter: blur(3px); 
+            transform: scale(1.02); 
+            opacity: 0.75; 
         }
 
         .portal-overlay {
@@ -246,10 +257,9 @@
         }
         
         .btn-large .btn-icon {
-            width: 22px; /* Nicely sized next to 1.3rem text */
+            width: 22px; 
             height: 22px;
             object-fit: contain;
-            /* Ensures no inherited blur applies to the icon */
             filter: none;
             opacity: 1;
             transform: none;
@@ -368,6 +378,17 @@
                 font-size: 2.5rem;
             }
             
+            /* Responsive intro card adjustments */
+            .intro-card {
+                padding: 40px 20px;
+                width: calc(100% - 6px);
+                margin-left: auto;
+                margin-right: auto;
+            }
+            .intro-card h2 {
+                font-size: 1.8rem;
+            }
+
             /* Responsive portal card adjustments */
             .portal-card {
                 width: calc(100% - 6px); 
@@ -375,7 +396,7 @@
                 margin-right: auto;    
             }
             .portal-image-wrapper {
-                height: 300px; /* Reduced height to look proportional on smaller screens */
+                height: 300px; 
             }
             .btn-large {
                 font-size: 1.1rem;
@@ -401,15 +422,16 @@
     </header>
 
     <section class="intro-section">
-        <h2>Exclusive Access</h2>
-        <p>Welcome to the largest collection of off-market homes in Arizona. In a highly competitive market, having immediate access to off-market inventory is an incredible advantage. We constantly source and evaluate properties to bring you the best investments available.</p>
-        <p>What sets our portal apart is the transparent level of detail provided. Each property is accompanied by a full proforma, detailing estimated repair costs, after-repair values, and projected ROI to give you a truly complete picture of any particular deal.</p>
+        <div class="intro-card">
+            <h2>Exclusive Access</h2>
+            <p>Welcome to the largest collection of off-market homes in Arizona. In a highly competitive market, having immediate access to off-market inventory is an incredible advantage. We constantly source and evaluate properties to bring you the best investments available.</p>
+            <p>What sets our portal apart is the transparent level of detail provided. Each property is accompanied by a full proforma, detailing estimated repair costs, after-repair values, and projected ROI to give you a truly complete picture of any particular deal.</p>
+        </div>
     </section>
 
     <section class="portal-section">
         <div class="portal-card">
             <div class="portal-image-wrapper">
-                <!-- Specific class added here -->
                 <img src="https://andrewmarth.com/images/map_background.jpg" alt="Off-Market Map Portal" class="portal-bg-image">
                 <div class="portal-overlay">
                     <a href="https://portal.andrewmarth.com/properties" target="_blank" rel="noopener noreferrer" class="btn-large">
