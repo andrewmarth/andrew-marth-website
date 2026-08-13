@@ -33,6 +33,12 @@
             background-color: #e9e2d8; 
         }
         
+        /* The Iron Curtain: Locks the body without losing scroll position for the form */
+        body.no-scroll {
+            overflow: hidden !important;
+            touch-action: none;
+        }
+        
         /* Updated Header Font */
         h1, h2, h3, h4, h5, h6 {
             font-family: 'Bricolage Grotesque', sans-serif;
@@ -56,9 +62,7 @@
             border-bottom: 1px solid rgba(153, 114, 75, 0.3); 
             min-height: 80px;
         }
-        .mobile-center-logo {
-            display: none; 
-        }
+        .mobile-center-logo { display: none; }
         .hamburger {
             display: none;
             font-size: 2rem;
@@ -95,12 +99,8 @@
             font-size: 1.1rem;
             transition: color 0.3s;
         }
-        .nav-links a:hover {
-            color: #9a5d40; 
-        }
-        .close-menu {
-            display: none; 
-        }
+        .nav-links a:hover { color: #9a5d40; }
+        .close-menu { display: none; }
 
         /* --- Header / Hero Section (Video Background) --- */
         header {
@@ -130,7 +130,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(78, 81, 62, 0.75); /* The Brand Green Overlay */
+            background-color: rgba(78, 81, 62, 0.75);
             z-index: 1;
         }
         
@@ -159,7 +159,7 @@
             text-shadow: 0 1px 3px rgba(0,0,0,0.3);
         }
 
-        /* --- Intro Section (Now a Card) --- */
+        /* --- Intro & Info Cards --- */
         .intro-section {
             max-width: 900px;
             margin: 60px auto 40px auto;
@@ -189,8 +189,8 @@
 
         /* --- Single Portal Card Section --- */
         .portal-section {
-            max-width: 1000px; 
-            margin: 0 auto 80px auto;
+            max-width: 900px; 
+            margin: 0 auto 40px auto;
             padding: 0 20px;
         }
         
@@ -212,7 +212,6 @@
             background-color: #000; 
         }
 
-        /* Specific class for the background image */
         .portal-bg-image {
             width: 100%;
             height: 100%;
@@ -235,7 +234,7 @@
             z-index: 10;
         }
 
-        /* --- Oversized Primary Button (No Movement Animation) --- */
+        /* --- Oversized Primary Button --- */
         .btn-large {
             display: inline-flex;
             align-items: center;
@@ -245,12 +244,13 @@
             color: #e9e2d8; 
             text-decoration: none;
             padding: 18px 45px;
-            border-radius: 999px; /* Pill shape */
+            border-radius: 999px; 
             font-weight: bold;
             font-size: 1.3rem;
             border: 2px solid #0E2A3B;
             box-shadow: 0 6px 15px rgba(0,0,0,0.2); 
-            transition: background-color 0.3s ease; /* Only fades color on hover */
+            transition: background-color 0.3s ease; 
+            cursor: pointer;
         }
         .btn-large:hover {
             background-color: #9a5d40; 
@@ -265,6 +265,111 @@
             transform: none;
         }
 
+        /* --- FORM COMPONENT CSS --- */
+        .form-overlay-wrapper { display: none; }
+        .form-overlay-wrapper.is-open { display: block; }
+        
+        .form-container-card { width: 100%; display: flex; justify-content: center; align-items: center; background-color: #e9e2d8; position: relative; overflow: hidden; transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); }
+        .form-container-card.fullscreen-active { position: fixed; top: 80px; left: 0; right: 0; bottom: 0; width: 100%; z-index: 999; padding: 20px; }
+        .form-bg-video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
+        .form-container-card.fullscreen-active .form-bg-video { position: fixed; top: -10vh; left: 0; width: 100%; height: 150vh; }
+        
+        .native-form-box { 
+            background: #ffffff; 
+            width: 100%; 
+            max-width: 600px; 
+            padding: 40px; 
+            border-radius: 20px; 
+            border: 2px solid #0E2A3B;
+            box-shadow: 6px 6px 0px #0E2A3B; 
+            text-align: center; 
+            position: relative; 
+            z-index: 1; 
+            min-height: 480px; 
+            display: flex; 
+            flex-direction: column; 
+            overflow: hidden; 
+            transition: all 0.4s ease; 
+        }
+        .fullscreen-active .native-form-box { min-height: 540px; border-radius: 20px; }
+        .close-form-btn { display: none; position: absolute; top: 15px; right: 20px; background: none; border: none; font-size: 2.2rem; color: #4f2d2c; cursor: pointer; line-height: 1; opacity: 0.5; transition: opacity 0.3s; z-index: 10; }
+        .close-form-btn:hover { opacity: 1; }
+        .fullscreen-active .close-form-btn { display: block; }
+        #conditional-form, #form-steps-container { display: flex; flex-direction: column; flex-grow: 1; width: 100%; }
+        .form-step { display: none; width: 100%; }
+        .form-step.active { display: flex; flex-direction: column; flex-grow: 1; animation: slideInRight 0.4s cubic-bezier(0.25, 0.8, 0.25, 1) forwards; }
+        .form-step.active-reverse { display: flex; flex-direction: column; flex-grow: 1; animation: slideInLeft 0.4s cubic-bezier(0.25, 0.8, 0.25, 1) forwards; }
+        @keyframes slideInRight { 0% { opacity: 0; transform: translateX(40px) scale(0.98); } 100% { opacity: 1; transform: translateX(0) scale(1); } }
+        @keyframes slideInLeft { 0% { opacity: 0; transform: translateX(-40px) scale(0.98); } 100% { opacity: 1; transform: translateX(0) scale(1); } }
+        .step-content { flex-grow: 1; display: flex; flex-direction: column; justify-content: flex-start; padding-top: 10px; }
+        .step-header { padding-top: 10px; }
+        .step-inputs { flex-grow: 1; display: flex; flex-direction: column; justify-content: center; width: 100%; }
+        .step-title { font-size: 1.6rem; color: #4e513e; margin-bottom: 8px; line-height: 1.3; }
+        .step-desc { font-size: 1.05rem; color: #4f2d2c; opacity: 0.85; margin-bottom: 5px; line-height: 1.5; }
+        
+        .input-group { margin-bottom: 20px; text-align: left; }
+        .input-group label { display: block; font-size: 0.95rem; color: #4f2d2c; margin-bottom: 8px; font-weight: bold; }
+        .input-group input { width: 100%; font-size: 1.1rem; color: #4f2d2c; border: 2px solid #0E2A3B; background-color: #f7f4f0; box-shadow: inset 0 2px 4px rgba(0,0,0,0.03); transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); font-family: inherit; border-radius: 999px; padding: 16px 25px; } 
+        .input-group input:focus { outline: none; background-color: #ffffff; border-color: #99724b; box-shadow: 0 8px 20px rgba(153, 114, 75, 0.15); transform: translateY(-2px); }
+        .input-group input.error { border-color: #d9534f; background-color: #fdf2f2; }
+        .name-row { display: flex; gap: 15px; flex-wrap: wrap; }
+        .name-row .input-group { flex: 1; min-width: 150px; }
+        
+        .form-actions { display: flex; justify-content: center; align-items: center; gap: 15px; margin-top: auto; padding-top: 25px; }
+        
+        .btn-primary { 
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background-color: #99724b; 
+            color: #ffffff; 
+            border: 2px solid #0E2A3B; 
+            padding: 15px 40px; 
+            font-size: 1.1rem; 
+            font-weight: bold; 
+            border-radius: 999px; 
+            cursor: pointer; 
+            transition: all 0.3s ease; 
+            min-width: 130px; 
+            box-shadow: 0 4px 10px rgba(153, 114, 75, 0.2); 
+        }
+        .btn-primary:hover { 
+            background-color: #9a5d40; 
+            transform: translateY(-5px); 
+            box-shadow: 0 8px 15px rgba(0,0,0,0.1); 
+        }
+        .btn-primary::after { content: '\2192'; font-size: 1.2em; transition: transform 0.3s ease; }
+        .btn-primary:hover::after { transform: translateX(5px); }
+
+        .btn-secondary { 
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            background-color: #e9e2d8; 
+            color: #99724b; 
+            border: 2px solid #0E2A3B; 
+            font-size: 1.05rem; 
+            font-weight: bold; 
+            cursor: pointer; 
+            padding: 15px 25px; 
+            border-radius: 999px;
+            transition: all 0.3s ease; 
+        }
+        .btn-secondary:hover { 
+            color: #4e513e; 
+            transform: translateY(-5px); 
+            box-shadow: 0 8px 15px rgba(0,0,0,0.1); 
+        }
+        .btn-secondary::before { content: '\2190'; font-size: 1.2em; transition: transform 0.3s ease; }
+        .btn-secondary:hover::before { transform: translateX(-4px); }
+
+        .success-message { display: none; padding: 20px 0; animation: slideInRight 0.5s cubic-bezier(0.25, 0.8, 0.25, 1) forwards; flex-direction: column; justify-content: center; flex-grow: 1; }
+        .success-icon { width: 70px; height: 70px; background-color: #4e513e; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; margin: 0 auto 20px auto; box-shadow: 0 8px 20px rgba(78, 81, 62, 0.3); }
+        .success-message h3 { font-size: 2.2rem; color: #4e513e; margin-bottom: 10px; }
+        .success-message p { font-size: 1.15rem; color: #4f2d2c; }
+
         /* --- Footer --- */
         footer {
             text-align: center;
@@ -272,22 +377,10 @@
             background-color: #4e513e; 
             color: #e9e2d8; 
         }
-        .footer-contact {
-            margin-bottom: 20px;
-        }
-        .footer-contact p {
-            margin-bottom: 8px;
-            font-size: 1.1rem;
-            color: #e9e2d8;
-        }
-        .footer-contact a {
-            color: #c09050; 
-            text-decoration: none;
-            font-weight: bold;
-        }
-        .footer-contact a:hover {
-            text-decoration: underline;
-        }
+        .footer-contact { margin-bottom: 20px; }
+        .footer-contact p { margin-bottom: 8px; font-size: 1.1rem; color: #e9e2d8; }
+        .footer-contact a { color: #c09050; text-decoration: none; font-weight: bold; }
+        .footer-contact a:hover { text-decoration: underline; }
         .footer-disclosure {
             max-width: 900px;
             margin: 0 auto 0 auto; 
@@ -301,9 +394,7 @@
 
         /* --- Mobile Responsiveness --- */
         @media (max-width: 768px) {
-            .navbar {
-                justify-content: flex-end; 
-            }
+            .navbar { justify-content: flex-end; }
             .mobile-center-logo {
                 display: block;
                 position: absolute;
@@ -311,15 +402,8 @@
                 top: 50%;
                 transform: translate(-50%, -50%); 
             }
-            .mobile-center-logo img {
-                height: 40px; 
-                width: auto;
-                border-radius: 4px;
-                display: block;
-            }
-            .hamburger {
-                display: block;
-            }
+            .mobile-center-logo img { height: 40px; width: auto; border-radius: 4px; display: block; }
+            .hamburger { display: block; }
             .nav-menu {
                 position: fixed;
                 top: 0;
@@ -337,24 +421,10 @@
                 transition: right 0.3s ease;
                 z-index: 1001; 
             }
-            .nav-menu.active {
-                right: 0; 
-            }
-            .nav-logo {
-                margin-bottom: 40px;
-                width: 100%;
-                display: flex;
-                justify-content: center;
-            }
-            .nav-logo img {
-                height: 60px;
-            }
-            .nav-links {
-                flex-direction: column;
-                width: 100%;
-                align-items: flex-start;
-                gap: 20px;
-            }
+            .nav-menu.active { right: 0; }
+            .nav-logo { margin-bottom: 40px; width: 100%; display: flex; justify-content: center; }
+            .nav-logo img { height: 60px; }
+            .nav-links { flex-direction: column; width: 100%; align-items: flex-start; gap: 20px; }
             .nav-links a {
                 display: block;
                 width: 100%;
@@ -374,34 +444,31 @@
                 cursor: pointer;
                 line-height: 1;
             }
-            header h1 {
-                font-size: 2.5rem;
-            }
+            header h1 { font-size: 2.5rem; }
             
-            /* Responsive intro card adjustments */
             .intro-card {
                 padding: 40px 20px;
                 width: calc(100% - 6px);
                 margin-left: auto;
                 margin-right: auto;
             }
-            .intro-card h2 {
-                font-size: 1.8rem;
-            }
-
-            /* Responsive portal card adjustments */
-            .portal-card {
-                width: calc(100% - 6px); 
-                margin-left: auto;
-                margin-right: auto;    
-            }
-            .portal-image-wrapper {
-                height: 300px; 
-            }
-            .btn-large {
-                font-size: 1.1rem;
-                padding: 15px 35px;
-            }
+            .intro-card h2 { font-size: 1.8rem; }
+            .portal-card { width: calc(100% - 6px); margin-left: auto; margin-right: auto; }
+            .portal-image-wrapper { height: 300px; }
+            .btn-large { font-size: 1.1rem; padding: 15px 35px; }
+            
+            /* Form Mobile Resets */
+            .name-row { flex-direction: column; gap: 0; }
+            .step-title { font-size: 1.5rem; }
+            .form-container-card.fullscreen-active { top: 80px; bottom: auto; padding: 15px; border-radius: 0; overflow: hidden; }
+            .fullscreen-active .native-form-box { min-height: 100%; height: 100%; border-radius: 20px; margin-bottom: 0; padding: 30px 20px; }
+            .form-container-card.fullscreen-active.keyboard-open { top: 0 !important; z-index: 10000; padding: 10px !important; }
+            .form-container-card.keyboard-open .native-form-box { padding: 15px 20px !important; }
+            .form-container-card.keyboard-open .step-desc { display: none !important; }
+            .form-container-card.keyboard-open .step-title { font-size: 1.3rem !important; margin-bottom: 10px !important; }
+            .form-container-card.keyboard-open .input-group { margin-bottom: 10px !important; }
+            .form-container-card.keyboard-open .input-group input { padding: 10px 20px !important; }
+            .form-container-card.keyboard-open .form-actions { padding-top: 10px !important; }
         }
     </style>
 </head>
@@ -443,11 +510,307 @@
         </div>
     </section>
 
+    <!-- NEW Access Request Card -->
+    <section class="intro-section" style="margin-top: 0; margin-bottom: 80px;">
+        <div class="intro-card">
+            <h2>Get Access</h2>
+            <p>You will need an exclusive access code to view the properties and proformas inside the portal. If you do not have one, you can request access below. Once approved, your code will be sent to you directly.</p>
+            <div style="margin-top: 35px;">
+                <button type="button" class="btn-large" id="btn-get-access">
+                    Get Access
+                    <img src="https://andrewmarth.com/images/fullscreen.png" alt="Open Form" class="btn-icon">
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hidden Form Overlay -->
+    <div class="form-overlay-wrapper" id="form-overlay-wrapper">
+        <div class="form-container-card" id="form-container">
+            <video class="form-bg-video" autoplay loop muted playsinline>
+                <source src="https://andrewmarth.com/images/form_background.mp4" type="video/mp4">
+            </video>
+
+            <div class="native-form-box">
+                <button type="button" class="close-form-btn" id="close-form-btn">&times;</button>
+
+                <form id="conditional-form" style="display: flex;">
+                    <input type="hidden" name="form_source" id="dynamic-form-source" value="Flip Portal Access Request">
+                    <div id="form-steps-container"></div>
+                </form>
+                
+                <div class="success-message" id="success-message">
+                    <div class="success-icon">&#10003;</div>
+                    <h3>Information Received!</h3>
+                    <p>Thank you for submitting your details. I will review everything and reach out to you shortly with your access code.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Footer Placeholder -->
     <div id="footer-placeholder"></div>
 
     <script>
-        // Function to load external HTML components
+        // Form Engine
+        function initDynamicForm() {
+            const overlayWrapper = document.getElementById('form-overlay-wrapper');
+            const formContainer = document.getElementById('form-container');
+            const form = document.getElementById('conditional-form');
+            const container = document.getElementById('form-steps-container');
+            const btnStart = document.getElementById('btn-get-access');
+            const btnClose = document.getElementById('close-form-btn');
+
+            let currentStepIndex = 0;
+            let stepHistory = [];
+            let slideDirection = 'forward'; 
+            let savedScrollY = 0; 
+
+            // Simplified 3-Question Logic Engine
+            const questions = [
+                { id: 'q_name', type: 'name', title: 'What is your name?', desc: 'Please provide your first and last name.', cond: () => true },
+                { id: 'q_phone', type: 'phone', title: 'What is the best phone number to reach you?', desc: 'I will use this to text you your secure access code.', cond: () => true },
+                { id: 'q_email', type: 'email', title: 'What is your email address?', desc: 'I will also email the code here for your records.', cond: () => true }
+            ];
+
+            questions.forEach((q, i) => {
+                let inner = '';
+                if(q.type === 'name') {
+                    inner = `<div class="name-row">
+                                <div class="input-group"><label>First Name</label><input type="text" name="${q.id}_first" placeholder="First"></div>
+                                <div class="input-group"><label>Last Name</label><input type="text" name="${q.id}_last" placeholder="Last"></div>
+                             </div>`;
+                } else {
+                    let cls = '', type = 'text', ph = '';
+                    if(q.type==='email') { type='email'; ph='email@example.com'; }
+                    if(q.type==='phone') { type='tel'; cls='fmt-phone'; ph='(555) 555-5555'; }
+                    inner = `<div class="input-group"><input type="${type}" name="${q.id}" class="${cls}" placeholder="${ph}"></div>`;
+                }
+
+                const stepDiv = document.createElement('div');
+                stepDiv.className = 'form-step';
+                stepDiv.id = `step-${i}`;
+                stepDiv.innerHTML = `
+                    <div class="step-header">
+                        <h3 class="step-title">${q.title}</h3>
+                        <p class="step-desc">${q.desc}</p>
+                    </div>
+                    <div class="step-inputs">${inner}</div>
+                    <div class="form-actions" id="actions-${i}"></div>
+                `;
+                container.appendChild(stepDiv);
+            });
+
+            function adjustFullscreenHeight() {
+                if (formContainer.classList.contains('fullscreen-active')) {
+                    const isKeyboardOpen = formContainer.classList.contains('keyboard-open');
+                    const offset = isKeyboardOpen ? 0 : 80; 
+
+                    if (window.visualViewport) {
+                        formContainer.style.bottom = 'auto'; 
+                        formContainer.style.height = (window.visualViewport.height - offset) + 'px';
+                    } else {
+                        formContainer.style.bottom = 'auto'; 
+                        formContainer.style.height = (window.innerHeight - offset) + 'px';
+                    }
+                } else {
+                    formContainer.style.height = '';
+                    formContainer.style.bottom = '';
+                }
+            }
+
+            if (window.visualViewport) {
+                window.visualViewport.addEventListener('resize', adjustFullscreenHeight);
+                window.visualViewport.addEventListener('scroll', () => {
+                    if(formContainer.classList.contains('fullscreen-active')) {
+                        window.scrollTo(0, savedScrollY); 
+                    }
+                });
+            }
+
+            container.addEventListener('focusin', (e) => {
+                if (window.innerWidth <= 768 && (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA')) {
+                    formContainer.classList.add('keyboard-open');
+                    setTimeout(adjustFullscreenHeight, 50); 
+                }
+            });
+
+            container.addEventListener('focusout', (e) => {
+                setTimeout(() => {
+                    const activeElement = document.activeElement;
+                    if (activeElement.tagName !== 'INPUT' && activeElement.tagName !== 'TEXTAREA') {
+                        formContainer.classList.remove('keyboard-open');
+                        adjustFullscreenHeight();
+                    }
+                }, 50);
+            });
+
+            btnStart.addEventListener('click', () => {
+                savedScrollY = window.scrollY || document.documentElement.scrollTop;
+                document.body.classList.add('no-scroll');
+                overlayWrapper.classList.add('is-open');
+                formContainer.classList.add('fullscreen-active');
+                adjustFullscreenHeight(); 
+                renderFlow(); 
+            });
+
+            btnClose.addEventListener('click', () => {
+                formContainer.classList.remove('fullscreen-active', 'keyboard-open');
+                overlayWrapper.classList.remove('is-open');
+                formContainer.style.height = ''; 
+                formContainer.style.bottom = ''; 
+                form.reset(); 
+                currentStepIndex = 0;
+                stepHistory = [];
+                document.querySelectorAll('.form-step').forEach(s => s.classList.remove('active', 'active-reverse'));
+                document.body.classList.remove('no-scroll');
+                setTimeout(() => window.scrollTo(0, savedScrollY), 10);
+            });
+
+            function updateActions() {
+                const currentEl = document.getElementById(`step-${currentStepIndex}`);
+                const actionsEl = document.getElementById(`actions-${currentStepIndex}`);
+                if (!actionsEl) return;
+                
+                actionsEl.innerHTML = '';
+                
+                let nextStepIndex = -1;
+                for(let i = currentStepIndex + 1; i < questions.length; i++) {
+                    if(questions[i].cond()) { nextStepIndex = i; break; }
+                }
+
+                if(stepHistory.length > 0) {
+                    const btnBack = document.createElement('button');
+                    btnBack.type = 'button';
+                    btnBack.className = 'btn-secondary';
+                    btnBack.textContent = 'Back';
+                    btnBack.onclick = () => {
+                        slideDirection = 'backward';
+                        currentStepIndex = stepHistory.pop();
+                        renderFlow();
+                    };
+                    actionsEl.appendChild(btnBack);
+                }
+
+                const btnForward = document.createElement('button');
+                btnForward.className = 'btn-primary btn-forward';
+                btnForward.type = 'submit'; 
+                btnForward.textContent = nextStepIndex === -1 ? 'Submit' : 'Next';
+                actionsEl.appendChild(btnForward);
+            }
+
+            container.addEventListener('input', e => {
+                const el = e.target;
+                if(el.classList.contains('fmt-phone')) {
+                    let x = el.value.replace(/\D/g, '').match(/(\d{0,3})(\d{0,3})(\d{0,4})/);
+                    el.value = !x[2] ? x[1] : '(' + x[1] + ') ' + x[2] + (x[3] ? '-' + x[3] : '');
+                }
+                el.classList.remove('error'); 
+            });
+
+            container.addEventListener('keydown', e => {
+                if (e.key === 'Enter') {
+                    e.preventDefault(); 
+                    const currentEl = document.getElementById(`step-${currentStepIndex}`);
+                    const fwdBtn = currentEl.querySelector('.btn-forward');
+                    if (fwdBtn) fwdBtn.click(); 
+                }
+            });
+
+            function renderFlow() {
+                document.querySelectorAll('.form-step').forEach(s => {
+                    s.classList.remove('active', 'active-reverse');
+                });
+                const currentEl = document.getElementById(`step-${currentStepIndex}`);
+                currentEl.classList.add(slideDirection === 'forward' ? 'active' : 'active-reverse');
+                updateActions();
+
+                if (window.innerWidth > 768) {
+                    const firstInput = currentEl.querySelector('input[type="text"], input[type="tel"], input[type="email"]');
+                    if (firstInput) setTimeout(() => firstInput.focus(), 50);
+                }
+            }
+
+            function validateStep(stepEl) {
+                let isValid = true;
+                const inputs = stepEl.querySelectorAll('input');
+                
+                inputs.forEach(i => {
+                    if(!i.value.trim()) {
+                        isValid = false; i.classList.add('error');
+                    } else if(i.type === 'email' && !i.value.includes('@')) {
+                        isValid = false; i.classList.add('error');
+                    } else if(i.classList.contains('fmt-phone') && i.value.replace(/\D/g, '').length < 10) {
+                        isValid = false; i.classList.add('error');
+                    }
+                });
+                return isValid;
+            }
+
+            form.addEventListener('submit', e => {
+                e.preventDefault();
+                const currentEl = document.getElementById(`step-${currentStepIndex}`);
+                if(!validateStep(currentEl)) return;
+
+                let nextStepIndex = -1;
+                for(let i = currentStepIndex + 1; i < questions.length; i++) {
+                    if(questions[i].cond()) { nextStepIndex = i; break; }
+                }
+                
+                if (nextStepIndex !== -1) {
+                    slideDirection = 'forward';
+                    stepHistory.push(currentStepIndex);
+                    currentStepIndex = nextStepIndex;
+                    renderFlow();
+                    return;
+                }
+
+                const submitBtn = currentEl.querySelector('.btn-forward');
+                submitBtn.textContent = 'Submitting...';
+                submitBtn.disabled = true;
+
+                const finalData = new FormData();
+                const dynamicSource = document.getElementById('dynamic-form-source').value;
+                finalData.append('form_source', dynamicSource);
+                
+                const azDate = new Date(new Date().toLocaleString("en-US", {timeZone: "America/Phoenix"}));
+                const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+                const formattedDate = monthNames[azDate.getMonth()] + " " + String(azDate.getDate()).padStart(2, '0') + " " + azDate.getFullYear();
+                finalData.append('submission_date', formattedDate);
+                
+                questions.forEach(q => {
+                    const isActive = q.cond();
+                    const stepEl = document.getElementById(`step-${questions.indexOf(q)}`);
+                    const inputs = Array.from(stepEl.querySelectorAll('input'));
+                    const uniqueNames = [...new Set(inputs.map(i => i.name))];
+                    
+                    uniqueNames.forEach(name => {
+                        if (!isActive) {
+                            finalData.append(name, "");
+                        } else {
+                            const els = inputs.filter(i => i.name === name);
+                            finalData.append(name, els[0].value);
+                        }
+                    });
+                });
+
+                fetch('https://hooks.zapier.com/hooks/catch/17339400/42fpg7w/', {
+                    method: 'POST',
+                    body: finalData,
+                    mode: 'no-cors' 
+                })
+                .then(() => {
+                    window.location.href = 'https://andrewmarth.com/thank-you';
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    submitBtn.textContent = 'Error. Try Again.';
+                    submitBtn.disabled = false;
+                });
+            });
+        }
+
+        // Global DOM Load
         async function loadComponent(id, file) {
             try {
                 const response = await fetch(file);
@@ -455,7 +818,6 @@
                 const html = await response.text();
                 document.getElementById(id).innerHTML = html;
                 
-                // If we just loaded the header, initialize the hamburger menu logic
                 if (id === 'header-placeholder') {
                     initNavigation();
                 }
@@ -464,27 +826,23 @@
             }
         }
 
-        // Initialize mobile navigation logic
         function initNavigation() {
             const hamburgerBtn = document.getElementById('hamburger-btn');
             const closeBtn = document.getElementById('close-btn');
             const navMenu = document.getElementById('nav-menu');
 
             if(hamburgerBtn && closeBtn && navMenu) {
-                hamburgerBtn.addEventListener('click', () => {
-                    navMenu.classList.add('active');
-                });
-
-                closeBtn.addEventListener('click', () => {
-                    navMenu.classList.remove('active');
-                });
+                hamburgerBtn.addEventListener('click', () => navMenu.classList.add('active'));
+                closeBtn.addEventListener('click', () => navMenu.classList.remove('active'));
             }
         }
 
-        // Load the header and footer when the DOM is ready
         document.addEventListener('DOMContentLoaded', () => {
             loadComponent('header-placeholder', 'header.html');
             loadComponent('footer-placeholder', 'footer.html');
+            
+            // Fire up the form logic
+            initDynamicForm();
         });
     </script>
 </body>
