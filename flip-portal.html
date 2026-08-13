@@ -223,7 +223,7 @@
             z-index: 10;
         }
 
-        /* --- Oversized Primary Button --- */
+        /* --- Oversized Primary Button (No Movement Animation) --- */
         .btn-large {
             display: inline-flex;
             align-items: center;
@@ -237,21 +237,15 @@
             font-weight: bold;
             font-size: 1.3rem;
             border: 2px solid #0E2A3B;
-            transition: all 0.3s ease;
             box-shadow: 0 6px 15px rgba(0,0,0,0.2); 
+            transition: background-color 0.3s ease; /* Only fades color on hover */
         }
         .btn-large:hover {
             background-color: #9a5d40; 
-            transform: translateY(-5px); 
-            box-shadow: 0 10px 25px rgba(0,0,0,0.3); 
         }
         .btn-large::after {
             content: '\2192'; 
             font-size: 1.2em;
-            transition: transform 0.3s ease;
-        }
-        .btn-large:hover::after {
-            transform: translateX(5px); 
         }
 
         /* --- Footer --- */
@@ -408,9 +402,9 @@
     <section class="portal-section">
         <div class="portal-card">
             <div class="portal-image-wrapper">
-                <img src="https://andrewmarth.com/images/map_background.jpeg" alt="Off-Market Map Portal">
+                <img src="https://andrewmarth.com/images/map_background.jpg" alt="Off-Market Map Portal">
                 <div class="portal-overlay">
-                    <a href="properties" class="btn-large">Open Portal</a>
+                    <a href="https://portal.andrewmarth.com/properties" class="btn-large">Open Portal</a>
                 </div>
             </div>
         </div>
