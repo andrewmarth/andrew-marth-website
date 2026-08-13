@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flip Portal | Andrew Marth Real Estate</title>
+    
+    <!-- Google Fonts Import -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Familjen+Grotesk:wght@400..700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- General Reset & Styling --- */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        /* Prevents ALL horizontal scrolling across all mobile browsers */
+        html, body {
+            width: 100%;
+            max-width: 100%;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        body {
+            font-family: 'Familjen Grotesk', sans-serif; 
+            line-height: 1.6;
+            color: #4f2d2c; 
+            background-color: #e9e2d8; 
+        }
+        
+        /* Updated Header Font */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Bricolage Grotesque', sans-serif;
+        }
+        
+        /* --- Navigation Bar (Fixed & Glassmorphism) --- */
+        .navbar {
+            background: rgba(233, 226, 216, 0.85); 
+            backdrop-filter: blur(12px); 
+            -webkit-backdrop-filter: blur(12px); 
+            
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000; 
+            
+            padding: 15px 30px;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid rgba(153, 114, 75, 0.3); 
+            min-height: 80px;
+        }
+        .mobile-center-logo {
+            display: none; 
+        }
+        .hamburger {
+            display: none;
+            font-size: 2rem;
+            background: none;
+            border: none;
+            color: #4e513e; 
+            cursor: pointer;
+        }
+        .nav-menu {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+        .nav-logo img {
+            height: 50px; 
+            width: auto;
+            display: block;
+            border-radius: 4px;
+        }
+        .nav-logo a {
+            text-decoration: none; 
+            display: block;
+        }
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: #4f2d2c; 
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: color 0.3s;
+        }
+        .nav-links a:hover {
+            color: #9a5d40; 
+        }
+        .close-menu {
+            display: none; 
+        }
+
+        /* --- Header / Hero Section (Video Background) --- */
+        header {
+            position: relative;
+            padding: 160px 20px 100px 20px; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            min-height: 45vh;
+            text-align: center;
+        }
+        
+        .hero-video-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+        }
+        
+        .hero-color-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(78, 81, 62, 0.75); /* The Brand Green Overlay */
+            z-index: 1;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        header h1 {
+            color: #e9e2d8;
+            font-size: 3.5rem;
+            margin-bottom: 15px;
+            letter-spacing: 2px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3); 
+        }
+        header p {
+            font-size: 1.3rem;
+            color: #e9e2d8; 
+            opacity: 0.95; 
+            max-width: 700px;
+            margin: 0 auto;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+        }
+
+        /* --- Intro Section --- */
+        .intro-section {
+            max-width: 900px;
+            margin: 60px auto 40px auto;
+            padding: 0 20px;
+            text-align: center;
+        }
+        .intro-section h2 {
+            font-size: 2.2rem;
+            color: #4f2d2c;
+            margin-bottom: 20px;
+        }
+        .intro-section p {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+        }
+
+        /* --- Single Portal Card Section --- */
+        .portal-section {
+            max-width: 1000px; /* Slightly narrower than standard container for visual weight */
+            margin: 0 auto 80px auto;
+            padding: 0 20px;
+        }
+        
+        .portal-card {
+            background: #ffffff;
+            border-radius: 20px; 
+            border: 2px solid #0E2A3B; 
+            box-shadow: 6px 6px 0px #0E2A3B; 
+            overflow: hidden;
+            position: relative;
+            width: 100%;
+        }
+
+        .portal-image-wrapper {
+            position: relative;
+            width: 100%;
+            height: 450px; /* Gives a massive, impressive viewing window */
+            overflow: hidden;
+            background-color: #000; /* Deep backdrop to make the image stand out */
+        }
+
+        .portal-image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            filter: blur(3px); /* The very subtle blur */
+            transform: scale(1.02); /* Prevents the blur from fading the edges to white */
+            opacity: 0.75; /* Dims the image slightly so the button jumps off the screen */
+        }
+
+        .portal-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+        }
+
+        /* --- Oversized Primary Button --- */
+        .btn-large {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px; 
+            background-color: #99724b; 
+            color: #e9e2d8; 
+            text-decoration: none;
+            padding: 18px 45px;
+            border-radius: 999px; /* Pill shape */
+            font-weight: bold;
+            font-size: 1.3rem;
+            border: 2px solid #0E2A3B;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.2); 
+        }
+        .btn-large:hover {
+            background-color: #9a5d40; 
+            transform: translateY(-5px); 
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3); 
+        }
+        .btn-large::after {
+            content: '\2192'; 
+            font-size: 1.2em;
+            transition: transform 0.3s ease;
+        }
+        .btn-large:hover::after {
+            transform: translateX(5px); 
+        }
+
+        /* --- Footer --- */
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            background-color: #4e513e; 
+            color: #e9e2d8; 
+        }
+        .footer-contact {
+            margin-bottom: 20px;
+        }
+        .footer-contact p {
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+            color: #e9e2d8;
+        }
+        .footer-contact a {
+            color: #c09050; 
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .footer-contact a:hover {
+            text-decoration: underline;
+        }
+        .footer-disclosure {
+            max-width: 900px;
+            margin: 0 auto 0 auto; 
+            font-size: 0.8rem;
+            color: #e9e2d8; 
+            opacity: 0.75;
+            line-height: 1.5;
+            text-align: justify;
+            text-align-last: center; 
+        }
+
+        /* --- Mobile Responsiveness --- */
+        @media (max-width: 768px) {
+            .navbar {
+                justify-content: flex-end; 
+            }
+            .mobile-center-logo {
+                display: block;
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%); 
+            }
+            .mobile-center-logo img {
+                height: 40px; 
+                width: auto;
+                border-radius: 4px;
+                display: block;
+            }
+            .hamburger {
+                display: block;
+            }
+            .nav-menu {
+                position: fixed;
+                top: 0;
+                right: -100%; 
+                width: 280px;
+                height: 100vh;
+                background: rgba(233, 226, 216, 0.95); 
+                backdrop-filter: blur(15px);
+                -webkit-backdrop-filter: blur(15px);
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: flex-start;
+                padding: 60px 30px 30px 30px;
+                box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+                transition: right 0.3s ease;
+                z-index: 1001; 
+            }
+            .nav-menu.active {
+                right: 0; 
+            }
+            .nav-logo {
+                margin-bottom: 40px;
+                width: 100%;
+                display: flex;
+                justify-content: center;
+            }
+            .nav-logo img {
+                height: 60px;
+            }
+            .nav-links {
+                flex-direction: column;
+                width: 100%;
+                align-items: flex-start;
+                gap: 20px;
+            }
+            .nav-links a {
+                display: block;
+                width: 100%;
+                padding-bottom: 10px;
+                border-bottom: 1px solid rgba(192, 144, 80, 0.4); 
+                font-size: 1.3rem;
+            }
+            .close-menu {
+                display: block;
+                position: absolute;
+                top: 15px;
+                right: 25px;
+                font-size: 2.5rem;
+                background: none;
+                border: none;
+                color: #4f2d2c;
+                cursor: pointer;
+                line-height: 1;
+            }
+            header h1 {
+                font-size: 2.5rem;
+            }
+            
+            /* Responsive portal card adjustments */
+            .portal-card {
+                width: calc(100% - 6px); 
+                margin-left: auto;
+                margin-right: auto;    
+            }
+            .portal-image-wrapper {
+                height: 300px; /* Reduced height to look proportional on smaller screens */
+            }
+            .btn-large {
+                font-size: 1.1rem;
+                padding: 15px 35px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Placeholder -->
+    <div id="header-placeholder"></div>
+
+    <header>
+        <video class="hero-video-bg" autoplay loop muted playsinline>
+            <source src="https://andrewmarth.com/images/banner.mp4" type="video/mp4">
+        </video>
+        <div class="hero-color-overlay"></div>
+        <div class="hero-content">
+            <h1>Flip Portal</h1>
+            <p>Access the largest collection of off-market homes in Arizona</p>
+        </div>
+    </header>
+
+    <section class="intro-section">
+        <h2>Exclusive Access</h2>
+        <p>Welcome to the largest collection of off-market homes in Arizona. In a highly competitive market, having immediate access to off-market inventory is an incredible advantage. We constantly source and evaluate properties to bring you the best investments available.</p>
+        <p>What sets our portal apart is the transparent level of detail provided. Each property is accompanied by a full proforma, detailing estimated repair costs, after-repair values, and projected ROI to give you a truly complete picture of any particular deal.</p>
+    </section>
+
+    <section class="portal-section">
+        <div class="portal-card">
+            <div class="portal-image-wrapper">
+                <img src="https://andrewmarth.com/images/map_background.jpeg" alt="Off-Market Map Portal">
+                <div class="portal-overlay">
+                    <a href="properties" class="btn-large">Open Portal</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Placeholder -->
+    <div id="footer-placeholder"></div>
+
+    <script>
+        // Function to load external HTML components
+        async function loadComponent(id, file) {
+            try {
+                const response = await fetch(file);
+                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                const html = await response.text();
+                document.getElementById(id).innerHTML = html;
+                
+                // If we just loaded the header, initialize the hamburger menu logic
+                if (id === 'header-placeholder') {
+                    initNavigation();
+                }
+            } catch (error) {
+                console.error(`Error loading component ${file}:`, error);
+            }
+        }
+
+        // Initialize mobile navigation logic
+        function initNavigation() {
+            const hamburgerBtn = document.getElementById('hamburger-btn');
+            const closeBtn = document.getElementById('close-btn');
+            const navMenu = document.getElementById('nav-menu');
+
+            if(hamburgerBtn && closeBtn && navMenu) {
+                hamburgerBtn.addEventListener('click', () => {
+                    navMenu.classList.add('active');
+                });
+
+                closeBtn.addEventListener('click', () => {
+                    navMenu.classList.remove('active');
+                });
+            }
+        }
+
+        // Load the header and footer when the DOM is ready
+        document.addEventListener('DOMContentLoaded', () => {
+            loadComponent('header-placeholder', 'header.html');
+            loadComponent('footer-placeholder', 'footer.html');
+        });
+    </script>
+</body>
+</html>
