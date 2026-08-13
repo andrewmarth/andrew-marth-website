@@ -243,9 +243,10 @@
         .btn-large:hover {
             background-color: #9a5d40; 
         }
-        .btn-large::after {
-            content: '\2192'; 
-            font-size: 1.2em;
+        .btn-large .btn-icon {
+            width: 22px; /* Nicely sized next to 1.3rem text */
+            height: 22px;
+            object-fit: contain;
         }
 
         /* --- Footer --- */
@@ -404,7 +405,10 @@
             <div class="portal-image-wrapper">
                 <img src="https://andrewmarth.com/images/map_background.jpg" alt="Off-Market Map Portal">
                 <div class="portal-overlay">
-                    <a href="https://portal.andrewmarth.com/properties" class="btn-large">Open Portal</a>
+                    <a href="https://portal.andrewmarth.com/properties" target="_blank" rel="noopener noreferrer" class="btn-large">
+                        Open Portal
+                        <img src="https://andrewmarth.com/images/new_tab_icon.png" alt="Opens in new tab" class="btn-icon">
+                    </a>
                 </div>
             </div>
         </div>
