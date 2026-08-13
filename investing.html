@@ -145,10 +145,22 @@
 
         header h1 {
             color: #e9e2d8;
-            font-size: 3.5rem;
-            margin-bottom: 15px;
+            font-size: 4.5rem; 
+            margin-bottom: 0px; 
+            line-height: 1.1; 
             letter-spacing: 2px;
             text-shadow: 0 2px 4px rgba(0,0,0,0.3); 
+        }
+        .hero-subtitle {
+            font-size: 1.3rem; 
+            font-family: 'Familjen Grotesk', sans-serif;
+            color: #e9e2d8;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-weight: 600;
+            margin-top: 5px; 
+            margin-bottom: 20px;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.3);
         }
         header p {
             font-size: 1.3rem;
@@ -156,6 +168,7 @@
             opacity: 0.95; 
             max-width: 700px;
             margin: 0 auto;
+            font-style: italic; 
             text-shadow: 0 1px 3px rgba(0,0,0,0.3);
         }
 
@@ -231,28 +244,32 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 8px; 
+            gap: 10px; 
             background-color: #99724b; 
             color: #e9e2d8; 
             text-decoration: none;
-            padding: 12px 28px;
+            padding: 15px 35px;
             border-radius: 999px; /* Pill shape */
             font-weight: bold;
+            font-size: 1.1rem;
+            border: 2px solid #0E2A3B;
+            box-shadow: 0 4px 10px rgba(153, 114, 75, 0.2);
             transition: all 0.3s ease;
-            margin-top: auto; 
+            margin-top: auto;
         }
         .btn:hover {
             background-color: #9a5d40; 
-            transform: translateY(-5px); 
+            transform: translateY(-4px); 
             box-shadow: 0 8px 15px rgba(0,0,0,0.1); 
         }
-        .btn::after {
-            content: '\2192'; 
-            font-size: 1.2em;
+        .btn .btn-icon {
+            width: 18px; 
+            height: 18px;
+            object-fit: contain;
             transition: transform 0.3s ease;
         }
-        .btn:hover::after {
-            transform: translateX(5px); 
+        .btn:hover .btn-icon {
+            transform: translateX(4px); 
         }
 
         /* --- Footer --- */
@@ -261,6 +278,7 @@
             padding: 40px 20px;
             background-color: #4e513e; 
             color: #e9e2d8; 
+            margin-top: 40px;
         }
         .footer-contact {
             margin-bottom: 20px;
@@ -411,7 +429,10 @@
                 <div class="card-content">
                     <h3>Flipping</h3>
                     <p>Whether you are an experienced professional or an aspiring investor, I can help you find profitable off-market and MLS deals. I only present opportunities with high ROI potential that I would buy myself. This is for someone who is willing to put in the work to add massive value to a property with the intent to sell it for a profit, or rent it and get serious cash flow.</p>
-                    <a href="flip-portal" class="btn">Explore Flipping</a>
+                    <a href="flip-portal" class="btn">
+                        Explore Flipping
+                        <img src="https://andrewmarth.com/images/arrow_forward.png" alt="Explore" class="btn-icon">
+                    </a>
                 </div>
             </div>
 
@@ -420,7 +441,10 @@
                 <div class="card-content">
                     <h3>Turn-Key Rental</h3>
                     <p>Putting your capital into a turn-key rental property has long been a way to protect and build generational wealth. While the returns may not match that of flipping, investing in real estate long term has proven to be a safe and strong investment. Navigating the ROI of properties requires careful consideration and insight that I aim to provide.</p>
-                    <a href="rentals" class="btn">View Rentals</a>
+                    <a href="rentals" class="btn">
+                        View Rentals
+                        <img src="https://andrewmarth.com/images/arrow_forward.png" alt="Explore" class="btn-icon">
+                    </a>
                 </div>
             </div>
 
@@ -429,7 +453,10 @@
                 <div class="card-content">
                     <h3>Partnership</h3>
                     <p>Interested in the high returns of flipping but don't want the day-to-day responsibility? We can partner up. You bring the capital, I handle the acquisition, renovation, and sale, and we split the profits. You can be as involved or removed from the project as you like.</p>
-                    <a href="partnership" class="btn">Partner With Me</a>
+                    <a href="partnership" class="btn">
+                        Partner With Me
+                        <img src="https://andrewmarth.com/images/arrow_forward.png" alt="Explore" class="btn-icon">
+                    </a>
                 </div>
             </div>
 
