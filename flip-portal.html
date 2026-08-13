@@ -294,18 +294,18 @@
         /* Interactive Form Modal Container */
         .form-container-card { 
             position: fixed; 
-            top: 0; left: 0; right: 0; bottom: 0; 
+            top: 0; left: 0; right: 0; bottom: 0; /* Starts at true 0 because header is hidden */
             width: 100%; 
             padding: 20px;
             z-index: 999;
             display: flex; justify-content: center; align-items: center; 
             background-color: transparent; 
-            overflow: hidden !important; 
+            overflow: hidden !important; /* Strict no scrolling */
             
             /* Native Animation Base State */
             opacity: 0;
             visibility: hidden;
-            transform: scale(0.05);
+            transform: scale(0.05); /* Starts incredibly tiny at the button */
             pointer-events: none;
             
             /* High-end spring animation */
@@ -371,6 +371,7 @@
         
         .form-actions { display: flex; justify-content: center; align-items: center; gap: 15px; margin-top: auto; padding-top: 25px; flex-shrink: 0; }
         
+        /* New Button Layout with custom images */
         .btn-primary { 
             display: inline-flex;
             align-items: center;
@@ -393,15 +394,13 @@
             transform: translateY(-5px); 
             box-shadow: 0 8px 15px rgba(0,0,0,0.1); 
         }
-        .btn-primary::after { content: '\2192'; font-size: 1.2em; transition: transform 0.3s ease; }
-        .btn-primary:hover::after { transform: translateX(5px); }
 
         .btn-secondary { 
             display: inline-flex;
             align-items: center;
             justify-content: center;
             gap: 6px;
-            background-color: #e9e2d8; 
+            background-color: #ffffff; /* Matched to the white card background */
             color: #99724b; 
             border: 2px solid #0E2A3B; 
             font-size: 1.05rem; 
@@ -416,8 +415,16 @@
             transform: translateY(-5px); 
             box-shadow: 0 8px 15px rgba(0,0,0,0.1); 
         }
-        .btn-secondary::before { content: '\2190'; font-size: 1.2em; transition: transform 0.3s ease; }
-        .btn-secondary:hover::before { transform: translateX(-4px); }
+        
+        /* Animation specifically for the form button icons */
+        .btn-primary .btn-icon, .btn-secondary .btn-icon {
+            width: 18px;
+            height: 18px;
+            object-fit: contain;
+            transition: transform 0.3s ease;
+        }
+        .btn-primary:hover .btn-icon-forward { transform: translateX(4px); }
+        .btn-secondary:hover .btn-icon-back { transform: translateX(-4px); }
 
         .success-message { display: none; padding: 20px 0; animation: slideInRight 0.5s cubic-bezier(0.25, 0.8, 0.25, 1) forwards; flex-direction: column; justify-content: center; flex-grow: 1; }
         .success-icon { width: 70px; height: 70px; background-color: #4e513e; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; margin: 0 auto 20px auto; box-shadow: 0 8px 20px rgba(78, 81, 62, 0.3); }
@@ -545,6 +552,10 @@
             .form-container-card.keyboard-open .input-group { margin-bottom: 10px !important; }
             .form-container-card.keyboard-open .input-group label { margin-bottom: 5px !important; }
             .form-container-card.keyboard-open .form-actions { padding-top: 10px !important; margin-top: auto !important; }
+            
+            /* Add secondary to the button override to keep proportions matched */
+            .form-container-card.keyboard-open .btn-primary,
+            .form-container-card.keyboard-open .btn-secondary { padding: 10px 20px !important; font-size: 1rem !important; }
             
             .form-container-card.keyboard-open .close-form-btn { top: 10px !important; right: 15px !important; font-size: 1.8rem !important; }
         }
@@ -798,7 +809,7 @@
                     const btnBack = document.createElement('button');
                     btnBack.type = 'button';
                     btnBack.className = 'btn-secondary';
-                    btnBack.textContent = 'Back';
+                    btnBack.innerHTML = `<img src="https://andrewmarth.com/images/arrow_back.png" alt="Back" class="btn-icon btn-icon-back"> Back`;
                     btnBack.onclick = () => {
                         slideDirection = 'backward';
                         currentStepIndex = stepHistory.pop();
@@ -810,7 +821,13 @@
                 const btnForward = document.createElement('button');
                 btnForward.className = 'btn-primary btn-forward';
                 btnForward.type = 'submit'; 
-                btnForward.textContent = nextStepIndex === -1 ? 'Submit' : 'Next';
+                
+                if (nextStepIndex === -1) {
+                    btnForward.innerHTML = `Submit <img src="https://andrewmarth.com/images/submit.png" alt="Submit" class="btn-icon btn-icon-forward">`;
+                } else {
+                    btnForward.innerHTML = `Next <img src="https://andrewmarth.com/images/arrow_forward.png" alt="Next" class="btn-icon btn-icon-forward">`;
+                }
+                
                 actionsEl.appendChild(btnForward);
             }
 
