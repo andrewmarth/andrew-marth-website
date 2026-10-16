@@ -3,27 +3,84 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Buying a Home | Andrew Marth Real Estate</title>
-    
+    <title>Buying a Home in Phoenix & the East Valley | Andrew Marth</title>
+    <meta name="description" content="A clear, step-by-step guide to buying a home in Phoenix, Tempe, Scottsdale, Mesa, Chandler or Gilbert, from your first conversation to getting the keys.">
+    <link rel="canonical" href="https://andrewmarth.com/buying">
+
+    <!-- Search & link previews -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Andrew Marth Real Estate">
+    <meta property="og:title" content="Buying a Home in Phoenix &amp; the East Valley | Andrew Marth">
+    <meta property="og:description" content="A clear, step-by-step guide to buying a home in Phoenix, Tempe, Scottsdale, Mesa, Chandler or Gilbert, from your first conversation to getting the keys.">
+    <meta property="og:url" content="https://andrewmarth.com/buying">
+    <meta property="og:image" content="https://andrewmarth.com/images/og-image.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Andrew Marth, Real Estate Agent">
+    <meta property="og:locale" content="en_US">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Buying a Home in Phoenix &amp; the East Valley | Andrew Marth">
+    <meta name="twitter:description" content="A clear, step-by-step guide to buying a home in Phoenix, Tempe, Scottsdale, Mesa, Chandler or Gilbert, from your first conversation to getting the keys.">
+    <meta name="twitter:image" content="https://andrewmarth.com/images/og-image.jpg">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Familjen+Grotesk:wght@400..700&display=swap" rel="stylesheet">
-    
+
     <script src="form-logic.js"></script>
     <style>
+        /* --- Brand Palette --- */
+        :root {
+            --cream: #e9e2d8;
+            --brown: #4f2d2c;
+            --olive: #4e513e;
+            --tan: #99724b;
+            --rust: #9a5d40;
+            --gold: #c09050;
+            --navy: #0E2A3B;
+            --white: #ffffff;
+            --ease: cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
         /* --- General Reset & Styling --- */
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        
+
         html, body { width: 100%; max-width: 100%; overflow-x: hidden; position: relative; }
-        
-        body { font-family: 'Familjen Grotesk', sans-serif; line-height: 1.6; color: #4f2d2c; background-color: #e9e2d8; }
-        
+        html { scroll-behavior: smooth; }
+
+        body { font-family: 'Familjen Grotesk', sans-serif; line-height: 1.6; color: var(--brown); background-color: var(--cream); }
+
         h1, h2, h3, h4, h5, h6 { font-family: 'Bricolage Grotesque', sans-serif; }
-        
+
+        a:focus-visible, button:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
+
+        /* --- Background Texture: faint brand line pattern + paper grain --- */
+        /* (on html, because body::after is used by the form's scroll lock) */
+        html::before,
+        html::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: -1;
+        }
+        html::before {
+            background-image: url('/images/tiling_background_alt.png');
+            background-size: 520px auto;
+            background-repeat: repeat;
+            mix-blend-mode: multiply;
+            opacity: 0.07;
+        }
+        html::after {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.31 0 0 0 0 0.18 0 0 0 0 0.17 0 0 0 0.55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+            opacity: 0.35;
+            mix-blend-mode: multiply;
+        }
+
         /* Nav and Scroll Locks */
         body.no-scroll { overflow: hidden !important; touch-action: none; }
         body.no-scroll::after { content: ''; position: fixed; top: -10vh; left: 0; width: 100%; height: 150vh; background-color: #e9e2d8; z-index: 998; }
-        
+
         .navbar { background: rgba(233, 226, 216, 0.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); transform: translate3d(0, 0, 0); backface-visibility: hidden; position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; padding: 15px 30px; display: flex; align-items: center; border-bottom: 1px solid rgba(153, 114, 75, 0.3); min-height: 80px; transition: transform 0.3s ease; }
         .mobile-center-logo { display: none; }
         .hamburger { display: none; font-size: 2rem; background: none; border: none; color: #4e513e; cursor: pointer; }
@@ -35,78 +92,364 @@
         .nav-links a:hover { color: #9a5d40; }
         .close-menu { display: none; }
 
-        /* Header */
-        header { background: linear-gradient(rgba(78, 81, 62, 0.75), rgba(78, 81, 62, 0.75)), url('https://andrewmarth.com/images/background.jpeg'); background-size: cover; background-position: center; color: #e9e2d8; padding: 160px 20px 100px 20px; text-align: center; }
-        header h1 { font-size: 3rem; margin-bottom: 15px; letter-spacing: 2px; text-shadow: 0 2px 4px rgba(0,0,0,0.3); }
-        header p { font-size: 1.3rem; color: #e9e2d8; opacity: 0.95; max-width: 700px; margin: 0 auto; text-shadow: 0 1px 3px rgba(0,0,0,0.3); }
+        /* --- Shared Section Bits --- */
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--rust);
+            margin-bottom: 14px;
+        }
+        .eyebrow::before {
+            content: '';
+            width: 28px;
+            height: 2px;
+            background: currentColor;
+        }
+        .section-title {
+            font-size: clamp(2rem, 4vw, 2.75rem);
+            line-height: 1.15;
+            color: var(--brown);
+            letter-spacing: -0.5px;
+        }
+
+        /* --- Header / Hero --- */
+        header {
+            position: relative;
+            overflow: hidden;
+            background-color: var(--olive);
+            color: var(--cream);
+            padding: 190px 20px 130px 20px;
+            text-align: center;
+        }
+        /* Same video background as the homepage hero */
+        .hero-video-bg {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+        }
+        .hero-color-overlay {
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse at center, rgba(78, 81, 62, 0.55) 0%, rgba(78, 81, 62, 0.8) 70%),
+                linear-gradient(180deg, rgba(14, 42, 59, 0.25) 0%, rgba(78, 81, 62, 0.35) 60%, rgba(79, 45, 44, 0.75) 100%);
+            z-index: 1;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 820px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .hero-eyebrow {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            font-size: 1rem;
+            font-weight: 700;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            color: var(--cream);
+            margin-bottom: 18px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.55), 0 1px 2px rgba(0, 0, 0, 0.6);
+        }
+        .hero-eyebrow::before,
+        .hero-eyebrow::after {
+            content: '';
+            width: 36px;
+            height: 2px;
+            background: var(--gold);
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+        }
+        header h1 {
+            font-size: clamp(2.6rem, 7vw, 5rem);
+            font-weight: 800;
+            line-height: 1.05;
+            letter-spacing: -1px;
+            margin-bottom: 22px;
+            text-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+        }
+        header p {
+            font-size: clamp(1.1rem, 2vw, 1.35rem);
+            color: var(--cream);
+            opacity: 0.95;
+            max-width: 640px;
+            margin: 0 auto;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+        }
+
+        /* Hero entrance */
+        .hero-content > * {
+            opacity: 0;
+            transform: translateY(24px);
+            animation: rise 0.9s var(--ease) forwards;
+        }
+        .hero-content > *:nth-child(2) { animation-delay: 0.1s; }
+        .hero-content > *:nth-child(3) { animation-delay: 0.2s; }
+        @keyframes rise {
+            to { opacity: 1; transform: translateY(0); }
+        }
 
         /* --- Unified Roadmap Section --- */
-        .roadmap-section { padding: 60px 20px; background-color: #e9e2d8; }
-        
-        .intro-card { background-color: #ffffff; border-radius: 20px; border: 2px solid #0E2A3B; box-shadow: 6px 6px 0px #0E2A3B; max-width: 900px; margin: 0 auto; padding: 50px 40px; text-align: center; position: relative; z-index: 2; }
-        .intro-card h2 { font-size: 2.2rem; color: #4f2d2c; margin-bottom: 20px; }
-        .intro-card p { font-size: 1.1rem; margin-bottom: 15px; }
+        .roadmap-section { padding: 100px 20px 60px 20px; }
+
+        .intro-card {
+            background-color: var(--white);
+            border-radius: 20px;
+            border: 2px solid var(--navy);
+            box-shadow: 6px 6px 0px var(--navy);
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 56px 48px;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+        .intro-card .eyebrow { justify-content: center; }
+        .intro-card .section-title { margin-bottom: 22px; }
+        .intro-card p { font-size: 1.125rem; margin: 0 auto 16px auto; max-width: 66ch; }
+        .intro-card p.lead { font-size: 1.25rem; font-weight: 600; line-height: 1.5; }
         .intro-card p:last-child { margin-bottom: 0; }
 
-        .timeline { position: relative; max-width: 1000px; margin: 0 auto; padding-top: 50px; }
-        .timeline::after { content: ''; position: absolute; width: 4px; background-color: #99724b; top: -10px; bottom: 0; left: 50%; margin-left: -2px; border-radius: 2px; z-index: 1; }
-        
-        .timeline-item { padding: 10px 40px; position: relative; background-color: inherit; width: 50%; }
-        .timeline-item::after { content: ''; position: absolute; width: 24px; height: 24px; right: -12px; background-color: #e9e2d8; border: 4px solid #4e513e; top: 25px; border-radius: 50%; z-index: 3; }
+        .timeline { position: relative; max-width: 1000px; margin: 0 auto; padding-top: 60px; }
+        .timeline::after { content: ''; position: absolute; width: 4px; background-color: var(--tan); top: -10px; bottom: 0; left: 50%; margin-left: -2px; border-radius: 2px; z-index: 1; }
+
+        /* z-index keeps each item (and its dot) above the line, even mid fade-in */
+        .timeline-item { padding: 14px 40px; position: relative; z-index: 2; width: 50%; }
+        .timeline-item::after { content: ''; position: absolute; width: 24px; height: 24px; right: -12px; background-color: var(--cream); border: 4px solid var(--olive); top: 40px; border-radius: 50%; z-index: 3; box-shadow: 0 0 0 4px rgba(192, 144, 80, 0.25); }
         .left { left: 0; }
         .right { left: 50%; }
         .right::after { left: -12px; }
-        
-        .content { padding: 25px 30px; background-color: white; position: relative; border-radius: 20px; border: 2px solid #0E2A3B; box-shadow: 6px 6px 0px #0E2A3B; }
-        .content h3 { color: #4e513e; font-size: 1.4rem; margin-bottom: 10px; }
-        .content p { font-size: 1.05rem; color: #4f2d2c; margin-bottom: 0; }
-        .step-number { font-size: 0.9rem; color: #99724b; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; display: block; }
 
-        /* Unified Button Styling (Arrow code removed!) */
+        .content {
+            padding: 28px 32px;
+            background-color: var(--white);
+            position: relative;
+            border-radius: 20px;
+            border: 2px solid var(--navy);
+            box-shadow: 6px 6px 0px var(--navy);
+        }
+        .content h3 { color: var(--olive); font-size: 1.5rem; margin-bottom: 10px; line-height: 1.2; }
+        .content p { font-size: 1.05rem; color: var(--brown); margin-bottom: 0; }
+        .step-number {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--rust);
+            margin-bottom: 8px;
+        }
+        .step-number::before {
+            content: '';
+            width: 20px;
+            height: 2px;
+            background: currentColor;
+        }
+
+        /* --- Buttons --- */
         .btn {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 10px; 
-            background-color: #99724b; 
-            color: #e9e2d8; 
+            gap: 8px;
+            background-color: var(--tan);
+            color: var(--cream);
             text-decoration: none;
-            padding: 15px 35px;
-            border-radius: 999px; 
+            padding: 12px 28px;
+            min-height: 48px;
+            border-radius: 999px;
             font-weight: bold;
-            font-size: 1.1rem;
-            border: 2px solid #0E2A3B;
-            box-shadow: 0 4px 10px rgba(153, 114, 75, 0.2);
             transition: all 0.3s ease;
+            border: 2px solid var(--navy);
+            box-shadow: 0 4px 10px rgba(153, 114, 75, 0.2);
+            cursor: pointer;
+            white-space: nowrap;
         }
         .btn:hover {
-            background-color: #9a5d40; 
-            transform: translateY(-4px); 
-            box-shadow: 0 8px 15px rgba(0,0,0,0.1); 
+            background-color: var(--rust);
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
         }
-        .btn .btn-icon {
-            width: 18px; 
+
+        /* Right Arrow Injection & Animation (line icon, matches homepage) */
+        .btn::after {
+            content: '';
+            width: 18px;
             height: 18px;
-            object-fit: contain;
+            flex-shrink: 0;
+            background-color: currentColor;
+            -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12h14'/%3E%3Cpath d='m12 5 7 7-7 7'/%3E%3C/svg%3E") center / contain no-repeat;
+            mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12h14'/%3E%3Cpath d='m12 5 7 7-7 7'/%3E%3C/svg%3E") center / contain no-repeat;
             transition: transform 0.3s ease;
         }
-        .btn:hover .btn-icon {
-            transform: translateX(4px); 
+        .btn:hover::after {
+            transform: translateX(5px);
         }
 
         /* --- Programs Section --- */
-        .programs-section { max-width: 940px; margin: 60px auto 40px auto; padding: 0 20px; }
-        .programs-header { text-align: center; margin-bottom: 40px; }
-        .programs-header h2 { font-size: 2.2rem; color: #4f2d2c; margin-bottom: 15px; }
-        .programs-header p { font-size: 1.1rem; color: #4f2d2c; max-width: 800px; margin: 0 auto; }
-        
-        .program-link-card { display: flex; align-items: center; background-color: #ffffff; border-radius: 20px; border: 2px solid #0E2A3B; box-shadow: 6px 6px 0px #0E2A3B; margin-bottom: 25px; overflow: hidden; }
-        .program-link-image { flex: 0 0 240px; padding: 30px 0 30px 30px; display: flex; align-items: center; }
-        .program-link-image img { width: 100%; height: auto; display: block; transition: opacity 0.3s ease; }
-        .program-link-image a:hover img { opacity: 0.85; }
-        .program-link-content { flex: 1; padding: 30px; display: flex; align-items: center; }
-        .program-link-content p { font-size: 1.1rem; color: #4f2d2c; margin-bottom: 0; line-height: 1.6; }
-        .program-link-action-container { flex: 0 0 auto; padding: 30px 30px 30px 0; display: flex; align-items: center; justify-content: center; }
+        .programs-section { max-width: 980px; margin: 80px auto 60px auto; padding: 0 20px; }
+        .programs-header { text-align: center; margin-bottom: 48px; }
+        .programs-header .eyebrow { justify-content: center; }
+        .programs-header p { font-size: 1.125rem; color: var(--brown); max-width: 620px; margin: 16px auto 0 auto; }
+
+        .program-link-card {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background-color: var(--white);
+            border-radius: 20px;
+            border: 2px solid var(--navy);
+            box-shadow: 6px 6px 0px var(--navy);
+            margin-bottom: 25px;
+            overflow: hidden;
+        }
+        .program-link-image { flex: 0 0 240px; padding: 32px 0 32px 32px; display: flex; align-items: center; }
+        .program-link-image a { display: block; width: 100%; }
+        .program-link-image img { width: 100%; height: auto; display: block; }
+        .program-link-content { flex: 1; padding: 32px 20px; }
+        .program-link-content p { font-size: 1.05rem; color: var(--brown); margin-bottom: 0; line-height: 1.6; }
+        .program-link-action-container { flex: 0 0 auto; padding: 32px 32px 32px 0; display: flex; align-items: center; justify-content: center; }
+
+        /* --- Form Trigger Card (matches homepage "Ready When You Are" card) --- */
+        /* Scoped to this page so the shared form component stays unchanged elsewhere */
+        #form-placeholder .trigger-card {
+            position: relative;
+            overflow: hidden;
+            overflow: clip;
+            max-width: 940px;
+            margin: 40px auto 60px auto;
+            background: var(--brown);
+            color: var(--cream);
+            border-radius: 28px;
+            border: 2px solid var(--navy);
+            box-shadow: 8px 8px 0px var(--navy);
+            padding: 70px 40px;
+        }
+        #form-placeholder .trigger-card::before,
+        #form-placeholder .trigger-card::after {
+            content: '';
+            position: absolute;
+            border-radius: 50%;
+            pointer-events: none;
+        }
+        #form-placeholder .trigger-card::before {
+            width: 420px;
+            height: 420px;
+            top: -220px;
+            right: -120px;
+            background: radial-gradient(circle, rgba(192, 144, 80, 0.35), transparent 70%);
+        }
+        #form-placeholder .trigger-card::after {
+            width: 360px;
+            height: 360px;
+            bottom: -200px;
+            left: -100px;
+            background: radial-gradient(circle, rgba(154, 93, 64, 0.4), transparent 70%);
+        }
+        #form-placeholder .trigger-card > * {
+            position: relative;
+            z-index: 1;
+        }
+        #form-placeholder .trigger-card .eyebrow {
+            color: var(--gold);
+            justify-content: center;
+        }
+        #form-placeholder .trigger-card h2 {
+            font-size: clamp(2rem, 4.5vw, 3rem);
+            line-height: 1.1;
+            color: var(--cream);
+            margin-bottom: 16px;
+        }
+        #form-placeholder .trigger-card p {
+            white-space: pre-line;
+            color: var(--cream);
+            max-width: 640px;
+            margin: 0 auto 34px auto;
+            font-size: 1.15rem;
+            opacity: 0.92;
+        }
+        #form-placeholder .btn-large-trigger {
+            gap: 8px;
+            background-color: var(--cream);
+            color: var(--brown);
+            padding: 12px 28px;
+            min-height: 48px;
+            font-size: 1rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            font-family: inherit;
+            transition: all 0.3s ease;
+        }
+        #form-placeholder .btn-large-trigger:hover {
+            background-color: var(--white);
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        }
+        #form-placeholder .btn-large-trigger .btn-icon {
+            display: none;
+        }
+        #form-placeholder .btn-large-trigger::after {
+            content: '';
+            width: 18px;
+            height: 18px;
+            flex-shrink: 0;
+            background-color: currentColor;
+            -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12h14'/%3E%3Cpath d='m12 5 7 7-7 7'/%3E%3C/svg%3E") center / contain no-repeat;
+            mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12h14'/%3E%3Cpath d='m12 5 7 7-7 7'/%3E%3C/svg%3E") center / contain no-repeat;
+            transition: transform 0.3s ease;
+        }
+        #form-placeholder .btn-large-trigger:hover::after {
+            transform: translateX(5px);
+        }
+        #form-placeholder .secure-notice {
+            margin-top: 26px;
+        }
+        #form-placeholder .secure-header {
+            color: var(--gold);
+        }
+        /* Lock icon tinted with the exact text color via a mask of the original image */
+        #form-placeholder .secure-header img {
+            display: none;
+        }
+        #form-placeholder .secure-header::before {
+            content: '';
+            width: 1rem;
+            height: 1rem;
+            flex-shrink: 0;
+            background-color: currentColor;
+            -webkit-mask: url('/images/lock.png') center / contain no-repeat;
+            mask: url('/images/lock.png') center / contain no-repeat;
+        }
+        #form-placeholder .trigger-card p.secure-disclaimer {
+            font-size: 0.75rem;
+            color: var(--cream);
+            opacity: 0.7;
+            margin: 0;
+        }
+
+        /* --- Scroll Reveal --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(32px);
+            transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
+        }
+        .reveal.is-visible {
+            opacity: 1;
+            transform: none;
+        }
 
         /* --- Footer --- */
         footer { text-align: center; padding: 40px 20px; background-color: #4e513e; color: #e9e2d8; }
@@ -128,83 +471,136 @@
             .nav-links { flex-direction: column; width: 100%; align-items: flex-start; gap: 20px; }
             .nav-links a { display: block; width: 100%; padding-bottom: 10px; border-bottom: 1px solid rgba(192, 144, 80, 0.4); font-size: 1.3rem; }
             .close-menu { display: block; position: absolute; top: 15px; right: 25px; font-size: 2.5rem; background: none; border: none; color: #4f2d2c; cursor: pointer; line-height: 1; }
-            
-            .roadmap-section { padding: 40px 20px; }
-            .intro-card { width: calc(100% - 6px); padding: 40px 20px; margin: 0 auto; }
-            .intro-card h2 { font-size: 1.8rem; }
-            
-            .timeline::after { left: 31px; }
-            .timeline-item { width: 100%; padding-left: 70px; padding-right: 15px; }
-            .timeline-item::after { left: 19px; }
+
+            header { padding: 150px 20px 90px 20px; }
+            .hero-eyebrow { font-size: 0.9rem; letter-spacing: 4px; }
+
+            .roadmap-section { padding: 70px 20px 40px 20px; }
+            .intro-card { width: calc(100% - 6px); padding: 40px 22px; margin: 0 auto; }
+
+            .timeline::after { left: 16px; }
+            .timeline-item { width: 100%; padding-left: 46px; padding-right: 6px; }
+            .timeline-item::after { left: 4px; top: 36px; }
             .right { left: 0; }
-            
-            .program-link-card { flex-direction: column; width: calc(100% - 6px); margin: 0 auto 30px auto; }
+            .content { padding: 24px 22px; }
+            .content h3 { font-size: 1.35rem; }
+
+            .programs-section { margin: 60px auto 40px auto; }
+            .program-link-card { flex-direction: column; gap: 0; width: calc(100% - 6px); margin: 0 auto 30px auto; }
             .program-link-image { flex: none; width: 100%; max-width: 250px; padding: 30px 20px 10px 20px; margin: 0 auto; }
-            .program-link-content { padding: 10px 20px 20px 20px; text-align: center; }
-            .program-link-action-container { width: 100%; flex: none; padding: 0 20px 30px 20px; }
+            .program-link-content { padding: 10px 22px 20px 22px; text-align: center; }
+            .program-link-action-container { width: 100%; flex: none; padding: 0 22px 30px 22px; }
+
+            #form-placeholder .trigger-card { padding: 56px 24px; }
+        }
+
+        /* Respect users who prefer less motion */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+            .hero-content > *,
+            .reveal {
+                opacity: 1;
+                transform: none;
+            }
         }
     </style>
 </head>
 <body>
 
-    <div id="header-placeholder"></div>
+    <nav class="navbar" aria-label="Main">
+        <a href="/" class="mobile-center-logo" aria-label="Andrew Marth, home">
+            <img src="/images/andrew_marth_logo.webp" alt="Andrew Marth Real Estate Agent" width="170" height="40">
+        </a>
+
+        <button type="button" class="hamburger" id="hamburger-btn" aria-label="Open menu" aria-controls="nav-menu">&#9776;</button>
+
+        <div class="nav-menu" id="nav-menu">
+            <button type="button" class="close-menu" id="close-btn" aria-label="Close menu">&times;</button>
+
+            <div class="nav-logo">
+                <a href="/" aria-label="Andrew Marth, home">
+                    <img src="/images/andrew_marth_logo.webp" alt="Andrew Marth Real Estate Agent" width="213" height="50">
+                </a>
+            </div>
+
+            <div class="nav-links">
+                <a href="/buying">Buying</a>
+                <a href="/selling">Selling</a>
+                <a href="/investing">Investing</a>
+                <a href="/contact">Contact</a>
+            </div>
+        </div>
+    </nav>
 
     <header>
-        <h1>The Buying Process</h1>
-        <p>A clear, step-by-step guide to securing your dream home with confidence and strategic precision.</p>
+        <video class="hero-video-bg" poster="/images/banner_poster.webp" autoplay loop muted playsinline aria-hidden="true">
+            <source src="/images/banner_web.mp4" type="video/mp4">
+        </video>
+        <div class="hero-color-overlay"></div>
+        <div class="hero-content">
+            <span class="hero-eyebrow">Buying</span>
+            <h1>The Buying Process</h1>
+            <p>A clear, step-by-step guide to securing your dream home with confidence and strategic precision.</p>
+        </div>
     </header>
 
     <section class="roadmap-section">
-        <div class="intro-card">
-            <h2>Your Path to Homeownership</h2>
-            <p>Buying a house is one of the most exciting financial milestones of your life. However, navigating the Arizona real estate market requires an organized strategy and an advocate in your corner.</p>
+        <div class="intro-card reveal">
+            <span class="eyebrow">Your Roadmap</span>
+            <h2 class="section-title">Your Path to Homeownership</h2>
+            <p class="lead">Buying a house is one of the most exciting financial milestones of your life. However, navigating the Arizona real estate market requires an organized strategy and an advocate in your corner.</p>
             <p>Below is a roadmap of what you can expect when we partner together to find your perfect property. From our very first conversation to the moment I hand you the keys, I am here to ensure the process is seamless and successful.</p>
         </div>
 
         <div class="timeline">
-            <div class="timeline-item left">
+            <div class="timeline-item left reveal">
                 <div class="content">
                     <span class="step-number">Step 01</span>
                     <h3>Initial Information</h3>
                     <p>To get started, simply fill out my brief buyer intake form. This provides me with the essential initial information regarding your budget, timeline, and the specific criteria you are looking for in a home.</p>
                 </div>
             </div>
-            <div class="timeline-item right">
+            <div class="timeline-item right reveal">
                 <div class="content">
                     <span class="step-number">Step 02</span>
                     <h3>Refine The Best Strategy</h3>
                     <p>Once I have your details, we will connect to refine your strategy. We will evaluate your buying power, connect you with trusted lenders, and decide exactly what loan product will work best for your unique situation.</p>
                 </div>
             </div>
-            <div class="timeline-item left">
+            <div class="timeline-item left reveal">
                 <div class="content">
                     <span class="step-number">Step 03</span>
                     <h3>Set Up The Collection</h3>
                     <p>I will curate a custom, real-time collection of homes on the market that strictly match the criteria you are looking for. You will be able to review, favorite, and reject properties in one streamlined portal.</p>
                 </div>
             </div>
-            <div class="timeline-item right">
+            <div class="timeline-item right reveal">
                 <div class="content">
                     <span class="step-number">Step 04</span>
                     <h3>Tour Homes</h3>
                     <p>This is the fun part! Once you have identified your top choices from the collection, we will schedule private showings and hit the pavement to tour the homes you are most interested in.</p>
                 </div>
             </div>
-            <div class="timeline-item left">
+            <div class="timeline-item left reveal">
                 <div class="content">
                     <span class="step-number">Step 05</span>
                     <h3>Offer</h3>
                     <p>When we find "the one," we will sit down and discuss the best way to structure a competitive offer. I will use deep market data to negotiate fiercely on your behalf and get you under contract.</p>
                 </div>
             </div>
-            <div class="timeline-item right">
+            <div class="timeline-item right reveal">
                 <div class="content">
                     <span class="step-number">Step 06</span>
                     <h3>Escrow</h3>
                     <p>Once the seller accepts your offer, we enter escrow. I will guide you through this secure holding phase, coordinating property inspections, handling the appraisal, and ensuring your final loan approval goes smoothly.</p>
                 </div>
             </div>
-            <div class="timeline-item left">
+            <div class="timeline-item left reveal">
                 <div class="content">
                     <span class="step-number">Step 07</span>
                     <h3>Get Keys</h3>
@@ -215,36 +611,43 @@
     </section>
 
     <section class="programs-section">
-        <div class="programs-header">
-            <h2>Buyer Programs</h2>
+        <div class="programs-header reveal">
+            <span class="eyebrow">Programs</span>
+            <h2 class="section-title">Buyer Programs</h2>
             <p>Explore exclusive financing options and specialized programs designed to give you a strategic advantage in the Arizona real estate market.</p>
         </div>
 
-        <div class="program-link-card">
+        <div class="program-link-card reveal">
             <div class="program-link-image">
                 <a href="zero-down-program">
-                    <img src="https://andrewmarth.com/images/final_zero_down.png" alt="Zero Down Program Logo">
+                    <img src="/images/final_zero_down.png" alt="Zero Down Program Logo">
                 </a>
             </div>
             <div class="program-link-content">
                 <p>A highly specialized buying program that allows you to purchase a home with absolutely zero dollars out of pocket, without sacrificing true market interest rates.</p>
             </div>
             <div class="program-link-action-container">
-                <a href="zero-down-program" class="btn">
-                    Explore
-                    <img src="https://andrewmarth.com/images/arrow_forward.png" alt="Explore" class="btn-icon">
-                </a>
+                <a href="zero-down-program" class="btn">Explore</a>
             </div>
         </div>
     </section>
 
-    <div id="form-placeholder" 
-         data-form-source="Buyer Intake Form" 
-         data-form-title="Ready to Take the First Step?" 
-         data-form-desc="Before we can dive into the collection and start touring, we have to start with Step 1. Filling out the initial intake form is completely zero-pressure. In fact, it is a great idea to do this even if you are months or years away from buying—it gives you a crystal-clear picture of your options and what you are able to do right now.">
+    <div id="form-placeholder"
+         data-form-source="Buyer Intake Form"
+         data-form-title="Ready to Take the First Step?"
+         data-form-desc="Before we can start touring homes, I need to gather some information from you so that I may personalize your plan.&#10;&#10;Whether you are ready to buy now, or just looking to get an idea, this information will allow me to help you all the same.">
     </div>
 
-    <div id="footer-placeholder"></div>
+    <footer>
+        <div class="footer-contact">
+            <p><strong>Cell:</strong> 480.652.1330 | <strong>Email:</strong> <a href="mailto:andrew@andrewmarth.com">andrew@andrewmarth.com</a></p>
+            <p><strong>AZ License:</strong> SA711359000</p>
+        </div>
+        
+        <div class="footer-disclosure">
+            <p>Andrew Marth is an agent affiliated with Compass, a licensed real estate broker and abides by Equal Housing Opportunity laws. All material presented herein is intended for informational purposes only. Information is compiled from sources deemed reliable but is subject to errors, omissions, changes in price, condition, sale, or withdrawal without notice. This is not intended to solicit property already listed. Photos may be virtually staged or digitally enhanced and may not reflect actual property conditions.</p>
+        </div>
+    </footer>
 
     <script>
         async function loadComponent(id, file) {
@@ -254,7 +657,7 @@
                 const html = await response.text();
                 const el = document.getElementById(id);
                 if(el) el.innerHTML = html;
-                
+
                 if (id === 'header-placeholder') initNavigation();
             } catch (error) { console.error(error); }
         }
@@ -269,17 +672,44 @@
             }
         }
 
+        function initReveal() {
+            const items = document.querySelectorAll('.reveal');
+            if (!('IntersectionObserver' in window)) {
+                items.forEach(el => el.classList.add('is-visible'));
+                return;
+            }
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+            items.forEach(el => observer.observe(el));
+        }
+
         document.addEventListener('DOMContentLoaded', async () => {
-            // Wait for header and footer
-            await loadComponent('header-placeholder', 'header.html');
-            await loadComponent('footer-placeholder', 'footer.html');
-            
+            initReveal();
+
+            // Menu bar and footer are built into the page; wire up the mobile menu
+            initNavigation();
+
             // Check if this page needs the form
             const formPlaceholder = document.getElementById('form-placeholder');
             if(formPlaceholder) {
                 // Load the HTML
                 await loadComponent('form-placeholder', 'form-component.html');
-                
+
+                // Add the section label above the form card title, matching the homepage
+                const formTitle = document.getElementById('dynamic-form-title');
+                if (formTitle) {
+                    const eyebrow = document.createElement('span');
+                    eyebrow.className = 'eyebrow';
+                    eyebrow.textContent = 'Ready When You Are';
+                    formTitle.before(eyebrow);
+                }
+
                 // Once HTML is in the page, run the form logic!
                 if (typeof initDynamicForm === 'function') {
                     initDynamicForm();

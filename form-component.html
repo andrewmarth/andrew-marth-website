@@ -1,19 +1,18 @@
 <style>
     /* --- FORM COMPONENT CSS --- */
-    
+
     /* Hides global external headers instantly when the form is open to reclaim screen space */
-    body.form-open .navbar, 
-    body.form-open header, 
-    body.form-open #header-placeholder {
+    body.form-open .navbar,
+    body.form-open header {
         display: none !important;
     }
-    
+
     /* Blur Background Overlay */
-    .form-overlay-bg { 
+    .form-overlay-bg {
         position: fixed;
         top: 0; left: 0;
         width: 100vw; height: 100vh;
-        background-color: rgba(233, 226, 216, 0.7); 
+        background-color: rgba(233, 226, 216, 0.7);
         backdrop-filter: blur(12px);
         -webkit-backdrop-filter: blur(12px);
         z-index: 998;
@@ -21,32 +20,30 @@
         visibility: hidden;
         transition: opacity 0.4s ease, visibility 0.4s ease;
     }
-    .form-overlay-bg.is-open { 
+    .form-overlay-bg.is-open {
         opacity: 1;
         visibility: visible;
     }
-    
-    /* Interactive Form Modal Container */
-    .form-container-card { 
-        position: fixed; 
-        top: 0; left: 0; right: 0; bottom: 0; 
-        width: 100%; 
+
+    /* Interactive Form Modal Container (desktop: pops out of the button) */
+    .form-container-card {
+        position: fixed;
+        top: 0; left: 0; right: 0; bottom: 0;
+        width: 100%;
         padding: 20px;
         z-index: 999;
-        display: flex; justify-content: center; align-items: center; 
-        background-color: transparent; 
-        overflow: hidden !important; 
-        
-        /* Native Animation Base State */
+        display: flex; justify-content: center; align-items: center;
+        background-color: transparent;
+        overflow: hidden;
+
         opacity: 0;
         visibility: hidden;
-        transform: scale(0.05); 
+        transform: scale(0.05);
         pointer-events: none;
-        
-        /* High-end spring animation */
-        transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease, visibility 0.5s ease;
+
+        transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease, visibility 0.55s ease;
     }
-    
+
     .form-container-card.is-open {
         opacity: 1;
         visibility: visible;
@@ -54,119 +51,277 @@
         pointer-events: auto;
     }
 
-    .form-bg-video { 
-        position: absolute; 
-        top: 0; left: 0; 
-        width: 100%; height: 100%; 
-        object-fit: cover; 
-        z-index: 0; 
+    .form-bg-video {
+        position: absolute;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        object-fit: cover;
+        z-index: 0;
     }
-    
-    .native-form-box { 
-        background: #ffffff; 
-        width: 100%; 
-        max-width: 600px; 
-        padding: 40px; 
-        border-radius: 20px; 
-        border: 2px solid #0E2A3B;
-        box-shadow: 6px 6px 0px #0E2A3B; 
-        text-align: center; 
-        position: relative; 
-        z-index: 1; 
-        min-height: 480px; 
-        display: flex; 
-        flex-direction: column; 
-        overflow: hidden !important; 
-    }
-    
-    .close-form-btn { display: block; position: absolute; top: 15px; right: 20px; background: none; border: none; font-size: 2.2rem; color: #4f2d2c; cursor: pointer; line-height: 1; opacity: 0.5; transition: opacity 0.3s; z-index: 10; }
-    .close-form-btn:hover { opacity: 1; }
-    
-    #conditional-form, #form-steps-container { display: flex; flex-direction: column; flex-grow: 1; width: 100%; overflow: hidden !important; }
-    .form-step { display: none; width: 100%; overflow: hidden !important; }
-    .form-step.active { display: flex; flex-direction: column; flex-grow: 1; animation: slideInRight 0.4s cubic-bezier(0.25, 0.8, 0.25, 1) forwards; }
-    .form-step.active-reverse { display: flex; flex-direction: column; flex-grow: 1; animation: slideInLeft 0.4s cubic-bezier(0.25, 0.8, 0.25, 1) forwards; }
-    @keyframes slideInRight { 0% { opacity: 0; transform: translateX(40px) scale(0.98); } 100% { opacity: 1; transform: translateX(0) scale(1); } }
-    @keyframes slideInLeft { 0% { opacity: 0; transform: translateX(-40px) scale(0.98); } 100% { opacity: 1; transform: translateX(0) scale(1); } }
-    
-    .step-content { flex-grow: 1; display: flex; flex-direction: column; justify-content: flex-start; padding-top: 10px; overflow: hidden !important; }
-    .step-header { padding-top: 10px; flex-shrink: 0; }
-    .step-inputs { flex-grow: 1; display: flex; flex-direction: column; justify-content: center; width: 100%; overflow: hidden !important; }
-    .step-title { font-size: 1.6rem; color: #4e513e; margin-bottom: 15px; line-height: 1.3; }
-    
-    .input-group { margin-bottom: 20px; text-align: left; }
-    .input-group label { display: block; font-size: 0.95rem; color: #4f2d2c; margin-bottom: 8px; font-weight: bold; }
-    .input-group input, .input-group textarea { width: 100%; font-size: 1.1rem; color: #4f2d2c; border: 2px solid #0E2A3B; background-color: #f7f4f0; box-shadow: inset 0 2px 4px rgba(0,0,0,0.03); transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); font-family: inherit; } 
-    .input-group input { border-radius: 999px; padding: 16px 25px; } 
-    .input-group textarea { border-radius: 20px; padding: 16px 20px; resize: vertical; } 
-    .input-group input:focus, .input-group textarea:focus { outline: none; background-color: #ffffff; border-color: #99724b; box-shadow: 0 8px 20px rgba(153, 114, 75, 0.15); transform: translateY(-2px); }
-    .input-group input.error, .input-group textarea.error { border-color: #d9534f; background-color: #fdf2f2; }
-    
-    .name-row { display: flex; gap: 15px; flex-wrap: nowrap; width: 100%; }
-    .name-row .input-group { flex: 1; min-width: 0; }
-    
-    .radio-group { display: flex; gap: 15px; justify-content: center; margin-bottom: 20px; flex-wrap: wrap; }
-    .radio-group.vertical { flex-direction: column; gap: 12px; }
-    .radio-btn input[type="radio"] { display: none; }
-    .radio-btn span { display: block; padding: 16px 25px; background-color: #f7f4f0; border: 2px solid #0E2A3B; border-radius: 999px; font-size: 1.1rem; font-weight: bold; color: #4f2d2c; cursor: pointer; transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1); text-align: center; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
-    .radio-btn input[type="radio"]:checked + span { background-color: #99724b; color: #ffffff; transform: scale(1.02); box-shadow: 0 6px 15px rgba(153, 114, 75, 0.25); border-color: #0E2A3B; }
-    .radio-group.error span { border: 2px solid #d9534f; }
 
-    .form-actions { display: flex; justify-content: center; align-items: center; gap: 15px; margin-top: auto; padding-top: 25px; flex-shrink: 0; }
-    
-    .btn-primary { 
+    .native-form-box {
+        background: #ffffff;
+        width: 100%;
+        max-width: 620px;
+        padding: 28px 44px 36px 44px;
+        border-radius: 28px;
+        border: 2px solid #0E2A3B;
+        box-shadow: 8px 8px 0px #0E2A3B;
+        text-align: center;
+        position: relative;
+        z-index: 1;
+        min-height: 500px;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+    }
+
+    /* Top bar: progress + close */
+    .form-topbar {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        flex-shrink: 0;
+        margin-bottom: 18px;
+    }
+    .form-progress {
+        flex: 1;
+        height: 6px;
+        border-radius: 999px;
+        background: #efe9e1;
+        overflow: hidden;
+    }
+    .form-progress-fill {
+        display: block;
+        height: 100%;
+        width: 8%;
+        border-radius: inherit;
+        background: linear-gradient(90deg, #99724b, #c09050);
+        transition: width 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .close-form-btn {
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 44px;
+        height: 44px;
+        margin-right: -10px;
+        border-radius: 50%;
+        background: none;
+        border: none;
+        color: #4f2d2c;
+        cursor: pointer;
+        opacity: 0.6;
+        transition: opacity 0.2s ease, background-color 0.2s ease;
+    }
+    .close-form-btn svg { width: 22px; height: 22px; }
+    .close-form-btn:hover { opacity: 1; background-color: #f4efe8; }
+    .close-form-btn:focus-visible { outline: 3px solid #c09050; outline-offset: 2px; opacity: 1; }
+
+    #conditional-form, #form-steps-container { display: flex; flex-direction: column; flex-grow: 1; width: 100%; min-height: 0; }
+    #form-steps-container { position: relative; }
+
+    .form-step { display: none; width: 100%; min-height: 0; }
+    .form-step.active,
+    .form-step.active-reverse,
+    .form-step.leaving,
+    .form-step.leaving-reverse { display: flex; flex-direction: column; flex-grow: 1; }
+
+    /* Outgoing step sits underneath while it animates away; its buttons hide so they never double up */
+    .form-step.leaving,
+    .form-step.leaving-reverse { position: absolute; inset: 0; pointer-events: none; }
+    .form-step.leaving .form-actions,
+    .form-step.leaving-reverse .form-actions { visibility: hidden; }
+
+    /* Only the question and answers move; the buttons stay put for a steady feel */
+    .form-step.active .step-header,
+    .form-step.active .step-inputs { animation: stepInFwd 0.42s cubic-bezier(0.22, 1, 0.36, 1) both; }
+    .form-step.active-reverse .step-header,
+    .form-step.active-reverse .step-inputs { animation: stepInBack 0.42s cubic-bezier(0.22, 1, 0.36, 1) both; }
+    .form-step.active .step-inputs,
+    .form-step.active-reverse .step-inputs { animation-delay: 0.05s; }
+    .form-step.leaving .step-header,
+    .form-step.leaving .step-inputs { animation: stepOutFwd 0.28s cubic-bezier(0.4, 0, 1, 1) both; }
+    .form-step.leaving-reverse .step-header,
+    .form-step.leaving-reverse .step-inputs { animation: stepOutBack 0.28s cubic-bezier(0.4, 0, 1, 1) both; }
+
+    @keyframes stepInFwd { from { opacity: 0; transform: translateX(32px); } to { opacity: 1; transform: none; } }
+    @keyframes stepInBack { from { opacity: 0; transform: translateX(-32px); } to { opacity: 1; transform: none; } }
+    @keyframes stepOutFwd { from { opacity: 1; transform: none; } to { opacity: 0; transform: translateX(-32px); } }
+    @keyframes stepOutBack { from { opacity: 1; transform: none; } to { opacity: 0; transform: translateX(32px); } }
+
+    .step-header { flex-shrink: 0; padding-top: 6px; }
+    .step-count {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 0.78rem;
+        font-weight: 700;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: #9a5d40;
+        margin-bottom: 10px;
+    }
+    .step-count::before { content: ''; width: 20px; height: 2px; background: currentColor; }
+    .step-inputs { flex-grow: 1; display: flex; flex-direction: column; justify-content: center; width: 100%; padding: 4px 6px 4px 2px; }
+    .step-title { font-size: 1.7rem; color: #4e513e; margin-bottom: 22px; line-height: 1.25; letter-spacing: -0.3px; }
+
+    .input-group { margin-bottom: 18px; text-align: left; }
+    .input-group:last-child { margin-bottom: 0; }
+    .input-group label { display: block; font-size: 0.9rem; color: #4f2d2c; margin-bottom: 8px; font-weight: bold; padding-left: 6px; }
+    .input-group input, .input-group textarea { width: 100%; font-size: 1.1rem; color: #4f2d2c; border: 2px solid #0E2A3B; background-color: #f7f4f0; box-shadow: inset 0 2px 4px rgba(0,0,0,0.03); transition: border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease; font-family: inherit; -webkit-appearance: none; appearance: none; }
+    .input-group input { border-radius: 999px; padding: 15px 24px; min-height: 54px; }
+    .input-group textarea { border-radius: 20px; padding: 16px 20px; resize: vertical; }
+    .input-group input::placeholder, .input-group textarea::placeholder { color: #4f2d2c; opacity: 0.4; }
+    .input-group input:focus, .input-group textarea:focus { outline: none; background-color: #ffffff; border-color: #99724b; box-shadow: 0 0 0 4px rgba(192, 144, 80, 0.22); }
+    .input-group input.error, .input-group textarea.error { border-color: #c0392b; background-color: #fdf2f2; }
+
+    /* Google address suggestions dropdown */
+    .input-group.has-suggestions { position: relative; z-index: 5; }
+    .addr-suggestions {
+        position: absolute;
+        top: calc(100% + 6px);
+        left: 0;
+        right: 0;
+        background: #ffffff;
+        border: 2px solid #0E2A3B;
+        border-radius: 20px;
+        box-shadow: 6px 6px 0px #0E2A3B;
+        padding: 6px;
+        text-align: left;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-6px);
+        transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s ease;
+    }
+    .addr-suggestions.is-open { opacity: 1; visibility: visible; transform: none; }
+    .addr-option {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        min-height: 52px;
+        padding: 10px 14px;
+        border-radius: 14px;
+        cursor: pointer;
+        color: #4f2d2c;
+        -webkit-tap-highlight-color: transparent;
+    }
+    .addr-option svg { width: 20px; height: 20px; flex-shrink: 0; color: #c09050; }
+    .addr-option-text { display: flex; flex-direction: column; min-width: 0; line-height: 1.3; }
+    .addr-main { font-weight: bold; font-size: 1rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .addr-secondary { font-size: 0.85rem; opacity: 0.7; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .addr-option.is-active, .addr-option:active { background-color: #f4efe8; }
+    @media (hover: hover) { .addr-option:hover { background-color: #f4efe8; } }
+    .addr-credit { padding: 6px 14px 4px 14px; font-size: 0.7rem; color: #4f2d2c; opacity: 0.55; text-align: right; }
+
+    /* Single address box + manual fallback */
+    .form-step [hidden] { display: none !important; }
+    .addr-hint { display: none; margin: 8px 0 0 6px; font-size: 0.85rem; font-weight: bold; color: #c0392b; }
+    .addr-search.error + .addr-hint { display: block; }
+    .addr-selected { display: flex; align-items: center; gap: 8px; margin: 10px 0 0 8px; font-size: 1rem; font-weight: bold; color: #4e513e; }
+    .addr-selected svg { width: 18px; height: 18px; flex-shrink: 0; color: #99724b; }
+    .addr-manual { width: 100%; }
+    .addr-manual + .addr-unit-group { margin-top: 18px; }
+    .optional-tag { font-weight: normal; opacity: 0.65; }
+    .addr-toggle {
+        align-self: center;
+        margin-top: 16px;
+        min-height: 44px;
+        padding: 8px 12px;
+        background: none;
+        border: none;
+        font-family: inherit;
+        font-size: 0.95rem;
+        font-weight: bold;
+        color: #99724b;
+        text-decoration: underline;
+        text-underline-offset: 3px;
+        cursor: pointer;
+    }
+    .addr-toggle:focus-visible { outline: 3px solid #c09050; outline-offset: 2px; border-radius: 8px; }
+
+    .name-row { display: flex; gap: 14px; flex-wrap: nowrap; width: 100%; margin-bottom: 18px; }
+    .name-row:last-child { margin-bottom: 0; }
+    .name-row .input-group { flex: 1; min-width: 0; margin-bottom: 0; }
+
+    .radio-group { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+    .radio-group .radio-btn { flex: 1 1 140px; max-width: 220px; }
+    .radio-group.vertical { flex-direction: column; gap: 10px; align-items: stretch; }
+    .radio-group.vertical .radio-btn { flex: none; max-width: none; }
+    .radio-btn { display: block; position: relative; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+    .radio-btn input[type="radio"] { position: absolute; opacity: 0; width: 1px; height: 1px; pointer-events: none; }
+    .radio-btn span { display: flex; align-items: center; justify-content: center; gap: 10px; min-height: 54px; padding: 14px 24px; background-color: #f7f4f0; border: 2px solid #0E2A3B; border-radius: 999px; font-size: 1.1rem; font-weight: bold; color: #4f2d2c; transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease; text-align: center; }
+    .radio-btn input[type="radio"]:focus-visible + span { box-shadow: 0 0 0 4px rgba(192, 144, 80, 0.35); }
+    .radio-btn:active span { transform: scale(0.98); }
+    .radio-btn input[type="radio"]:checked + span { background-color: #99724b; color: #ffffff; box-shadow: 0 6px 15px rgba(153, 114, 75, 0.25); }
+    .radio-btn input[type="radio"]:checked + span::before {
+        content: '';
+        width: 18px;
+        height: 18px;
+        flex-shrink: 0;
+        background-color: currentColor;
+        -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E") center / contain no-repeat;
+        mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E") center / contain no-repeat;
+    }
+    .radio-group.error span { border-color: #c0392b; background-color: #fdf2f2; }
+
+    /* Gentle shake when something is missing */
+    .shake { animation: shake 0.4s cubic-bezier(0.36, 0.07, 0.19, 0.97); }
+    @keyframes shake {
+        20%, 60% { transform: translateX(-6px); }
+        40%, 80% { transform: translateX(6px); }
+    }
+
+    .form-actions { display: flex; justify-content: center; align-items: center; gap: 12px; margin-top: auto; padding-top: 26px; flex-shrink: 0; }
+
+    .btn-primary,
+    .btn-secondary {
         display: inline-flex;
         align-items: center;
         justify-content: center;
         gap: 8px;
-        background-color: #99724b; 
-        color: #e9e2d8; 
-        border: 2px solid #0E2A3B; 
-        padding: 15px 40px; 
-        font-size: 1.1rem; 
-        font-weight: bold; 
-        border-radius: 999px; 
-        cursor: pointer; 
-        transition: all 0.3s ease; 
-        min-width: 130px; 
-        box-shadow: 0 4px 10px rgba(153, 114, 75, 0.2); 
+        min-height: 52px;
+        border: 2px solid #0E2A3B;
+        border-radius: 999px;
+        font-family: inherit;
+        font-size: 1.05rem;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+        -webkit-tap-highlight-color: transparent;
     }
-    .btn-primary:hover { 
-        background-color: #9a5d40; 
-        transform: translateY(-5px); 
-        box-shadow: 0 8px 15px rgba(0,0,0,0.1); 
+    .btn-primary {
+        background-color: #99724b;
+        color: #e9e2d8;
+        padding: 13px 34px;
+        min-width: 140px;
+        box-shadow: 0 4px 10px rgba(153, 114, 75, 0.2);
+    }
+    .btn-secondary {
+        background-color: #ffffff;
+        color: #99724b;
+        padding: 13px 24px;
+    }
+    .btn-primary:active, .btn-secondary:active { transform: scale(0.97); }
+    .btn-primary:disabled { opacity: 0.7; cursor: wait; }
+    .btn-primary:focus-visible, .btn-secondary:focus-visible { outline: 3px solid #c09050; outline-offset: 3px; }
+    @media (hover: hover) {
+        .btn-primary:hover { background-color: #9a5d40; transform: translateY(-3px); box-shadow: 0 8px 15px rgba(0,0,0,0.1); }
+        .btn-secondary:hover { transform: translateY(-3px); box-shadow: 0 8px 15px rgba(0,0,0,0.08); }
+        .btn-primary:hover .btn-icon-forward { transform: translateX(4px); }
+        .btn-secondary:hover .btn-icon-back { transform: translateX(-4px); }
     }
 
-    .btn-secondary { 
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        gap: 6px;
-        background-color: #ffffff; 
-        color: #99724b !important; /* Forced to never change color on hover */
-        border: 2px solid #0E2A3B; 
-        font-size: 1.05rem; 
-        font-weight: bold; 
-        cursor: pointer; 
-        padding: 15px 25px; 
-        border-radius: 999px;
-        transition: all 0.3s ease; 
-    }
-    .btn-secondary:hover { 
-        transform: translateY(-5px); 
-        box-shadow: 0 8px 15px rgba(0,0,0,0.1); 
-    }
-    
     .btn-primary .btn-icon, .btn-secondary .btn-icon {
         width: 18px;
         height: 18px;
-        object-fit: contain;
+        flex-shrink: 0;
         transition: transform 0.3s ease;
     }
-    .btn-primary:hover .btn-icon-forward { transform: translateX(4px); }
-    .btn-secondary:hover .btn-icon-back { transform: translateX(-4px); }
 
-    .success-message { display: none; padding: 20px 0; animation: slideInRight 0.5s cubic-bezier(0.25, 0.8, 0.25, 1) forwards; flex-direction: column; justify-content: center; flex-grow: 1; }
+    .success-message { display: none; padding: 20px 0; animation: stepInFwd 0.5s cubic-bezier(0.25, 0.8, 0.25, 1) forwards; flex-direction: column; justify-content: center; flex-grow: 1; }
     .success-icon { width: 70px; height: 70px; background-color: #4e513e; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; margin: 0 auto 20px auto; box-shadow: 0 8px 20px rgba(78, 81, 62, 0.3); }
     .success-message h3 { font-size: 2.2rem; color: #4e513e; margin-bottom: 10px; }
     .success-message p { font-size: 1.15rem; color: #4f2d2c; }
@@ -185,60 +340,109 @@
     .trigger-card h2 { font-size: 2.2rem; color: #4e513e; margin-bottom: 15px; }
     .trigger-card p { font-size: 1.15rem; color: #4f2d2c; margin-bottom: 25px; line-height: 1.6; }
     .btn-large-trigger {
-        display: inline-flex; align-items: center; justify-content: center; gap: 12px; 
-        background-color: #99724b; color: #e9e2d8; padding: 18px 45px; 
-        border-radius: 999px; font-weight: bold; font-size: 1.3rem; 
-        border: 2px solid #0E2A3B; box-shadow: 0 6px 15px rgba(0,0,0,0.2); 
+        display: inline-flex; align-items: center; justify-content: center; gap: 12px;
+        background-color: #99724b; color: #e9e2d8; padding: 18px 45px;
+        border-radius: 999px; font-weight: bold; font-size: 1.3rem;
+        border: 2px solid #0E2A3B; box-shadow: 0 6px 15px rgba(0,0,0,0.2);
         cursor: pointer; transition: background-color 0.3s ease;
     }
     .btn-large-trigger:hover { background-color: #9a5d40; }
     .btn-large-trigger .btn-icon { width: 22px; height: 22px; object-fit: contain; }
-    
+
     .secure-notice { text-align: center; max-width: 400px; margin: 20px auto 0 auto; }
     .secure-header { display: flex; align-items: center; justify-content: center; gap: 6px; color: #4e513e; font-weight: bold; font-size: 1rem; margin-bottom: 4px; }
     .secure-header img { height: 1rem; width: auto; object-fit: contain; }
     .secure-disclaimer { font-size: 0.75rem; color: #4f2d2c; opacity: 0.75; line-height: 1.3; font-style: italic; margin-bottom: 0; }
 
-    /* Form Mobile Responsiveness */
+    /* Form Mobile: full-screen sheet that slides up, buttons pinned to the bottom */
     @media (max-width: 768px) {
         .trigger-card { padding: 40px 20px; width: calc(100% - 6px); }
         .trigger-card h2 { font-size: 1.8rem; }
         .btn-large-trigger { font-size: 1.1rem; padding: 15px 35px; }
-        
-        .step-title { font-size: 1.5rem; }
-        .form-container-card { padding: 15px !important; }
-        
-        .native-form-box { 
-            min-height: auto !important; 
-            height: auto !important; 
-            border-radius: 20px !important; 
-            border: 2px solid #0E2A3B !important;
-            box-shadow: 6px 6px 0px #0E2A3B !important;
-            padding: 30px 20px !important; 
-            overflow: hidden !important; 
-            justify-content: center;
+
+        .form-overlay-bg { display: none; }
+        .form-bg-video { display: none; }
+
+        .form-container-card {
+            padding: 0;
+            align-items: stretch;
+            justify-content: stretch;
+            background-color: #ffffff;
+            opacity: 1;
+            transform: translate3d(0, 100%, 0) !important;
+            transition: transform 0.45s cubic-bezier(0.32, 0.72, 0, 1), visibility 0.45s ease;
         }
-        
-        .form-container-card.keyboard-open { 
-            padding: 10px !important; 
-            align-items: stretch !important; 
+        .form-container-card.is-open {
+            transform: translate3d(0, 0, 0) !important;
         }
-        
-        .form-container-card.keyboard-open .native-form-box { 
-            padding: 20px !important; 
-            margin: 0 auto !important; 
-            box-shadow: 4px 4px 0px #0E2A3B !important; 
-            height: auto !important; 
-            max-height: none !important; 
-            min-height: 0 !important; 
+
+        .native-form-box {
+            max-width: none;
+            min-height: 0;
+            height: 100%;
+            border: none;
+            border-radius: 0;
+            box-shadow: none;
+            padding: calc(env(safe-area-inset-top, 0px) + 10px) 20px calc(env(safe-area-inset-bottom, 0px) + 16px) 20px;
         }
-        
-        /* Font sizes and padding shrink rules REMOVED to keep native size! */
-        .form-container-card.keyboard-open .step-title { margin-bottom: 10px !important; }
-        .form-container-card.keyboard-open .input-group { margin-bottom: 10px !important; }
-        .form-container-card.keyboard-open .input-group label { margin-bottom: 5px !important; }
-        .form-container-card.keyboard-open .form-actions { padding-top: 10px !important; margin-top: auto !important; }
-        .form-container-card.keyboard-open .close-form-btn { top: 10px !important; right: 15px !important; }
+
+        .form-topbar { margin-bottom: 10px; }
+
+        .step-header { padding-top: 14px; text-align: left; }
+        .step-title { font-size: 1.6rem; margin-bottom: 18px; }
+        .step-inputs {
+            justify-content: flex-start;
+            overflow-y: auto;
+            overflow-x: hidden;
+            -webkit-overflow-scrolling: touch;
+            overscroll-behavior: contain;
+            padding: 6px 4px 8px 2px;
+        }
+        .radio-group .radio-btn { max-width: none; }
+
+        .addr-row { flex-wrap: wrap; row-gap: 18px; }
+        .addr-row .input-group:first-child { flex-basis: 100%; }
+
+        .form-actions { padding-top: 14px; gap: 10px; }
+        .form-actions .btn-primary { flex: 1; }
+        .form-actions .btn-secondary { padding: 13px 20px; }
+
+        /* While the keyboard is open, tighten the header so the answer area keeps its room */
+        .form-container-card.keyboard-open .form-topbar { margin-bottom: 2px; }
+        .form-container-card.keyboard-open .step-count { display: none; }
+        .form-container-card.keyboard-open .step-header { padding-top: 4px; }
+        .form-container-card.keyboard-open .step-title { font-size: 1.3rem; margin-bottom: 12px; }
+
+        /* Address suggestions sit in the page flow on phones so they're never cut off,
+           and the buttons step aside while a choice is being made */
+        .addr-suggestions {
+            position: static;
+            display: none;
+            margin-top: 8px;
+            box-shadow: 4px 4px 0px #0E2A3B;
+            opacity: 1;
+            visibility: visible;
+            transform: none;
+        }
+        .addr-suggestions.is-open { display: block; animation: addrIn 0.18s ease both; }
+        .addr-suggestions { padding: 4px; }
+        .addr-option { min-height: 46px; padding: 7px 12px; gap: 10px; }
+        .addr-credit { padding: 2px 12px 2px 12px; }
+        @keyframes addrIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: none; } }
+        .form-step.addr-open .form-actions,
+        .form-step.addr-open .addr-unit-group,
+        .form-step.addr-open .addr-toggle { display: none; }
+        .addr-toggle { align-self: flex-start; padding-left: 6px; }
+    }
+
+    /* Respect users who prefer less motion */
+    @media (prefers-reduced-motion: reduce) {
+        .form-container-card,
+        .form-overlay-bg,
+        .form-progress-fill { transition-duration: 0.01ms !important; }
+        .form-step .step-header,
+        .form-step .step-inputs,
+        .shake { animation: none !important; }
     }
 </style>
 
@@ -249,11 +453,11 @@
         <p id="dynamic-form-desc">Fill out the information below to get started.</p>
         <button type="button" class="btn-large-trigger" id="btn-start-form">
             Get Started
-            <img src="https://andrewmarth.com/images/fullscreen.png" alt="Open Form" class="btn-icon">
+            <img src="/images/fullscreen.png" alt="Open Form" class="btn-icon">
         </button>
         <div class="secure-notice">
             <div class="secure-header">
-                <img src="https://andrewmarth.com/images/lock.png" alt="Secure Lock">
+                <img src="/images/lock.png" alt="Secure Lock">
                 <span>Secure Submission</span>
             </div>
             <p class="secure-disclaimer">All information is securely submitted and never shared with anyone. This is not a loan application and is only used for informational purposes.</p>
@@ -265,19 +469,24 @@
 <div class="form-overlay-bg" id="form-overlay-bg"></div>
 
 <!-- Hidden Form Modal (Animated Pop-Out) -->
-<div class="form-container-card" id="form-container">
-    <video class="form-bg-video" autoplay loop muted playsinline>
-        <source src="https://andrewmarth.com/images/form_background.mp4" type="video/mp4">
+<div class="form-container-card" id="form-container" role="dialog" aria-modal="true" aria-label="Intake form">
+    <video class="form-bg-video" autoplay loop muted playsinline aria-hidden="true">
+        <source src="/images/form_background_web.mp4" type="video/mp4">
     </video>
 
     <div class="native-form-box">
-        <button type="button" class="close-form-btn" id="close-form-btn">&times;</button>
+        <div class="form-topbar">
+            <div class="form-progress" aria-hidden="true"><span class="form-progress-fill" id="form-progress-fill"></span></div>
+            <button type="button" class="close-form-btn" id="close-form-btn" aria-label="Close form">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+            </button>
+        </div>
 
-        <form id="conditional-form" style="display: flex;">
+        <form id="conditional-form" style="display: flex;" novalidate>
             <input type="hidden" name="form_source" id="dynamic-form-source" value="General Web Form">
             <div id="form-steps-container"></div>
         </form>
-        
+
         <div class="success-message" id="success-message">
             <div class="success-icon">&#10003;</div>
             <h3>Information Received!</h3>

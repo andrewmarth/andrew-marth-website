@@ -3,501 +3,658 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Capital Partnerships | Andrew Marth Real Estate</title>
-    
+    <title>Real Estate Capital Partnerships in Phoenix | Andrew Marth</title>
+    <meta name="description" content="Earn fix-and-flip returns without managing the work. You provide the capital; Andrew Marth handles acquisition, renovation and sale across the Phoenix area.">
+    <link rel="canonical" href="https://andrewmarth.com/partnership">
+
+    <!-- Search & link previews -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Andrew Marth Real Estate">
+    <meta property="og:title" content="Real Estate Capital Partnerships in Phoenix | Andrew Marth">
+    <meta property="og:description" content="Earn fix-and-flip returns without managing the work. You provide the capital; Andrew Marth handles acquisition, renovation and sale across the Phoenix area.">
+    <meta property="og:url" content="https://andrewmarth.com/partnership">
+    <meta property="og:image" content="https://andrewmarth.com/images/og-image.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Andrew Marth, Real Estate Agent">
+    <meta property="og:locale" content="en_US">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Real Estate Capital Partnerships in Phoenix | Andrew Marth">
+    <meta name="twitter:description" content="Earn fix-and-flip returns without managing the work. You provide the capital; Andrew Marth handles acquisition, renovation and sale across the Phoenix area.">
+    <meta name="twitter:image" content="https://andrewmarth.com/images/og-image.jpg">
+
     <!-- Google Fonts Import -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Familjen+Grotesk:wght@400..700&display=swap" rel="stylesheet">
-    
+
     <style>
-        /* --- General Reset & Styling --- */
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-        
-        /* The Absolute Hard Lock: Prevents ALL horizontal scrolling across all mobile browsers */
-        html, body {
-            width: 100%;
-            max-width: 100%;
-            overflow-x: hidden;
-            position: relative;
-        }
-        
-        body {
-            font-family: 'Familjen Grotesk', sans-serif; 
-            line-height: 1.6;
-            color: #4f2d2c; 
-            background-color: #e9e2d8; 
-        }
-        
-        /* Updated Header Font */
-        h1, h2, h3, h4, h5, h6 {
-            font-family: 'Bricolage Grotesque', sans-serif;
-        }
-        
-        /* --- Navigation Bar (Fixed & Glassmorphism) --- */
-        .navbar {
-            background: rgba(233, 226, 216, 0.85); 
-            backdrop-filter: blur(12px); 
-            -webkit-backdrop-filter: blur(12px); 
-            
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000; 
-            
-            padding: 15px 30px;
-            display: flex;
-            align-items: center;
-            border-bottom: 1px solid rgba(153, 114, 75, 0.3); 
-            min-height: 80px;
-        }
-        .mobile-center-logo {
-            display: none; 
-        }
-        .hamburger {
-            display: none;
-            font-size: 2rem;
-            background: none;
-            border: none;
-            color: #4e513e; 
-            cursor: pointer;
-        }
-        .nav-menu {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 100%;
-        }
-        .nav-logo img {
-            height: 50px; 
-            width: auto;
-            display: block;
-            border-radius: 4px;
-        }
-        .nav-logo a {
-            text-decoration: none; 
-            display: block;
-        }
-        .nav-links {
-            display: flex;
-            gap: 30px;
-            align-items: center;
-        }
-        .nav-links a {
-            text-decoration: none;
-            color: #4f2d2c; 
-            font-weight: bold;
-            font-size: 1.1rem;
-            transition: color 0.3s;
-        }
-        .nav-links a:hover {
-            color: #9a5d40; 
-        }
-        .close-menu {
-            display: none; 
+        /* --- Brand Palette --- */
+        :root {
+            --cream: #e9e2d8;
+            --brown: #4f2d2c;
+            --olive: #4e513e;
+            --tan: #99724b;
+            --rust: #9a5d40;
+            --gold: #c09050;
+            --navy: #0E2A3B;
+            --white: #ffffff;
+            --ease: cubic-bezier(0.22, 1, 0.36, 1);
         }
 
-        /* --- Header / Hero Section --- */
+        /* --- General Reset & Styling --- */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        /* The Absolute Hard Lock: Prevents ALL horizontal scrolling across all mobile browsers */
+        html, body { width: 100%; max-width: 100%; overflow-x: hidden; position: relative; }
+        html { scroll-behavior: smooth; }
+
+        body { font-family: 'Familjen Grotesk', sans-serif; line-height: 1.6; color: var(--brown); background-color: var(--cream); }
+
+        /* Locks the page behind the form without losing scroll position */
+        body.no-scroll { overflow: hidden !important; touch-action: none; }
+
+        /* Hides the fixed navbar while the form is open to reclaim screen space */
+        body.form-open .navbar { display: none !important; }
+
+        h1, h2, h3, h4, h5, h6 { font-family: 'Bricolage Grotesque', sans-serif; }
+
+        a:focus-visible, button:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
+
+        /* --- Background Texture: faint brand line pattern + paper grain --- */
+        html::before,
+        html::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: -1;
+        }
+        html::before {
+            background-image: url('/images/tiling_background_alt.png');
+            background-size: 520px auto;
+            background-repeat: repeat;
+            mix-blend-mode: multiply;
+            opacity: 0.07;
+        }
+        html::after {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.31 0 0 0 0 0.18 0 0 0 0 0.17 0 0 0 0.55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+            opacity: 0.35;
+            mix-blend-mode: multiply;
+        }
+
+        /* --- Navigation Bar (Fixed & Glassmorphism) --- */
+        .navbar { background: rgba(233, 226, 216, 0.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; padding: 15px 30px; display: flex; align-items: center; border-bottom: 1px solid rgba(153, 114, 75, 0.3); min-height: 80px; }
+        .mobile-center-logo { display: none; }
+        .hamburger { display: none; font-size: 2rem; background: none; border: none; color: #4e513e; cursor: pointer; }
+        .nav-menu { display: flex; justify-content: space-between; align-items: center; width: 100%; }
+        .nav-logo img { height: 50px; width: auto; display: block; border-radius: 4px; }
+        .nav-logo a { text-decoration: none; display: block; }
+        .nav-links { display: flex; gap: 30px; align-items: center; }
+        .nav-links a { text-decoration: none; color: #4f2d2c; font-weight: bold; font-size: 1.1rem; transition: color 0.3s; }
+        .nav-links a:hover { color: #9a5d40; }
+        .close-menu { display: none; }
+
+        /* --- Shared Section Bits --- */
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--rust);
+            margin-bottom: 14px;
+        }
+        .eyebrow::before {
+            content: '';
+            width: 28px;
+            height: 2px;
+            background: currentColor;
+        }
+        .section-title {
+            font-size: clamp(2rem, 4vw, 2.75rem);
+            line-height: 1.15;
+            color: var(--brown);
+            letter-spacing: -0.5px;
+        }
+        .section-header { text-align: center; margin-bottom: 48px; }
+        .section-header .eyebrow { justify-content: center; }
+
+        /* --- Header / Hero Section (Video Background, same as homepage) --- */
         header {
-            background: linear-gradient(rgba(78, 81, 62, 0.75), rgba(78, 81, 62, 0.75)), url('https://andrewmarth.com/images/background.jpeg');
-            background-size: cover;
-            background-position: center;
-            color: #e9e2d8; 
-            padding: 160px 20px 100px 20px; 
+            position: relative;
+            overflow: hidden;
+            background-color: var(--olive);
+            color: var(--cream);
+            padding: 190px 20px 130px 20px;
             text-align: center;
         }
+        .hero-video-bg {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+        }
+        .hero-color-overlay {
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse at center, rgba(78, 81, 62, 0.55) 0%, rgba(78, 81, 62, 0.8) 70%),
+                linear-gradient(180deg, rgba(14, 42, 59, 0.25) 0%, rgba(78, 81, 62, 0.35) 60%, rgba(79, 45, 44, 0.75) 100%);
+            z-index: 1;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 820px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .hero-eyebrow {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            font-size: 1rem;
+            font-weight: 700;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            color: var(--cream);
+            margin-bottom: 18px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.55), 0 1px 2px rgba(0, 0, 0, 0.6);
+        }
+        .hero-eyebrow::before,
+        .hero-eyebrow::after {
+            content: '';
+            width: 36px;
+            height: 2px;
+            background: var(--gold);
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+        }
         header h1 {
-            font-size: 3rem; 
-            margin-bottom: 15px;
-            letter-spacing: 2px;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.3); 
+            font-size: clamp(2.6rem, 7vw, 5rem);
+            font-weight: 800;
+            line-height: 1.05;
+            letter-spacing: -1px;
+            margin-bottom: 22px;
+            text-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
         }
         header p {
-            font-size: 1.3rem;
-            color: #e9e2d8; 
-            opacity: 0.95; 
-            max-width: 700px;
+            font-size: clamp(1.1rem, 2vw, 1.35rem);
+            color: var(--cream);
+            opacity: 0.95;
+            max-width: 640px;
             margin: 0 auto;
             text-shadow: 0 1px 3px rgba(0,0,0,0.3);
         }
 
-        /* --- Intro Section (Updated to Card Styling) --- */
-        .intro-wrapper {
-            padding: 0 20px;
+        /* Hero entrance */
+        .hero-content > * {
+            opacity: 0;
+            transform: translateY(24px);
+            animation: rise 0.9s var(--ease) forwards;
         }
-        .intro-card {
-            background-color: #ffffff;
-            border-radius: 20px;
-            border: 2px solid #0E2A3B;
-            box-shadow: 6px 6px 0px #0E2A3B;
-            max-width: 900px;
-            margin: 60px auto 40px auto;
-            padding: 50px 40px;
-            text-align: center;
-        }
-        .intro-card h2 {
-            font-size: 2.2rem;
-            color: #4f2d2c;
-            margin-bottom: 20px;
-        }
-        .intro-card p {
-            font-size: 1.1rem;
-            margin-bottom: 15px;
-        }
-        .intro-card p:last-child {
-            margin-bottom: 0;
+        .hero-content > *:nth-child(2) { animation-delay: 0.1s; }
+        .hero-content > *:nth-child(3) { animation-delay: 0.2s; }
+        @keyframes rise {
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        /* --- Proforma Images Section (Updated to solid shadow cards) --- */
-        .proforma-section {
-            max-width: 1000px;
-            margin: 0 auto 60px auto;
-            padding: 0 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 60px; 
-        }
-        .proforma-container {
-            width: 100%;
+        /* --- Intro Card --- */
+        .intro-wrapper { padding: 100px 20px 0 20px; }
+        .intro-card {
+            background-color: var(--white);
+            border-radius: 20px;
+            border: 2px solid var(--navy);
+            box-shadow: 6px 6px 0px var(--navy);
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 56px 48px;
             text-align: center;
         }
+        .intro-card .eyebrow { justify-content: center; }
+        .intro-card .section-title { margin-bottom: 22px; }
+        .intro-card p { font-size: 1.125rem; margin: 0 auto 16px auto; max-width: 66ch; }
+        .intro-card p.lead { font-size: 1.25rem; font-weight: 600; line-height: 1.5; }
+        .intro-card p:last-child { margin-bottom: 0; }
+
+        /* --- Proforma Images --- */
+        .proforma-section { max-width: 1000px; margin: 0 auto; padding: 90px 20px 0 20px; }
+        .proforma-list { display: flex; flex-direction: column; align-items: center; gap: 48px; }
+        .proforma-container { width: 100%; max-width: 600px; }
         .proforma-container img {
             width: 100%;
-            max-width: 600px; 
             height: auto;
+            display: block;
             border-radius: 20px;
-            border: 2px solid #0E2A3B;
-            box-shadow: 6px 6px 0px #0E2A3B;
+            border: 2px solid var(--navy);
+            box-shadow: 6px 6px 0px var(--navy);
         }
 
         /* --- Timeline Section --- */
-        .timeline-section {
-            padding: 40px 20px 60px 20px;
-            background-color: #e9e2d8;
-        }
-        .timeline {
-            position: relative;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-        .timeline::after {
-            content: '';
-            position: absolute;
-            width: 4px;
-            background-color: #99724b; 
-            top: 0;
-            bottom: 0;
-            left: 50%;
-            margin-left: -2px;
-            border-radius: 2px;
-        }
-        .timeline-item {
-            padding: 10px 40px;
-            position: relative;
-            background-color: inherit;
-            width: 50%;
-        }
-        .timeline-item::after {
-            content: '';
-            position: absolute;
-            width: 24px;
-            height: 24px;
-            right: -12px;
-            background-color: #e9e2d8;
-            border: 4px solid #4e513e; 
-            top: 25px;
-            border-radius: 50%;
-            z-index: 1;
-        }
+        .timeline-section { padding: 90px 20px 0 20px; }
+        .timeline { position: relative; max-width: 1000px; margin: 0 auto; }
+        .timeline::after { content: ''; position: absolute; width: 4px; background-color: var(--tan); top: 0; bottom: 0; left: 50%; margin-left: -2px; border-radius: 2px; z-index: 1; }
+
+        /* z-index keeps each item (and its dot) above the line, even mid fade-in */
+        .timeline-item { padding: 14px 40px; position: relative; z-index: 2; width: 50%; }
+        .timeline-item::after { content: ''; position: absolute; width: 24px; height: 24px; right: -12px; background-color: var(--cream); border: 4px solid var(--olive); top: 40px; border-radius: 50%; z-index: 3; box-shadow: 0 0 0 4px rgba(192, 144, 80, 0.25); }
         .left { left: 0; }
         .right { left: 50%; }
         .right::after { left: -12px; }
 
-        /* Updated Timeline Cards */
         .content {
-            padding: 25px 30px;
-            background-color: white;
+            padding: 28px 32px;
+            background-color: var(--white);
             position: relative;
             border-radius: 20px;
-            border: 2px solid #0E2A3B;
-            box-shadow: 6px 6px 0px #0E2A3B;
+            border: 2px solid var(--navy);
+            box-shadow: 6px 6px 0px var(--navy);
         }
-        .content h3 {
-            color: #4e513e;
-            font-size: 1.4rem;
-            margin-bottom: 10px;
-        }
-        .content p {
-            font-size: 1.05rem;
-            color: #4f2d2c;
-            margin-bottom: 10px;
-        }
-        .content p:last-child {
-            margin-bottom: 0;
-        }
+        .content h3 { color: var(--olive); font-size: 1.5rem; margin-bottom: 10px; line-height: 1.2; }
+        .content p { font-size: 1.05rem; color: var(--brown); margin-bottom: 12px; }
+        .content p:last-child { margin-bottom: 0; }
         .step-number {
-            font-size: 0.9rem;
-            color: #99724b;
-            font-weight: bold;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 3px;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 5px;
-            display: block;
+            color: var(--rust);
+            margin-bottom: 8px;
+        }
+        .step-number::before {
+            content: '';
+            width: 20px;
+            height: 2px;
+            background: currentColor;
         }
 
-        /* Logo specific styling */
-        .dixon-logo {
-            max-width: 140px;
-            margin-top: 25px; 
-            display: block;
-        }
-        .wynwest-logo {
-            max-width: 210px; 
-            margin-top: 25px; 
-            display: block;
-        }
-
-        /* --- Call to Action Section (Updated to solid shadow cards) --- */
-        .cta-section {
-            max-width: 800px;
-            margin: 80px auto; 
-            padding: 40px 20px;
-            text-align: center;
-            background-color: #ffffff;
-            border-radius: 20px;
-            border: 2px solid #0E2A3B;
-            box-shadow: 6px 6px 0px #0E2A3B; 
-        }
-        .cta-section h2 {
-            font-size: 2rem;
-            color: #4f2d2c;
-            margin-bottom: 15px;
-        }
-        .cta-section p {
-            font-size: 1.1rem;
-            color: #4f2d2c;
-            margin-bottom: 30px;
-        }
-
-        /* --- Buttons (Pill Shape + Animated Arrow) --- */
-        .cta-btn {
+        /* --- Buttons --- */
+        .btn {
             display: inline-flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
-            padding: 15px 35px;
-            background-color: #99724b; 
-            color: #e9e2d8;
+            background-color: var(--tan);
+            color: var(--cream);
             text-decoration: none;
-            border-radius: 999px; /* Pill shape */
+            padding: 12px 28px;
+            min-height: 48px;
+            border-radius: 999px;
             font-weight: bold;
-            font-size: 1.1rem;
             transition: all 0.3s ease;
-            margin: 0 10px 10px 10px;
-            border: 2px solid transparent;
+            border: 2px solid var(--navy);
+            box-shadow: 0 4px 10px rgba(153, 114, 75, 0.2);
+            cursor: pointer;
         }
-        .cta-btn:hover {
-            background-color: #9a5d40; 
-            transform: translateY(-5px); /* Upward float */
+        .btn:hover {
+            background-color: var(--rust);
+            transform: translateY(-5px);
             box-shadow: 0 8px 15px rgba(0,0,0,0.1);
         }
-        .cta-btn::after {
-            content: '\2192'; /* Right arrow */
-            font-size: 1.2em;
+        /* Right Arrow Injection & Animation (line icon, matches homepage) */
+        .btn::after {
+            content: '';
+            width: 18px;
+            height: 18px;
+            flex-shrink: 0;
+            background-color: currentColor;
+            -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12h14'/%3E%3Cpath d='m12 5 7 7-7 7'/%3E%3C/svg%3E") center / contain no-repeat;
+            mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12h14'/%3E%3Cpath d='m12 5 7 7-7 7'/%3E%3C/svg%3E") center / contain no-repeat;
             transition: transform 0.3s ease;
         }
-        .cta-btn:hover::after {
-            transform: translateX(5px); /* Shifting arrow */
+        .btn:hover::after { transform: translateX(5px); }
+        .btn-light { background-color: var(--cream); color: var(--brown); box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); }
+        .btn-light:hover { background-color: var(--white); color: var(--brown); }
+        .btn-ghost { background-color: transparent; color: var(--cream); border-color: rgba(233, 226, 216, 0.7); box-shadow: none; }
+        .btn-ghost:hover { background-color: rgba(233, 226, 216, 0.12); border-color: var(--cream); }
+
+        /* --- Closing Call to Action (matches the "Ready When You Are" cards) --- */
+        .cta-band { max-width: 940px; margin: 0 auto 80px auto; padding: 90px 20px 0 20px; }
+        .cta-inner {
+            position: relative;
+            overflow: hidden;
+            overflow: clip;
+            background: var(--brown);
+            color: var(--cream);
+            border-radius: 28px;
+            border: 2px solid var(--navy);
+            box-shadow: 8px 8px 0px var(--navy);
+            padding: 70px 40px;
+            text-align: center;
         }
-        
-        /* Secondary transparent button style */
-        .cta-btn-outline {
+        .cta-inner::before,
+        .cta-inner::after { content: ''; position: absolute; border-radius: 50%; pointer-events: none; }
+        .cta-inner::before { width: 420px; height: 420px; top: -220px; right: -120px; background: radial-gradient(circle, rgba(192, 144, 80, 0.35), transparent 70%); }
+        .cta-inner::after { width: 360px; height: 360px; bottom: -200px; left: -100px; background: radial-gradient(circle, rgba(154, 93, 64, 0.4), transparent 70%); }
+        .cta-inner > * { position: relative; z-index: 1; }
+        .cta-inner .eyebrow { color: var(--gold); justify-content: center; }
+        .cta-inner h2 { font-size: clamp(2rem, 4.5vw, 3rem); line-height: 1.1; margin-bottom: 16px; }
+        .cta-inner p { max-width: 620px; margin: 0 auto 34px auto; font-size: 1.15rem; opacity: 0.92; }
+        .cta-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 16px; }
+
+        /* --- Scroll Reveal --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(32px);
+            transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
+        }
+        .reveal.is-visible { opacity: 1; transform: none; }
+
+        /* --- FORM (same design as the site's other intake forms) --- */
+        .form-overlay-bg {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            background-color: rgba(233, 226, 216, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            z-index: 998;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.4s ease, visibility 0.4s ease;
+        }
+        .form-overlay-bg.is-open { opacity: 1; visibility: visible; }
+
+        /* Desktop: pops out of the button */
+        .form-container-card {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            width: 100%;
+            padding: 20px;
+            z-index: 999;
+            display: flex; justify-content: center; align-items: center;
             background-color: transparent;
-            color: #99724b;
-            border: 2px solid #99724b;
+            overflow: hidden;
+            opacity: 0;
+            visibility: hidden;
+            transform: scale(0.05);
+            pointer-events: none;
+            transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease, visibility 0.55s ease;
         }
-        .cta-btn-outline:hover {
-            background-color: #99724b;
-            color: #e9e2d8;
-            border: 2px solid #99724b;
+        .form-container-card.is-open { opacity: 1; visibility: visible; transform: scale(1); pointer-events: auto; }
+
+        .form-bg-video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
+
+        .native-form-box {
+            background: #ffffff;
+            width: 100%;
+            max-width: 620px;
+            padding: 28px 44px 36px 44px;
+            border-radius: 28px;
+            border: 2px solid #0E2A3B;
+            box-shadow: 8px 8px 0px #0E2A3B;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            min-height: 480px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
         }
 
+        .form-topbar { display: flex; align-items: center; gap: 16px; flex-shrink: 0; margin-bottom: 18px; }
+        .form-progress { flex: 1; height: 6px; border-radius: 999px; background: #efe9e1; overflow: hidden; }
+        .form-progress-fill { display: block; height: 100%; width: 8%; border-radius: inherit; background: linear-gradient(90deg, #99724b, #c09050); transition: width 0.5s cubic-bezier(0.22, 1, 0.36, 1); }
+
+        .close-form-btn { flex-shrink: 0; display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; margin-right: -10px; border-radius: 50%; background: none; border: none; color: #4f2d2c; cursor: pointer; opacity: 0.6; transition: opacity 0.2s ease, background-color 0.2s ease; }
+        .close-form-btn svg { width: 22px; height: 22px; }
+        .close-form-btn:hover { opacity: 1; background-color: #f4efe8; }
+
+        #conditional-form, #form-steps-container { display: flex; flex-direction: column; flex-grow: 1; width: 100%; min-height: 0; }
+        #form-steps-container { position: relative; }
+
+        .form-step { display: none; width: 100%; min-height: 0; }
+        .form-step.active,
+        .form-step.active-reverse,
+        .form-step.leaving,
+        .form-step.leaving-reverse { display: flex; flex-direction: column; flex-grow: 1; }
+        .form-step.leaving,
+        .form-step.leaving-reverse { position: absolute; inset: 0; pointer-events: none; }
+        .form-step.leaving .form-actions,
+        .form-step.leaving-reverse .form-actions { visibility: hidden; }
+
+        .form-step.active .step-header,
+        .form-step.active .step-inputs { animation: stepInFwd 0.42s cubic-bezier(0.22, 1, 0.36, 1) both; }
+        .form-step.active-reverse .step-header,
+        .form-step.active-reverse .step-inputs { animation: stepInBack 0.42s cubic-bezier(0.22, 1, 0.36, 1) both; }
+        .form-step.active .step-inputs,
+        .form-step.active-reverse .step-inputs { animation-delay: 0.05s; }
+        .form-step.leaving .step-header,
+        .form-step.leaving .step-inputs { animation: stepOutFwd 0.28s cubic-bezier(0.4, 0, 1, 1) both; }
+        .form-step.leaving-reverse .step-header,
+        .form-step.leaving-reverse .step-inputs { animation: stepOutBack 0.28s cubic-bezier(0.4, 0, 1, 1) both; }
+        @keyframes stepInFwd { from { opacity: 0; transform: translateX(32px); } to { opacity: 1; transform: none; } }
+        @keyframes stepInBack { from { opacity: 0; transform: translateX(-32px); } to { opacity: 1; transform: none; } }
+        @keyframes stepOutFwd { from { opacity: 1; transform: none; } to { opacity: 0; transform: translateX(-32px); } }
+        @keyframes stepOutBack { from { opacity: 1; transform: none; } to { opacity: 0; transform: translateX(32px); } }
+
+        .step-header { flex-shrink: 0; padding-top: 6px; }
+        .step-count { display: inline-flex; align-items: center; gap: 10px; font-size: 0.78rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: #9a5d40; margin-bottom: 10px; }
+        .step-count::before { content: ''; width: 20px; height: 2px; background: currentColor; }
+        .step-inputs { flex-grow: 1; display: flex; flex-direction: column; justify-content: center; width: 100%; padding: 4px 6px 4px 2px; }
+        .step-title { font-size: 1.7rem; color: #4e513e; margin-bottom: 22px; line-height: 1.25; letter-spacing: -0.3px; }
+        .step-hint { font-size: 0.95rem; color: #4f2d2c; opacity: 0.7; margin: -12px 0 18px 0; }
+
+        .input-group { margin-bottom: 18px; text-align: left; }
+        .input-group:last-child { margin-bottom: 0; }
+        .input-group label { display: block; font-size: 0.9rem; color: #4f2d2c; margin-bottom: 8px; font-weight: bold; padding-left: 6px; }
+        .input-group input,
+        .input-group textarea { width: 100%; font-size: 1.1rem; color: #4f2d2c; border: 2px solid #0E2A3B; background-color: #f7f4f0; box-shadow: inset 0 2px 4px rgba(0,0,0,0.03); transition: border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease; font-family: inherit; -webkit-appearance: none; appearance: none; }
+        .input-group input { border-radius: 999px; padding: 15px 24px; min-height: 54px; }
+        .input-group textarea { border-radius: 20px; padding: 16px 20px; min-height: 150px; resize: vertical; line-height: 1.5; }
+        .input-group input::placeholder,
+        .input-group textarea::placeholder { color: #4f2d2c; opacity: 0.4; }
+        .input-group input:focus,
+        .input-group textarea:focus { outline: none; background-color: #ffffff; border-color: #99724b; box-shadow: 0 0 0 4px rgba(192, 144, 80, 0.22); }
+        .input-group input.error { border-color: #c0392b; background-color: #fdf2f2; }
+
+        /* Force Name row to ALWAYS stay side by side */
+        .name-row { display: flex; gap: 14px; flex-wrap: nowrap; width: 100%; }
+        .name-row .input-group { flex: 1; min-width: 0; margin-bottom: 0; }
+
+        .shake { animation: shake 0.4s cubic-bezier(0.36, 0.07, 0.19, 0.97); }
+        @keyframes shake {
+            20%, 60% { transform: translateX(-6px); }
+            40%, 80% { transform: translateX(6px); }
+        }
+
+        .form-actions { display: flex; justify-content: center; align-items: center; gap: 12px; margin-top: auto; padding-top: 26px; flex-shrink: 0; }
+
+        .btn-primary,
+        .btn-secondary { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 52px; border: 2px solid #0E2A3B; border-radius: 999px; font-family: inherit; font-size: 1.05rem; font-weight: bold; cursor: pointer; transition: background-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease; -webkit-tap-highlight-color: transparent; }
+        .btn-primary { background-color: #99724b; color: #e9e2d8; padding: 13px 34px; min-width: 140px; box-shadow: 0 4px 10px rgba(153, 114, 75, 0.2); }
+        .btn-secondary { background-color: #ffffff; color: #99724b; padding: 13px 24px; }
+        .btn-primary:active, .btn-secondary:active { transform: scale(0.97); }
+        .btn-primary:disabled { opacity: 0.7; cursor: wait; }
+        @media (hover: hover) {
+            .btn-primary:hover { background-color: #9a5d40; transform: translateY(-3px); box-shadow: 0 8px 15px rgba(0,0,0,0.1); }
+            .btn-secondary:hover { transform: translateY(-3px); box-shadow: 0 8px 15px rgba(0,0,0,0.08); }
+            .btn-primary:hover .btn-icon-forward { transform: translateX(4px); }
+            .btn-secondary:hover .btn-icon-back { transform: translateX(-4px); }
+        }
+        .btn-primary .btn-icon, .btn-secondary .btn-icon { width: 18px; height: 18px; flex-shrink: 0; transition: transform 0.3s ease; }
+        button.btn { font-family: inherit; font-size: 1rem; }
+
         /* --- Footer --- */
-        footer {
-            text-align: center;
-            padding: 40px 20px;
-            background-color: #4e513e; 
-            color: #e9e2d8; 
-        }
-        .footer-contact {
-            margin-bottom: 20px;
-        }
-        .footer-contact p {
-            margin-bottom: 8px;
-            font-size: 1.1rem;
-            color: #e9e2d8;
-        }
-        .footer-contact a {
-            color: #c09050; 
-            text-decoration: none;
-            font-weight: bold;
-        }
-        .footer-contact a:hover {
-            text-decoration: underline;
-        }
-        .footer-disclosure {
-            max-width: 900px;
-            margin: 0 auto 0 auto; 
-            font-size: 0.8rem;
-            color: #e9e2d8; 
-            opacity: 0.75;
-            line-height: 1.5;
-            text-align: justify;
-            text-align-last: center; 
-        }
+        footer { text-align: center; padding: 40px 20px; background-color: #4e513e; color: #e9e2d8; }
+        .footer-contact { margin-bottom: 20px; }
+        .footer-contact p { margin-bottom: 8px; font-size: 1.1rem; color: #e9e2d8; }
+        .footer-contact a { color: #c09050; text-decoration: none; font-weight: bold; }
+        .footer-contact a:hover { text-decoration: underline; }
+        .footer-disclosure { max-width: 900px; margin: 0 auto 0 auto; font-size: 0.8rem; color: #e9e2d8; opacity: 0.75; line-height: 1.5; text-align: justify; text-align-last: center; }
 
         /* --- Mobile Responsiveness --- */
         @media (max-width: 768px) {
-            .navbar {
-                justify-content: flex-end; 
+            .navbar { justify-content: flex-end; }
+            .mobile-center-logo { display: block; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); }
+            .mobile-center-logo img { height: 40px; width: auto; border-radius: 4px; display: block; }
+            .hamburger { display: block; }
+            .nav-menu { position: fixed; top: 0; right: -100%; width: 280px; height: 100vh; background: rgba(233, 226, 216, 0.95); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); flex-direction: column; justify-content: flex-start; align-items: flex-start; padding: 60px 30px 30px 30px; box-shadow: -5px 0 15px rgba(0,0,0,0.1); transition: right 0.3s ease; z-index: 1001; }
+            .nav-menu.active { right: 0; }
+            .nav-logo { margin-bottom: 40px; width: 100%; display: flex; justify-content: center; }
+            .nav-logo img { height: 60px; }
+            .nav-links { flex-direction: column; width: 100%; align-items: flex-start; gap: 20px; }
+            .nav-links a { display: block; width: 100%; padding-bottom: 10px; border-bottom: 1px solid rgba(192, 144, 80, 0.4); font-size: 1.3rem; }
+            .close-menu { display: block; position: absolute; top: 15px; right: 25px; font-size: 2.5rem; background: none; border: none; color: #4f2d2c; cursor: pointer; line-height: 1; }
+
+            header { padding: 150px 20px 90px 20px; }
+            .hero-eyebrow { font-size: 0.9rem; letter-spacing: 4px; }
+
+            .intro-wrapper { padding-top: 70px; }
+            .intro-card { width: calc(100% - 6px); padding: 40px 22px; }
+
+            .proforma-section { padding-top: 70px; }
+            .proforma-list { gap: 36px; }
+            .proforma-container { width: calc(100% - 6px); }
+
+            .timeline-section { padding-top: 70px; }
+            .timeline::after { left: 16px; }
+            .timeline-item { width: 100%; padding-left: 46px; padding-right: 6px; }
+            .timeline-item::after { left: 4px; top: 36px; }
+            .right { left: 0; }
+            .content { padding: 24px 22px; }
+            .content h3 { font-size: 1.35rem; }
+
+            .cta-band { padding-top: 70px; margin-bottom: 60px; }
+            .cta-inner { width: calc(100% - 6px); padding: 56px 24px; }
+            .cta-actions .btn { width: 100%; max-width: 320px; }
+
+            /* Form: full-screen sheet that slides up, buttons pinned to the bottom */
+            .form-overlay-bg { display: none; }
+            .form-bg-video { display: none; }
+            .form-container-card {
+                padding: 0;
+                align-items: stretch;
+                justify-content: stretch;
+                background-color: #ffffff;
+                opacity: 1;
+                transform: translate3d(0, 100%, 0) !important;
+                transition: transform 0.45s cubic-bezier(0.32, 0.72, 0, 1), visibility 0.45s ease;
             }
-            .mobile-center-logo {
-                display: block;
-                position: absolute;
-                left: 50%;
-                top: 50%;
-                transform: translate(-50%, -50%); 
-            }
-            .mobile-center-logo img {
-                height: 40px; 
-                width: auto;
-                border-radius: 4px;
-                display: block;
-            }
-            .hamburger {
-                display: block;
-            }
-            .nav-menu {
-                position: fixed;
-                top: 0;
-                right: -100%; 
-                width: 280px;
-                height: 100vh;
-                background: rgba(233, 226, 216, 0.95); 
-                backdrop-filter: blur(15px);
-                -webkit-backdrop-filter: blur(15px);
-                flex-direction: column;
-                justify-content: flex-start;
-                align-items: flex-start;
-                padding: 60px 30px 30px 30px;
-                box-shadow: -5px 0 15px rgba(0,0,0,0.1);
-                transition: right 0.3s ease;
-                z-index: 1001; 
-            }
-            .nav-menu.active {
-                right: 0; 
-            }
-            .nav-logo {
-                margin-bottom: 40px;
-                width: 100%;
-                display: flex;
-                justify-content: center;
-            }
-            .nav-logo img {
-                height: 60px;
-            }
-            .nav-links {
-                flex-direction: column;
-                width: 100%;
-                align-items: flex-start;
-                gap: 20px;
-            }
-            .nav-links a {
-                display: block;
-                width: 100%;
-                padding-bottom: 10px;
-                border-bottom: 1px solid rgba(192, 144, 80, 0.4); 
-                font-size: 1.3rem;
-            }
-            .close-menu {
-                display: block;
-                position: absolute;
-                top: 15px;
-                right: 25px;
-                font-size: 2.5rem;
-                background: none;
+            .form-container-card.is-open { transform: translate3d(0, 0, 0) !important; }
+            .native-form-box {
+                max-width: none;
+                min-height: 0;
+                height: 100%;
                 border: none;
-                color: #4f2d2c;
-                cursor: pointer;
-                line-height: 1;
+                border-radius: 0;
+                box-shadow: none;
+                padding: calc(env(safe-area-inset-top, 0px) + 10px) 20px calc(env(safe-area-inset-bottom, 0px) + 16px) 20px;
             }
-            
-            /* Responsive formatting to prevent horizontal bleed */
-            .intro-card, .cta-section {
-                width: calc(100% - 6px);
-                margin-left: auto;
-                margin-right: auto;
-                padding: 30px 20px;
+            .form-topbar { margin-bottom: 10px; }
+            .step-header { padding-top: 14px; text-align: left; }
+            .step-title { font-size: 1.6rem; margin-bottom: 18px; }
+            .step-hint { text-align: left; }
+            .step-inputs { justify-content: flex-start; overflow-y: auto; overflow-x: hidden; -webkit-overflow-scrolling: touch; overscroll-behavior: contain; padding: 6px 4px 8px 2px; }
+            .input-group textarea { min-height: 130px; }
+            .form-actions { padding-top: 14px; gap: 10px; }
+            .form-actions .btn-primary { flex: 1; }
+            .form-actions .btn-secondary { padding: 13px 20px; }
+
+            /* While the keyboard is open, tighten the header so the answer area keeps its room */
+            .form-container-card.keyboard-open .form-topbar { margin-bottom: 2px; }
+            .form-container-card.keyboard-open .step-count { display: none; }
+            .form-container-card.keyboard-open .step-header { padding-top: 4px; }
+            .form-container-card.keyboard-open .step-title { font-size: 1.3rem; margin-bottom: 12px; }
+            .form-container-card.keyboard-open .step-hint { display: none; }
+            .form-container-card.keyboard-open .input-group textarea { min-height: 96px; }
+        }
+
+        /* Respect users who prefer less motion */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
             }
-            
-            .timeline::after {
-                left: 31px; 
-            }
-            .timeline-item {
-                width: 100%;
-                padding-left: 70px;
-                padding-right: 15px;
-            }
-            .timeline-item::after {
-                left: 19px; 
-            }
-            .right {
-                left: 0; 
-            }
-            
-            .cta-btn {
-                display: flex; /* Makes buttons stack cleanly on mobile */
-                width: 100%;
-            }
+            .hero-content > *,
+            .reveal { opacity: 1; transform: none; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Header Placeholder -->
-    <div id="header-placeholder"></div>
+        <nav class="navbar" aria-label="Main">
+        <a href="/" class="mobile-center-logo" aria-label="Andrew Marth, home">
+            <img src="/images/andrew_marth_logo.webp" alt="Andrew Marth Real Estate Agent" width="170" height="40">
+        </a>
+
+        <button type="button" class="hamburger" id="hamburger-btn" aria-label="Open menu" aria-controls="nav-menu">&#9776;</button>
+
+        <div class="nav-menu" id="nav-menu">
+            <button type="button" class="close-menu" id="close-btn" aria-label="Close menu">&times;</button>
+
+            <div class="nav-logo">
+                <a href="/" aria-label="Andrew Marth, home">
+                    <img src="/images/andrew_marth_logo.webp" alt="Andrew Marth Real Estate Agent" width="213" height="50">
+                </a>
+            </div>
+
+            <div class="nav-links">
+                <a href="/buying">Buying</a>
+                <a href="/selling">Selling</a>
+                <a href="/investing">Investing</a>
+                <a href="/contact">Contact</a>
+            </div>
+        </div>
+    </nav>
 
     <header>
-        <h1>Capital Partnerships</h1>
-        <p>High-yield real estate returns without the burden of day-to-day management.</p>
+        <video class="hero-video-bg" poster="/images/banner_poster.webp" autoplay loop muted playsinline aria-hidden="true">
+            <source src="/images/banner_web.mp4" type="video/mp4">
+        </video>
+        <div class="hero-color-overlay"></div>
+        <div class="hero-content">
+            <span class="hero-eyebrow">Investing</span>
+            <h1>Capital Partnerships</h1>
+            <p>High-yield real estate returns without the burden of day-to-day management.</p>
+        </div>
     </header>
 
     <section class="intro-wrapper">
-        <div class="intro-card">
-            <h2>Passive Investing, Active Returns</h2>
-            <p>A capital partnership allows you to participate in the lucrative Arizona fix-and-flip market without having to swing a hammer or manage a job site. You provide the funding, and I handle the acquisition, project management, and final sale.</p>
+        <div class="intro-card reveal">
+            <span class="eyebrow">Joint Ventures</span>
+            <h2 class="section-title">Passive Investing, Active Returns</h2>
+            <p class="lead">A capital partnership allows you to participate in the lucrative Arizona fix-and-flip market without having to swing a hammer or manage a job site.</p>
+            <p>You provide the funding, and I handle the acquisition, project management, and final sale.</p>
             <p>Take a look at the example proforma below to see the level of analytical detail, transparency, and profit-sharing structure I provide for every joint venture.</p>
         </div>
     </section>
 
     <section class="proforma-section">
-        <div class="proforma-container">
-            <img src="https://andrewmarth.com/images/example_proforma-1.png" alt="Andrew Marth Real Estate Proforma Page 1">
+        <div class="section-header reveal">
+            <span class="eyebrow">Example Proforma</span>
+            <h2 class="section-title">See the Numbers</h2>
         </div>
-        <div class="proforma-container">
-            <img src="https://andrewmarth.com/images/example_proforma-2.png" alt="Andrew Marth Real Estate Proforma Page 2">
+        <div class="proforma-list">
+            <div class="proforma-container reveal">
+                <img src="/images/example_proforma-1.png" alt="Andrew Marth Real Estate Proforma Page 1" loading="lazy">
+            </div>
+            <div class="proforma-container reveal">
+                <img src="/images/example_proforma-2.png" alt="Andrew Marth Real Estate Proforma Page 2" loading="lazy">
+            </div>
         </div>
     </section>
 
     <section class="timeline-section">
+        <div class="section-header reveal">
+            <span class="eyebrow">The Process</span>
+            <h2 class="section-title">How a Partnership Works</h2>
+        </div>
+
         <div class="timeline">
-            
-            <div class="timeline-item left">
+
+            <div class="timeline-item left reveal">
                 <div class="content">
                     <span class="step-number">Step 01</span>
                     <h3>Connect</h3>
@@ -505,7 +662,7 @@
                 </div>
             </div>
 
-            <div class="timeline-item right">
+            <div class="timeline-item right reveal">
                 <div class="content">
                     <span class="step-number">Step 02</span>
                     <h3>The Search</h3>
@@ -514,25 +671,23 @@
                 </div>
             </div>
 
-            <div class="timeline-item left">
+            <div class="timeline-item left reveal">
                 <div class="content">
                     <span class="step-number">Step 03</span>
                     <h3>Purchase</h3>
-                    <p>This is when you will need to wire your investment funds. Time is of the essence, so any delay in payment could cause the deal to fall through. Your contribution must be the full amount, as the deal needs to be fully funded at the time of purchase. We will also sign the full partnership agreement at this stage so there is absolutely no ambiguity regarding the scope of the investment. The purchase and partnership agreement will be handled directly through my company, Wynwest.</p>
-                    <img src="https://andrewmarth.com/images/Wynwest_Logo_New.png" alt="Wynwest Logo" class="wynwest-logo">
+                    <p>This is when you will need to wire your investment funds. Time is of the essence, so any delay in payment could cause the deal to fall through. Your contribution must be the full amount, as the deal needs to be fully funded at the time of purchase. We will also sign the full partnership agreement at this stage so there is absolutely no ambiguity regarding the scope of the investment.</p>
                 </div>
             </div>
 
-            <div class="timeline-item right">
+            <div class="timeline-item right reveal">
                 <div class="content">
                     <span class="step-number">Step 04</span>
                     <h3>Construction</h3>
-                    <p>This is when the magic happens! Through our construction partner, Dixon Construction Co, the renovation will be completed in the most cost-effective and expedient manner possible.</p>
-                    <img src="https://andrewmarth.com/images/dixon_final.png" alt="Dixon Construction Co Logo" class="dixon-logo">
+                    <p>This is when the magic happens! Through our trusted construction partner, the renovation will be completed in the most cost-effective and expedient manner possible.</p>
                 </div>
             </div>
 
-            <div class="timeline-item left">
+            <div class="timeline-item left reveal">
                 <div class="content">
                     <span class="step-number">Step 05</span>
                     <h3>Sale</h3>
@@ -543,20 +698,360 @@
         </div>
     </section>
 
-    <section class="cta-section">
-        <h2>Want To Learn More?</h2>
-        <p>If you are interested in deploying your capital into high-yield real estate projects, let's hop on a call! We can discuss your investment goals, review active opportunities, and see if a capital partnership is the right fit.</p>
-        
-        <div>
-            <a href="partnership-intake" class="cta-btn">Get Started</a>
-            <a href="contact" class="cta-btn cta-btn-outline">Schedule a Call</a>
+    <section class="cta-band">
+        <div class="cta-inner reveal">
+            <span class="eyebrow">Ready When You Are</span>
+            <h2>Want To Learn More?</h2>
+            <p>If you are interested in deploying your capital into high-yield real estate projects, let's hop on a call! We can discuss your investment goals, review active opportunities, and see if a capital partnership is the right fit.</p>
+            <div class="cta-actions">
+                <button type="button" class="btn btn-light" id="btn-get-started">Get Started</button>
+                <a href="contact" class="btn btn-ghost">Schedule a Call</a>
+            </div>
         </div>
     </section>
 
-    <!-- Footer Placeholder -->
-    <div id="footer-placeholder"></div>
+    <!-- Hidden Blur Background -->
+    <div class="form-overlay-bg" id="form-overlay-bg"></div>
+
+    <!-- Hidden Form Modal (Animated Pop-Out) -->
+    <div class="form-container-card" id="form-container" role="dialog" aria-modal="true" aria-label="Capital partnership inquiry">
+
+        <!-- Video Background behind the form modal -->
+        <video class="form-bg-video" autoplay loop muted playsinline aria-hidden="true">
+            <source src="/images/form_background_web.mp4" type="video/mp4">
+        </video>
+
+        <div class="native-form-box">
+            <div class="form-topbar">
+                <div class="form-progress" aria-hidden="true"><span class="form-progress-fill" id="form-progress-fill"></span></div>
+                <button type="button" class="close-form-btn" id="close-form-btn" aria-label="Close form">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+                </button>
+            </div>
+
+            <form id="conditional-form" style="display: flex;" novalidate>
+                <input type="hidden" name="form_source" id="dynamic-form-source" value="Capital Partnership Inquiry">
+                <div id="form-steps-container"></div>
+            </form>
+        </div>
+    </div>
+
+        <footer>
+        <div class="footer-contact">
+            <p><strong>Cell:</strong> 480.652.1330 | <strong>Email:</strong> <a href="mailto:andrew@andrewmarth.com">andrew@andrewmarth.com</a></p>
+            <p><strong>AZ License:</strong> SA711359000</p>
+        </div>
+        
+        <div class="footer-disclosure">
+            <p>Andrew Marth is an agent affiliated with Compass, a licensed real estate broker and abides by Equal Housing Opportunity laws. All material presented herein is intended for informational purposes only. Information is compiled from sources deemed reliable but is subject to errors, omissions, changes in price, condition, sale, or withdrawal without notice. This is not intended to solicit property already listed. Photos may be virtually staged or digitally enhanced and may not reflect actual property conditions.</p>
+        </div>
+    </footer>
 
     <script>
+        // --- Capital Partnership Inquiry Form ---
+        function initDynamicForm() {
+            const overlayBg = document.getElementById('form-overlay-bg');
+            const formContainer = document.getElementById('form-container');
+            const form = document.getElementById('conditional-form');
+            const container = document.getElementById('form-steps-container');
+            const btnStart = document.getElementById('btn-get-started');
+            const btnClose = document.getElementById('close-form-btn');
+            const progressFill = document.getElementById('form-progress-fill');
+
+            let currentStepIndex = 0;
+            let stepHistory = [];
+            let slideDirection = 'forward';
+            let savedScrollY = 0;
+            let leaveTimer = null;
+
+            // Line icons (match the rest of the site)
+            const ICON_NEXT = `<svg class="btn-icon btn-icon-forward" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>`;
+            const ICON_BACK = `<svg class="btn-icon btn-icon-back" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>`;
+            const ICON_SUBMIT = `<svg class="btn-icon btn-icon-forward" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>`;
+
+            const isMobile = () => window.innerWidth <= 768;
+            const isTextField = el => el && (el.tagName === 'TEXTAREA' || (el.tagName === 'INPUT' && el.type !== 'hidden'));
+
+            const questions = [
+                { id: 'q_name', type: 'name', title: 'What is your name?' },
+                { id: 'q_phone', type: 'phone', title: 'What is the best phone number to reach you?' },
+                { id: 'q_email', type: 'email', title: 'What is your email address?' },
+                { id: 'q_details', type: 'textarea', title: 'Any details or questions you want to add?', hint: 'Optional — feel free to skip.', optional: true }
+            ];
+
+            questions.forEach((q, i) => {
+                let inner = '';
+                if (q.type === 'name') {
+                    inner = `<div class="name-row">
+                                <div class="input-group"><label for="${q.id}_first">First Name</label><input type="text" id="${q.id}_first" name="${q.id}_first" placeholder="First" autocomplete="given-name" autocapitalize="words" enterkeyhint="next"></div>
+                                <div class="input-group"><label for="${q.id}_last">Last Name</label><input type="text" id="${q.id}_last" name="${q.id}_last" placeholder="Last" autocomplete="family-name" autocapitalize="words" enterkeyhint="next"></div>
+                             </div>`;
+                } else if (q.type === 'textarea') {
+                    inner = `<div class="input-group"><textarea name="${q.id}" rows="5" placeholder="Investment goals, timeline, questions..." aria-label="${q.title}" data-optional="1"></textarea></div>`;
+                } else {
+                    let cls = '', type = 'text', ph = '', extra = '';
+                    if (q.type === 'email') { type = 'email'; ph = 'email@example.com'; extra = 'autocomplete="email" inputmode="email" autocapitalize="off" spellcheck="false"'; }
+                    if (q.type === 'phone') { type = 'tel'; cls = 'fmt-phone'; ph = '(555) 555-5555'; extra = 'autocomplete="tel-national" inputmode="tel"'; }
+                    inner = `<div class="input-group"><input type="${type}" name="${q.id}" class="${cls}" placeholder="${ph}" aria-label="${q.title}" enterkeyhint="next" ${extra}></div>`;
+                }
+
+                const stepDiv = document.createElement('div');
+                stepDiv.className = 'form-step';
+                stepDiv.id = `step-${i}`;
+                stepDiv.innerHTML = `
+                    <div class="step-header">
+                        <span class="step-count"></span>
+                        <h3 class="step-title">${q.title}</h3>
+                        ${q.hint ? `<p class="step-hint">${q.hint}</p>` : ''}
+                    </div>
+                    <div class="step-inputs">${inner}</div>
+                    <div class="form-actions" id="actions-${i}"></div>
+                `;
+                container.appendChild(stepDiv);
+            });
+
+            // Keeps the form sized to the visible screen (above the phone keyboard)
+            function adjustFullscreenHeight() {
+                if (formContainer.classList.contains('is-open')) {
+                    if (window.visualViewport) {
+                        formContainer.style.height = window.visualViewport.height + 'px';
+                        formContainer.style.top = window.visualViewport.offsetTop + 'px';
+                    } else {
+                        formContainer.style.height = window.innerHeight + 'px';
+                        formContainer.style.top = '0px';
+                    }
+                } else {
+                    formContainer.style.height = '';
+                    formContainer.style.top = '';
+                }
+            }
+
+            if (window.visualViewport) {
+                window.visualViewport.addEventListener('resize', adjustFullscreenHeight);
+                window.visualViewport.addEventListener('scroll', adjustFullscreenHeight);
+            }
+
+            container.addEventListener('focusin', (e) => {
+                if (isMobile() && isTextField(e.target)) {
+                    formContainer.classList.add('keyboard-open');
+                    setTimeout(adjustFullscreenHeight, 50);
+                }
+            });
+
+            container.addEventListener('focusout', () => {
+                setTimeout(() => {
+                    if (!isTextField(document.activeElement)) {
+                        formContainer.classList.remove('keyboard-open');
+                        adjustFullscreenHeight();
+                    }
+                }, 50);
+            });
+
+            // Open: pops out of the button on desktop, slides up on phones
+            btnStart.addEventListener('click', () => {
+                savedScrollY = window.scrollY || document.documentElement.scrollTop;
+                document.body.classList.add('form-open', 'no-scroll');
+
+                const rect = btnStart.getBoundingClientRect();
+                formContainer.style.transformOrigin = `${rect.left + rect.width / 2}px ${rect.top + rect.height / 2}px`;
+
+                overlayBg.classList.add('is-open');
+                formContainer.classList.add('is-open');
+
+                adjustFullscreenHeight();
+                renderFlow();
+            });
+
+            // Escape closes the form on desktop
+            document.addEventListener('keydown', e => {
+                if (e.key === 'Escape' && formContainer.classList.contains('is-open')) btnClose.click();
+            });
+
+            btnClose.addEventListener('click', () => {
+                if (isTextField(document.activeElement)) document.activeElement.blur();
+
+                const rect = btnStart.getBoundingClientRect();
+                formContainer.style.transformOrigin = `${rect.left + rect.width / 2}px ${rect.top + rect.height / 2}px`;
+
+                formContainer.classList.remove('is-open');
+                overlayBg.classList.remove('is-open');
+
+                setTimeout(() => {
+                    formContainer.classList.remove('keyboard-open');
+                    formContainer.style.transformOrigin = '';
+                    formContainer.style.height = '';
+                    formContainer.style.top = '';
+                    form.reset();
+                    currentStepIndex = 0;
+                    stepHistory = [];
+                    slideDirection = 'forward';
+                    clearTimeout(leaveTimer);
+                    document.querySelectorAll('.form-step').forEach(s => s.classList.remove('active', 'active-reverse', 'leaving', 'leaving-reverse'));
+                    document.querySelectorAll('.form-step .error').forEach(el => el.classList.remove('error'));
+                    document.body.classList.remove('form-open', 'no-scroll');
+                    window.scrollTo(0, savedScrollY);
+                    btnStart.focus({ preventScroll: true });
+                }, 460);
+            });
+
+            function updateActions() {
+                const actionsEl = document.getElementById(`actions-${currentStepIndex}`);
+                if (!actionsEl) return;
+                actionsEl.innerHTML = '';
+
+                if (stepHistory.length > 0) {
+                    const btnBack = document.createElement('button');
+                    btnBack.type = 'button';
+                    btnBack.className = 'btn-secondary';
+                    btnBack.innerHTML = `${ICON_BACK} Back`;
+                    btnBack.onclick = () => {
+                        slideDirection = 'backward';
+                        currentStepIndex = stepHistory.pop();
+                        renderFlow();
+                    };
+                    actionsEl.appendChild(btnBack);
+                }
+
+                const isLast = currentStepIndex === questions.length - 1;
+                const btnForward = document.createElement('button');
+                btnForward.className = 'btn-primary btn-forward';
+                btnForward.type = 'submit';
+                btnForward.innerHTML = isLast ? `Submit ${ICON_SUBMIT}` : `Next ${ICON_NEXT}`;
+                actionsEl.appendChild(btnForward);
+            }
+
+            container.addEventListener('input', e => {
+                const el = e.target;
+                if (el.classList.contains('fmt-phone')) {
+                    let x = el.value.replace(/\D/g, '').match(/(\d{0,3})(\d{0,3})(\d{0,4})/);
+                    el.value = !x[2] ? x[1] : '(' + x[1] + ') ' + x[2] + (x[3] ? '-' + x[3] : '');
+                }
+                el.classList.remove('error');
+            });
+
+            container.addEventListener('keydown', e => {
+                // Enter adds a new line in the details box; elsewhere it moves forward
+                if (e.key === 'Enter' && e.target.tagName !== 'TEXTAREA') {
+                    e.preventDefault();
+                    const currentEl = document.getElementById(`step-${currentStepIndex}`);
+
+                    // On the name step, Enter moves to the next field first
+                    const fields = Array.from(currentEl.querySelectorAll('input'));
+                    const nextField = fields.slice(fields.indexOf(e.target) + 1).find(f => !f.value.trim());
+                    if (fields.includes(e.target) && nextField) {
+                        nextField.focus({ preventScroll: true });
+                        return;
+                    }
+
+                    const fwdBtn = currentEl.querySelector('.btn-forward');
+                    if (fwdBtn) fwdBtn.click();
+                }
+            });
+
+            function renderFlow() {
+                const isBack = slideDirection !== 'forward';
+                const prevEl = document.querySelector('.form-step.active, .form-step.active-reverse');
+                const currentEl = document.getElementById(`step-${currentStepIndex}`);
+                const hadTextFocus = isTextField(document.activeElement);
+
+                clearTimeout(leaveTimer);
+                document.querySelectorAll('.form-step').forEach(s => {
+                    s.classList.remove('active', 'active-reverse', 'leaving', 'leaving-reverse');
+                });
+
+                // Let the previous question slide away underneath the new one
+                if (prevEl && prevEl !== currentEl) {
+                    prevEl.classList.add(isBack ? 'leaving-reverse' : 'leaving');
+                    leaveTimer = setTimeout(() => prevEl.classList.remove('leaving', 'leaving-reverse'), 300);
+                }
+
+                currentEl.classList.add(isBack ? 'active-reverse' : 'active');
+                currentEl.querySelector('.step-count').textContent = `Question ${currentStepIndex + 1} of ${questions.length}`;
+                progressFill.style.width = ((currentStepIndex + 1) / questions.length * 100) + '%';
+
+                updateActions();
+
+                const firstInput = currentEl.querySelector('input, textarea');
+                if (isMobile()) {
+                    // Keep the keyboard up between typed answers
+                    if (firstInput && hadTextFocus) firstInput.focus({ preventScroll: true });
+                } else if (firstInput) {
+                    setTimeout(() => firstInput.focus({ preventScroll: true }), 60);
+                }
+            }
+
+            // Briefly shake the answer area when something is missing
+            function shake(el) {
+                el.classList.remove('shake');
+                void el.offsetWidth;
+                el.classList.add('shake');
+                el.addEventListener('animationend', () => el.classList.remove('shake'), { once: true });
+            }
+
+            function validateStep(stepEl) {
+                let isValid = true;
+                stepEl.querySelectorAll('input, textarea').forEach(i => {
+                    if (i.dataset.optional) return;
+                    if (!i.value.trim()) {
+                        isValid = false; i.classList.add('error');
+                    } else if (i.type === 'email' && !i.value.includes('@')) {
+                        isValid = false; i.classList.add('error');
+                    } else if (i.classList.contains('fmt-phone') && i.value.replace(/\D/g, '').length < 10) {
+                        isValid = false; i.classList.add('error');
+                    }
+                });
+                return isValid;
+            }
+
+            form.addEventListener('submit', e => {
+                e.preventDefault();
+                const currentEl = document.getElementById(`step-${currentStepIndex}`);
+                if (!validateStep(currentEl)) {
+                    shake(currentEl.querySelector('.step-inputs'));
+                    const firstError = currentEl.querySelector('.error');
+                    if (firstError && (!isMobile() || isTextField(document.activeElement))) firstError.focus({ preventScroll: true });
+                    return;
+                }
+
+                if (currentStepIndex < questions.length - 1) {
+                    slideDirection = 'forward';
+                    stepHistory.push(currentStepIndex);
+                    currentStepIndex++;
+                    renderFlow();
+                    return;
+                }
+
+                const submitBtn = currentEl.querySelector('.btn-forward');
+                submitBtn.textContent = 'Submitting...';
+                submitBtn.disabled = true;
+
+                const finalData = new FormData();
+                finalData.append('form_source', document.getElementById('dynamic-form-source').value);
+
+                const azDate = new Date(new Date().toLocaleString("en-US", { timeZone: "America/Phoenix" }));
+                const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+                finalData.append('submission_date', monthNames[azDate.getMonth()] + " " + String(azDate.getDate()).padStart(2, '0') + " " + azDate.getFullYear());
+
+                container.querySelectorAll('input[name], textarea[name]').forEach(el => {
+                    finalData.append(el.name, el.value.trim());
+                });
+
+                fetch('https://hooks.zapier.com/hooks/catch/17339400/41kmsuu/', {
+                    method: 'POST',
+                    body: finalData,
+                    mode: 'no-cors'
+                })
+                .then(() => {
+                    window.location.href = 'https://andrewmarth.com/thank-you';
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    submitBtn.textContent = 'Error. Try Again.';
+                    submitBtn.disabled = false;
+                });
+            });
+        }
+
         // Function to load external HTML components
         async function loadComponent(id, file) {
             try {
@@ -564,7 +1059,7 @@
                 if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
                 const html = await response.text();
                 document.getElementById(id).innerHTML = html;
-                
+
                 // If we just loaded the header, initialize the hamburger menu logic
                 if (id === 'header-placeholder') {
                     initNavigation();
@@ -591,10 +1086,31 @@
             }
         }
 
+        // Fade sections in as they scroll into view
+        function initReveal() {
+            const items = document.querySelectorAll('.reveal');
+            if (!('IntersectionObserver' in window)) {
+                items.forEach(el => el.classList.add('is-visible'));
+                return;
+            }
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+            items.forEach(el => observer.observe(el));
+        }
+
         // Load the header and footer when the DOM is ready
         document.addEventListener('DOMContentLoaded', () => {
-            loadComponent('header-placeholder', 'header.html');
-            loadComponent('footer-placeholder', 'footer.html');
+            initReveal();
+            initNavigation();
+
+            // Fire up the inquiry form
+            initDynamicForm();
         });
     </script>
 </body>
