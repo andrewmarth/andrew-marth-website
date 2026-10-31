@@ -321,10 +321,6 @@
         transition: transform 0.3s ease;
     }
 
-    .success-message { display: none; padding: 20px 0; animation: stepInFwd 0.5s cubic-bezier(0.25, 0.8, 0.25, 1) forwards; flex-direction: column; justify-content: center; flex-grow: 1; }
-    .success-icon { width: 70px; height: 70px; background-color: #4e513e; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; margin: 0 auto 20px auto; box-shadow: 0 8px 20px rgba(78, 81, 62, 0.3); }
-    .success-message h3 { font-size: 2.2rem; color: #4e513e; margin-bottom: 10px; }
-    .success-message p { font-size: 1.15rem; color: #4f2d2c; }
 
     /* Native page trigger styling */
     .trigger-card {
@@ -483,14 +479,7 @@
         </div>
 
         <form id="conditional-form" style="display: flex;" novalidate>
-            <input type="hidden" name="form_source" id="dynamic-form-source" value="General Web Form">
             <div id="form-steps-container"></div>
         </form>
-
-        <div class="success-message" id="success-message">
-            <div class="success-icon">&#10003;</div>
-            <h3>Information Received!</h3>
-            <p>Thank you for submitting your details. I will review everything and reach out to you shortly to discuss your options.</p>
-        </div>
     </div>
 </div>
