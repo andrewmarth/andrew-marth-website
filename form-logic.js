@@ -155,7 +155,8 @@ function initDynamicForm(options = {}) {
             <div class="done-icon">${icon('<path d="M20 6 9 17l-5-5"/>')}</div>
             <h3 class="step-title"></h3>
             <p class="done-text"></p>
-            <a class="btn-primary done-btn" href="${PORTAL_URL}">Get the My Homes App ${ICON_NEXT}</a>
+            <a class="btn-primary done-btn" href="${PORTAL_URL}"><span></span> ${ICON_NEXT}</a>
+            <button type="button" class="link-btn done-change" hidden>Not your number? Use a different one</button>
         </div>`;
     container.appendChild(done);
     steps.done = done;
@@ -654,6 +655,20 @@ function initDynamicForm(options = {}) {
             return false;
         }
     }
+    // Asked before a code is texted: whether this number is already on the account list (if we can't tell, carry on)
+    async function numberHasAccount(number) {
+        try {
+            const json = await fetch(PORTAL_API_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                body: JSON.stringify({ action: 'accountExists', phone: number }),
+            }).then(r => r.json());
+            return Boolean(json && json.ok && json.exists);
+        } catch (err) {
+            console.error(err);
+            return false;
+        }
+    }
 
     const API_ERRORS = {
         invalid_name: 'Please check your name and try again.',
@@ -687,12 +702,20 @@ function initDynamicForm(options = {}) {
 
     function finish(kind) {
         finished = true;
-        done.querySelector('.step-title').textContent = kind === 'created' ? 'You\'re all set!' : 'You already have an account';
-        done.querySelector('.done-text').textContent = kind === 'created'
+        const created = kind === 'created';
+        done.querySelector('.step-title').textContent = created ? 'You\'re all set!' : 'You already have an account';
+        done.querySelector('.done-text').textContent = created
             ? 'Your account is ready. Get the My Homes app and sign in with the phone number you just confirmed.'
-            : 'This phone number already has an account. Get the My Homes app and sign in with it.';
+            : `${formatUS(digitsOnly(field('su_phone').value))} already has an account. Head to the portal to sign in.`;
+        done.querySelector('.done-btn span').textContent = created ? 'Get the My Homes App' : 'Go to the Portal';
+        // Only offered when the number was looked up before a code was texted
+        done.querySelector('.done-change').hidden = kind !== 'listed';
         go('done');
     }
+    done.querySelector('.done-change').addEventListener('click', () => {
+        finished = false;
+        go('phone', true);
+    });
 
     // --- Typing helpers ---
     container.addEventListener('input', e => {
@@ -738,9 +761,13 @@ function initDynamicForm(options = {}) {
         if (busy || current === 'done' || validate() !== true) return;
 
         if (current === 'phone') {
+            const number = digitsOnly(field('su_phone').value);
+            setBusy(true, 'Checking...');
+            // Already a client: stop here, before a code is texted
+            if (await numberHasAccount(number)) { busy = false; finish('listed'); return; }
             setBusy(true, 'Sending...');
             try {
-                await sendCode(digitsOnly(field('su_phone').value));
+                await sendCode(number);
                 field('su_code').value = '';
                 setBusy(false);
                 go('code');
@@ -911,6 +938,7 @@ function addFormStyles() {
         .done-body .step-title { margin-bottom: 10px; }
         .done-text { max-width: 420px; margin: 0 auto 26px; font-size: 1.08rem; line-height: 1.5; color: #4f2d2c; }
         a.done-btn { text-decoration: none; }
+        .done-change { margin-top: 14px; }
 
         /* Address search (same look as before) */
         .input-group.has-suggestions { position: relative; z-index: 5; }
